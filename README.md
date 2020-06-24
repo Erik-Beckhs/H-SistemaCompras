@@ -1,1 +1,1 @@
-Proyecto SCM
+Proyecto SCM.
