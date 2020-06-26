@@ -13,11 +13,20 @@ require_once('include/entryPoint.php');
 global $current_user;
     
     $filtro = $_POST['filtro'];
-	$idDiv = $current_user->iddivision_c;
-    //nro cotizacion filtrado por fabricante
-    // $query = "SELECT pcv_familia,name,pcv_preciofob,pcv_nombreproveedor,pcv_descripcion,pcv_vendedor,pcv_cantidad 
-    //     FROM suitecrm.sco_productoscotizadosventa
-    //     WHERE pcv_numerocotizacion = '$nroCotizacion'";
+    $idDiv = $current_user->iddivision_c;
+    
+    if($filtro == 'fabricanteList'){
+        $query = "SELECT pcv_proveedoraio,pcv_nombreproveedor FROM suitecrm.sco_productoscotizadosventa
+        group by pcv_proveedoraio;
+        ";
+        $results = $GLOBALS['db']->query($query, true);
+        $object= array();
+        while($row = $GLOBALS['db']->fetchByAssoc($results))
+            {
+                $object[] = $row;
+            }
+        echo json_encode($object);
+    }
     if($filtro == 'fabricante'){
         $pcv_proveedoraio = $_POST['pcv_proveedoraio'];
         $query = "SELECT pcv_numerocotizacion

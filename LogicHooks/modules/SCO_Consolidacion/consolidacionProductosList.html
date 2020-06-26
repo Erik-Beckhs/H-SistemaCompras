@@ -1,0 +1,179 @@
+<div class="row">
+    <div class="col-sm-3">
+        <div class="input-group">
+            <div class="input-group">
+                <span class="input-group-addon">Fabricante</span>
+                <select class="form-control filter" id="idFabricante" name="idFabricante">
+                    <option value="00" selected="selected">Todo</option>';
+                    </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="input-group">
+            <div class="input-group">
+                <span class="input-group-addon">Nro. cotizaci&oacute;n: </span>
+                <select class="form-control filter" id="nroCotizacion" name="nroCotizacion">
+                    <option value="00" selected="selected">Todo</option>
+                    <div id="nroCotizacionOption"></div>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="input-group">
+            <div class="input-group">
+                <span class="input-group-addon">Código AIO</span>
+                <select class="form-control filter" id="codAioProduct" name="codAioProduct">
+                    <option value="00" selected="selected">Todo</option>
+                    <div id="codAioProductOption"></div>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="input-group">
+            <div class="input-group">
+                <span class="input-group-addon">Cliente</span>
+                <select class="form-control filter" id="idCliente" name="idCliente">
+                    <option value="00" selected="selected">Todo</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="input-group">
+            <div class="input-group">
+                <span class="input-group-addon">Familia</span>
+                <select class="form-control filter" id="aMercado" name="aMercado">
+                    <option value="00" selected="selected">Todo</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class=" col-md-6">
+        <div class="tabla1">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="tabla2">
+        </div>
+    </div>
+</div>
+<script>
+    // Filtro inicial
+$( document ).ready(function() {
+  $.ajax({
+    type: 'POST',
+    url: 'index.php?to_pdf=true&module=SCO_ProductosCotizados&action=CotizacionesList',
+    datatype: 'json',
+    data: {
+      filtro:"fabricanteList"
+    },
+    async: false,
+    success: function (e) {
+      console.log(e);
+      var res = JSON.parse(e);
+      var html = '<option value="00">todo</option>';
+      for(var i = 0;i < res.length;i++){
+        html += '<option value="'+res[i]["pcv_proveedoraio"]+'">'+res[i]["pcv_nombreproveedor"]+'</option>';
+      }
+      $('#idFabricante').html(html);
+    },
+    error: function (data) {
+      console.log('ERROR, No se pudo conectar', data);
+    }
+  });
+});
+// Detector de cambios filtro de fabricante
+$("#idFabricante").on('change', function () {
+  var pcv_proveedoraio = $("#idFabricante").val();
+  if(pcv_proveedoraio != '00'){
+    $.ajax({
+      type: 'POST',
+      url: 'index.php?to_pdf=true&module=SCO_ProductosCotizados&action=CotizacionesList',
+      datatype: 'json',
+      data: {
+        pcv_proveedoraio: pcv_proveedoraio,
+        filtro:"fabricante"
+      },
+      async: false,
+      success: function (e) {
+        console.log(e);
+        var res = JSON.parse(e);
+        var html = '<option value="00">todo</option>';
+        for(var i = 0;i < res.length;i++){
+          html += '<option value="'+res[i]["pcv_numerocotizacion"]+'">'+res[i]["pcv_numerocotizacion"]+'</option>';
+        }
+        $('#nroCotizacion').html(html);
+      },
+      error: function (data) {
+        console.log('ERROR, No se pudo conectar', data);
+      }
+    });
+  }
+})
+// Detector de filtro de nro cotización 
+$('#nroCotizacion').on('change', function () {
+  var pcv_proveedoraio = $("#idFabricante").val();
+  var nroCotizacion = $('#nroCotizacion').val();
+  if(nroCotizacion != '00'){
+    $.ajax({
+      type: 'POST',
+      url: 'index.php?to_pdf=true&module=SCO_ProductosCotizados&action=CotizacionesList',
+      datatype: 'json',
+      data: {
+        nroCotizacion: nroCotizacion,
+        pcv_proveedoraio:pcv_proveedoraio,
+        filtro:"cotizacion"
+      },
+      async: false,
+      success: function (e) {
+        console.log(e);
+        var res = JSON.parse(e);
+        var html = '<option value="00">todo</option>';
+        for(var i = 0;i < res.length;i++){
+          html += '<option value="'+res[i]["name"]+'">'+res[i]["name"]+'</option>';
+        }
+        $('#codAioProduct').html(html);
+      },
+      error: function (data) {
+        console.log('ERROR, No se pudo conectar', data);
+      }
+    });
+  }
+});
+// Detector de filtro de nro cotización 
+$('#nroCotizacion').on('change', function () {
+  var pcv_proveedoraio = $("#idFabricante").val();
+  var nroCotizacion = $('#nroCotizacion').val();
+  if(nroCotizacion != '00'){
+    $.ajax({
+      type: 'POST',
+      url: 'index.php?to_pdf=true&module=SCO_ProductosCotizados&action=CotizacionesList',
+      datatype: 'json',
+      data: {
+        nroCotizacion: nroCotizacion,
+        pcv_proveedoraio:pcv_proveedoraio,
+        filtro:"cliente"
+      },
+      async: false,
+      success: function (e) {
+        console.log(e);
+        var res = JSON.parse(e);
+        var html = '<option value="00">todo</option>';
+        for(var i = 0;i < res.length;i++){
+          html += '<option value="'+res[i]["pcv_clienteaio"]+'">'+res[i]["pcv_cliente"]+'</option>';
+        }
+        $('#idCliente').html(html);
+      },
+      error: function (data) {
+        console.log('ERROR, No se pudo conectar', data);
+      }
+    });
+  }
+});
+</script>
