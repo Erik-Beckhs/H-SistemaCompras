@@ -407,6 +407,10 @@ $installdefs = array(
         'to'   => 'modules/SCO_Productos/buscap.php',
       ),
       array(
+        'from' => '<basepath>/modules/SCO_ProductosCotizados/CotizacionesList.php',
+        'to'   => 'modules/SCO_ProductosCotizados/CotizacionesList.php',
+      ),
+      array(
         'from' => '<basepath>/modules/SCO_Productos/buscaproy.php',
         'to'   => 'modules/SCO_Productos/buscaproy.php',
       ),
