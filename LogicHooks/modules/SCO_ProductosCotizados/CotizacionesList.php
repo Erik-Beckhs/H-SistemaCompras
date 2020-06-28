@@ -75,5 +75,22 @@ global $current_user;
             }
         echo json_encode($object);
     }
+    if($filtro == 'familia'){
+        $nroCotizacion = $_POST['nroCotizacion'];
+        $pcv_proveedoraio = $_POST['pcv_proveedoraio'];
+        $query = "SELECT pcv_clienteaio, pcv_cliente 
+        FROM suitecrm.sco_productoscotizadosventa
+        WHERE pcv_numerocotizacion = '$nroCotizacion'
+        AND pcv_proveedoraio = '$pcv_proveedoraio'
+        group by pcv_clienteaio;
+        ";
+        $results = $GLOBALS['db']->query($query, true);
+        $object= array();
+        while($row = $GLOBALS['db']->fetchByAssoc($results))
+            {
+                $object[] = $row;
+            }
+        echo json_encode($object);
+    }
 
  
