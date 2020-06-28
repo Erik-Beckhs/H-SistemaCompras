@@ -3,8 +3,8 @@
 var div = '03';
 
 //Carga dom de consolidacion.html
-$("#capa").load('modules/SCO_Consolidacion/consolidacion.html');
-$("#capa1").load('modules/SCO_Consolidacion/consolidacionProductosList.html');
+$("#ordeCompra").load('modules/SCO_Consolidacion/consolidacion.html');
+$("#consolidacion").load('modules/SCO_Consolidacion/consolidacionProductosList.html');
 //despliega ventana emergente de Suitecrm Modulo Proveedor
 function openProveedorPopup(ln) {
     var popupRequestData = {

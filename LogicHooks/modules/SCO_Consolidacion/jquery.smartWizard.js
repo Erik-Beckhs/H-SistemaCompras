@@ -27,7 +27,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   var defaults = {
     selected: 0,
     // Initial selected step, 0 = first step
-    theme: 'default',
+    theme: 'arrows',
     // theme for the wizard, related css need to include for other than default theme
     justified: true,
     // Nav menu justification. true/false
@@ -37,7 +37,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     // Allows to cycle the navigation of steps
     backButtonSupport: true,
     // Enable the back button support
-    enableURLhash: true,
+    enableURLhash: false,
     // Enable selection of the step based on url hash
     transition: {
       animation: 'none',
@@ -48,7 +48,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     },
     toolbarSettings: {
-      toolbarPosition: 'bottom',
+      toolbarPosition: 'both',
       // none, top, bottom, both
       toolbarButtonPosition: 'right',
       // left, right, center
@@ -66,15 +66,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       // Activates all anchors clickable all times
       markDoneStep: true,
       // Add done state on navigation
-      markAllPreviousStepsAsDone: true,
+      markAllPreviousStepsAsDone: false,
       // When a step selected by url hash, all previous steps are marked done
       removeDoneStepOnNavigateBack: false,
       // While navigate back done step after active step will be cleared
-      enableAnchorOnDoneStep: true // Enable/Disable the done steps navigation
+      enableAnchorOnDoneStep: false // Enable/Disable the done steps navigation
 
     },
     keyboardSettings: {
-      keyNavigation: true,
+      keyNavigation: false,
       // Enable/Disable keyboard navigation(left and right keys are used if enabled)
       //keyLeft: [37],
       // Left key code
