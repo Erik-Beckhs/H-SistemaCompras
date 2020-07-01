@@ -1,23 +1,22 @@
 <?php
 
-require_once('include/MVC/View/views/view.html.php');
+require_once ('include/MVC/View/views/view.html.php');
 
 #customAOS_ProductsViewPlan_inventario
-class SCO_ConsolidacionViewCreacion extends ViewHtml
-{
-    public function display(){
+class SCO_ConsolidacionViewCreacion extends ViewHtml {
+	public function display() {
 
-	   	$head = '	   	   		
-				<link rel="stylesheet" href="modules/SCO_Consolidacion/consolidacion.css?'.time().'" type="text/css" />	 
-				<link rel="stylesheet" href="modules/SCO_Consolidacion/consolidacionProductosList.css?'.time().'" type="text/css" />	 
+		$head = '
+				<link rel="stylesheet" href="modules/SCO_Consolidacion/consolidacion.css?'.time().'" type="text/css" />
+				<link rel="stylesheet" href="modules/SCO_Consolidacion/consolidacionProductosList.css?'.time().'" type="text/css" />
 	   			<link href="modules/SCO_Consolidacion/smart_wizard_all.css?'.time().'" rel="stylesheet" type="text/css" />
-	   			<link href="modules/SCO_Consolidacion/css-loader.css?'.time().'" rel="stylesheet" type="text/css" />  		   			
+	   			<link href="modules/SCO_Consolidacion/css-loader.css?'.time().'" rel="stylesheet" type="text/css" />
 	   			';
-	   	$head .= '<div class="moduleTitle">
+		$head .= '<div class="moduleTitle">
 				<h2 class="module-title-text"> Crear </h2>
 				<span class="utils"></span><div class="clear"></div></div>
 				<div class="loader loader-default" data-text="Enviando datos"></div>
-				';		
+				';
 
 		$steps = '
 				<!-- SmartWizard html -->
@@ -32,7 +31,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 				          <span class="nav-link" href="#step-2">
 				            <strong><span class="suitepicon suitepicon-module-outcomebymonthdashlet"></span></strong> <br>Orden de Compra
 				          </span>
-				        </li>            
+				        </li>
 				    </ul>
 				    <div class="tab-content">
 				        <div id="step-1" class="tab-pane consolidacionProductos" role="tabpanel" aria-labelledby="step-1">
@@ -59,7 +58,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 												</div>
 											</div>
 										</div>
-										
+
 										<div class="col-sm-3">
 											<div class="input-group">
 												<div class="input-group">
@@ -96,7 +95,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 									<div class="row">
 										<div class="col-md-6 table-responsive">
 										<div class="totales">
-										<label>Total FOB</label> <input type="number" id="totalFob1" value="0"> 
+										<label>Total FOB</label> <input type="number" id="totalFob1" value="0">
 										<label>Cant. Total</label> <input type="number" id="cantidadTabla1" value="0">
 										<button class="btn btn-primary btn-xs btn-secondary" style="width: 10%;" onclick="enviarTodo()">>></button>
 										</div>
@@ -121,7 +120,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 										<div class="col-md-6 table-responsive">
 										<div class="totales">
 											<button class="btn btn-primary btn-xs" style="width: 10%;" onclick="regresarTodo()"><<</button>
-											<label>Total FOB</label> <input type="number" id="totalFob2" value="0"> 
+											<label>Total FOB</label> <input type="number" id="totalFob2" value="0">
 											<label>Cant. Total</label> <input type="number" id="cantidadTabla2" value="0">
 											<button class="btn btn-primary btn-xs" style="width: 10%;" onclick="verData()">Ver Data en consola</button>
 										</div>
@@ -138,18 +137,17 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 									</div>
 								</div>
 				        </div>
-				        <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">		
-				        	  <div id="ordeCompra"><div>	
-				        	  <div id="ventanaModal"></div>		            
+				        <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">
+				        	  <div id="ordeCompra"><div>
+				        	  <div id="ventanaModal"></div>
 				        </div>
 				    </div>
 				</div>
 				';
 
-       	
-      	$footer = '
-				<script type="text/javascript" src="modules/SCO_Consolidacion/jquery.smartWizard.js?'.time().'"></script> 
-				<script src="modules/SCO_Consolidacion/consolidacion.js?'.time().'"></script>				    			
+		$footer = '
+				<script type="text/javascript" src="modules/SCO_Consolidacion/jquery.smartWizard.js?'.time().'"></script>
+				<script src="modules/SCO_Consolidacion/consolidacion.js?'.time().'"></script>
     			<script src="modules/SCO_Consolidacion/consolidacionProductosList.js?'.time().'"></script>
     			<script src="modules/SCO_Consolidacion/jquery.validate.js?'.time().'"></script>
 				<script type="text/javascript">
@@ -158,9 +156,11 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 				        var btnFinish = $("<button></button>").text("Finish")
 				                                         .addClass("btn btn-info")
 				                                         .on("click", function(){ alert("Finish Clicked"); });
+
 				        var btnCancel = $("<button></button>").text("Cancel")
 				                                         .addClass("btn btn-danger")
 				                                         .on("click", function(){ $("#smartwizard").smartWizard("reset"); });
+
 
 				        // Step show event
 				        $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection, stepPosition) {
@@ -250,8 +250,8 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 				    });
 				</script>
     			';
-       
+
 		echo $head.$steps.$footer;
 
-    }
+	}
 }
