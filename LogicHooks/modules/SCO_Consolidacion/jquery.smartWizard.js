@@ -27,7 +27,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
   var defaults = {
     selected: 0,
     // Initial selected step, 0 = first step
-    theme: 'arrows',
+    theme: 'default',
     // theme for the wizard, related css need to include for other than default theme
     justified: true,
     // Nav menu justification. true/false

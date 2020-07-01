@@ -4895,7 +4895,7 @@ tbody.collapse.in {
 .nav>li>a {
 	position: relative;
 	display: block;
-	padding: 10px 15px
+	padding: 10px 10px
 }
 
 .nav>li>a:hover,
@@ -4946,8 +4946,8 @@ tbody.collapse.in {
 .nav-tabs>li>a {
 	margin-right: 2px;
 	line-height: 1.428571429;
-	border: 1px solid transparent;
-	border-radius: 4px 4px 0 0
+	/*border: 1px solid transparent;*/
+	/*border-radius: 4px 4px 0 0*/
 }
 
 .nav-tabs>li>a:hover {
@@ -5583,9 +5583,9 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 }
 
 .navbar-inverse {
-	background-color: #003C79 !important;
-	border-color: #367ca6;
-   box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)
+	background-color: #0e2741 !important;
+	border-color: #0e2741;
+  /*box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)*/
 }
 
 .navbar-inverse .navbar-brand {
@@ -8848,7 +8848,7 @@ button.close {
 .button-toggle-collapsed span,
 .panel-heading a.collapsed,
 .panel-heading a {
-	line-height: 1;
+	/*line-height: 1;*/
 	vertical-align: middle
 }
 
@@ -8860,7 +8860,7 @@ button.close {
 	font-family: suitepicon !important;
 	font-style: normal;
 	font-weight: normal !important;
-	vertical-align: top
+	vertical-align: top;
 }
 
 .button-toggle-expanded span {
@@ -8880,7 +8880,7 @@ html {
 body {
 	font-family: 'Lato', Lato, Arial, sans-serif;
 	font-size: 13px;
-	background: #f5f5f5;
+	background: #fafafa;
 	color: #817c8d;
 	margin: 0;
 	overflow: auto;
@@ -8947,12 +8947,12 @@ a:hover {
 }
 
 .bootstrap-container.col-sm-offset-3 {
-	background-color: #f5f5f5;
+	background-color: #fafafa;
 	margin-top: 80px
 }
 
 .bootstrap-container {
-	background-color: #f5f5f5;
+	background-color: #fafafa;
 	margin-top: 80px
 }
 
@@ -9002,7 +9002,9 @@ a:hover {
 }
 
 .content {
-	margin: 0 0 0 0
+	margin: 0 0 0 0;
+ margin-top: -20px;
+ 
 }
 
 @media (max-width:750px) {
@@ -9697,17 +9699,17 @@ a:hover {
 .sidebar {
 	display: block;
 	position: fixed;
-	top: 60px;
+	top: 46px;
 	bottom: 0;
 	left: 0;
-	background-color: #003C79 !important;
+	background-color: #244668 !important;
 	overflow-x: hidden;
 	overflow-y: auto;
 	z-index: 1000
 }
 
 .sidebar .actionMenuSidebar {
-	margin-bottom: 10px
+	margin-bottom: 1px
 }
 
 .sidebar .actionMenuSidebar_top {
@@ -9818,7 +9820,7 @@ a.buttontoggle:hover {
 .button-toggle-collapsed {
 	position: fixed;
 	top: 72px;
-	background: #929798;
+	background: rgba(0,0,0,0.4);
 	border-top-right-radius: 3px;
 	border-bottom-right-radius: 3px;
 	width: 30px;
@@ -9830,7 +9832,7 @@ a.buttontoggle:hover {
 .button-toggle-expanded {
 	position: fixed;
 	top: 72px;
-	background: #929798;
+	background: rgba(0,0,0,0.4);
 	border-top-right-radius: 3px;
 	border-bottom-right-radius: 3px;
 	width: 30px;
@@ -9949,19 +9951,21 @@ a.buttontoggle:hover {
 }
 
 .recentlyViewedSidebar .recent_h3 {
-	font-size: 16px;
-	font-weight: bold;
-	color: #f5f5f5;
+	font-size: 16.5px;
+	/*font-weight: bold;*/
+	color: #ccc;
 	margin: 0 0 5px 0;
- box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)
+  /*box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)*/
+   background: rgba(0,0,0,.05);
 }
 
 .favoritesSidebar .recent_h3 {
-	font-size: 16px;
-	font-weight: bold;
-	color: #f5f5f5;
+	font-size: 16.5px;
+	/*font-weight: bold;*/
+	color: #ccc;
 	margin: 0 0 5px 0;
-  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)
+  background: rgba(0,0,0,.05);
+  /*box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)*/
 }
 
 footer * {
@@ -9971,7 +9975,7 @@ footer * {
 footer {
 	box-sizing: content-box;
 	bottom: 0;
-	background-color: #e6e6e6;
+	background-color: rgba(0,0,0,0);
 	margin: 0 0 0 0;
 	border: 1px solid transparent;
 	border-radius: 4px;
@@ -9990,7 +9994,8 @@ footer.collapsedSidebar {
 
 .footer_left {
 	float: left;
-	width: 48%
+	width: 48%;
+ display:none;
 }
 
 @media (min-width:1200px) {
@@ -10013,10 +10018,10 @@ footer.collapsedSidebar {
 		width: 100%
 	}
 	.recentlyViewedSidebar .recent-links-detail {
-		padding: 5px 1% 5px 7%
+		padding: 1px 1% 1px 15%
 	}
 	.favoritesSidebar .favorite-links-detail {
-		padding: 5px 1% 5px 7%
+		padding: 1px 1% 1px 15%
 	}
 	.recentlyViewedSidebar .recent_h3 {
 		padding: 0 1% 0 7%
@@ -10213,7 +10218,7 @@ footer.collapsedSidebar {
 }
 
 .navbar-inverse {
-	background: #4b97c4;
+	background: #0e2741;
 }
 
 .navbar-inverse .navbar-brand,
@@ -10263,7 +10268,7 @@ footer.collapsedSidebar {
 
 .navbar-inverse .dropdown-menu li a {
 	display: block;
-	font-size: 14px;
+	font-size: 13px;
 	background-color: #707d84 !important;
 	color: #fff;
 	padding: 7px 10px 7px 10px;
@@ -10318,9 +10323,9 @@ footer.collapsedSidebar {
 .navbar-inverse .nav>.topnav {
 	margin: 0;
 	font-size: 12px;
-	height: 60px;
-	letter-spacing: 2px;
-	line-height: 60px;
+	height: 46px;
+	letter-spacing: 0.8px;
+	line-height: 46px;
 	padding: 0 7px 0 7px;
 	text-transform: uppercase
 }
@@ -10428,8 +10433,8 @@ footer.collapsedSidebar {
 }
 
 .navbar {
-	max-height: 60px;
-	min-height: 60px
+	max-height: 46px;
+	min-height: 46px
 }
 
 .recent_h3 {
@@ -10824,7 +10829,7 @@ footer.collapsedSidebar {
 }
 
 .globalLinks-desktop .user-menu-button {
-	background-color: #003c79;
+	background-color: rgba(255,255,255,0);
 	border: none;
 	box-shadow: none;
 	margin: 0;
@@ -10837,7 +10842,7 @@ footer.collapsedSidebar {
 }
 
 .globalLinks-desktop .suitepicon-action-current-user {
-	font-size: 38px;
+	font-size: 25px;
 	font-weight: 400
 }
 
@@ -11131,7 +11136,7 @@ footer.collapsedSidebar {
 }
 
 .create.quickcreatetop .dropdown-toggle {
-	background-color: #3e7291;
+	background-color: rgba(0,0,0,0.2);
 	height: 40px;
 	line-height: 37px;
 	padding-top: 0;
@@ -11229,7 +11234,7 @@ footer.collapsedSidebar {
 	border: none;
 	box-shadow: none;
 	color: #fff;
-	font-size: 40px;
+	font-size: 25px;
 	background-color: transparent;
 	margin-top: 0;
 	border: none
@@ -11955,11 +11960,11 @@ footer.collapsedSidebar {
 	#desktop_notifications .btn-success:active.focus,
 	#desktop_notifications .btn-success:active:focus,
 	#desktop_notifications .btn-success:active:hover {
-		background-color: #4b97c4;
+		background-color: #707d84;
 		border: none;
 		box-shadow: none;
 		color: #fff;
-		font-size: 40px
+		font-size: 25px
 	}
 	#desktop_notifications.open>.dropdown-toggle.btn-success,
 	#desktop_notifications.open>.dropdown-toggle.btn-success.active,
@@ -11967,37 +11972,37 @@ footer.collapsedSidebar {
 	#desktop_notifications.open>.dropdown-toggle.btn-success.focus,
 	#desktop_notifications.open>.dropdown-toggle.btn-success:focus,
 	#desktop_notifications.open>.dropdown-toggle.btn-success:hover {
-		background-color: #4b97c4;
+		background-color: #707d84;
 		border: none;
 		box-shadow: none;
 		color: #fff;
-		font-size: 40px
+		font-size: 25px
 	}
 	.desktop_notifications>.btn-success {
-		background-color: #003c79;
+		background-color: rgba(0,0,0,0);
 		border: none;
 		box-shadow: none;
 		color: #fff;
-		font-size: 40px
+		font-size: 25px
 	}
 	.desktop_notifications>.btn-success:hover {
-		background-color: #003c79;
+		background-color:#707d84;
 		color: #fff;
 		border: none
 	}
 	.desktop_notifications>.btn-success:active {
-		background-color: #003c79;
+		background-color:#707d84;
 		border: none;
 		box-shadow: none;
 		color: #fff;
-		font-size: 40px
+		font-size: 25px
 	}
 	.desktop_notifications>.btn-success:focus {
-		background-color: #003c79;
+		background-color:#707d84;
 		border: none;
 		box-shadow: none;
 		color: #fff;
-		font-size: 40px
+		font-size: 25px
 	}
 }
 
@@ -12148,7 +12153,7 @@ footer.collapsedSidebar {
 		padding: 0
 	}
 	.desktop-bar>.toolbar>li>.btn.searchbutton {
-		font-size: 20px
+		font-size: 18px
 	}
 	.globalLinks-mobile .dropdown-toggle {
 		background-color: transparent;
@@ -12293,8 +12298,8 @@ footer.collapsedSidebar {
 		visibility: visible
 	}
 	.navbar-fixed-top {
-		height: 60px;
-		max-height: 60px
+		height: 46px;
+		max-height: 46px
 	}
 	.searchform {
 		display: none
@@ -12347,8 +12352,8 @@ footer.collapsedSidebar {
 	}
 	.navbar-search .query_string {
 		font-size: 14px;
-		background-color: #fff;
-		color: #a2a5af;
+		background-color: rgba(255,255,255,0.8);
+		color: #333;
 		padding: 0 4px 0 4px;
 		border: none;
 		border-radius: 3px;
@@ -12360,8 +12365,8 @@ footer.collapsedSidebar {
 	.globalLinks-desktop .dropdown-toggle {
 		margin-left: 0;
 		border: none;
-		width: 48px;
-		height: 48px
+		/*width: 48px;*/
+		height: 46px
 	}
 }
 
@@ -12384,7 +12389,7 @@ footer.collapsedSidebar {
 	}
 	.desktop-bar {
 		width: 39%;
-		padding-top: 10px
+		padding-top: 5px
 	}
 	.navbar-form.searchform .input-group-btn {
 		background: #fff;
@@ -12496,7 +12501,7 @@ footer.collapsedSidebar {
 	}
 	.navbar-fixed-top .topnav .dropdown-menu {
 		height: auto;
-		max-height: 200px
+		max-height: 350px
 	}
 	.navbar-fixed-top .with-actions>.dropdown-menu {
 		height: auto;
@@ -13642,19 +13647,19 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .buttons .primary {
-	background-color: #003c79
+	background-color: #0e2741
 }
 
 .buttons .primary:hover {
-	background-color: #5fa9d4
+	background-color: #375c82;
 }
 
 .buttons .button {
-	background-color: #003c79
+	background-color: #0e2741
 }
 
 .buttons .button:hover {
-	background-color: #5fa9d4
+	background-color: #375c82;
 }
 
 .removeFileButton {
@@ -13870,7 +13875,7 @@ input[type=submit].button:hover {
 input[type=submit] {
 	font-size: 13px;
 	font-weight: 500;
-	background: #003c79;
+	background: #0e2741;
 	color: #f5f5f5;
 	cursor: pointer;
 	padding: 0 20px 0 20px;
@@ -14221,7 +14226,7 @@ input[type="button"][disabled] {
 input[type=text] {
 	background: #fff;
 	padding: 5px;
-	border: 1px solid #c4e3f5;
+	border: 1px solid #c4c4c4;
 	border-radius: 4px
 }
 
@@ -14261,8 +14266,8 @@ textarea {
 }
 
 input[type=text] {
-	line-height: 20px;
-	min-height: 20px
+	line-height: 10px;
+	min-height: 10px
 }
 
 input[type=number] {
@@ -15572,19 +15577,19 @@ tr#pagination {
 }
 
 .list #pagination td .paginationTable .paginationActionButtons {
-	background-color: #c2c3c4;
+	background-color: #c8dbeb;/*#c2c3c4;*/
 	padding: 5px 0 5px 0
 }
 
 .list #pagination td .paginationTable .paginationChangeButtons {
-	background-color: #c2c3c4;
+	background-color: #c8dbeb;/*#c2c3c4;*/
 	padding: 5px 5px 5px 0
 }
 
 .list #pagination td .paginationTable .pageNumbers {
 	position: static;
 	font-weight: bold;
-	color: #fff;
+	color: #444;
 	padding: 0 8px 0 0;
 	margin: 0 0 0 0
 }
@@ -15687,7 +15692,7 @@ tr#pagination {
 
 .list .pagination td table td {
 	padding: 3px 7px 3px 5px;
-	background: #c2c3c4 none repeat scroll 0 0
+	background: #ffffffcf none repeat scroll 0 0
 }
 
 .list .pagination td table td button {
@@ -15772,7 +15777,7 @@ tr#pagination {
 
 .list tr th {
 	font-size: 13px;
-	padding: 10px 10px 10px 10px;
+	padding: 6px 5px 6px 5px;
 	border-left: none;
 	border-right: none;
 	text-align: left;
@@ -15864,7 +15869,7 @@ tr#pagination {
 }
 
 .list thead {
-	background-color: #003C79
+	background-color: #224263;
 }
 
 .list .oddListRowS1 td[nowrap] {
@@ -15912,8 +15917,8 @@ a.listViewTdToolsS1 {
 
 .list tr th a:link {
 	font-size: 13px;
-	font-weight: 700;
-	padding-right: 10px;
+	font-weight: 500;
+	padding-right: 5px;
 	color: #fff
 }
 
@@ -15922,7 +15927,7 @@ a.listViewTdToolsS1 {
 }
 
 .list-view-rounded-corners {
-	margin: 16px 0 16px 0
+	margin: 0px 0 16px 0
 }
 
 .list-view-rounded-corners>table {
@@ -15966,19 +15971,19 @@ a.listViewTdToolsS1 {
 }
 
 .list-view-rounded-corners>table th:first-of-type {
-	border-top-left-radius: 4px
+	border-top-left-radius: 0px
 }
 
 .list-view-rounded-corners>table th:last-of-type {
-	border-top-right-radius: 4px
+	border-top-right-radius: 0px
 }
 
 .pagination-bottom .paginationTable td:first-of-type {
-	border-bottom-left-radius: 4px
+	border-bottom-left-radius: 0px
 }
 
 .pagination-bottom .paginationTable td:last-of-type {
-	border-bottom-right-radius: 4px
+	border-bottom-right-radius: 0px
 }
 
 #history_search table td {
@@ -16010,7 +16015,7 @@ a.listViewTdToolsS1 {
 }
 
 .table-responsive.list>tbody>tr>td>a {
-	font-weight: bold;
+	font-weight: 500;
 	color: #4b97c4;
 	border-bottom-color: #4b97c4;
 	border-bottom-style: dashed;
@@ -16190,7 +16195,7 @@ a.listViewTdToolsS1 {
 }
 
 .list .pagination td table td span.pageNumbers {
-	color: #fff
+	color: #555;
 }
 
 .list tr.pagination td.buttons ul.clickMenu>li>a:link {
@@ -16313,7 +16318,7 @@ a.listViewTdToolsS1 {
 
 .action-link-top {
 	position: relative;
-	font-size: 14px;
+	font-size: 12px;
 	line-height: 11px;
 	min-height: 16px
 }
@@ -16419,7 +16424,7 @@ a.listViewTdToolsS1 {
 }
 
 .list .SugarActionMenu .sugar_action_button .subnav {
-	padding: 4px 10px
+	padding:2px 2px
 }
 
 #detail_header_action_menu>.sugar_action_button>.subnav li {
@@ -17121,7 +17126,7 @@ label.hidden-mobile.selected-actions-label {
 
 label.hidden-desktop.selected-actions-label {
 	margin-bottom: initial;
-	font-size: 10.2px;
+	font-size: 12px;
 	letter-spacing: 1.2px;
 	line-height: 12px
 }
@@ -17189,12 +17194,12 @@ ul.chooserList.green.ui-sortable>li {
 }
 
 ul.chooserList.red.ui-sortable>li {
-	background-color: #4b97c4
+	background-color: #eff9ff
 }
 
 div.modal-header {
 	padding: 15px 5px 0px 5px;
-    background: #7095bc;
+    background: #244668;
     margin-bottom: -10px;
 }
 
@@ -17274,7 +17279,7 @@ div.qtip.qtip-default {
 }
 
 .modal-content #search_form label {
-	color: #817c8d
+	color: #333;
 }
 
 .modal-content .search_form .view input[type="text"],
@@ -18269,7 +18274,7 @@ ul.clickMenu {
 ul.clickMenu li ul.subnav {
 	list-style: none;
 	position: absolute;
-	top: 20px;
+	top: 25px;
 	margin: 0;
 	display: none;
 	float: left;
@@ -18378,7 +18383,7 @@ ul#selectLink.clickMenu>li>a {
 div.list-view-rounded-corners>table {
 	border-collapse: separate;
 	border-spacing: 0;
- box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)
+  /*box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)*/
 }
 
 tr.pagination-unique:nth-of-type(2) {
@@ -18671,7 +18676,7 @@ ul#selectLink.clickMenu.selectmenu.SugarActionMenu li.sugar_action_button span {
 }
 
 div#content div#pagecontent form#MassUpdate table.list.view tbody tr td {
-	font-weight: 700
+	font-weight: 500;
 }
 
 .list tr.oddListRowS1 td.inline-email-td {
@@ -19061,7 +19066,7 @@ p.msg {
 .moduleTitle .module-title-text {
 	height: auto;
 	line-height: 36px;
-	margin-bottom: 12px
+	margin-bottom: 12px;
 }
 
 .nav-tabs>li.tab-inline-pagination {
@@ -19100,7 +19105,7 @@ p.msg {
 	font-weight: 600;
 	height: 28px;
 	line-height: 18px;
-	padding: 0 10px 0 10px
+	padding: 0 5px 0 5px
 }
 
 .buttons .pagination .btn-pagination:hover {
@@ -19253,8 +19258,8 @@ p.msg {
 .subpanel-table .SugarActionMenu .sugar_action_button {}
 
 .subpanel-table .SugarActionMenu .single a {
-	min-height: 32px;
-	line-height: 32px
+	min-height: 22px;
+	line-height: 22px
 }
 
 @media print {
@@ -19669,13 +19674,15 @@ div.noBullet li,
 }
 
 .content {
-	padding: 05px 2% 20px 2%;
+	padding: 05px 1% 20px 1%;
 	width: 100%
+  margin-top: -20px;
+  margin-left: 10px;
 }
 
 @media (max-width:750px) {
 	.content {
-		padding-top: 50px
+		padding-top: 40px
 	}
 }
 
@@ -19980,9 +19987,9 @@ table.view {
 
 .detail-view-row .label {
 	display: inline;
-	font-size: 14px;
-	font-weight: 700;
-	color: #817c8d;
+	font-size: 13px;
+	font-weight: 500;
+	color: #000000;
 	padding: 0 0 6.5px 8px;
 	text-align: left;
 	vertical-align: baseline;
@@ -19991,7 +19998,7 @@ table.view {
 
 .edit-view-row .label {
 	display: inline;
-	font-size: 14px;
+	font-size: 13px;
 	font-weight: 700;
 	color: #444;
 	padding: 0;
@@ -20043,10 +20050,10 @@ slot {
 
 .detail-view-field {
 	display: inline;
-	font-size: 14px;
-	font-weight: 400;
-	background-color: #f5f5f5;
-	color: #666;
+	font-size: 13px;
+	font-weight: 500;
+	background-color: #f3f3ff;
+	color: #555;
 	padding: 5px 5px;
 	border: 1px solid transparent;
 	border-radius: 4px;
@@ -20165,7 +20172,7 @@ option[selected] {
 }
 
 .label {
-	font-size: 14px;
+	font-size: 13px;
 	color: #817c8d
 }
 
@@ -20518,7 +20525,8 @@ div.row.monthHeader {
 ul.noBullet {
 	padding-left: 0;
 	margin-left: 0;
-	list-style-type: none
+	list-style-type: none;
+  margin-top: -15px;
 }
 
 li.noBullet:first-child {
@@ -21050,12 +21058,12 @@ div.confirmTable {
 
 .moduleTitle h2 {
 	display: block;
-	font-size: 26px;
+	font-size: 20px;
 	font-weight: 600;
 	color: #003c79;
-	margin: 0 0 12px 0;
+	margin: 0 0 12px 10px;
 	float: left;
-	letter-spacing: 2px;
+	letter-spacing: 1px;
 	text-transform: uppercase
 }
 
@@ -21220,7 +21228,7 @@ a.tabFormAdvLink:hover {
 
 .evenListRowS1 td,
 .oddListRowS1 td {
-	color: #817c8d
+	color: #333;
 }
 
 .evenListRowS1 td {
@@ -24798,31 +24806,35 @@ div.content div.pagecontent form#EditView div.edit.view table tbody tr td input[
 .content .nav-tabs>li>a:focus,
 .content .nav-tabs>li>a:hover {
 	font-size: 13px;
-	font-weight: 400;
-	background-color: #7095bb;
-	color: #fff;
+	font-weight: 500;
+	background-color: rgba(0,0,0,0.07);
+	color: #666;
 	cursor: pointer;
-	margin: 0 1px 0 0px;
+	margin: 0 0px 0 0px;
 	border-color: transparent;
-	letter-spacing: 2px;
-	line-height: 10px
+	letter-spacing:  0.5px;
+	line-height: 10px;
+ border: 1px solid #fff;
+  border-right: 1px solid #fff; 
 }
 
 .content .nav-tabs>li.active>a,
 .content .nav-tabs>li.active>a:focus,
 .content .nav-tabs>li.active>a:hover {
 	font-size: 13px;
-	font-weight: 400;
-	background-color: #003C79 !important;
+	font-weight: 500;
+	background-color: #0e2741 !important;
 	color: #fff;
 	cursor: pointer;
 	margin-top: 0;
-	margin-bottom: 0;
-	margin-left: 2px;
-	margin-right: 2px;
+	margin-bottom: 2px;
+	margin-left: 0px;
+	margin-right: 0px;
 	border-color: transparent;
-	letter-spacing: 2px;
-	line-height: 10px
+	letter-spacing: 0.5px;
+	line-height: 10px;  
+  border-right: 1px solid #fff; 
+  /*box-shadow: 0px 4px 0px #bdc8d3;*/ 
 }
 
 .content .nav-tabs>li.active:nth-of-type(1)>a,
@@ -24995,12 +25007,9 @@ div.content div.pagecontent form#EditView div.edit.view table tbody tr td input[
 
 .content .detail-view .tab-content {
 	background-color: #fff;
-	padding: 24px;
-	margin-bottom: 5px;
+	padding: 20px;
+	margin-bottom: 2px;
 	border: 1px solid transparent;
-	border-top-right-radius: 4px;
-	border-bottom-left-radius: 4px;
-	border-bottom-right-radius: 4px
 }
 
 .dashboard .tab-content {
@@ -25031,7 +25040,7 @@ div.content div.pagecontent form#EditView div.edit.view table tbody tr td input[
 }
 
 .panel-default>.panel-heading {
-	background: #fff;
+	background: whitesmoke;
 	color: #fff;
 	padding: 0;
 	height: 32px;
@@ -25319,7 +25328,7 @@ div.sub-panel {
 	padding: 0;
 	margin: 0;
 	width: 26px;
-	height: 26px
+	height: 20px
 }
 
 .subpanel-table.list tr.pagination button.button[name="listViewStartButton"]:hover,
@@ -25357,7 +25366,7 @@ div.sub-panel {
 .panel-heading .subpanel-table .pagination button a.collapsed,
 .subpanel-table .pagination button .panel-heading a,
 .panel-heading .subpanel-table .pagination button a {
-	line-height: 26px
+	line-height: 20px
 }
 
 #actionLinkTop li.sugar_action_button:hover,
@@ -35832,4 +35841,23 @@ body>.le_panel .le_edit,
 
 .jstree-default-large .jstree-ellipsis.jstree-no-icons .jstree-anchor {
 	width: calc(100% - 5px)
+}
+
+/*AGREGANDO MODO DESARROLLO EN EN MENU*/
+/*.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a.with-home-icon:before {
+    content: "DESARROLLO";
+    color: #ffa8a8;
+}*/
+
+input:focus{
+    border: 1px solid #75c1fa;
+    transition: all 0.3s ease;
+    outline: none;
+    transform: scale(1.02);
+}
+textarea:focus{
+    border: 1px solid #75c1fa;
+    transition: all 0.3s ease;
+    outline: none;
+    transform: scale(1.02);
 }

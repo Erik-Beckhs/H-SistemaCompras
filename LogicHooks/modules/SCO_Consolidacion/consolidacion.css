@@ -1,5 +1,6 @@
 .form-group {
     padding: 10px;
+    color:#333;
 }
 .cons-btn{
 	position: absolute;
@@ -39,4 +40,61 @@ textarea{
 
 .nav-link{
 	font-size: 14px;
+}
+
+#smartwizard{
+	background: #fff;
+}
+
+.desabilidato{
+	pointer-events: none;
+	background: #eee !important;
+}
+/*MODAL*/
+.modal-header {
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.06), 0 4px 15px 0 rgba(0,0,0,.06);
+    margin: -2.6rem 3rem 1rem 3rem;
+    border: none;
+    border-radius: .125rem;
+    padding: 1.2rem !important;
+    text-align: center;
+    background: #0e2741 !important;
+    padding: 1.8rem;
+    color: #FFF;
+}
+.modal-content {
+    border-radius: 0px
+}
+.modal{
+	overflow-y: scroll;
+}
+.modal-dialog{
+	margin-top:10%;
+	width: 50%;
+}
+.modal-body {
+    padding: 20px 40px 10px 40px;
+}
+.modal h1{
+	color: #012448;
+	margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+#formPro label.error {
+	margin-left: 0px;
+	width: auto;
+	display: inline;
+	float: inherit;
+}
+.error:empty {
+    padding: 5px;
+} 
+.error{
+    margin-bottom: 0px;
+    font-size: 10px;
+    color:#ff504d;    
+}
+input[type=text] .error{
+	border-color: red;
 }
