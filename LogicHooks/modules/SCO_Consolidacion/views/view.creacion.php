@@ -146,7 +146,8 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
       	$footer = '
 				<script type="text/javascript" src="modules/SCO_Consolidacion/jquery.smartWizard.js?'.time().'"></script> 
 				<script src="modules/SCO_Consolidacion/consolidacion.js?'.time().'"></script>				    			
-    			<script src="modules/SCO_Consolidacion/consolidacionProductosList.js?'.time().'"></script>   			  			
+    			<script src="modules/SCO_Consolidacion/consolidacionProductosList.js?'.time().'"></script>
+    			<script src="modules/SCO_Consolidacion/jquery.validate.js?'.time().'"></script>
 				<script type="text/javascript">
 				    $(document).ready(function(){
 				        // Toolbar extra buttons
