@@ -15,9 +15,9 @@ global $current_user;
     $filtro = $_POST['filtro'];
     $idDiv = $current_user->iddivision_c;
     
-    if($filtro == 'fabricanteList'){
-        $query = "SELECT pcv_proveedoraio,pcv_nombreproveedor FROM suitecrm.sco_productoscotizadosventa
-        group by pcv_proveedoraio;
+    if($filtro == 'cotizacionList'){
+        $query = "SELECT pcv_numerocotizacion FROM suitecrm.sco_productoscotizadosventa
+        group by pcv_numerocotizacion;
         ";
         $results = $GLOBALS['db']->query($query, true);
         $object= array();
@@ -28,11 +28,11 @@ global $current_user;
         echo json_encode($object);
     }
     if($filtro == 'fabricante'){
-        $pcv_proveedoraio = $_POST['pcv_proveedoraio'];
-        $query = "SELECT pcv_numerocotizacion
+        $pcv_numerocotizacion = $_POST['pcv_numerocotizacion'];
+        $query = "SELECT pcv_nombreproveedor,pcv_proveedoraio
         FROM suitecrm.sco_productoscotizadosventa
-        WHERE pcv_proveedoraio = '$pcv_proveedoraio'
-        group by pcv_numerocotizacion;
+        WHERE pcv_numerocotizacion = '$pcv_numerocotizacion'
+        group by pcv_proveedoraio;
         ";
         $results = $GLOBALS['db']->query($query, true);
         $object= array();
@@ -75,5 +75,37 @@ global $current_user;
             }
         echo json_encode($object);
     }
-
+    if($filtro == 'familia'){
+        $nroCotizacion = $_POST['nroCotizacion'];
+        $pcv_proveedoraio = $_POST['pcv_proveedoraio'];
+        $query = "SELECT pcv_familia 
+        FROM suitecrm.sco_productoscotizadosventa
+        WHERE pcv_numerocotizacion = '$nroCotizacion'
+        AND pcv_proveedoraio = '$pcv_proveedoraio'
+        group by pcv_familia;
+        ";
+        $results = $GLOBALS['db']->query($query, true);
+        $object= array();
+        while($row = $GLOBALS['db']->fetchByAssoc($results))
+            {
+                $object[] = $row;
+            }
+        echo json_encode($object);
+    }
+    if($filtro == 'tabla1'){
+        $pcv_proveedoraio = $_POST['pcv_proveedoraio'] ? $_POST['pcv_proveedoraio'] : "";
+        $pcv_numerocotizacion = $_POST['nroCotizacion'] ? $_POST['nroCotizacion'] :"";
+        $name = $_POST['name'] ? $_POST['name'] : "";
+        $pcv_clienteaio = $_POST['pcv_clienteaio'] ? $_POST['pcv_clienteaio'] : "";
+        $pcv_familia = $_POST['pcv_familia'] ? $_POST['pcv_familia'] :"";
+        $query = "call suitecrm.sp_consolidacion_filtro('$pcv_proveedoraio', '$pcv_numerocotizacion', '$name', '$pcv_clienteaio', '$pcv_familia');";
+        $results = $GLOBALS['db']->query($query, true);
+        $object= array();
+        while($row = $GLOBALS['db']->fetchByAssoc($results))
+            {
+                $object[] = $row;
+            }
+        echo json_encode($object);
+    }
+    
  

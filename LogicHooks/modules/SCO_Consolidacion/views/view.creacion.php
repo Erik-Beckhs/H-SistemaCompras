@@ -10,13 +10,11 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 	   	$head = '	   	   		
 				<link rel="stylesheet" href="modules/SCO_Consolidacion/consolidacion.css?'.time().'" type="text/css" />	 
 				<link rel="stylesheet" href="modules/SCO_Consolidacion/consolidacionProductosList.css?'.time().'" type="text/css" />	 
-	   			<link href="modules/SCO_Consolidacion/smart_wizard_all.css?'.time().'" rel="stylesheet" type="text/css" />
-	   			<link href="modules/SCO_Consolidacion/css-loader.css?'.time().'" rel="stylesheet" type="text/css" />  		   			   		
+	   			<link href="modules/SCO_Consolidacion/smart_wizard_all.css" rel="stylesheet" type="text/css" />  		   			
 	   			';
 	   	$head .= '<div class="moduleTitle">
 				<h2 class="module-title-text"> Crear </h2>
-				<span class="utils"></span><div class="clear"></div></div>
-				<div class="loader loader-default" data-text="Enviando datos"></div>';		
+				<span class="utils"></span><div class="clear"></div></div>';		
 
 		$steps = '
 				<!-- SmartWizard html -->
@@ -24,22 +22,121 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 				    <ul class="nav">
 				        <li class="nav-item">
 				          <span class="nav-link" href="#step-1">
-				            <strong><span class="suitepicon suitepicon-module-aos-product-categories"></span></strong> <br>Consolidacion
+				            <strong><span class="suitepicon suitepicon-module-outcomebymonthdashlet"></span></strong> <br>Consolidacion
 				          </span>
 				        </li>
 				        <li class="nav-item">
 				          <span class="nav-link" href="#step-2">
-				            <strong><span class="suitepicon suitepicon-module-aor-reports"></span></strong> <br>Orden de Compra
+				            <strong><span class="suitepicon suitepicon-module-outcomebymonthdashlet"></span></strong> <br>Orden de Compra
 				          </span>
 				        </li>            
 				    </ul>
 				    <div class="tab-content">
-				        <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
-							<div id="consolidacion"></div>						
+				        <div id="step-1" class="tab-pane consolidacionProductos" role="tabpanel" aria-labelledby="step-1">
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-sm-3">
+											<div class="input-group">
+												<div class="input-group">
+													<span class="input-group-addon">Nro. cotizaci&oacute;n: </span>
+													<select class="form-control filter" id="nroCotizacion" name="nroCotizacion">
+														<option value="" selected="selected">Todo</option>
+														<div id="nroCotizacionOption"></div>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="input-group">
+												<div class="input-group">
+													<span class="input-group-addon">Fabricante</span>
+													<select class="form-control filter" id="idFabricante" name="idFabricante">
+														<option value="" selected="selected">Todo</option>
+														</select>
+												</div>
+											</div>
+										</div>
+										
+										<div class="col-sm-3">
+											<div class="input-group">
+												<div class="input-group">
+													<span class="input-group-addon">Código AIO</span>
+													<select class="form-control filter" id="codAioProduct" name="codAioProduct">
+														<option value="" selected="selected">Todo</option>
+														<div id="codAioProductOption"></div>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="input-group">
+												<div class="input-group">
+													<span class="input-group-addon">Cliente</span>
+													<select class="form-control filter" id="idCliente" name="idCliente">
+														<option value="" selected="selected">Todo</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="input-group">
+												<div class="input-group">
+													<span class="input-group-addon">Familia</span>
+													<select class="form-control filter" id="idFamilia" name="idFamilia">
+														<option value="" selected="selected">Todo</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-6 table-responsive">
+										<div class="totales">
+										<label>Total FOB</label> <input type="number" id="totalFob1" value="0"> 
+										<label>Cant. Total</label> <input type="number" id="cantidadTabla1" value="0">
+										<button class="btn btn-primary btn-xs btn-secondary" style="width: 10%;" onclick="enviarTodo()">>></button>
+										</div>
+											<table class="table tableCotizacion table-striped">
+												<thead>
+													<tr>
+														<th>Familia</th>
+														<th>CodigoAIO</th>
+														<th>FOB</th>
+														<th>Fabricante</th>
+														<th>Descipci&oacute;n</th>
+														<th>Vendedor</th>
+														<th>Cantidad</th>
+														<th>Cliente</th>
+														<th></th>
+													</tr>
+												</thead>
+												<tbody id="tabla1">
+												</tbody>
+											</table>
+										</div>
+										<div class="col-md-6 table-responsive">
+										<div class="totales">
+											<button class="btn btn-primary btn-xs" style="width: 10%;" onclick="regresarTodo()"><<</button>
+											<label>Total FOB</label> <input type="number" id="totalFob2" value="0"> 
+											<label>Cant. Total</label> <input type="number" id="cantidadTabla2" value="0">
+											<button class="btn btn-primary btn-xs" style="width: 10%;" onclick="verData()">Ver Data en consola</button>
+										</div>
+										<table class="table tableCotizacion table-striped">
+										<thead>
+											<tr>
+												<th>Familia</th><th>CodigoAIO</th><th>FOB</th><th>Fabricante</th><th>Descipci&oacute;n</th><th>Vendedor</th><th>Cantidad</th><th>Cliente</th><th></th>
+											</tr>
+										</thead>
+										<tbody id="tabla2">
+										</tbody>
+									</table>
+										</div>
+									</div>
+								</div>
 				        </div>
 				        <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">		
-				        	<div id="ordeCompra"></div>	
-				        	<div id="ventanaModal"></div>			            
+				        	  <div id="ordeCompra"><div>			            
 				        </div>
 				    </div>
 				</div>
@@ -48,9 +145,8 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
        	
       	$footer = '
 				<script type="text/javascript" src="modules/SCO_Consolidacion/jquery.smartWizard.js?'.time().'"></script> 
-				<script src="modules/SCO_Consolidacion/consolidacionProductosList.js?'.time().'"></script>
-				<script src="modules/SCO_Consolidacion/consolidacion.js?'.time().'"></script>
-				<script src="modules/SCO_Consolidacion/jquery.validate.js?'.time().'"></script>
+				<script src="modules/SCO_Consolidacion/consolidacion.js?'.time().'"></script>				    			
+    			<script src="modules/SCO_Consolidacion/consolidacionProductosList.js?'.time().'"></script>   			  			
 				<script type="text/javascript">
 				    $(document).ready(function(){
 				        // Toolbar extra buttons
@@ -80,7 +176,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 				            selected: 0,
 				            theme: "default", //default, arrows, dots, dark
 				            transition: {
-				                animation: "slide-horizontal", // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
+				                animation: "slide-vertical", // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
 				            },
 				            toolbarSettings: {
 				                toolbarPosition: "both" // both bottom
