@@ -32,75 +32,108 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 				        </li>            
 				    </ul>
 				    <div class="tab-content">
-				        <div id="step-1" class="tab-pane" role="tabpanel" aria-labelledby="step-1">
+				        <div id="step-1" class="tab-pane consolidacionProductos" role="tabpanel" aria-labelledby="step-1">
 								<div class="container-fluid">
-								<div class="row">
-								    <div class="col-sm-3">
-								        <div class="input-group">
-								            <div class="input-group">
-								                <span class="input-group-addon">Fabricante</span>
-								                <select class="form-control filter" id="idFabricante" name="idFabricante">
-								                    <option value="00" selected="selected">Todo</option>
-								                    </select>
-								            </div>
-								        </div>
-								    </div>
-								    <div class="col-sm-3">
-								        <div class="input-group">
-								            <div class="input-group">
-								                <span class="input-group-addon">Nro. cotizaci&oacute;n: </span>
-								                <select class="form-control filter" id="nroCotizacion" name="nroCotizacion">
-								                    <option value="00" selected="selected">Todo</option>
-								                    <div id="nroCotizacionOption"></div>
-								                </select>
-								            </div>
-								        </div>
-								    </div>
-								    <div class="col-sm-3">
-								        <div class="input-group">
-								            <div class="input-group">
-								                <span class="input-group-addon">Código AIO</span>
-								                <select class="form-control filter" id="codAioProduct" name="codAioProduct">
-								                    <option value="00" selected="selected">Todo</option>
-								                    <div id="codAioProductOption"></div>
-								                </select>
-								            </div>
-								        </div>
-								    </div>
-								    <div class="col-sm-3">
-								        <div class="input-group">
-								            <div class="input-group">
-								                <span class="input-group-addon">Cliente</span>
-								                <select class="form-control filter" id="idCliente" name="idCliente">
-								                    <option value="00" selected="selected">Todo</option>
-								                </select>
-								            </div>
-								        </div>
-								    </div>
-								    <div class="col-sm-3">
-								        <div class="input-group">
-								            <div class="input-group">
-								                <span class="input-group-addon">Familia</span>
-								                <select class="form-control filter" id="aMercado" name="aMercado">
-								                    <option value="00" selected="selected">Todo</option>
-								                </select>
-								            </div>
-								        </div>
-								    </div>
-								</div>
+									<div class="row">
+										<div class="col-sm-3">
+											<div class="input-group">
+												<div class="input-group">
+													<span class="input-group-addon">Nro. cotizaci&oacute;n: </span>
+													<select class="form-control filter" id="nroCotizacion" name="nroCotizacion">
+														<option value="" selected="selected">Todo</option>
+														<div id="nroCotizacionOption"></div>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="input-group">
+												<div class="input-group">
+													<span class="input-group-addon">Fabricante</span>
+													<select class="form-control filter" id="idFabricante" name="idFabricante">
+														<option value="" selected="selected">Todo</option>
+														</select>
+												</div>
+											</div>
+										</div>
+										
+										<div class="col-sm-3">
+											<div class="input-group">
+												<div class="input-group">
+													<span class="input-group-addon">Código AIO</span>
+													<select class="form-control filter" id="codAioProduct" name="codAioProduct">
+														<option value="" selected="selected">Todo</option>
+														<div id="codAioProductOption"></div>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="input-group">
+												<div class="input-group">
+													<span class="input-group-addon">Cliente</span>
+													<select class="form-control filter" id="idCliente" name="idCliente">
+														<option value="" selected="selected">Todo</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="input-group">
+												<div class="input-group">
+													<span class="input-group-addon">Familia</span>
+													<select class="form-control filter" id="idFamilia" name="idFamilia">
+														<option value="" selected="selected">Todo</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
 
-								<div class="row">
-								    <div class=" col-md-6">
-								        <div class="tabla1">
-								        </div>
-								    </div>
-								    <div class="col-md-6">
-								        <div class="tabla2">
-								        </div>
-								    </div>
+									<div class="row">
+										<div class="col-md-6 table-responsive">
+										<div class="totales">
+										<label>Total FOB</label> <input type="number" id="totalFob1" value="0"> 
+										<label>Cant. Total</label> <input type="number" id="cantidadTabla1" value="0">
+										<button class="btn btn-primary btn-xs btn-secondary" style="width: 10%;" onclick="enviarTodo()">>></button>
+										</div>
+											<table class="table tableCotizacion table-striped">
+												<thead>
+													<tr>
+														<th>Familia</th>
+														<th>CodigoAIO</th>
+														<th>FOB</th>
+														<th>Fabricante</th>
+														<th>Descipci&oacute;n</th>
+														<th>Vendedor</th>
+														<th>Cantidad</th>
+														<th>Cliente</th>
+														<th></th>
+													</tr>
+												</thead>
+												<tbody id="tabla1">
+												</tbody>
+											</table>
+										</div>
+										<div class="col-md-6 table-responsive">
+										<div class="totales">
+											<button class="btn btn-primary btn-xs" style="width: 10%;" onclick="regresarTodo()"><<</button>
+											<label>Total FOB</label> <input type="number" id="totalFob2" value="0"> 
+											<label>Cant. Total</label> <input type="number" id="cantidadTabla2" value="0">
+											<button class="btn btn-primary btn-xs" style="width: 10%;" onclick="verData()">Ver Data en consola</button>
+										</div>
+										<table class="table tableCotizacion table-striped">
+										<thead>
+											<tr>
+												<th>Familia</th><th>CodigoAIO</th><th>FOB</th><th>Fabricante</th><th>Descipci&oacute;n</th><th>Vendedor</th><th>Cantidad</th><th>Cliente</th><th></th>
+											</tr>
+										</thead>
+										<tbody id="tabla2">
+										</tbody>
+									</table>
+										</div>
+									</div>
 								</div>
-								</div>
-								
 				        </div>
 				        <div id="step-2" class="tab-pane" role="tabpanel" aria-labelledby="step-2">		
 				        	  <div id="ordeCompra"><div>			            
