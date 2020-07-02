@@ -37,7 +37,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 				    <div class="tab-content">
 				        <div id="step-1" class="tab-pane consolidacionProductos" role="tabpanel" aria-labelledby="step-1">
 								<div class="container-fluid">
-									<div class="row">
+									<div class="row filtro">
 										<div class="col-sm-3">
 											<div class="input-group">
 												<div class="input-group">
@@ -59,8 +59,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 												</div>
 											</div>
 										</div>
-										
-										<div class="col-sm-3">
+										<div class="col-sm-2">
 											<div class="input-group">
 												<div class="input-group">
 													<span class="input-group-addon">Código AIO</span>
@@ -71,7 +70,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 												</div>
 											</div>
 										</div>
-										<div class="col-sm-3">
+										<div class="col-sm-2">
 											<div class="input-group">
 												<div class="input-group">
 													<span class="input-group-addon">Cliente</span>
@@ -81,7 +80,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 												</div>
 											</div>
 										</div>
-										<div class="col-sm-3">
+										<div class="col-sm-2">
 											<div class="input-group">
 												<div class="input-group">
 													<span class="input-group-addon">Familia</span>
@@ -92,13 +91,13 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 											</div>
 										</div>
 									</div>
-
+									</br>
 									<div class="row">
 										<div class="col-md-6 table-responsive">
 										<div class="totales">
 										<label>Total FOB</label> <input type="number" id="totalFob1" value="0"> 
 										<label>Cant. Total</label> <input type="number" id="cantidadTabla1" value="0">
-										<button class="btn btn-primary btn-xs btn-secondary" style="width: 10%;" onclick="enviarTodo()">>></button>
+										<button class="btn derecha" onclick="enviarTodo()">>></button>
 										</div>
 											<table class="table tableCotizacion table-striped">
 												<thead>
@@ -120,7 +119,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 										</div>
 										<div class="col-md-6 table-responsive">
 										<div class="totales">
-											<button class="btn btn-primary btn-xs" style="width: 10%;" onclick="regresarTodo()"><<</button>
+											<button class="btn izquierda" onclick="regresarTodo()"><<</button>
 											<label>Total FOB</label> <input type="number" id="totalFob2" value="0"> 
 											<label>Cant. Total</label> <input type="number" id="cantidadTabla2" value="0">
 											<button class="btn btn-primary btn-xs" style="width: 10%;" onclick="verData()">Ver Data en consola</button>

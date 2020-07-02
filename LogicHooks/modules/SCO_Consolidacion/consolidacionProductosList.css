@@ -18,3 +18,24 @@
     width: 50px;
     height: 10px;
 }
+.filtro{	
+	margin-bottom: 10px;
+}
+.totales{
+	margin-bottom: 10px;
+}
+
+.izquierda,
+.derecha{
+	width: 40px;	
+	background: #17a2b8;
+	color: #fff;
+}
+
+.izquierda{
+	float: left;		
+}
+
+.derecha{	
+	float: right;		
+}
