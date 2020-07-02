@@ -211,6 +211,7 @@ function enviarProducto(idProducto) {
   // Data producto tabla 1 en variables
   var cantidadItem = $('#cantidad_' + idProducto).val();
   var dataProducto = [];
+  // buscar item en la segunda tabla
   // Eliminando item de lista de productos 1
   for (let index = 0; index < consProducto1.length; index++) {
     if (consProducto1[index]["name"] == idProducto) {
