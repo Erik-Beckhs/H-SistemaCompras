@@ -4,6 +4,7 @@ var consProducto1 = [];
 var consProducto2 = [];
 var cantTotal = 0;
 var fobTotal = 0;
+var proveedores = [];
 // Filtro inicial
 $(document).ready(function () {
   $.ajax({
@@ -46,6 +47,7 @@ $("#nroCotizacion").on('change', function () {
         for (var i = 0; i < res.length; i++) {
           html += '<option value="' + res[i]["pcv_proveedoraio"] + '">' + res[i]["pcv_nombreproveedor"] + '</option>';
         }
+        proveedores = res;
         $('#idFabricante').html(html);
         mostrarTabla1();
       },
@@ -111,6 +113,18 @@ $('#idFabricante').on('change', function () {
         console.log('ERROR, No se pudo conectar', data);
       }
     });
+  }
+});
+// Detector de datos del fabricante en formulario envio de consolidacion
+$('#idFabricante').on('change', function () {
+  var pcv_proveedoraio = $("#idFabricante").val();
+  for (let index = 0; index < proveedores.length; index++) {
+    if(proveedores[index]["pcv_proveedoraio"] == pcv_proveedoraio){
+      var codigoProv = proveedores[index]["pcv_proveedoraio"];
+      var nombreProv = proveedores[index]["pcv_nombreproveedor"];
+      $('#proveedor').val(nombreProv);
+      $('#proveedor_id').val(codigoProv);
+    }    
   }
 });
 // Detector de filtro de nro cotización a familia
@@ -182,12 +196,14 @@ var mostrarTabla1 = function () {
       var html = '';
       for (var i = 0; i < res.length; i++) {
         html += '<tr id="item1_' + res[i]["name"] + '">';
+        html += '<td>' + res[i]["pcv_numerocotizacion"] + '</td>';
         html += '<td>' + res[i]["pcv_familia"] + '</td>';
         html += '<td>' + res[i]["name"] + '</td>';
         html += '<td>' + Number.parseFloat(res[i]["pcv_preciofob"]).toFixed(2) + '</td>';
         html += '<td>' + res[i]["pcv_nombreproveedor"] + '</td>';
         html += '<td>' + res[i]["pcv_descripcion"] + '</td>';
         html += '<td>' + res[i]["pcv_vendedor"] + '</td>';
+        html += '<td>' + res[i]["pcv_cantidad"] + '</td>';
         html += '<td><span class="label label-success" style="color:#fff">' + res[i]["pcv_cantidad"] + '</span><input type="number" id="cantidad_' + res[i]["name"] + '" value="' + res[i]["pcv_cantidad"] + '"></td>';
         html += '<td>' + res[i]["pcv_cliente"] + '</td>';
         html += '<td><button class="btn btn-primary btn-xs" onclick="enviarProducto(' + "'" + String(res[i]["name"]).trim() + "'" + ')">+</button></td>';
@@ -223,6 +239,7 @@ function enviarProducto(idProducto) {
   // Construción del td de tabla 2
   var html = '';
   html += '<tr id="item2_' + dataProducto["name"] + '">';
+  html += '<td>' + dataProducto["pcv_numerocotizacion"] + '</td>';
   html += '<td>' + dataProducto["pcv_familia"] + '</td>';
   html += '<td>' + dataProducto["name"] + '</td>';
   html += '<td>' + Number.parseFloat(dataProducto["pcv_preciofob"]).toFixed(2) + '</td>';
@@ -250,11 +267,13 @@ function enviarProducto(idProducto) {
   var totalFob2 = $('#totalFob2').val();
   totalFob2 = (totalFob2 * 1) + (dataProducto["pcv_preciofob"] * 1);
   $('#totalFob2').val(Number.parseFloat(totalFob2).toFixed(2));
+  $('#precioTotalFob').val(Number.parseFloat(totalFob2).toFixed(2));
   fobTotal = totalFob2;
   // Cantidad
   var cantTotal2 = $('#cantidadTabla2').val();
   cantTotal2 = (cantTotal2 * 1) + (cantidadItem * 1);
   $('#cantidadTabla2').val(cantTotal2);
+  $('#cantidadTotal').val(cantTotal2);
   cantTotal = cantTotal2;
 }
 // Envio de productos de t2 a t1
@@ -271,6 +290,7 @@ function regresarProducto(idProducto) {
   // Construción del td de tabla 2
   var html = '';
   html += '<tr id="item1_' + dataProducto["name"] + '">';
+  html += '<td>' + dataProducto["pcv_numerocotizacion"] + '</td>';
   html += '<td>' + dataProducto["pcv_familia"] + '</td>';
   html += '<td>' + dataProducto["name"] + '</td>';
   html += '<td>' + Number.parseFloat(dataProducto["pcv_preciofob"]).toFixed(2) + '</td>';

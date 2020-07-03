@@ -102,6 +102,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 											<table class="table tableCotizacion table-striped">
 												<thead>
 													<tr>
+														<th>Nro. Cont</th>
 														<th>Familia</th>
 														<th>CodigoAIO</th>
 														<th>FOB</th>
@@ -109,6 +110,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 														<th>Descipci&oacute;n</th>
 														<th>Vendedor</th>
 														<th>Cantidad</th>
+														<th>Saldo</th>
 														<th>Cliente</th>
 														<th></th>
 													</tr>
@@ -127,7 +129,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 										<table class="table tableCotizacion table-striped">
 										<thead>
 											<tr>
-												<th>Familia</th><th>CodigoAIO</th><th>FOB</th><th>Fabricante</th><th>Descipci&oacute;n</th><th>Vendedor</th><th>Cantidad</th><th>Cliente</th><th></th>
+												<th>Nro. Cont</th><th>Familia</th><th>CodigoAIO</th><th>FOB</th><th>Fabricante</th><th>Descipci&oacute;n</th><th>Vendedor</th><th>Cantidad</th><th>Saldo</th><th>Cliente</th><th></th>
 											</tr>
 										</thead>
 										<tbody id="tabla2">
