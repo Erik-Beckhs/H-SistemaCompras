@@ -1,9 +1,14 @@
-//var div = $("#division").val();
+/**
+*@author Limberg Alcon <lalcon@hansa.com.bo>
+*@copyright 2020
+*@license /var/www/html/modules/SCO_Consolidacion
+*Descripcion: 
+**/
 var jsonDatos = {};
 var div = '03';
 vista();
-//Carga dom de consolidacion.html
 
+//Carga dom de consolidacion.html
 $("#consolidacion").load('modules/SCO_Consolidacion/consolidacionProductosList.html');
 
 //despliega ventana emergente de Suitecrm Modulo Proveedor
@@ -18,6 +23,7 @@ function openProveedorPopup(ln) {
     };
     open_popup('SCO_Proveedor', 600, 400, '&proyc_division_advanced[]='+div, true, false, popupRequestData, true);
 }
+
 //despliega ventana emergente de Suitecrm Modulo User
 function openUsersPopup() {
     var popupRequestData = {
@@ -30,6 +36,7 @@ function openUsersPopup() {
     };
     open_popup('Users', 600, 400, '', true, false, popupRequestData, true);
 }
+
 //despliega ventana emergente de Suitecrm Modulo Contacts
 function openContactsPopup() {
     var popupRequestData = {
@@ -43,26 +50,32 @@ function openContactsPopup() {
     open_popup('Contacts', 600, 400, '&proyc_division_advanced[]='+div, true, false, popupRequestData, true);
 }
 
+//Serializa los datos del formulario
 $("#formPro").submit(function(e) {
+    jsonDatos.items = consProducto2;
     e.preventDefault();        
     var datos = $(this).serializeArray();
     $(datos).each(function(index, obj){        
         jsonDatos[obj.name] = obj.value;
     });
-    //console.log(jsonDatos);
-    $.validator.setDefaults({
-      debug: true,
-      success: "valid"
-    });
-
-    var valida = validaCampos();
-    if(valida == true){
-        ventanaModal(jsonDatos);
-        $('#modalConfirmacion').modal('show');
+    //console.log(jsonDatos);  
+    
+    console.log(jsonDatos.items.length);
+    if(jsonDatos.items.length != 0){
+        $.validator.setDefaults({
+          debug: true,
+          success: "valid"
+        });  
+        var valida = validaCampos();
+        if(valida == true){
+            ventanaModal(jsonDatos);
+            $('#modalConfirmacion').modal('show');
+        }else{
+            //alert("Error campos vacios");
+        } 
     }else{
-        //alert("Error campos vacios");
-    } 
-        
+        alert("Tiene que consolidar al menos 1 item");
+    }
 });
 
 //Validacion de fomrulario
@@ -132,6 +145,7 @@ function validaCampos(){
     }
 }
 
+//Estructura de la vista de Orden de compra
 function vista(){
     var html = '';
     html += '<div class="container-fluid">';
@@ -143,7 +157,7 @@ function vista(){
     html += '            <div class="col-sm-4">';
     html += '            </div>';
     html += '            <div class="col-sm-4">';
-    html += '                <input type="submit" class="btn-sm btn-primary" value="Guardar">';
+    html += '                <input type="submit" class="btn-sm btn-info" value="Guardar">';
     html += '            </div>';
     html += '        </div>';
     html += '        <div class="row">';
@@ -294,7 +308,7 @@ function vista(){
     html += '                            <div class="form-group">';
     html += '                                <div class="col-sm-4 " >Cantidad total:</div>';
     html += '                                <div class="col-sm-2 " >';
-    html += '                                    <input type="text"  id="cantidadTotal" id="cantidadTotal" name="cantidadTotal" value="7" class="desabilidato">';
+    html += '                                    <input type="text"  id="cantidadTotal" id="cantidadTotal" name="cantidadTotal" value="" class="desabilidato">';
     html += '                                </div>      ';
     html += '                            </div>';
     html += '                        </div>';
@@ -302,7 +316,7 @@ function vista(){
     html += '                            <div class="form-group">';
     html += '                                <div class="col-sm-4 " >Precio FOB total:</div>';
     html += '                                <div class="col-sm-2 " >';
-    html += '                                    <input type="text"  id="precioTotalFob" id="precioTotalFob" name="precioTotalFob" value="45.00" class="desabilidato">';
+    html += '                                    <input type="text"  id="precioTotalFob" id="precioTotalFob" name="precioTotalFob" value="" class="desabilidato">';
     html += '                                </div>  ';
     html += '                            </div>';
     html += '                        </div>';
@@ -385,7 +399,7 @@ function vista(){
     html += '            <div class="col-sm-4">';
     html += '            </div>';
     html += '            <div class="col-sm-4">';
-    html += '                <input type="submit" class="btn-sm btn-primary" value="Guardar">';
+    html += '                <input type="submit" class="btn-sm btn-info" value="Guardar">';
     html += '            </div>';
     html += '        </div></br></br></br></br></br></br></br>';
     html += '        </div>';
@@ -395,7 +409,7 @@ function vista(){
     $("#ordeCompra").append(html);
 }
 
-
+//Estructura de la vista de la venta modal
 function ventanaModal(jsonDatos){  
     console.log(jsonDatos)
     var html = '';
@@ -445,12 +459,10 @@ function ventanaModal(jsonDatos){
     $("#ventanaModal").html(html);
 }
 
-
-function envioDeDatos(jsonDatos){
-    jsonDatos.datitos = {"asd":"asd"}; 
-    jsonDatos.items = [jsonProductos];
-    alert(jsonDatos);
-    console.log(jsonDatos);   
+//Envio de datos al archivo consolidacionDatos.php
+function envioDeDatos(jsonDatos){        
+    //alert(jsonDatos);
+    console.log("Datos enviados" + jsonDatos);   
     $.ajax({
         type: "POST",
         url: "index.php?to_pdf=true&module=SCO_Consolidacion&action=consolidacionDatos",        
@@ -459,11 +471,11 @@ function envioDeDatos(jsonDatos){
             $(".loader").addClass("is-active");
         },
         success: function(e) {
-            console.log(e);
+            console.log("datos de vuelta" + e);
             var id = e;
             $(".loader").removeClass("is-active");
             $("#modalConfirmacion").modal("hide"); 
-            alert("Se redireccionara a su vista creada"+jsonDatos.items.pr);
+            alert("Se redireccionara a su vista creada"+id);
             //$(location).attr("href","index.php?module=SCO_Consolidacion&action=DetailView&record="+id);
         },
         error: function(data) {
