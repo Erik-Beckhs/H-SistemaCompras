@@ -42,6 +42,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 											<div class="input-group">
 												<div class="input-group">
 													<span class="input-group-addon">Nro. cotizaci&oacute;n: </span>
+													<!-- input typw="text" class="form-control filter" id="nroCotizacion" name="nroCotizacion" -->
 													<select class="form-control filter" id="nroCotizacion" name="nroCotizacion">
 														<option value="" selected="selected">Todo</option>
 														<div id="nroCotizacionOption"></div>
@@ -105,13 +106,14 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 														<th>Nro. Cont</th>
 														<th>Familia</th>
 														<th>CodigoAIO</th>
-														<th>FOB</th>
 														<th>Fabricante</th>
 														<th>Descipci&oacute;n</th>
 														<th>Vendedor</th>
-														<th>Cantidad</th>
-														<th>Saldo</th>
 														<th>Cliente</th>
+														<th>Cantidad</th>
+														<th>FOB</th>
+														<th>Cant. Saldo</th>
+														<th>Sub Total</th>
 														<th></th>
 													</tr>
 												</thead>
@@ -129,7 +131,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 										<table class="table tableCotizacion table-striped">
 										<thead>
 											<tr>
-												<th>Nro. Cont</th><th>Familia</th><th>CodigoAIO</th><th>FOB</th><th>Fabricante</th><th>Descipci&oacute;n</th><th>Vendedor</th><th>Cantidad</th><th>Saldo</th><th>Cliente</th><th></th>
+												<th>Nro. Cont</th><th>Familia</th><th>CodigoAIO</th><th>Fabricante</th><th>Descipci&oacute;n</th><th>Vendedor</th><th>Cliente</th><th>FOB</th><th>Cant. Consolidado</th><th>Sub Total</th><th></th>
 											</tr>
 										</thead>
 										<tbody id="tabla2">

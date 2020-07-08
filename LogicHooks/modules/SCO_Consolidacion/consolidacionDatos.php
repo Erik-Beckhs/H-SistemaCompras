@@ -28,9 +28,9 @@ $beanConsolidacion->name = 'Consolidacion Prueba 2';
 $beanConsolidacion->save();
 
 //Creacion de bean relationship
-$beanConsolidacion->load_relationship('SCO_Consolidacion')
-//Añadiendo la relacion con consolidacion y orden de compra
-$beanConsolidacion->SCO_Consolidacion->add('45fa0345-1790-cd2c-b8e2-5d0906255c03');
+// $beanConsolidacion->load_relationship('SCO_Consolidacion');
+// //Añadiendo la relacion con consolidacion y orden de compra
+// $beanConsolidacion->SCO_Consolidacion->add('45fa0345-1790-cd2c-b8e2-5d0906255c03');
 
 //Devuelve el id de la Consolidacion creada
 $idConsolidacion = $beanConsolidacion->id;
