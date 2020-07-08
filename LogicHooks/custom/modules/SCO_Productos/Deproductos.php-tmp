@@ -82,12 +82,12 @@ class ClDeproductos {
 		$arr1 = str_replace("[[", "", $arr1);
 		$arr1 = str_replace("]]", "", $arr1);
 
-		$arr1    = str_replace("[", "", $arr1);
-		$arr1    = str_replace("],", "|", $arr1);
-		$arr1    = str_replace("&quot;", "'", $arr1);
-		$arr1    = str_replace("','", "~", $arr1);
-		$arr1    = str_replace("'", "", $arr1);
-		$arr2    = explode("|", $arr1);
+		$arr1 = str_replace("[", "", $arr1);
+		$arr1 = str_replace("],", "|", $arr1);
+		$arr1 = str_replace("&quot;", "'", $arr1);
+		$arr1 = str_replace("','", "~", $arr1);
+		$arr1 = str_replace("'", "", $arr1);
+		$arr2 = explode("|", $arr1);
 		#id de la orden de compra del array de productos
 		$arridoc = array_pop($arr2);
 		$arrprec = array_pop($arr2);

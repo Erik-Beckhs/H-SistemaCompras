@@ -35842,22 +35842,21 @@ body>.le_panel .le_edit,
 .jstree-default-large .jstree-ellipsis.jstree-no-icons .jstree-anchor {
 	width: calc(100% - 5px)
 }
-
 /*AGREGANDO MODO DESARROLLO EN EN MENU*/
-/*.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a.with-home-icon:before {
+.navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a.with-home-icon:before {
     content: "DESARROLLO";
     color: #ffa8a8;
-}*/
+}
 
 input:focus{
-    border: 1px solid #75c1fa;
-    transition: all 0.3s ease;
+    border: 2px solid #8fd9ff;
+    transition: all 0.2s ease;
     outline: none;
     transform: scale(1.02);
 }
 textarea:focus{
-    border: 1px solid #75c1fa;
-    transition: all 0.3s ease;
+    border: 2px solid #8fd9ff;
+    transition: all 0.2s ease;
     outline: none;
     transform: scale(1.02);
 }

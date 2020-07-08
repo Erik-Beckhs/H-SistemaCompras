@@ -151,13 +151,15 @@ function vista(){
     html += '<div class="container-fluid">';
     html += '    <form id="formPro" method="post" >';
     html += '        <div class="row">';
-    html += '            <div class="col-sm-4">';
-    html += '                <!--<button type="button" class="btn-sm btn-danger">Cancelar</button>-->';
-    html += '            </div>';
-    html += '            <div class="col-sm-4">';
-    html += '            </div>';
-    html += '            <div class="col-sm-4">';
+    html += '            <div class="col-sm-2">';
     html += '                <input type="submit" class="btn-sm btn-info" value="Guardar">';
+    html += '            </div>';
+    html += '            <div class="col-sm-2">';
+    html += '                <input type="button" class="btn-sm btn-info" value="Cancelar" onclick=cancelar()>';
+    html += '            </div>';
+    html += '            <div class="col-sm-4">';
+    html += '            </div>';
+    html += '            <div class="col-sm-4">';
     html += '            </div>';
     html += '        </div>';
     html += '        <div class="row">';
@@ -393,13 +395,15 @@ function vista(){
     html += '            </div>';
     html += '        </div>';
     html += '        <div class="row">';
-    html += '            <div class="col-sm-4">';
-    html += '                <!--<button type="button" class="btn-sm btn-danger">Cancelar</button>-->';
-    html += '            </div>';
-    html += '            <div class="col-sm-4">';
-    html += '            </div>';
-    html += '            <div class="col-sm-4">';
+    html += '            <div class="col-sm-2">';
     html += '                <input type="submit" class="btn-sm btn-info" value="Guardar">';
+    html += '            </div>';
+    html += '            <div class="col-sm-2">';
+    html += '                <input type="button" class="btn-sm btn-info" value="Cancelar" onclick=cancelar()>';
+    html += '            </div>';
+    html += '            <div class="col-sm-4">';
+    html += '            </div>';
+    html += '            <div class="col-sm-4">';
     html += '            </div>';
     html += '        </div></br></br></br></br></br></br></br>';
     html += '        </div>';
@@ -466,7 +470,7 @@ function envioDeDatos(jsonDatos){
     $.ajax({
         type: "POST",
         url: "index.php?to_pdf=true&module=SCO_Consolidacion&action=consolidacionDatos",        
-        data: {id:jsonDatos},
+        data: jsonDatos,
         beforeSend:function(){
             $(".loader").addClass("is-active");
         },
@@ -483,4 +487,8 @@ function envioDeDatos(jsonDatos){
             alert("Error");
         }
     });
+}
+
+function cancelar(){
+    $(location).attr("href","index.php?module=SCO_Consolidacion&action=index");
 }
