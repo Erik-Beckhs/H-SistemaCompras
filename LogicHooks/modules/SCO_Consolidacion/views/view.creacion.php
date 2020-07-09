@@ -39,16 +39,23 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 								<div class="container-fluid">
 									<div class="row filtro">
 										<div class="col-sm-3">
-											<div class="input-group">
+											<div class="input-group" style="display: flex;">
 												<div class="input-group">
 													<span class="input-group-addon">Nro. cotizaci&oacute;n: </span>
-													<!-- input typw="text" class="form-control filter" id="nroCotizacion" name="nroCotizacion" -->
-													<select class="form-control filter" id="nroCotizacion" name="nroCotizacion">
+													<input typw="text" class="form-control filter" id="nroCotizacion" name="nroCotizacion">
+													
+													<!-- select class="form-control filter" id="nroCotizacion" name="nroCotizacion">
 														<option value="" selected="selected">Todo</option>
 														<div id="nroCotizacionOption"></div>
-													</select>
+													</select -->
 												</div>
 											</div>
+											<div style="display: flex; width: 50px;">
+												<button class="btn btn-primary form-control" onclick="buscarPorCotizacion()">
+													<i class="glyphicon glyphicon-search"></i>
+												</button>
+											</div>
+											
 										</div>
 										<div class="col-sm-3">
 											<div class="input-group">
@@ -126,7 +133,6 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 											<button class="btn izquierda" onclick="regresarTodo()"><<</button>
 											<label>Total FOB</label> <input type="number" id="totalFob2" value="0"> 
 											<label>Cant. Total</label> <input type="number" id="cantidadTabla2" value="0">
-											<button class="btn btn-primary btn-xs" style="width: 10%;" onclick="verData()">Ver Data en consola</button>
 										</div>
 										<table class="table tableCotizacion table-striped">
 										<thead>
