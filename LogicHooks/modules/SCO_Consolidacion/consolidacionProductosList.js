@@ -7,29 +7,34 @@ var fobTotal = 0;
 var proveedores = [];
 // Filtro inicial
 $(document).ready(function () {
-  $.ajax({
-    type: 'POST',
-    url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesList',
-    datatype: 'json',
-    data: {
-      filtro: "cotizacionList"
-    },
-    async: false,
-    success: function (e) {
-      var res = JSON.parse(e);
-      var html = '<option value="">Todo</option>';
-      for (var i = 0; i < res.length; i++) {
-        html += '<option value="' + res[i]["pcv_numerocotizacion"] + '">' + res[i]["pcv_numerocotizacion"] + '</option>';
-      }
-      $('#nroCotizacion').html(html);
-    },
-    error: function (data) {
-      console.log('ERROR, No se pudo conectar', data);
-    }
-  });
+  // $.ajax({
+  //   type: 'POST',
+  //   url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesList',
+  //   datatype: 'json',
+  //   data: {
+  //     filtro: "cotizacionList"
+  //   },
+  //   async: false,
+  //   success: function (e) {
+  //     var res = JSON.parse(e);
+  //     var html = '<option value="">Todo</option>';
+  //     for (var i = 0; i < res.length; i++) {
+  //       html += '<option value="' + res[i]["pcv_numerocotizacion"] + '">' + res[i]["pcv_numerocotizacion"] + '</option>';
+  //     }
+  //     $('#nroCotizacion').html(html);
+  //   },
+  //   error: function (data) {
+  //     console.log('ERROR, No se pudo conectar', data);
+  //   }
+  // });
 });
 // Detector de cambios filtro de fabricante
-$("#nroCotizacion").on('change', function () {
+$("#nroCotizacion").on('keyup', function (event) {
+  if (event.keyCode === 13) {
+    buscarPorCotizacion();    
+  }
+});
+function buscarPorCotizacion() {
   var nroCotizacion = $('#nroCotizacion').val();
   if (nroCotizacion != '') {
     $.ajax({
@@ -56,7 +61,7 @@ $("#nroCotizacion").on('change', function () {
       }
     });
   }
-})
+}
 // Detector de filtro de nro cotización 
 $('#idFabricante').on('change', function () {
   var pcv_proveedoraio = $("#idFabricante").val();
@@ -333,7 +338,7 @@ function enviarProducto(idProducto) {
   cantTotal = cantTotal2;
   // Recalculando el subtotal de la tabla 1
   $('#subtotal1_' + idProducto).html((dataProducto["pcv_cantidadsaldo"] * 1 * dataProducto["pcv_preciofob"]));
-  
+  validarProveedor();
 }
 // Envio de productos de t2 a t1
 function regresarProducto(idProducto) {
@@ -404,6 +409,7 @@ function regresarProducto(idProducto) {
   cantTotal2 = (cantTotal2 * 1) - (cantConsolidado * 1);
   $('#cantidadTabla2').val(cantTotal2);
   cantTotal = cantTotal2;
+  validarProveedor()
 }
 // Envio masivo
 function enviarTodo() {
@@ -425,10 +431,6 @@ function regresarTodo() {
     regresarProducto(array[index]["name"]);
 
   }
-}
-// Ver data
-function verData() {
-  console.log("data", consProducto2, "cantidad", cantTotal, "fob", fobTotal);
 }
 // Función para buscar item en el json de las tablas 1 y 2
 function buscarItem(idItem, tabla) {
@@ -467,4 +469,15 @@ function actualizarItemT1(item) {
       consProducto1[index] = item;
     }
   }
+}
+// Validar Proveedor
+function validarProveedor() {
+  if (consProducto2.length > 0) {
+    $('#idFabricante option:not(:selected)').attr('disabled', true);
+    $('#nroCotizacion').attr('disabled', true);
+  }else{
+    $('#idFabricante option:not(:selected)').attr('disabled', false);
+    $('#nroCotizacion').attr('disabled', false);
+  }
+  
 }
