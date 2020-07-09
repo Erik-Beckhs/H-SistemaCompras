@@ -1,23 +1,23 @@
 <?php
 /**
-*Esta clase realiza operaciones matemáticas.
-*
-*@author Limberg Alcon <lalcon@hansa.com.bo>
-*@copyright 2018
-*@license ruta: /var/www/html/include/generic/SugarWidgets/
-*/
-if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-require_once('data/BeanFactory.php');
-require_once('include/entryPoint.php');
+ *Esta clase realiza operaciones matemáticas.
+ *
+ *@author Limberg Alcon <lalcon@hansa.com.bo>
+ *@copyright 2018
+ *@license ruta: /var/www/html/include/generic/SugarWidgets/
+ */
+if (!defined('sugarEntry') || !sugarEntry) {die('Not A Valid Entry Point');
+}
 
-class SugarWidgetSubPanelDespachos extends SugarWidgetField
-{
-    function displayHeaderCell($layout_def){
-      return '<span style="font-size:13px;">Eventos</span><span style="margin-left:5px; margin-top: -6px; font-size:20px; position:absolute;"> &#x1F6A2; </span>';
-    }
-    function displayList($layout_def)
-    {
-      $html = '<style>
+require_once ('data/BeanFactory.php');
+require_once ('include/entryPoint.php');
+
+class SugarWidgetSubPanelDespachos extends SugarWidgetField {
+  function displayHeaderCell($layout_def) {
+    return '<span style="font-size:13px;">Eventos</span>';
+  }
+  function displayList($layout_def) {
+    $html = '<style>
       #Flecha {
           position: absolute;
           width: 0;
@@ -188,27 +188,28 @@ class SugarWidgetSubPanelDespachos extends SugarWidgetField
         }
 
       </style>';
-      $id = $layout_def['fields']['ID'];
-      $beand = BeanFactory::getBean('SCO_Despachos', $id);
-      $origen = $beand->des_orig;
-      $modtrans = $beand->des_modtra;
-      $id_emba = $beand->sco_embarque_sco_despachossco_embarque_ida;
-      $estado_des = $beand->des_est;
+    $id         = $layout_def['fields']['ID'];
+    $beand      = BeanFactory::getBean('SCO_Despachos', $id);
+    $origen     = $beand->des_orig;
+    $modtrans   = $beand->des_modtra;
+    $id_emba    = $beand->sco_embarque_sco_despachossco_embarque_ida;
+    $estado_des = $beand->des_est;
 
-      $beanemb = BeanFactory::getBean('SCO_Embarque', $id_emba);
-      $estado_emb = $beanemb->emb_estado;
-      if($id != ''){
-        $query2 = "SELECT COUNT(ev.name) as cantidad_eve
+    $beanemb    = BeanFactory::getBean('SCO_Embarque', $id_emba);
+    $estado_emb = $beanemb->emb_estado;
+    if ($id != '') {
+      $query2 = "SELECT COUNT(ev.name) as cantidad_eve
           FROM sco_embarque_sco_eventos_c as eev
           INNER JOIN sco_eventos as ev
           ON eev.sco_embarque_sco_eventossco_eventos_idb = ev.id
-          WHERE eev.sco_embarque_sco_eventossco_embarque_ida = '".$id_emba."';";
-        $results = $GLOBALS['db']->query($query2, true);
-        $count = 1;
-        switch ($estado_des){
-          case '2':
-          while($row2 = $GLOBALS['db']->fetchByAssoc($results)){
-               $diast = $row2['cantidad_eve'];
+          WHERE eev.sco_embarque_sco_eventossco_embarque_ida = '".$id_emba."';
+";
+      $results = $GLOBALS['db']->query($query2, true);
+      $count   = 1;
+      switch ($estado_des) {
+        case '2':
+          while ($row2 = $GLOBALS['db']->fetchByAssoc($results)) {
+            $diast = $row2['cantidad_eve'];
           }
           $diast;
           $eventos = "SELECT SUBSTRING(ev.name, 1,2) as num,
@@ -220,17 +221,17 @@ class SugarWidgetSubPanelDespachos extends SugarWidgetField
           FROM sco_embarque_sco_eventos_c as eev
           INNER JOIN sco_eventos as ev
           ON eev.sco_embarque_sco_eventossco_eventos_idb = ev.id
-          WHERE eev.sco_embarque_sco_eventossco_embarque_ida = '".$id_emba."'
+          WHERE eev.sco_embarque_sco_eventossco_embarque_ida = '" .$id_emba."'
           AND eev.deleted = 0
           AND ev.deleted = 0
-          ORDER BY CAST(num AS UNSIGNED) asc";
+          ORDER BY CAST(num AS UNSIGNED) asc" ;
           $res_event = $GLOBALS['db']->query($eventos, true);
-          $arr_fp = array();
-          $arr_fr = array();
-          $arr_fn = array();
-          $cont = 0;
-          while($row_event = $GLOBALS['db']->fetchByAssoc($res_event)){
-           $evento_riesgo = "SELECT COUNT(r.name) as nombre_riesgo
+          $arr_fp    = array();
+          $arr_fr    = array();
+          $arr_fn    = array();
+          $cont      = 0;
+          while ($row_event = $GLOBALS['db']->fetchByAssoc($res_event)) {
+            $evento_riesgo = "SELECT COUNT(r.name) as nombre_riesgo
            FROM sco_embarque as e
            INNER JOIN sco_embarque_sco_eventos_c as e_ev
            ON e.id = e_ev.sco_embarque_sco_eventossco_embarque_ida
@@ -238,15 +239,16 @@ class SugarWidgetSubPanelDespachos extends SugarWidgetField
            on ev_ri.sco_eventos_sco_riesgosco_eventos_ida = e_ev.sco_embarque_sco_eventossco_eventos_idb
            INNER JOIN sco_riesgo as r
            on r.id = ev_ri.sco_eventos_sco_riesgosco_riesgo_idb
-           WHERE  ev_ri.sco_eventos_sco_riesgosco_eventos_ida = '".$row_event['sco_embarque_sco_eventossco_eventos_idb']."'
+           WHERE  ev_ri.sco_eventos_sco_riesgosco_eventos_ida = '"  .$row_event['sco_embarque_sco_eventossco_eventos_idb']."'
            AND ev_ri.deleted = 0
            AND e.deleted =0
            AND e_ev.deleted = 0
-           AND r.deleted = 0;";
-           $res_evento_riesgo = $GLOBALS['db']->query($evento_riesgo, true);
-           $numero_evento = $row_event['num'];
+           AND r.deleted = 0;
+" ;
+            $res_evento_riesgo = $GLOBALS['db']->query($evento_riesgo, true);
+            $numero_evento     = $row_event['num'];
 
-           $evento_problema ="SELECT COUNT(pr.name) as nombre_problema
+            $evento_problema = "SELECT COUNT(pr.name) as nombre_problema
            FROM sco_embarque as e
            INNER JOIN sco_embarque_sco_eventos_c as e_ev
            ON e.id = e_ev.sco_embarque_sco_eventossco_embarque_ida
@@ -254,80 +256,85 @@ class SugarWidgetSubPanelDespachos extends SugarWidgetField
            ON ev_pr.sco_eventos_sco_problemasco_eventos_ida = e_ev.sco_embarque_sco_eventossco_eventos_idb
            INNER JOIN sco_problema as pr
            ON pr.id = ev_pr.sco_eventos_sco_problemasco_problema_idb
-           WHERE ev_pr.sco_eventos_sco_problemasco_eventos_ida = '".$row_event['sco_embarque_sco_eventossco_eventos_idb']."'
+           WHERE ev_pr.sco_eventos_sco_problemasco_eventos_ida = '" .$row_event['sco_embarque_sco_eventossco_eventos_idb']."'
            AND e.deleted = 0
            AND ev_pr.deleted = 0
            AND pr.deleted = 0
-           AND e_ev.deleted = 0 ;";
-           $res_evento_problema = $GLOBALS['db']->query($evento_problema, true);
-           $numero_problema = $row_event['num'];
+           AND e_ev.deleted = 0 ;
+" ;
+            $res_evento_problema = $GLOBALS['db']->query($evento_problema, true);
+            $numero_problema     = $row_event['num'];
 
-           $fecha = date("Y-m-d");
-           $fecha = explode('-', $fecha);
-           $fecha_ac = $fecha[0]."-".$fecha[1]."-".$fecha[2];
+            $fecha    = date("Y-m-d");
+            $fecha    = explode('-', $fecha);
+            $fecha_ac = $fecha[0]."-".$fecha[1]."-".$fecha[2];
 
-           array_push($arr_fp, $row_event['fp']);
-           array_push($arr_fr, $row_event['fr']);
-           array_push($arr_fn, $row_event['fn']);
+            array_push($arr_fp, $row_event['fp']);
+            array_push($arr_fr, $row_event['fr']);
+            array_push($arr_fn, $row_event['fn']);
 
-           if(!empty($row_event['fr'])){
-            //Color gris
-                if($row_event['fr'] > $row_event['fp']){
-                     $html .= '<div id="actual" class="cuadrado" style="background:rgba(0,0,0,0.3); cursor: pointer; color:#FFF;" ><div id="retraso"></div>';
-                }else{
-                     $html .= '<div id="actual" class="cuadrado" style="background:rgba(0,0,0,0.3); cursor: pointer; color:#FFF;" ><div id="atiempo">&#10004;</div>';
-                }
-            //color amarillo
-           }elseif($arr_fr[$cont] == '' && $arr_fn[$cont] == '' && $arr_fr[$cont + 1] == '' && $arr_fn[$cont + 1] == '' && $arr_fp[$cont - 1] == '' && $fecha_ac == $arr_fp[$cont]){
-                $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#FFF; background:#f0ad4e!important; cursor: pointer"><span style="margin-left: 9px;margin-top: 12px;font-size: 17px;position: absolute;"> &#9875;</span>';
-           }elseif($arr_fr[$cont] == '' && $arr_fr[$cont + 1] == '' && $arr_fr[$cont - 1] != '' && $fecha_ac == $arr_fn[$cont]){
-                $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#FFF; background:#f0ad4e!important; cursor: pointer"><span style="margin-left: 9px;margin-top: 12px;font-size: 17px;position: absolute;"> &#9875;</span>';
-            //Color Verder
-           }elseif($arr_fr[$cont] == '' && $arr_fr[$cont + 1] == '' && $arr_fr[$cont - 1] != '' && $fecha_ac < $arr_fn[$cont]){
-                $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#FFF; background:rgba(92,173,92,1); cursor: pointer"><span style="margin-left: 9px;margin-top: 12px;font-size: 17px;position: absolute;"> &#9875;</span>';
-           }elseif($arr_fp[$cont] > $fecha_ac && $arr_fn[$cont] == '' && $arr_fr[$cont] == '' && $arr_fp[$cont - 1] == ''){
-                $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#FFF; background:rgba(92,173,92,1); cursor: pointer"><span style="margin-left: 9px;margin-top: 12px;font-size: 17px;position: absolute;"> &#9875;</span>';
-            //Color Rojo
-           }elseif($arr_fr[$cont] == '' && $arr_fr[$cont - 1] != '' && $arr_fr[$cont + 1] == ''){
-                $html .= '<div id="actual" class="cuadrado" style="background:#DD4D2C; cursor: pointer; color:#FFF;" ><span style="margin-left: 9px;margin-top: 12px;font-size: 16px;position: absolute;color:red;"> &#9202;</span>';
-           }elseif($arr_fr[$cont] == '' && $arr_fn[$cont] == '' && $arr_fr[$cont + 1] == '' && $arr_fn[$cont + 1] == '' && $arr_fp[$cont - 1] == '' && $fecha_ac > $arr_fp[$cont]){
-                $html .= '<div id="actual" class="cuadrado" style="background: #DD4D2C; cursor: pointer; color:#FFF;"><span style="margin-left: 9px;margin-top: 12px;font-size: 17px;position: absolute;color:red;"> &#9202;</span>';
-            //Color Blanco
-           }elseif($arr_fr[$cont] == '' && $arr_fr[$cont + 1] == '' && $arr_fr[$cont - 1] == '' && $arr_fn[$cont - 1] != ''){
-             $html .= '<div id="actual" class="cuadrado" style="background:#FFF; cursor: pointer; color:#000;" >';
-           }elseif($arr_fr[$cont] == '' && $arr_fn[$cont] == ''){
-                $html .= '<div id="actual" class="cuadrado"style="color:#000!important;background:rgba(255,255,255,1); cursor: pointer; color:#FFF;" >';
-            }elseif($fecha_ac == $arr_fn[$cont]) {
-                $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#FFF; background:rgba(92,173,92,1); cursor: pointer"><span style="margin-left: 9px;margin-top: 12px;font-size: 17px;position: absolute;"> &#9875;</span>';
-           }elseif($row_event['fn'] > $fecha_ac){
-                $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#000 !important; background:rgba(255,255,255,1);cursor: pointer; color:#FFF;" >';
-           }else{
-                $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#000 !important; background:rgba(255,255,255,1); cursor: pointer" >';
-           }
+            if (!empty($row_event['fr'])) {
+              //Color gris
+              if ($row_event['fr'] > $row_event['fp']) {
+                $html .= '<div id="actual" class="cuadrado" style="background:rgba(0,0,0,0.3); cursor: pointer; color:#FFF;" ><div id="retraso"></div>';
+              } else {
+                $html .= '<div id="actual" class="cuadrado" style="background:rgba(0,0,0,0.3); cursor: pointer; color:#FFF;" ><div id="atiempo">&#10004;</div>';
+              }
+              //color amarillo
+            } elseif ($arr_fr[$cont] == '' && $arr_fn[$cont] == '' && $arr_fr[$cont+1] == '' && $arr_fn[$cont+1] == '' && $arr_fp[$cont-1] == '' && $fecha_ac == $arr_fp[$cont]) {
+              $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#FFF; background:#f0ad4e!important; cursor: pointer"><span style="margin-left: 9px;margin-top: 12px;font-size: 17px;position: absolute;"> &#9875;</span>';
+            } elseif ($arr_fr[$cont] == '' && $arr_fr[$cont+1] == '' && $arr_fr[$cont-1] != '' && $fecha_ac == $arr_fn[$cont]) {
+              $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#FFF; background:#f0ad4e!important; cursor: pointer"><span style="margin-left: 9px;margin-top: 12px;font-size: 17px;position: absolute;"> &#9875;</span>';
+              //Color Verder
+            } elseif ($arr_fr[$cont] == '' && $arr_fr[$cont+1] == '' && $arr_fr[$cont-1] != '' && $fecha_ac < $arr_fn[$cont]) {
+              $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#FFF; background:rgba(92,173,92,1); cursor: pointer"><span style="margin-left: 9px;margin-top: 12px;font-size: 17px;position: absolute;"> &#9875;</span>';
+            } elseif ($arr_fp[$cont] > $fecha_ac && $arr_fn[$cont] == '' && $arr_fr[$cont] == '' && $arr_fp[$cont-1] == '') {
+              $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#FFF; background:rgba(92,173,92,1); cursor: pointer"><span style="margin-left: 9px;margin-top: 12px;font-size: 17px;position: absolute;"> &#9875;</span>';
+              //Color Rojo
+            } elseif ($arr_fr[$cont] == '' && $arr_fr[$cont-1] != '' && $arr_fr[$cont+1] == '') {
+              $html .= '<div id="actual" class="cuadrado" style="background:#DD4D2C; cursor: pointer; color:#FFF;" ><span style="margin-left: 9px;margin-top: 12px;font-size: 16px;position: absolute;color:red;"> &#9202;</span>';
+            } elseif ($arr_fr[$cont] == '' && $arr_fn[$cont] == '' && $arr_fr[$cont+1] == '' && $arr_fn[$cont+1] == '' && $arr_fp[$cont-1] == '' && $fecha_ac > $arr_fp[$cont]) {
+              $html .= '<div id="actual" class="cuadrado" style="background: #DD4D2C; cursor: pointer; color:#FFF;"><span style="margin-left: 9px;margin-top: 12px;font-size: 17px;position: absolute;color:red;"> &#9202;</span>';
+              //Color Blanco
+            } elseif ($arr_fr[$cont] == '' && $arr_fr[$cont+1] == '' && $arr_fr[$cont-1] == '' && $arr_fn[$cont-1] != '') {
+              $html .= '<div id="actual" class="cuadrado" style="background:#FFF; cursor: pointer; color:#000;" >';
+            } elseif ($arr_fr[$cont] == '' && $arr_fn[$cont] == '') {
+              $html .= '<div id="actual" class="cuadrado"style="color:#000!important;background:rgba(255,255,255,1); cursor: pointer; color:#FFF;" >';
+            } elseif ($fecha_ac == $arr_fn[$cont]) {
+              $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#FFF; background:rgba(92,173,92,1); cursor: pointer"><span style="margin-left: 9px;margin-top: 12px;font-size: 17px;position: absolute;"> &#9875;</span>';
+            } elseif ($row_event['fn'] > $fecha_ac) {
+              $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#000 !important; background:rgba(255,255,255,1);cursor: pointer; color:#FFF;" >';
+            } else {
+              $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#000 !important; background:rgba(255,255,255,1); cursor: pointer" >';
+            }
 
-           $html .= '<div id="tol" onclick=\'hitos("'.$row_event['sco_embarque_sco_eventossco_eventos_idb'].'","'.$row_event['name_evento'].'")\'>'.$numero_evento.' </div>
+            $html .= '<div id="tol" onclick=\'hitos("'.$row_event['sco_embarque_sco_eventossco_eventos_idb'].'","'.$row_event['name_evento'].'")\'>'.$numero_evento.' </div>
            <div class="navegacion">
-                <h4 style="color:#FFF;">'.$row_event['name_evento'].'</h4>
-                <p>Fecha plan: '.$row_event['fp'].'</p>
-                <p>Fecha real: '.$row_event['fr'].'</p>
-                <p>Fecha nueva: '.$row_event['fn'].'</p>
+                <h4 style="color:#FFF;">' .$row_event['name_evento'].'</h4>
+                <p>Fecha plan: '  .$row_event['fp'].'</p>
+                <p>Fecha real: '  .$row_event['fr'].'</p>
+                <p>Fecha nueva: ' .$row_event['fn'].'</p>
            </div>
-           ';
-           while($row_evento_riesgo = $GLOBALS['db']->fetchByAssoc($res_evento_riesgo)){
-                $nombre_riesgo = $row_evento_riesgo['nombre_riesgo']." ";
-           }
-            while($row_evento_problema = $GLOBALS['db']->fetchByAssoc($res_evento_problema)){
-                $nombre_problema = $row_evento_problema['nombre_problema']." ";
-           }
-           if($nombre_riesgo != 0 or $nombre_problema != 0){
-                if($nombre_riesgo != 0)
-                     $html .= '<div id="riesgo" style="cursor: pointer; " onclick="riesgo()">R</div>';
-                if($nombre_problema != 0)
-                     $html .= '<div id="peligro" style="cursor: pointer; " onclick="problema()">P</div>';
-                $html .= '<div class="riesg"><p>Riesgos: '.$nombre_riesgo.', Problemas: '.$nombre_problema.'</p></div>';
-           }
-           $html .='</div>';
-           $cont++;
+           '  ;
+            while ($row_evento_riesgo = $GLOBALS['db']->fetchByAssoc($res_evento_riesgo)) {
+              $nombre_riesgo = $row_evento_riesgo['nombre_riesgo']." ";
+            }
+            while ($row_evento_problema = $GLOBALS['db']->fetchByAssoc($res_evento_problema)) {
+              $nombre_problema = $row_evento_problema['nombre_problema']." ";
+            }
+            if ($nombre_riesgo != 0 or $nombre_problema != 0) {
+              if ($nombre_riesgo != 0) {
+                $html .= '<div id="riesgo" style="cursor: pointer; " onclick="riesgo()">R</div>';
+              }
+
+              if ($nombre_problema != 0) {
+                $html .= '<div id="peligro" style="cursor: pointer; " onclick="problema()">P</div>';
+              }
+
+              $html .= '<div class="riesg"><p>Riesgos: '.$nombre_riesgo.', Problemas: '.$nombre_problema.'</p></div>';
+            }
+            $html .= '</div>';
+            $cont++;
           }
           $html .= '<script>
           function hitos(id, evento){
@@ -346,27 +353,27 @@ class SugarWidgetSubPanelDespachos extends SugarWidgetField
                alert("problema");
           }
           </script>
-          ';
+          ' ;
           return $html;
           break;
-          case '1':
-              $html = '<div class="alert-warning" style="box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.4);border-radius: 5px;padding:5px 10px; width:177px;">Embarque Solicitado <span style="position:absolute;font-size:20px;margin-top:-5.3px;margin-left: 8px;"> &#9872;</span></div>';
-               return $html;
+        case '1':
+          $html = '<div class="alert-warning" style="box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.4);border-radius: 5px;padding:5px 10px; width:177px;">Embarque Solicitado <span style="position:absolute;font-size:20px;margin-top:-5.3px;margin-left: 8px;"> &#9872;</span></div>';
+          return $html;
           break;
-          case '3':
-            $html = '<div class="alert-success" style="box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.4);border-radius: 5px;padding:5px 10px; width:152px;">Embarque Cerrado <span style="position:absolute;font-size:20px;margin-top:-5.3px;margin-left: 8px;">&#9875;</span></div>';
-               return $html;
+        case '3':
+          $html = '<div class="alert-success" style="box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.4);border-radius: 5px;padding:5px 10px; width:152px;">Embarque Cerrado <span style="position:absolute;font-size:20px;margin-top:-5.3px;margin-left: 8px;">&#9875;</span></div>';
+          return $html;
           break;
-          case '4':
-            $html = '<div class="alert-danger" style="background:#d9534f; color:#FFF;box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.4);border-radius: 5px;padding:5px 10px; width:152px;">Despacho Anulado <span style="position:absolute;font-size:20px;margin-top:-5.3px;margin-left: 8px;"> &#x02672;</span></div>';
-               return $html;
+        case '4':
+          $html = '<div class="alert-danger" style="background:#d9534f; color:#FFF;box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.4);border-radius: 5px;padding:5px 10px; width:152px;">Despacho Anulado <span style="position:absolute;font-size:20px;margin-top:-5.3px;margin-left: 8px;"> &#x02672;</span></div>';
+          return $html;
           break;
-          default:
-               $html = '<div class="alert-danger" style="box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.4);border-radius: 5px;padding:5px 10px; width:118px;">Sin Embarcar <span style="position:absolute;font-size:20px;margin-top:-5.3px;margin-left: 8px;">&#x026A0;</span></div>';
-               return $html;
+        default:
+          $html = '<div class="alert-danger" style="box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.4);border-radius: 5px;padding:5px 10px; width:118px;">Sin Embarcar <span style="position:absolute;font-size:20px;margin-top:-5.3px;margin-left: 8px;">&#x026A0;</span></div>';
+          return $html;
           break;
-        }
       }
     }
+  }
 }
 ?>
