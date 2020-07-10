@@ -5583,8 +5583,8 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 }
 
 .navbar-inverse {
-	background-color: #0e2741 !important;
-	border-color: #0e2741;
+	background-color: #244668 !important;
+	border-color: #244668;
   /*box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)*/
 }
 
@@ -9742,7 +9742,7 @@ a:hover {
 .sidebar .actionMenuSidebar li a {
 	display: block;
 	font-size: 13px;
-	background-color: #707d84;
+	background-color: #0e2741;
 	color: #fff;
 	margin: 0 0 1px 0;
 	clear: both
@@ -9951,20 +9951,20 @@ a.buttontoggle:hover {
 }
 
 .recentlyViewedSidebar .recent_h3 {
-	font-size: 16.5px;
+	font-size: 14.5px;
 	/*font-weight: bold;*/
-	color: #ccc;
+	color: #eee;
 	margin: 0 0 5px 0;
   /*box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)*/
-   background: rgba(0,0,0,.05);
+   background: rgba(0,0,0,0.2);
 }
 
 .favoritesSidebar .recent_h3 {
-	font-size: 16.5px;
+	font-size: 14.5px;
 	/*font-weight: bold;*/
-	color: #ccc;
+	color: #eee;
 	margin: 0 0 5px 0;
-  background: rgba(0,0,0,.05);
+  background: rgba(0,0,0,.2);
   /*box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12)*/
 }
 
@@ -10218,7 +10218,7 @@ footer.collapsedSidebar {
 }
 
 .navbar-inverse {
-	background: #0e2741;
+	background: #244668;
 }
 
 .navbar-inverse .navbar-brand,
@@ -10324,7 +10324,7 @@ footer.collapsedSidebar {
 	margin: 0;
 	font-size: 12px;
 	height: 46px;
-	letter-spacing: 0.8px;
+	letter-spacing: 0.4px;
 	line-height: 46px;
 	padding: 0 7px 0 7px;
 	text-transform: uppercase
@@ -11136,7 +11136,7 @@ footer.collapsedSidebar {
 }
 
 .create.quickcreatetop .dropdown-toggle {
-	background-color: rgba(0,0,0,0.2);
+	background-color: rgba(0,0,0,0.3);
 	height: 40px;
 	line-height: 37px;
 	padding-top: 0;

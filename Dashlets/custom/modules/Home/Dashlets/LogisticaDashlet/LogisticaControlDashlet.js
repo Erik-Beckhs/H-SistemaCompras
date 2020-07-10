@@ -149,7 +149,7 @@ $(document).ready(function() {
       //¿console.log(typeof data == "object");
       var html = '';
       var x = 0;      
-
+      var cantidadOrdenCompra = [];
       var cantidadEbarque = [];
       data.forEach(function(element,indice,array){         
         element = JSON.parse(element);  
@@ -163,6 +163,7 @@ $(document).ready(function() {
         if(jQuery.inArray(element.idEmb, cantidadEbarque) >= 0){
         
         }else{
+          cantidadOrdenCompra.push(element.idOC);  
           cantidadEbarque.push(element.idEmb);          
         }
         //console.log("Cantidad Embarques ",cantidadEbarque, cantidadEbarque.length);
@@ -334,7 +335,7 @@ $(document).ready(function() {
 	        }).show();
        });	
       
-      $("#cantCompras").text(data.length);
+      $("#cantCompras").text(cantidadOrdenCompra.length);
       $("#cantEmbarques").text(cantidadEbarque.length);
        var back = [
        "#fff",       

@@ -98,3 +98,22 @@ textarea{
 input[type=text] .error{
 	border-color: red;
 }
+.buscador{
+	    display: flex;
+    width: 50px;
+    float: right;
+    margin-top: -34.5px;
+    z-index: 1000;
+    position: relative;
+}
+
+.sw-theme-default > .nav .nav-link.active{
+	background: #ecfdff;
+}
+
+#smartwizard{
+	height: 100% !important;
+}
+.tab-content{
+	height: 100% !important;	
+}

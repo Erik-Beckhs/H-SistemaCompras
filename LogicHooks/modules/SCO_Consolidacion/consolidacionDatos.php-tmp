@@ -93,8 +93,8 @@ $idOc = $beanOc->id;
 #Armado de array de productos para orden de compra
 foreach ($items as $key => $value) {
 	$idItem     = $value['id'];
-	$subtotal   = $value['pcv_cantidad']*$value['pcv_preciofob'];
-	$arrayItems = '["'.$value['name'].'","'.$value['pcv_descripcion'].'","PZA","'.$value['pcv_cantidad'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","","","","","'.$value['name'].'"]';
+	$subtotal   = $value['pcv_cantidadconsolidado']*$value['pcv_preciofob'];
+	$arrayItems = '["'.$value['name'].'","'.$value['pcv_descripcion'].'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","","'.$value['sco_productoscompras_id_c'].'","","","'.$value['name'].'"]';
 	$total += $subtotal;
 }
 $arrayItemsTotal = '['.$arrayItems.']|'.$total.',0,0,'.$total.'|'.$idOc.'';
@@ -140,8 +140,10 @@ foreach ($items as $key => $value) {
 	#Actualizando registros de productos a relacionar.
 	$beanPcv = new SCO_ProductosCotizadosVenta();
 	$beanPcv->retrieve($idItem);
-	$beanPcv->pcv_cantidadconsolidado   = $value['pcv_cantidad'];
-	$beanPcv->pcv_cantidadsaldo         = 0;
+	$beanPcv->pcv_cantidadconsolidado = $value['pcv_cantidadconsolidado'];
+	$beanPcv->pcv_cantidadsaldo       = $value['pcv_cantidadsaldo'];
+	;
+
 	$beanPcv->sco_consolf10bidacion_ida = $idConsolidacion;
 	$beanPcv->save();
 }

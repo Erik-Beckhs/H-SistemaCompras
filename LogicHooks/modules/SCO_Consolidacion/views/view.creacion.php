@@ -50,14 +50,15 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 													</select -->
 												</div>
 											</div>
-											<div style="display: flex; width: 50px;">
+											<div class="buscador">
 												<button class="btn btn-primary form-control" onclick="buscarPorCotizacion()">
 													<i class="glyphicon glyphicon-search"></i>
 												</button>
-											</div>
-											
+											</div>											
 										</div>
 										<div class="col-sm-3">
+										</div>
+										<div class="col-sm-2">
 											<div class="input-group">
 												<div class="input-group">
 													<span class="input-group-addon">Fabricante</span>
@@ -88,7 +89,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 												</div>
 											</div>
 										</div>
-										<div class="col-sm-2">
+										<!--div class="col-sm-2">
 											<div class="input-group">
 												<div class="input-group">
 													<span class="input-group-addon">Familia</span>
@@ -97,7 +98,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 													</select>
 												</div>
 											</div>
-										</div>
+										</div-->
 									</div>
 									</br>
 									<div class="row">
@@ -107,7 +108,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 										<label>Cant. Total</label> <input type="number" id="cantidadTabla1" value="0">
 										<button class="btn derecha" onclick="enviarTodo()">>></button>
 										</div>
-											<table class="table tableCotizacion table-striped">
+											<table class="list view table-responsive tableCotizacion table-striped">
 												<thead>
 													<tr>
 														<th>Nro. Cont</th>
@@ -134,7 +135,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 											<label>Total FOB</label> <input type="number" id="totalFob2" value="0"> 
 											<label>Cant. Total</label> <input type="number" id="cantidadTabla2" value="0">
 										</div>
-										<table class="table tableCotizacion table-striped">
+										<table class="list view table-responsive tableCotizacion table-striped">
 										<thead>
 											<tr>
 												<th>Nro. Cont</th><th>Familia</th><th>CodigoAIO</th><th>Fabricante</th><th>Descipci&oacute;n</th><th>Vendedor</th><th>Cliente</th><th>FOB</th><th>Cant. Consolidado</th><th>Sub Total</th><th></th>
