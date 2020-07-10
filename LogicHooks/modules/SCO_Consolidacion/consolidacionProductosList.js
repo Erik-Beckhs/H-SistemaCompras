@@ -31,7 +31,7 @@ $(document).ready(function () {
 // Detector de cambios filtro de fabricante
 $("#nroCotizacion").on('keyup', function (event) {
   if (event.keyCode === 13) {
-    buscarPorCotizacion();    
+    buscarPorCotizacion();
   }
 });
 function buscarPorCotizacion() {
@@ -131,6 +131,11 @@ $('#idFabricante').on('change', function () {
       $('#proveedor_id').val(codigoProv);
     }
   }
+  if (pcv_proveedoraio == '') {
+    $('#proveedor').val('');
+    $('#proveedor_id').val('');
+  }
+
 });
 // Detector de filtro de nro cotización a familia
 $('#idFabricante').on('change', function () {
@@ -212,7 +217,7 @@ var mostrarTabla1 = function () {
           html += '<td>' + res[i]["pcv_cliente"] + '</td>';
           html += '<td>' + res[i]["pcv_cantidad"] + '</td>';
           html += '<td>' + Number.parseFloat(res[i]["pcv_preciofob"]).toFixed(2) + '</td>';
-          html += '<td><input type="number" id="cantidad_' + res[i]["name"] + '" value="' + res[i]["pcv_cantidadsaldo"] + '" max="' + res[i]["pcv_cantidadsaldo"] + '" min="0"></td>';
+          html += '<td><input type="number" id="cantidad_' + res[i]["name"] + '" value="' + res[i]["pcv_cantidadsaldo"] + '" max="' + res[i]["pcv_cantidadsaldo"] + '" min="0" onkeyup="validaSaldoEnlinea(' + res[i]["name"] + ',' + res[i]["pcv_cantidadsaldo"] + ')"></td>';
           html += '<td id="subtotal1_' + res[i]["name"] + '">' + (res[i]["pcv_cantidadsaldo"] * 1 * res[i]["pcv_preciofob"]) + '</td>';
           html += '<td><button class="btn btn-primary btn-xs" onclick="enviarProducto(' + "'" + String(res[i]["name"]).trim() + "'" + ')">+</button></td>';
           html += '</tr>';
@@ -231,7 +236,7 @@ var mostrarTabla1 = function () {
           html += '<td>' + item["pcv_cliente"] + '</td>';
           html += '<td>' + item["pcv_cantidad"] + '</td>';
           html += '<td>' + Number.parseFloat(item["pcv_preciofob"]).toFixed(2) + '</td>';
-          html += '<td><input type="number" id="cantidad_' + item["name"] + '" value="' + item["pcv_cantidadsaldo"] + '" max="' + item["pcv_cantidadsaldo"] + '" min="0"></td>';
+          html += '<td><input type="number" id="cantidad_' + item["name"] + '" value="' + item["pcv_cantidadsaldo"] + '" max="' + item["pcv_cantidadsaldo"] + '" min="0" onkeyup="validaSaldoEnlinea(' + res[i]["name"] + ',' + res[i]["pcv_cantidadsaldo"] + ')"></td>';
           html += '<td id="subtotal1_' + item["name"] + '">' + (item["pcv_cantidadsaldo"] * 1 * item["pcv_preciofob"]) + '</td>';
           html += '<td><button class="btn btn-primary btn-xs" onclick="enviarProducto(' + "'" + String(item["name"]).trim() + "'" + ')">+</button></td>';
           html += '</tr>';
@@ -258,87 +263,88 @@ function enviarProducto(idProducto) {
   var cantidadItem = $('#cantidad_' + idProducto).val();
   var dataProducto = [];
   var buscarT2 = buscarItem(idProducto, consProducto2);
-  // Eliminando item de lista de productos 1
-  for (let index = 0; index < consProducto1.length; index++) {
-    if (consProducto1[index]["name"] == idProducto) {
-      dataProducto = consProducto1[index];
-      if (dataProducto["pcv_cantidadconsolidado"] == undefined) { dataProducto["pcv_cantidadconsolidado"] = 0; }
-      // Verificar si la cantidad es menor al saldo
-      if (cantidadItem < Number(dataProducto["pcv_cantidadsaldo"])) {
-        dataProducto["pcv_cantidadconsolidado"] = (dataProducto["pcv_cantidadconsolidado"] * 1) + (cantidadItem * 1);
-        dataProducto["pcv_cantidadsaldo"] = (dataProducto["pcv_cantidadsaldo"] * 1) - (cantidadItem * 1);
-        $('#cantidad_' + idProducto).val(dataProducto["pcv_cantidadsaldo"]);
-        consProducto1[index] = dataProducto;
-        if (buscarT2 == true) {
-          actualizarItemT2(dataProducto);
-        } else if (buscarT2 == false) {
-          consProducto2.push(dataProducto);
+  if (validarSelectProveedor() == true) {
+    // Eliminando item de lista de productos 1
+    for (let index = 0; index < consProducto1.length; index++) {
+      if (consProducto1[index]["name"] == idProducto) {
+        dataProducto = consProducto1[index];
+        if (dataProducto["pcv_cantidadconsolidado"] == undefined) { dataProducto["pcv_cantidadconsolidado"] = 0; }
+        // Verificar si la cantidad es menor al saldo
+        if (cantidadItem < Number(dataProducto["pcv_cantidadsaldo"])) {
+          dataProducto["pcv_cantidadconsolidado"] = (dataProducto["pcv_cantidadconsolidado"] * 1) + (cantidadItem * 1);
+          dataProducto["pcv_cantidadsaldo"] = (dataProducto["pcv_cantidadsaldo"] * 1) - (cantidadItem * 1);
+          $('#cantidad_' + idProducto).val(dataProducto["pcv_cantidadsaldo"]);
+          consProducto1[index] = dataProducto;
+          if (buscarT2 == true) {
+            actualizarItemT2(dataProducto);
+          } else if (buscarT2 == false) {
+            consProducto2.push(dataProducto);
+          }
         }
-      }
-      // Si la cantidad en igual se elimina el item de la primera tabla
-      else if (cantidadItem == Number(dataProducto["pcv_cantidadsaldo"])) {
-        dataProducto["pcv_cantidadsaldo"] = 0;
-        dataProducto["pcv_cantidadconsolidado"] = (dataProducto["pcv_cantidadconsolidado"] * 1) + (cantidadItem * 1);
-        if (buscarT2 == true) {
-          consProducto1.splice(index, 1)[0]
-          actualizarItemT2(dataProducto);
-        } else if (buscarT2 == false) {
-          consProducto2.push(consProducto1.splice(index, 1)[0])
+        // Si la cantidad en igual se elimina el item de la primera tabla
+        else if (cantidadItem == Number(dataProducto["pcv_cantidadsaldo"])) {
+          dataProducto["pcv_cantidadsaldo"] = 0;
+          dataProducto["pcv_cantidadconsolidado"] = (dataProducto["pcv_cantidadconsolidado"] * 1) + (cantidadItem * 1);
+          if (buscarT2 == true) {
+            consProducto1.splice(index, 1)[0]
+            actualizarItemT2(dataProducto);
+          } else if (buscarT2 == false) {
+            consProducto2.push(consProducto1.splice(index, 1)[0])
+          }
+          // Solo en caso de que la cantidad sea todo se elimina de la primera tabla
+          $('#item1_' + idProducto).remove();
         }
-        // Solo en caso de que la cantidad sea todo se elimina de la primera tabla
-        $('#item1_' + idProducto).remove();
       }
     }
+    // Construción del td de tabla 2
+    var html = '';
+    if (buscarT2 == false) {
+      html += '<tr id="item2_' + dataProducto["name"] + '">';
+    }
+    html += '<td>' + dataProducto["pcv_numerocotizacion"] + '</td>';
+    html += '<td>' + dataProducto["pcv_familia"] + '</td>';
+    html += '<td>' + dataProducto["name"] + '</td>';
+    html += '<td>' + dataProducto["pcv_nombreproveedor"] + '</td>';
+    html += '<td>' + dataProducto["pcv_descripcion"] + '</td>';
+    html += '<td>' + dataProducto["pcv_vendedor"] + '</td>';
+    html += '<td>' + dataProducto["pcv_cliente"] + '</td>';
+    html += '<td>' + Number.parseFloat(dataProducto["pcv_preciofob"]).toFixed(2) + '</td>';
+    html += '<td>' + dataProducto["pcv_cantidadconsolidado"] + '</td>';
+    html += '<td>' + (dataProducto["pcv_cantidadconsolidado"] * 1 * dataProducto["pcv_preciofob"]).toFixed(2) + '</td>';// sub total
+    html += '<td><button class="btn btn-danger btn-xs" onclick="regresarProducto(' + "'" + String(dataProducto["name"]).trim() + "'" + ')">-</button></td>';
+    if (buscarT2 == false) {
+      html += '</tr>';
+      $('#tabla2').append(html);
+    }
+    if (buscarT2 == true) {
+      $('#item2_' + dataProducto["name"]).html(html);
+    }
+    // Recalculando totales tabla 1
+    // FOB
+    var totalFob1 = $('#totalFob1').val();
+    totalFob1 = (totalFob1 * 1) - (dataProducto["pcv_preciofob"] * 1 * cantidadItem);
+    $('#totalFob1').val(Number.parseFloat(totalFob1).toFixed(2));
+    // Cantidad
+    var cantTotal1 = $('#cantidadTabla1').val();
+    cantTotal1 = (cantTotal1 * 1) - (cantidadItem * 1);
+    $('#cantidadTabla1').val(cantTotal1);
+    // Recalculando totales tabla 2
+    // FOB
+    var totalFob2 = $('#totalFob2').val();
+    totalFob2 = (totalFob2 * 1) + (dataProducto["pcv_preciofob"] * 1 * cantidadItem);
+    $('#totalFob2').val(Number.parseFloat(totalFob2).toFixed(2));
+    $('#precioTotalFob').val(Number.parseFloat(totalFob2).toFixed(2));
+    fobTotal = totalFob2;
+    // Cantidad
+    var cantTotal2 = $('#cantidadTabla2').val();
+    cantTotal2 = (cantTotal2 * 1) + (cantidadItem * 1);
+    $('#cantidadTabla2').val(cantTotal2);
+    $('#cantidadTotal').val(cantTotal2);
+    cantTotal = cantTotal2;
+    // Recalculando el subtotal de la tabla 1
+    $('#subtotal1_' + idProducto).html((dataProducto["pcv_cantidadsaldo"] * 1 * dataProducto["pcv_preciofob"]));
+    validarProveedor();
   }
-
-  // Construción del td de tabla 2
-  var html = '';
-  if (buscarT2 == false) {
-    html += '<tr id="item2_' + dataProducto["name"] + '">';
-  }
-  html += '<td>' + dataProducto["pcv_numerocotizacion"] + '</td>';
-  html += '<td>' + dataProducto["pcv_familia"] + '</td>';
-  html += '<td>' + dataProducto["name"] + '</td>';
-  html += '<td>' + dataProducto["pcv_nombreproveedor"] + '</td>';
-  html += '<td>' + dataProducto["pcv_descripcion"] + '</td>';
-  html += '<td>' + dataProducto["pcv_vendedor"] + '</td>';
-  html += '<td>' + dataProducto["pcv_cliente"] + '</td>';
-  html += '<td>' + Number.parseFloat(dataProducto["pcv_preciofob"]).toFixed(2) + '</td>';
-  html += '<td>' + dataProducto["pcv_cantidadconsolidado"] + '</td>';
-  html += '<td>' + (dataProducto["pcv_cantidadconsolidado"] * 1 * dataProducto["pcv_preciofob"]).toFixed(2) + '</td>';// sub total
-  html += '<td><button class="btn btn-danger btn-xs" onclick="regresarProducto(' + "'" + String(dataProducto["name"]).trim() + "'" + ')">-</button></td>';
-  if (buscarT2 == false) {
-    html += '</tr>';
-    $('#tabla2').append(html);
-  }
-  if (buscarT2 == true) {
-    $('#item2_' + dataProducto["name"]).html(html);
-  }
-  // Recalculando totales tabla 1
-  // FOB
-  var totalFob1 = $('#totalFob1').val();
-  totalFob1 = (totalFob1 * 1) - (dataProducto["pcv_preciofob"] * 1 * cantidadItem);
-  $('#totalFob1').val(Number.parseFloat(totalFob1).toFixed(2));
-  // Cantidad
-  var cantTotal1 = $('#cantidadTabla1').val();
-  cantTotal1 = (cantTotal1 * 1) - (cantidadItem * 1);
-  $('#cantidadTabla1').val(cantTotal1);
-  // Recalculando totales tabla 2
-  // FOB
-  var totalFob2 = $('#totalFob2').val();
-  totalFob2 = (totalFob2 * 1) + (dataProducto["pcv_preciofob"] * 1 * cantidadItem);
-  $('#totalFob2').val(Number.parseFloat(totalFob2).toFixed(2));
-  $('#precioTotalFob').val(Number.parseFloat(totalFob2).toFixed(2));
-  fobTotal = totalFob2;
-  // Cantidad
-  var cantTotal2 = $('#cantidadTabla2').val();
-  cantTotal2 = (cantTotal2 * 1) + (cantidadItem * 1);
-  $('#cantidadTabla2').val(cantTotal2);
-  $('#cantidadTotal').val(cantTotal2);
-  cantTotal = cantTotal2;
-  // Recalculando el subtotal de la tabla 1
-  $('#subtotal1_' + idProducto).html((dataProducto["pcv_cantidadsaldo"] * 1 * dataProducto["pcv_preciofob"]));
-  validarProveedor();
 }
 // Envio de productos de t2 a t1
 function regresarProducto(idProducto) {
@@ -356,8 +362,8 @@ function regresarProducto(idProducto) {
       dataProducto["pcv_cantidadconsolidado"] = 0;
       // validacion para actualizar o agregar item en la 1ra tabla
       if (buscarT1 == true) {
-          consProducto2.splice(index, 1)[0]
-          actualizarItemT1(dataProducto);
+        consProducto2.splice(index, 1)[0]
+        actualizarItemT1(dataProducto);
       } else if (buscarT1 == false) {
         consProducto1.push(consProducto2.splice(index, 1)[0])
       }
@@ -366,7 +372,7 @@ function regresarProducto(idProducto) {
   // Construción del td de tabla 2
   var html = '';
   if (buscarT1 == false) {
-    html += '<tr id="item1_' + dataProducto["name"] + '">';  
+    html += '<tr id="item1_' + dataProducto["name"] + '">';
   }
   html += '<td>' + dataProducto["pcv_numerocotizacion"] + '</td>';
   html += '<td>' + dataProducto["pcv_familia"] + '</td>';
@@ -377,15 +383,15 @@ function regresarProducto(idProducto) {
   html += '<td>' + dataProducto["pcv_cliente"] + '</td>';
   html += '<td>' + dataProducto["pcv_cantidad"] + '</td>';
   html += '<td>' + Number.parseFloat(dataProducto["pcv_preciofob"]).toFixed(2) + '</td>';
-  html += '<td><input type="number" id="cantidad_' + dataProducto["name"] + '" value="' + dataProducto["pcv_cantidad"] + '"></td>';
+  html += '<td><input type="number" id="cantidad_' + dataProducto["name"] + '" max="' + dataProducto["pcv_cantidadsaldo"] + '" value="' + dataProducto["pcv_cantidadsaldo"] + '" onkeyup="validaSaldoEnlinea(' + dataProducto["name"] + ',' + dataProducto["pcv_cantidadsaldo"] + ')"></td>';
   html += '<td id="subtotal1_' + dataProducto["name"] + '" >' + (dataProducto["pcv_cantidadsaldo"] * 1 * dataProducto["pcv_preciofob"]) + '</td>';
   html += '<td><button class="btn btn-primary btn-xs" onclick="enviarProducto(' + "'" + String(dataProducto["name"]).trim() + "'" + ')">+</button></td>';
   if (buscarT1 == false) {
     html += '</tr>';
-  $('#tabla1').append(html);
+    $('#tabla1').append(html);
   }
   if (buscarT1 == true) {
-    $('#item1_'+idProducto).html(html);
+    $('#item1_' + idProducto).html(html);
   }
   $('#item2_' + idProducto).remove();
 
@@ -475,9 +481,33 @@ function validarProveedor() {
   if (consProducto2.length > 0) {
     $('#idFabricante option:not(:selected)').attr('disabled', true);
     $('#nroCotizacion').attr('disabled', true);
-  }else{
+  } else {
     $('#idFabricante option:not(:selected)').attr('disabled', false);
     $('#nroCotizacion').attr('disabled', false);
   }
+
+}
+function validaSaldoEnlinea(id, saldo) {
+  var cantidad = $('#cantidad_' + id).val();
+  if (cantidad > saldo) {
+    $('#tituloMensaje').html('Cantidad incorrecta');
+    var html = '<h2> ' + cantidad + ' es mayor al saldo ' + saldo + '</h2>';
+    $('#mensajeModal').html(html);
+    $('#modalMensaje').modal("show");
+    $('#cantidad_' + id).val(saldo);
+  }
+}
+function validarSelectProveedor() {
+  var validar = true;
+  var idProv = $('#proveedor_id').val();
+  console.log(idProv);
   
+  if (idProv == '') {
+    validar = false;
+    $('#tituloMensaje').html('Proveedor no seleccionado');
+    var html = '<h2> Es necesario seleccionar un proveedor</h2>';
+    $('#mensajeModal').html(html);
+    $('#modalMensaje').modal("show");
+  }
+  return validar;
 }

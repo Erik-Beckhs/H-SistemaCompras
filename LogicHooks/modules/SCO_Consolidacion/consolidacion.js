@@ -333,7 +333,7 @@ function vista(){
     html += '                                <div class="col-sm-4 " >Proveedor:</div>';
     html += '                                <div class="col-sm-7 " >';
     html += '                                    <input type="text"  id="proveedor" name="proveedor" value="NOMBRE DE PROVEEDOR" class="desabilidato">';
-    html += '                                    <input type="hidden"  id="proveedor_id" name="proveedor_id" value="NOMBRE DE PROVEEDOR" >';
+    html += '                                    <input type="hidden"  id="proveedor_id" name="proveedor_id" >';
     html += '                                </div>  ';
     html += '                            </div>';
     html += '                        </div>';
