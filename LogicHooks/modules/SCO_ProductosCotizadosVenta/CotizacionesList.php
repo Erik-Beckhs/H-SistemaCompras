@@ -16,7 +16,7 @@ global $current_user;
     $idDiv = $current_user->iddivision_c;
     
     if($filtro == 'cotizacionList'){
-        $query = "SELECT pcv_numerocotizacion FROM suitecrm.sco_productoscotizadosventa
+        $query = "SELECT pcv_numerocotizacion FROM suitecrm.sco_productoscotizadosventa WHERE deleted = 0
         group by pcv_numerocotizacion;
         ";
         $results = $GLOBALS['db']->query($query, true);
@@ -31,7 +31,8 @@ global $current_user;
         $pcv_numerocotizacion = $_POST['pcv_numerocotizacion'];
         $query = "SELECT pcv_nombreproveedor,pcv_proveedoraio
         FROM suitecrm.sco_productoscotizadosventa
-        WHERE pcv_numerocotizacion = '$pcv_numerocotizacion'
+        WHERE pcv_numerocotizacion = '$pcv_numerocotizacion' AND
+        deleted = 0
         group by pcv_proveedoraio;
         ";
         $results = $GLOBALS['db']->query($query, true);
@@ -47,7 +48,8 @@ global $current_user;
         $pcv_proveedoraio = $_POST['pcv_proveedoraio'];
         $query = "SELECT name 
         FROM suitecrm.sco_productoscotizadosventa
-        WHERE pcv_numerocotizacion = '$nroCotizacion'
+        WHERE pcv_numerocotizacion = '$nroCotizacion' AND
+        deleted = 0
         AND pcv_proveedoraio = '$pcv_proveedoraio';
         ";
         $results = $GLOBALS['db']->query($query, true);
@@ -64,7 +66,8 @@ global $current_user;
         $query = "SELECT pcv_clienteaio, pcv_cliente 
         FROM suitecrm.sco_productoscotizadosventa
         WHERE pcv_numerocotizacion = '$nroCotizacion'
-        AND pcv_proveedoraio = '$pcv_proveedoraio'
+        AND pcv_proveedoraio = '$pcv_proveedoraio' AND
+        deleted = 0
         group by pcv_clienteaio;
         ";
         $results = $GLOBALS['db']->query($query, true);
@@ -81,7 +84,8 @@ global $current_user;
         $query = "SELECT pcv_familia 
         FROM suitecrm.sco_productoscotizadosventa
         WHERE pcv_numerocotizacion = '$nroCotizacion'
-        AND pcv_proveedoraio = '$pcv_proveedoraio'
+        AND pcv_proveedoraio = '$pcv_proveedoraio' AND
+        deleted = 0
         group by pcv_familia;
         ";
         $results = $GLOBALS['db']->query($query, true);
