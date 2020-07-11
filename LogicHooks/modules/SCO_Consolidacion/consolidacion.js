@@ -332,8 +332,8 @@ function vista(){
     html += '                            <div class="form-group">';
     html += '                                <div class="col-sm-4 " >Proveedor:</div>';
     html += '                                <div class="col-sm-7 " >';
-    html += '                                    <input type="text"  id="proveedor" name="proveedor" value="NOMBRE DE PROVEEDOR" class="desabilidato">';
-    html += '                                    <input type="hidden"  id="proveedor_id" name="proveedor_id" value="NOMBRE DE PROVEEDOR" >';
+    html += '                                    <input type="text"  id="proveedor" name="proveedor" value="" class="desabilidato">';
+    html += '                                    <input type="hidden"  id="proveedor_id" name="proveedor_id" value="" >';
     html += '                                </div>  ';
     html += '                            </div>';
     html += '                        </div>';
@@ -479,7 +479,7 @@ function envioDeDatos(jsonDatos){
             var id = e;
             $(".loader").removeClass("is-active");
             $("#modalConfirmacion").modal("hide"); 
-            alert("Se redireccionara a su vista creada"+id);
+            alert("Se redireccionara a su Consolidacion creada "+id);
             //$(location).attr("href","index.php?module=SCO_Consolidacion&action=DetailView&record="+id);
         },
         error: function(data) {

@@ -50,17 +50,24 @@ $nombreOc             = $_POST['nombreOc']?$_POST['nombreOc']:"";
 $items                = $_POST['items']?$_POST['items']:"";
 
 $dateFC = date_create(date("Y-m-d H:i:s"));
+#Extrayendo el Proveedor por su codigo AIO
+
+$queryProveedor = "SELECT id FROM suitecrm.sco_proveedor where prv_codaio = '".$proveedor_id."'  and deleted = 0;";
+
+$proveedorObj  = $GLOBALS['db']->query($queryProveedor, true);
+$proveedorDato = $GLOBALS['db']->fetchByAssoc($proveedorObj);
+$proveedorDato["id"];
 
 #Creación de la Orden de compra
 $beanOc                                                 = BeanFactory::newBean('SCO_OrdenCompra');
 $beanOc->name                                           = "OC_".$nombre;
 $beanOc->orc_tipo                                       = 1;
 $beanOc->orc_tipoo                                      = 2;
-$beanOc->orc_fechaord                                   = date_format($dateFC, 'Y-m-d H:m:s');
+$beanOc->orc_fechaent                                   = date_format($dateFC, 'Y-m-d H:m:s');
 $beanOc->orc_solicitado                                 = $solicitante;
 $beanOc->user_id1_c                                     = $solicitante_id;
 $beanOc->sco_proveedor_sco_ordencompra_name             = $proveedor;
-$beanOc->sco_proveedor_sco_ordencomprasco_proveedor_ida = $proveedor_id;
+$beanOc->sco_proveedor_sco_ordencomprasco_proveedor_ida = $proveedorDato["id"];
 $beanOc->sco_ordencompra_contacts_name                  = $contactoProveedor;
 $beanOc->sco_ordencompra_contactscontacts_ida           = $contactoProveedor_id;
 $beanOc->orc_decop                                      = '1';
@@ -80,7 +87,7 @@ $bean_ususol                                            = BeanFactory::getBean('
 $beanOc->orc_division                                   = $bean_ususol->iddivision_c;
 $beanOc->orc_regional                                   = $bean_ususol->idregional_c;
 $beanOc->idamercado_c                                   = $bean_ususol->idamercado_c;
-$beanOc->orc_observaciones                              = $desc;
+$beanOc->orc_obs                                        = $desc;
 $beanOc->date_entered                                   = date_format($dateFC, 'Y-m-d H:i:s');
 $beanOc->sco_ordencompra_id_c                           = '';
 $beanOc->orc_occ                                        = '';
@@ -97,7 +104,7 @@ foreach ($items as $key => $value) {
 	$arrayItems = '["'.$value['name'].'","'.$value['pcv_descripcion'].'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","","'.$value['sco_productoscompras_id_c'].'","","","'.$value['name'].'"]';
 	$total += $subtotal;
 }
-$arrayItemsTotal = '['.$arrayItems.']|'.$total.',0,0,'.$total.'|'.$idOc.'';
+$arrayItemsTotal = '['.$arrayItems.']|'.$total.',0,0,'.$total.'|'.$idOc;
 
 #Creación del modulo de productos. realcionados a la Orden de compra
 $beanProductos              = BeanFactory::newBean('SCO_Productos');
@@ -140,13 +147,15 @@ foreach ($items as $key => $value) {
 	#Actualizando registros de productos a relacionar.
 	$beanPcv = new SCO_ProductosCotizadosVenta();
 	$beanPcv->retrieve($idItem);
-	$beanPcv->pcv_cantidadconsolidado   = $value['pcv_cantidadconsolidado'];
-	$beanPcv->pcv_cantidadsaldo         = $value['pcv_cantidadsaldo'];;
+	$beanPcv->pcv_cantidadconsolidado = $value['pcv_cantidadconsolidado'];
+	$beanPcv->pcv_cantidadsaldo       = $value['pcv_cantidadsaldo'];
+	;
+
 	$beanPcv->sco_consolf10bidacion_ida = $idConsolidacion;
 	$beanPcv->save();
 }
 
-echo $idConsolidacion;
+echo json_decode($items);
 
 ?>
 
