@@ -1,27 +1,28 @@
 <?php
 /**
-*Esta clase realiza operaciones matemÃ¡ticas.
-*
-*@author Limberg Alcon <lalcon@hansa.com.bo>
-*@copyright 2018
-*@license /var/www/html/modules/SCO_PlanPagos
-*/
-if (! defined ( 'sugarEntry' ) || ! sugarEntry)
-  die ( 'Not A Valid Entry Point' );
+ *Esta clase realiza operaciones matemÃ¡ticas.
+ *
+ *@author Limberg Alcon <lalcon@hansa.com.bo>
+ *@copyright 2018
+ *@license /var/www/html/modules/SCO_PlanPagos
+ */
+if (!defined('sugarEntry') || !sugarEntry) {
+	die('Not A Valid Entry Point');
+}
 
 require_once ('include/MVC/View/views/view.edit.php');
-require_once('data/BeanFactory.php');
-require_once('include/entryPoint.php');
+require_once ('data/BeanFactory.php');
+require_once ('include/entryPoint.php');
 
 class SCO_PlandePagosViewEdit extends ViewEdit {
 
-  function SCO_PlandePagosViewEdit() {
-    parent::ViewEdit ();
-    $this->useForSubpanel = true;
-  }
+	function SCO_PlandePagosViewEdit() {
+		parent::ViewEdit();
+		$this->useForSubpanel = true;
+	}
 
-  function display($bean){
-    $js = "<script>
+	function display($bean) {
+		$js = "<script>
       //Cargando el precio total del modulo de productos
       var b = [];
       var cont = 0;
@@ -35,7 +36,7 @@ class SCO_PlandePagosViewEdit extends ViewEdit {
       }else{cont++;}
       });
       */
-      b = datosProductos.split('|');      
+      b = datosProductos.split('|');
       var tot = b[1].split(',');
       var total = tot[3];
       $('#ppg_monto').on('keyup', function (){
@@ -65,9 +66,10 @@ class SCO_PlandePagosViewEdit extends ViewEdit {
         alert(12);
       })
     </script>";
-    echo "<style>#SCO_PlandePagos_subpanel_full_form_button{display:none;}</style>";
-    echo $js;
-    parent::display();
-  }
+		echo "<style>#SCO_PlandePagos_subpanel_full_form_button{display:none;}</style>";
+
+		echo $js;
+		parent::display();
+	}
 }
 ?>

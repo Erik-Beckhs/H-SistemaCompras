@@ -43,7 +43,9 @@ class SCO_ProductosViewEdit extends ViewEdit {
             margin: 0;
             padding:2px;
         }
-
+       .tabpanel{
+         padding: 7px 0px 0px 0px;
+       }
        input[type=number] { -moz-appearance:textfield; padding:2px;}
 
        #form_SubpanelQuickCreate_SCO_Productos{padding:5px 0px 2px 0px;}
@@ -130,11 +132,14 @@ class SCO_ProductosViewEdit extends ViewEdit {
       #SCO_Productos_subpanel_full_form_button{display:none;}
       #detailpanel_-1{display:none;}
       #form_SubpanelQuickCreate_SCO_Productos #Default_SCO_Productos_Subpanel{display:none;}
+      #form_SubpanelQuickCreate_SCO_Productos .dcQuickEdit{display:none;}
       #description{display:none;}</style>';
     #echo "<input type=\"submit\" class=\"button\" onClick=\"convRes();\" value=\"Crear Nuevo Producto\">";
     parent::display();
      echo '
     <script>
+      var datosProductos = $("#idOrdeCompra").text();
+      alert(asd);
       $("#SCO_Productos_subpanel_cancel_button").hide();
       $("#SCO_Productos_subpanel_save_button").hide();
       function convRes() {
@@ -162,7 +167,7 @@ class SCO_ProductosViewEdit extends ViewEdit {
       <link rel=\"stylesheet\" href=\"custom/modules/SCO_OrdenCompra/jquery.jexcel.css?".time()."\" type=\"text/css\" />
       <script>
       //Agregando a la vista las tablas de carga masiva y carga individual
-      $('#form_SubpanelQuickCreate_SCO_Productos').append(\"<div role='tabpanel'><ul class='nav nav-tabs' role='tablist'><li role='presentation' class='active'><a href='#home' aria-controls='home' role='tab' data-toggle='tab'> Carga Individual </a></li><li role='presentation'><a href='#tab' aria-controls='tab' role='tab' data-toggle='tab'> Carga Masiva </a></li><li><a href='#' aria-controls='home' role='tab' data-toggle='tab' onClick='convRes()'>Crear nuevo Producto</a></li></ul><div class='tab-content'><div role='tabpanel' class='tab-pane active' id='home'><div class='yui-navset detailview_tabs yui-navset-top'><div class='yui-content'><div class='detail view  detail508 expanded'><form id='formPro'><table class='panelContainer' cellspacing='1'><table id='idprod' ></table><table id='idser'></table><table id='idnewpro' ></table><div id='findiv'></div></table></form></div></div></div></div><div role='tabpanel' class='tab-pane' id='tab'><div class='yui-navset detailview_tabs yui-navset-top'><div class='yui-content'><div class='detail view  detail508 expanded'><table class='panelContainer' cellspacing='1'><div id='my'></div><div id='tabmy'></div></table></div></div></div></div></div></div>\");
+      $('#form_SubpanelQuickCreate_SCO_Productos').append(\"<div role='tabpanel' class= 'tabpanel'><ul class='nav nav-tabs' role='tablist'><li role='presentation' class='active'><a href='#home' aria-controls='home' role='tab' data-toggle='tab'> Carga Individual </a></li><li role='presentation'><a href='#tab' aria-controls='tab' role='tab' data-toggle='tab'> Carga Masiva </a></li><li><a href='#' aria-controls='home' role='tab' data-toggle='tab' onClick='convRes()'>Crear nuevo Producto</a></li></ul><div class='tab-content'><div role='tabpanel' class='tab-pane active' id='home'><div class='yui-navset detailview_tabs yui-navset-top'><div class='yui-content'><div class='detail view  detail508 expanded'><form id='formPro'><table class='panelContainer' cellspacing='1'><table id='idprod' ></table><table id='idser'></table><table id='idnewpro' ></table><div id='findiv'></div></table></form></div></div></div></div><div role='tabpanel' class='tab-pane' id='tab'><div class='yui-navset detailview_tabs yui-navset-top'><div class='yui-content'><div class='detail view  detail508 expanded'><table class='panelContainer' cellspacing='1'><div id='my'></div><div id='tabmy'></div></table></div></div></div></div></div></div>\");
       $('#findiv').append(htmljs);
       //////////////////////////////////////////////
       //Formulario de carga masiva con Formato Excel
@@ -178,7 +183,7 @@ class SCO_ProductosViewEdit extends ViewEdit {
       data = [];
       $('#list_subpanel_sco_ordencompra_sco_productos .list tbody .oddListRowS1').each(function(){
       if(cont == 0){
-        var a = $(this).text().trim();
+        var a = datosProductos.trim();
         var b = a.split('|');
         data = b[0];
         //console.log('rkt'+$(this).text().trim());

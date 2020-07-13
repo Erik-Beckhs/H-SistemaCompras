@@ -98,13 +98,18 @@ $beanOc->save();
 $idOc = $beanOc->id;
 
 #Armado de array de productos para orden de compra
+$cantidadItems = 0;
 foreach ($items as $key => $value) {
+	$cantidadItems++;
 	$idItem     = $value['id'];
-	$subtotal   = $value['pcv_cantidadconsolidado']*$value['pcv_preciofob'];
-	$arrayItems = '["'.$value['name'].'","'.$value['pcv_descripcion'].'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","","'.$value['sco_productoscompras_id_c'].'","","","'.$value['name'].'"]';
-	$total += $subtotal;
+	$subtotal   = $value['pcv_cantidadconsolidado'] * $value['pcv_preciofob'];
+	if($cantidadItems < count($items)){
+		$arrayItems .= '["'.$value['name'].'","'.$value['pcv_descripcion'].'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","0","'.$value['sco_productoscompras_id_c'].'","","","'.$value['name'].'"],';	
+	}else{
+		$arrayItems .= '["'.$value['name'].'","'.$value['pcv_descripcion'].'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","0","'.$value['sco_productoscompras_id_c'].'","","","'.$value['name'].'"]';	
+	}		
 }
-$arrayItemsTotal = '['.$arrayItems.']|'.$total.',0,0,'.$total.'|'.$idOc;
+$arrayItemsTotal = '['.$arrayItems.']|'.$precioTotalFob.',0,0,'.$precioTotalFob.'|'.$idOc;
 
 #Creación del modulo de productos. realcionados a la Orden de compra
 $beanProductos              = BeanFactory::newBean('SCO_Productos');
@@ -155,7 +160,7 @@ foreach ($items as $key => $value) {
 	$beanPcv->save();
 }
 
-echo json_decode($items);
+echo $idConsolidacion;
 
 ?>
 

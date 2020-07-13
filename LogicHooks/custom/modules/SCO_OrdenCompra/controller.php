@@ -24,7 +24,7 @@ class SCO_OrdenCompraController extends SugarController {
 		//script para actualizar la pagina cada momento desde los cambios del subpanel de PRODUCTOS
 		if ($_REQUEST['subpanel'] == 'sco_ordencompra_sco_productos'){             
 			$js = "<script>
-				window.location.reload(); 
+				//window.location.reload(); 
 			</script> "; 
 			echo $js;
 		}

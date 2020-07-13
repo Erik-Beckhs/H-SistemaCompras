@@ -49,6 +49,18 @@ function openContactsPopup() {
     };
     open_popup('Contacts', 600, 400, '&proyc_division_advanced[]='+div, true, false, popupRequestData, true);
 }
+//despliega ventana emergente de Suitecrm Modulo Proyectos / co
+function openProyectoPopup(){
+    var popupRequestData = {
+        "call_back_function": "set_return",
+        "form_name": "formPro",
+        "field_to_name_array": {
+            "id": "proyecto_id",
+            "name": "proyecto",
+        }
+    };
+    open_popup('SCO_ProyectosCO', 600, 400, '&proyc_division_advanced[]='+div, true, false, popupRequestData, true);
+}
 
 //Serializa los datos del formulario
 $("#formPro").submit(function(e) {
@@ -218,7 +230,14 @@ function vista(){
     html += '                                </div>                      ';
     html += '                            </div>';
     html += '                            <div class="col-sm-6">';
-    html += '';
+    html += '                                <div class="form-group">';
+    html += '                                    <div class="col-sm-4 " >Proyecto: <span class="required">*</span></div>';
+    html += '                                    <div class="col-sm-6 " >';
+    html += '                                       <input type="text" id="proyecto" name="proyecto" class="desabilidato">';
+    html += '                                       <input type="hidden" name="proyecto_id" id="proyecto_id" size="20" maxlength="50" >';
+    html += '                                       <button class="btn-success btn-sm cons-btn"  title="Seleccionar" accesskey="T" type="button" tabindex="116"  onclick="openProyectoPopup();"><img src="themes/default/images/id-ff-select.png" alt="Seleccionar"></button>';
+    html += '                                    </div>';  
+    html += '                                </div>';    
     html += '                            </div>';
     html += '                        </div>';
     html += '                        <br>';
@@ -332,7 +351,7 @@ function vista(){
     html += '                            <div class="form-group">';
     html += '                                <div class="col-sm-4 " >Proveedor:</div>';
     html += '                                <div class="col-sm-7 " >';
-    html += '                                    <input type="text"  id="proveedor" name="proveedor" value="NOMBRE DE PROVEEDOR" class="desabilidato">';
+    html += '                                    <input type="text"  id="proveedor" name="proveedor" value="" class="desabilidato">';
     html += '                                    <input type="hidden"  id="proveedor_id" name="proveedor_id" >';
     html += '                                </div>  ';
     html += '                            </div>';
@@ -405,7 +424,7 @@ function vista(){
     html += '            </div>';
     html += '            <div class="col-sm-4">';
     html += '            </div>';
-    html += '        </div></br></br></br></br></br></br></br>';
+    html += '        </div></br>';
     html += '        </div>';
     html += '    </form>';
     html += '</div>';
@@ -466,7 +485,8 @@ function ventanaModal(jsonDatos){
 //Envio de datos al archivo consolidacionDatos.php
 function envioDeDatos(jsonDatos){        
     //alert(jsonDatos);
-    console.log("Datos enviados" + jsonDatos);   
+    console.log("Envio de datos" + jsonDatos);  
+    console.log("items" + jsonDatos.items);   
     $.ajax({
         type: "POST",
         url: "index.php?to_pdf=true&module=SCO_Consolidacion&action=consolidacionDatos",        

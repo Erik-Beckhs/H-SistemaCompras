@@ -1,6 +1,6 @@
 <?php
 /**
-*Esta clase realiza operaciones matemáticas.
+*Esta clase realiza operaciones matemÃ¡ticas.
 *
 *@author Limberg Alcon <lalcon@hansa.com.bo>
 *@copyright 2018
@@ -65,10 +65,9 @@ class SugarWidgetSubPanelEditProdDesp extends SugarWidgetField
               //debugger;
               var datos = $.parseJSON(data);
               if(datos != 'Error'){
-                alert('Modificaci�n realizada con �xito');
+                alert('Modificación realizada con éxito');
               }else{
-                alert('La canitdad debe ser mayor a 0');
-                $('#cantidad').val('');
+                alert('La canitdad debe ser mayor a 0');                
               }
             }
           });
