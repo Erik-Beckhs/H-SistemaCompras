@@ -9831,7 +9831,7 @@ a.buttontoggle:hover {
 
 .button-toggle-expanded {
 	position: fixed;
-	top: 72px;
+	top: 65px;
 	background: rgba(0,0,0,0.4);
 	border-top-right-radius: 3px;
 	border-bottom-right-radius: 3px;
