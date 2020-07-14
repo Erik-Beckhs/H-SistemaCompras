@@ -57,8 +57,6 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 											</div>											
 										</div>
 										<div class="col-sm-3">
-										</div>
-										<div class="col-sm-2">
 											<div class="input-group">
 												<div class="input-group">
 													<span class="input-group-addon">Fabricante</span>
@@ -71,7 +69,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 										<div class="col-sm-2">
 											<div class="input-group">
 												<div class="input-group">
-													<span class="input-group-addon">Código AIO</span>
+													<span class="input-group-addon">Cod. Proveedor</span>
 													<select class="form-control filter" id="codAioProduct" name="codAioProduct">
 														<option value="" selected="selected">Todo</option>
 														<div id="codAioProductOption"></div>
@@ -84,6 +82,16 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 												<div class="input-group">
 													<span class="input-group-addon">Cliente</span>
 													<select class="form-control filter" id="idCliente" name="idCliente">
+														<option value="" selected="selected">Todo</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-2">
+											<div class="input-group">
+												<div class="input-group">
+													<span class="input-group-addon">Plazo entrega</span>
+													<select class="form-control filter" id="plazoEntrega" name="plazoEntrega">
 														<option value="" selected="selected">Todo</option>
 													</select>
 												</div>
@@ -129,14 +137,14 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 													<tr>
 														<th>Nro. Cont</th>
 														<th>Familia</th>
-														<th>CodigoAIO</th>
+														<th>Cod. Proveedor</th>
 														<th>Fabricante</th>
 														<th>Descipci&oacute;n</th>
 														<th>Vendedor</th>
 														<th>Cliente</th>
 														<th>Cantidad</th>
 														<th>FOB</th>
-														<th>Cant. Saldo</th>
+														
 														<th>Sub Total</th>
 														<th></th>
 													</tr>
@@ -154,7 +162,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 										<table class="list view table-responsive tableCotizacion table-striped">
 										<thead>
 											<tr>
-												<th>Nro. Cont</th><th>Familia</th><th>CodigoAIO</th><th>Fabricante</th><th>Descipci&oacute;n</th><th>Vendedor</th><th>Cliente</th><th>FOB</th><th>Cant. Consolidado</th><th>Sub Total</th><th></th>
+												<th>Nro. Cont</th><th>Familia</th><th>Cod. Proveedor</th><th>Fabricante</th><th>Descipci&oacute;n</th><th>Vendedor</th><th>Cliente</th><th>FOB</th><th>Cant. Consolidado</th><th>Sub Total</th><th></th>
 											</tr>
 										</thead>
 										<tbody id="tabla2">
