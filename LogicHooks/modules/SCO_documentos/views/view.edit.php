@@ -84,6 +84,7 @@ class SCO_documentosViewEdit extends ViewEdit {
     }
 
     </script>";
+    echo "<style>#SCO_documentos_subpanel_full_form_button{display:none;}</style>";
     parent::display();
   }
 }

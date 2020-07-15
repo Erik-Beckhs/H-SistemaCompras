@@ -29,6 +29,7 @@ class SCO_AprobadoresViewEdit extends ViewEdit {
     $('#apr_tipo').is(':checked');
     $('#apr_tipo').after(' Elaborado por <br>".$html."');
     </script>";
+    echo "<style>#SCO_Aprobadores_subpanel_full_form_button{display:none;}</style>";
     parent::display();
   }
 }
