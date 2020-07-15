@@ -170,6 +170,10 @@ $installdefs = array(
         'to'   => 'custom/modules/SCO_OrdenCompra/contap.php',
       ),
       array(
+        'from' => '<basepath>/custom/modules/SCO_OrdenCompra/datospm.php',
+        'to'   => 'custom/modules/SCO_OrdenCompra/datospm.php',
+      ),
+      array(
         'from' => '<basepath>/custom/modules/SCO_OrdenCompra/controller.php',
         'to'   => 'custom/modules/SCO_OrdenCompra/controller.php',
       ),
@@ -645,6 +649,15 @@ $installdefs = array(
        'class'   => 'Clcontap',
        'function'  => 'Fncontap',
       ),
+      array(
+        'module'  => 'SCO_OrdenCompra',
+        'hook'    => 'after_save',
+        'order'   => 7,
+        'description' => 'DatosProcessMaker',
+        'file'   => 'custom/modules/SCO_OrdenCompra/datospm.php',
+        'class'   => 'Cldatospm',
+        'function'  => 'datosapr',
+       ),
       array(
        'module'  => 'SCO_OrdenCompra',
        'hook'    => 'after_save',
