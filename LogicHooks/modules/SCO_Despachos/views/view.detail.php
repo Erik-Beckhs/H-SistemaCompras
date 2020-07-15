@@ -275,6 +275,7 @@ class SCO_DespachosViewDetail extends ViewDetail {
     if($estado == 0){
     require_once("modules/SCO_Despachos/dividirdespacho.php");
     }
+    require_once("modules/SCO_Despachos/validacionesItems.php");
  	}
 
  }
