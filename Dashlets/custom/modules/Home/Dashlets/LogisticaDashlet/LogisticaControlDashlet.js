@@ -153,7 +153,7 @@ $(document).ready(function() {
       var cantidadEbarque = [];
       data.forEach(function(element,indice,array){         
         element = JSON.parse(element);  
-        console.log(element);
+        //console.log(element);
         var xEvento = element.eventos.length;
         x++;
         var stepper = '';
@@ -162,15 +162,15 @@ $(document).ready(function() {
                                 
         if(jQuery.inArray(element.idEmb, cantidadEbarque) >= 0){
         
-        }else{
-          cantidadOrdenCompra.push(element.idOC);  
+        }else{            
           cantidadEbarque.push(element.idEmb);          
         }
+
         //console.log("Cantidad Embarques ",cantidadEbarque, cantidadEbarque.length);
         
         //Armado de los hitos del embarque**************************************    
         element.eventos.forEach(function(el,indice,array){               
-               
+        cantidadOrdenCompra.push(element.idOc);
           switch(el.eve_estado) {
             case "Concluido":
               stepperBody += '<div class="md-stepper-horizontal plomo" id="md-stepper-horizontal'+element.idDes+'" >';
@@ -246,7 +246,7 @@ $(document).ready(function() {
         html += '<td class="emb_fechacrea">' + element.emb_fechacrea + '</td>'; 
         
         //importes Orden de compra, Despacho y Embarque**
-        html += '<td id="orc_importet'+element.idDes+'" class="orc_importet" style="color:#000;font-weight: bold;"><input type="hidden" class="importeCompras" value="'+element.orc_importet+'">' + formatearNumero(element.orc_importet) + '</td>'; 
+        html += '<td id="orc_importet'+element.idOc+'" class="orc_importet" style="color:#000;font-weight: bold;"><input type="hidden" class="importeCompras'+element.idOc+'" value="'+element.orc_importet+'">' + formatearNumero(element.orc_importet) + '</td>'; 
         html += '<td id="precioDesp'+element.idDes+'" class="precioDesp precioEmb  '+element.idEmb+'" style="color:#000;font-weight: bold;"><input type="hidden" class="importeEmbarque" value="'+element.precioDesp+'">' + formatearNumero(element.precioDesp).replace('null','<b style="color:red;">Sin Items</b>') + '</td>';
         
         var desParcial = (element.precioDesp / element.orc_importet) * 100;
@@ -305,18 +305,39 @@ $(document).ready(function() {
         html += '<td class="comentarios '+element.idEmb+'"><ul >'+ tdComnentario+'</ul><a class="suitepicon suitepicon-action-view" style="cursor: pointer;" onclick=showModal("'+element.idEmb+'")> ver...</a></td>';    
         html += '</tr>'     
       });
+      console.log(cantidadOrdenCompra);
       $(".contenido").html(html);
       //Suma de totales de Orden de compra y Embarque**
-      var orc_importet = 0;
+      //var orc_importet = 0;      
+      /*
       $(".importeCompras").each(function(){
       	orc_importet += parseInt($(this).val()) || 0;
-      });
-      $("#totalCompras").text(formatearNumero(orc_importet));
+      });      
       console.log(orc_importet);
-      
+      */
+
+      var orc_importet2 = 0;
+      for(var i = cantidadOrdenCompra.length -1; i >=0; i--){
+        if(cantidadOrdenCompra.indexOf(cantidadOrdenCompra[i]) !== i) cantidadOrdenCompra.splice(i,1);
+      }
+      console.info(cantidadOrdenCompra);
+
+      for(var i = 0; i<cantidadOrdenCompra.length;i++){
+        orc_importet2 += parseFloat($(".importeCompras"+cantidadOrdenCompra[i]).val()) || 0;
+        console.log(cantidadOrdenCompra[i]+" EL IMPORTE "+ $(".importeCompras"+cantidadOrdenCompra[i]).val());
+      }
+      console.log("MONTO TOTAL DE ORDEN DE COMPRA"+orc_importet2);
+      $("#totalCompras").text(formatearNumero(orc_importet2));  
+          
+
+
+
+
+
+      //Suma totales de EMBARUQES
       var prdes_unidad = 0;
       $(".importeEmbarque").each(function(){
-      	prdes_unidad += parseInt($(this).val()) || 0;
+      	prdes_unidad += parseFloat($(this).val()) || 0;
       });
       $("#totalEmbarque").text(formatearNumero(prdes_unidad));
       console.log(prdes_unidad);
