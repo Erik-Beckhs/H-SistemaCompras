@@ -12,6 +12,10 @@ class SCO_OrdenCompraController extends SugarController {
 		$this->view = 'reporte';
 	}
 
+	function action_backorder() {
+		$this->view = 'backorder';
+	}
+
 	function action_SubPanelViewer() {
 		require_once 'include/SubPanel/SubPanelViewer.php';
 		//script para actualizar la pagina cada momento desde el Subpanel de DOCUMENTOS

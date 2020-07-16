@@ -212,7 +212,7 @@ class SCO_OrdenCompraViewReporte extends ViewHtml
              <div class="input-group">    		    
               <input id="usuario" type="text" class="form-control" name="msg" placeholder="'.$nombre.'" disabled>    		    
       		  </div>
-    		    <span class="input-group-addon">División</span>
+    		    <span class="input-group-addon">DivisiÃ³n</span>
     		    <input id="division" type="text" class="form-control" name="msg"  value="'.$division.'"disabled>
             <input id="logistico" type="text" class="form-control" name="msg"  value="'.$logistico.'"disabled>
             <input id="rol" type="text" class="form-control" name="rol"  value="'.$rol.'"disabled>
