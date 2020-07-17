@@ -204,10 +204,10 @@ agregarTotalesDespacho();
         <h4 class="modal-title" style="color:#fff!important;"id="">Dividir Despacho</h4>
       </div>
       <div class="modal-body">
-        <div class="col-lg-12 container">
+        <div class="col-lg-12 row">
           <div class="col-lg-7 table-responsive" >
           <center><h2>Productos</h2></center>
-            <div id="contenido">Paginación en local<br></div>
+            <div id="contenido">Paginaciï¿½n en local<br></div>
             <center><div id="paginacion"></div></center>
           </div>
           <div class="col-lg-5 table-responsive" >
@@ -218,7 +218,7 @@ agregarTotalesDespacho();
                 <thead>
                   <tr>
                     <th>Productos</th>
-                    <th>Descripción</th>
+                    <th>Descripciï¿½n</th>
                     <th>Cantidades</th>
                     <th></th>
                   </tr>
@@ -253,7 +253,7 @@ agregarTotalesDespacho();
         </div>
       </div>
       <br>
-      <div class="container">
+      <div class="row">
           <center>
             <button type="button" class="btn  btn-xs" data-dismiss="modal">Cancelar</button>
             <button type="button" class="btn btn-default btn-xs" onclick="crearDespacho()">Crear Nuevo despacho en modo borrador</button>

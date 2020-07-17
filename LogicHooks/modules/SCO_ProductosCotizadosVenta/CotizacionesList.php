@@ -120,7 +120,7 @@ global $current_user;
         $name = $_POST['name'] ? $_POST['name'] : "";
         $pcv_clienteaio = $_POST['pcv_clienteaio'] ? $_POST['pcv_clienteaio'] : "";
         $plazoEntrega = $_POST['plazoEntrega'] ? $_POST['plazoEntrega'] :"";
-        $query = "call suitecrm.sp_consolidacion_filtro('$pcv_proveedoraio', '$pcv_numerocotizacion', '$name', '$pcv_clienteaio', '','$pcv_familia');";
+        $query = "call suitecrm.sp_consolidacion_filtro('$pcv_proveedoraio', '$pcv_numerocotizacion', '$name', '$pcv_clienteaio', '','$plazoEntrega');";
         $results = $GLOBALS['db']->query($query, true);
         $object= array();
         while($row = $GLOBALS['db']->fetchByAssoc($results))
