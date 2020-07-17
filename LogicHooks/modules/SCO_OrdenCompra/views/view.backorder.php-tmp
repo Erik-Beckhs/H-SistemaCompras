@@ -90,7 +90,6 @@ class SCO_OrdenCompraViewBackorder extends ViewHtml {
 				</div>
 			</div>
 			';
-
 		echo $head.$js.$body;
 	}
 }
