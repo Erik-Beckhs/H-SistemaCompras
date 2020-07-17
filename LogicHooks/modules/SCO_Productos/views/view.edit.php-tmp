@@ -1,28 +1,29 @@
 <?php
 /**
-*Esta clase realiza la vista de PRODUCTOS
-*
-*@author Limberg Alcon <lalcon@hansa.com.bo>
-*@copyright 2018
-*@license ruta: /var/www/html/modules/view/SCO_Productos
-*/
-if (! defined ( 'sugarEntry' ) || ! sugarEntry)
-  die ( 'Not A Valid Entry Point' );
+ *Esta clase realiza la vista de PRODUCTOS
+ *
+ *@author Limberg Alcon <lalcon@hansa.com.bo>
+ *@copyright 2018
+ *@license ruta: /var/www/html/modules/view/SCO_Productos
+ */
+if (!defined('sugarEntry') || !sugarEntry) {
+	die('Not A Valid Entry Point');
+}
 
 require_once ('include/MVC/View/views/view.edit.php');
 
 class SCO_ProductosViewEdit extends ViewEdit {
 
-  function SCO_ProductosViewEdit() {
-    parent::ViewEdit ();
-    $this->useForSubpanel = true;
-  }
+	function SCO_ProductosViewEdit() {
+		parent::ViewEdit();
+		$this->useForSubpanel = true;
+	}
 
-  function display(){
-    global $current_user;
-    $id_usuario = $current_user->iddivision_c;
-    echo "<input type='hidden' id='division' value='".$id_usuario."'>";
-    echo '<div class="modal fade" id="codprdup" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+	function display() {
+		global $current_user;
+		$id_usuario = $current_user->iddivision_c;
+		echo "<input type='hidden' id='division' value='".$id_usuario."'>";
+		echo '<div class="modal fade" id="codprdup" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
@@ -36,7 +37,7 @@ class SCO_ProductosViewEdit extends ViewEdit {
         </div>
       </div>
     </div>';
-    echo '<style>
+		echo '<style>
         input[type=number]::-webkit-inner-spin-button,
         input[type=number]::-webkit-outer-spin-button {
             -webkit-appearance: none;
@@ -90,7 +91,9 @@ class SCO_ProductosViewEdit extends ViewEdit {
       }
       #form_SubpanelQuickCreate_SCO_Productos{
         background: #fff;
-        border: 1px solid #ddd;;
+        border: 1px solid #ddd;
+;
+
       }
       #form_SubpanelQuickCreate_SCO_Productos tr input{
         width: 70px;
@@ -114,9 +117,11 @@ class SCO_ProductosViewEdit extends ViewEdit {
       #form_SubpanelQuickCreate_SCO_Productos #Default_SCO_Productos_Subpanel{display:none;}
       #form_SubpanelQuickCreate_SCO_Productos .dcQuickEdit{display:none;}
       #description{display:none;}</style>';
-    #echo "<input type=\"submit\" class=\"button\" onClick=\"convRes();\" value=\"Crear Nuevo Producto\">";
-    parent::display();
-     echo '
+		#echo "<input type=\"submit\" class=\"button\" onClick=\"convRes();
+		\" value=\"Crear Nuevo Producto\">";
+
+		parent::display();
+		echo '
     <script>
       var datosProductos = $("#idOrdeCompra").text();
       alert(asd);
@@ -127,20 +132,24 @@ class SCO_ProductosViewEdit extends ViewEdit {
         window.open(url, "", "width=990,height=650");
       }
     </script>';
-    echo "<script>
+		echo "<script>
       var htmljs = '';
       htmljs += '<div><table width=\"100%\" class=\"panelContainer\" id=\"tablet\"><tbody>';
       htmljs += '<tr><td><button type=\"button\" onclick=\"insertarProductos()\" class=\"btn btn-default btn-xs\">Agregar Producto</button></td>';
       htmljs += '<td><button type=\"button\" class=\"btn btn-default btn-xs\" onclick=\"insertarServicio()\">Agregar Servicio</button></td>';
       htmljs += '<td></td><td></td></tr>';
       htmljs += '<tr><td scope=\"col\" width=\"12.5%\"><div><span>Subtotal</span></td><td><input style=\"width:100px;\"type=\"text\" name=\"subtotal\" id=\"subtotal\" readonly=\"readonly\"></div></td><td></td><td></td></tr>';
+
       htmljs += '<tr><td scope=\"col\" width=\"12.5%\"><div><span >Descuento valor</span></td><td><input style=\"width:100px;\"type=\"text\" name=\"decval\" id=\"decval\" onblur=\"descvalor();\"><span></div></td><td></td><td></td></tr>';
+
       htmljs += '<tr><td scope=\"col\" width=\"12.5%\"><div><span >Descuento %</span></td><td><input style=\"width:100px;\"type=\"text\" name=\"descpor\" id=\"descpor\" onblur=\"descporc();\"><span></div></td><td></td><td></td></tr>';
+
       htmljs += '<tr><td scope=\"col\" width=\"12.5%\"><div><span >total</span></td><td><input style=\"width:100px;\"type=\"text\" name=\"total\" id=\"total\" readonly=\"readonly\"><span></div></td><td></td><td></td></tr></tbody></table>';
+
       htmljs += '</div>';
     </script>";
 
-    echo "
+		echo "
       <script src=\"custom/modules/SCO_OrdenCompra/jquery.jexcel.js?".time()."\"></script>
       <script src=\"modules/SCO_Productos/productos.js?".time()."\"></script>
       <script src=\"modules/SCO_Productos/items.js?".time()."\"></script>
@@ -338,9 +347,13 @@ class SCO_ProductosViewEdit extends ViewEdit {
       var htmlto = '';
       htmlto += '<div><table width=\"100%\" class=\"panelContainer\" id=\"tablet\"><tbody>';
       htmlto += '<tr><td scope=\"col\" width=\"12.5%\">Subtotal: </td><td><input type=\"text\" name=\"pro_subto\" id=\"pro_subto\" style=\"width:100px; \" value=\"'+subto+'\" disabled></td></tr>';
+
       htmlto += '<tr><td scope=\"col\" width=\"12.5%\">Descuento valor: </td><td><input type=\"text\" name=\"pro_descval\" id=\"pro_descval\" style=\"width:100px;\"value=\"'+desval+'\"></td></tr>';
+
       htmlto += '<tr><td scope=\"col\" width=\"12.5%\">Descuento %: </td><td><input type=\"text\" name=\"pro_descpor\" id=\"pro_descpor\" style=\"width:100px;\" value=\"'+despor+'\"></td></tr>';
+
       htmlto += '<tr><td scope=\"col\" width=\"12.5%\">Total: </td><td><input type=\"text\"style=\"width:100px;\" name=\"pro_total\" id=\"pro_total\" value=\"'+total+'\" disabled></td></tr>';
+
       htmlto += '</tbody></table></div>';
       $('#tabmy').append(htmlto);
 
@@ -501,6 +514,6 @@ class SCO_ProductosViewEdit extends ViewEdit {
 
       </script>
     ";
-  }
+	}
 }
 ?>
