@@ -18,13 +18,22 @@ class Cldatospm
         where oc.id = '$bean->id'";
         $results = $GLOBALS['db']->query($query, true);
         $nombre = " ";
+        $array = array();
         while($row = $GLOBALS['db']->fetchByAssoc($results))
         {
-            $nombre .= "hola mundo2".$bean->id;
+            $array[] = $row;
         }
-        $bean->name = $nombre;
-        $bean->save();
-    }
+        $curl = curl_init('http://192.168.1.203:8081'); 
+        $data =  json_encode($array);
+        try{
+        curl_setopt($curl,CURLOPT_HTTPHEADER,array("Content-type:application/json"));
+        curl_setopt($curl,CURLOPT_POST,true);
+        curl_setopt($curl,CURLOPT_POSTFIELDS,$data);
+        curl_exec($curl);
+        curl_close($curl);
+        }catch(exception $e){
+        echo "Error";
+        }
     }
 }
 

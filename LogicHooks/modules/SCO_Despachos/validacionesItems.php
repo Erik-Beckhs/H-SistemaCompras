@@ -109,35 +109,9 @@ $('#spreadsheet').jexcel({
             width:90
         },
         {
-            type: 'dropdown',
+            type: 'text',
             title:'Make',
             width:120,
-            source:[
-                "Alfa Romeo",
-                "Audi",
-                "Bmw",
-                "Chevrolet",
-                "Chrystler",
-                "Dodge",
-                "Ferrari",
-                "Fiat",
-                "Ford",
-                "Honda",
-                "Hyundai",
-                "Jaguar",
-                "Jeep",
-                "Kia",
-                "Mazda",
-                "Mercedez-Benz",
-                "Mitsubish",
-                "Nissan",
-                "Peugeot",
-                "Porsche",
-                "Subaru",
-                "Suzuki",
-                "Toyota",
-                "Volkswagen"
-              ]
         },
         {
             type: 'text',
