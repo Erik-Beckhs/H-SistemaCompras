@@ -47,6 +47,8 @@ $telefono             = $_POST['telefono']?$_POST['telefono']:"";
 $direccion            = $_POST['direccion']?$_POST['direccion']:"";
 $nombreConsolidacion  = $_POST['nombreConsolidacion']?$_POST['nombreConsolidacion']:"";
 $nombreOc             = $_POST['nombreOc']?$_POST['nombreOc']:"";
+$proyecto             = $_POST['proyecto']?$_POST['proyecto']:"";
+$proyecto_id          = $_POST['proyecto_id']?$_POST['proyecto_id']:"";
 $items                = $_POST['items']?$_POST['items']:"";
 
 $dateFC = date_create(date("Y-m-d H:i:s"));
@@ -106,7 +108,7 @@ foreach ($items as $key => $value) {
 	if ($cantidadItems < count($items)) {
 		$arrayItems .= '["'.$value['name'].'","'.$value['pcv_descripcion'].'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","0","'.$value['sco_productoscompras_id_c'].'","","","'.$value['name'].'"],';
 	} else {
-		$arrayItems .= '["'.$value['name'].'","'.$value['pcv_descripcion'].'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","0","'.$value['sco_productoscompras_id_c'].'","","","'.$value['name'].'"]';
+		$arrayItems .= '["'.$value['name'].'","'.$value['pcv_descripcion'].'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","0","'.$value['sco_productoscompras_id_c'].'","'.$proyecto.'","'.$proyecto_id.'","'.$value['name'].'"]';
 	}
 }
 $arrayItemsTotal = '['.$arrayItems.']|'.$precioTotalFob.',0,0,'.$precioTotalFob.'|'.$idOc;
