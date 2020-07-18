@@ -46,6 +46,9 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
  	.label{
  		font-size: 11.5px;
  	}
+  .campopersonalizado{
+    margin-top:10px;
+  }
   #list_subpanel_sco_ordencompra_sco_productos .oddListRowS1{background:red;}
  	#whole_subpanel_sco_ordencompra_sco_productoscompras {display:none;}
  	#whole_subpanel_sco_productoscotizados_sco_ordencompra {display:none;}
@@ -244,56 +247,57 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
     				$('#desc_val').prop('disabled', true);
 </script>"	;
 				parent::display();
-				echo '<div class="yui-navset detailview_tabs yui-navset-top"><div class="yui-content"><div class="detail view  detail508 expanded">
-				<table class="panelContainer" cellspacing="1"><tbody>
-				<tr>
-            <td width="12.5%" scope="col">
-     					<b>Estado Actual:</b>
-     				</td>
-     				<td>
-     					<span style="color:green"><b>'	.$arr_estado[1].'</b></span>
-     				</td>
-     				<td width="12.5%" >
-     				<!--<input type="button" id="btn-estados" class="btn btn-sm btn-success"onClick="estado(2);" value="'	.$arr_estado[2].'">-->
-    				</td>
-    				<td width="12.5%" scope="col">
-     					<b>Reportes:</b>
-     				</td>
-         			<td width="37.5%">
-     					<a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick="imprimir();">Descargar</a>
-    				    <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
-     				</td>
-          </tr>
- 			</tbody></table>
-				 </div></div></div>'	;
+				echo '
+      <div class="row detail-view-row" style="background:#FFF;margin-top:-15px;">
+        <div class="col-xs-12 col-sm-6 detail-view-row-item">
+              <div class="col-xs-12 col-sm-4 label col-1-label">
+                Estado Actual:
+              </div>
+              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar" >
+                <span style="color:blue"><b>'	.$arr_estado[1].'</b></span>
+              </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 detail-view-row-item">
+              <div class="col-xs-12 col-sm-4 label col-1-label">
+                <b>Reportes:</b>
+              </div>
+              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
+                  <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick="imprimir();">Descargar</a>
+                  <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
+              </div>
+        </div>
+      </div>
+      '	;
 				#echo $js.$st;
 				break;
 			case '2':
 				echo "<style>#whole_subpanel_sco_despachos_sco_ordencompra{display:none;}</style>";
 
 				parent::display();
-				echo '<div class="yui-navset detailview_tabs yui-navset-top"><div class="yui-content"><div class="detail view  detail508 expanded">
-				<table class="panelContainer" cellspacing="1"><tbody>
-				<tr>
-					<td width="12.5%" scope="col">
- 					<b>Estado Actual:</b>
- 				</td>
- 				<td>
- 					'	.$arr_estado[2].'
- 				</td>
- 				<td width="28%" >
- 				<button id="btn-estados" class="btn btn-success btnCompra" onClick="estado(3);" >'	.$arr_estado[3].'</button>
-				</td>
-	    		<td width="12.5%" scope="col">
-	 					<b>Reportes:</b>
-	 				</td>
-	     		<td width="37.5%">
-	 					<a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick="imprimir();">Descargar</a>
-					    <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
-	 				</td>
-	 			</tr>
-	 			</tbody></table>
-			 </div></div></div>'	;
+				echo '
+      <div class="row detail-view-row" style="background:#FFF;margin-top:-15px;">
+        <div class="col-xs-12 col-sm-6 detail-view-row-item">
+              <div class="col-xs-12 col-sm-4 label col-1-label">
+                <b>Estado Actual:</b>
+              </div>
+              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar" >
+                <span style="color:#333">
+                  <b>'	.$arr_estado[2].' </b>
+                </span>
+                <button id="btn-estados" class="btn btn-success btnCompra" onClick="estado(3);" >'	.$arr_estado[3].'</button>
+              </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 detail-view-row-item">
+              <div class="col-xs-12 col-sm-4 label col-1-label">
+                <b>Reportes:</b>
+              </div>
+              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
+                  <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick="imprimir();">Descargar</a>
+                  <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
+              </div>
+        </div>
+      </div>
+      '	;
 				break;
 			case '3':
 				echo "<style>#list_subpanel_sco_ordencompra_sco_productos table .clickMenu{display:none;}
@@ -305,17 +309,17 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
               	         #whole_subpanel_sco_despachos_sco_ordencompra{display:none;}
               	 </style>"	;
 				parent::display();
-				echo '<div class="yui-navset detailview_tabs yui-navset-top"><div class="yui-content"><div class="detail view  detail508 expanded">
-					<table class="panelContainer" cellspacing="1"><tbody>
-					<tr>
-						<td width="12.5%" scope="col">
-	 					<b>Estado Actual:</b>
-	 				</td>
-	 				<td>
-	 					<span style="color:#ff0000;">'	.$arr_estado[3].'</span>
-	 				</td>
-	 				<td width="26.5%" >
-           	'	;
+				echo '
+        <div class="row detail-view-row" style="background:#FFF;margin-top:-15px;">
+          <div class="col-xs-12 col-sm-6 detail-view-row-item">
+                <div class="col-xs-12 col-sm-4 label col-1-label">
+                  <b>Estado Actual:</b>
+                </div>
+                <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar" >
+                  <span style="color:blue">
+                    <b>'	.$arr_estado[3].' </b>
+                  </span>
+                  '	;
 				global $current_user;
 				$id_usuario = $current_user->id;
 				if ($id_usuario == $this->bean->user_id_c || $id_usuario == '1') {
@@ -323,44 +327,48 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
 
 				}
 				echo '
-				</td>
-				<td width="12.5%" scope="col">
- 					<b>Reportes:</b>
- 				</td>
-     			<td width="37.5%">
- 					<a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick="imprimir();">Descargar</a>
-				    <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
- 				</td>
-	 			</tr>
-	 			</tbody></table>
- 				 </div></div></div>'	;
+                </div>
+          </div>
+          <div class="col-xs-12 col-sm-6 detail-view-row-item">
+                <div class="col-xs-12 col-sm-4 label col-1-label">
+                  <b>Reportes:</b>
+                </div>
+                <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
+                    <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick="imprimir();">Descargar</a>
+                    <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
+                </div>
+          </div>
+        </div>
+       '	;
 				echo "<style>#list_subpanel_sco_ordencompra_sco_documentos .sugar_action_button{display:block;}</style>";
 
 				break;
 			case '4':
 				parent::display();
-				echo '<div class="yui-navset detailview_tabs yui-navset-top"><div class="yui-content"><div class="detail view  detail508 expanded">
-				<table class="panelContainer" cellspacing="1"><tbody>
-				<tr>
-					<td width="12.5%" scope="col">
- 					<b>Estado Actual:</b>
- 				</td>
- 				<td>
- 					'	.$arr_estado[4].'
- 				</td>
- 				<td width="12.5%" >
- 				<input type="button" id="btn-estados" class="btn btn-sm btn-success" onClick="estado(6);" value="'	.$arr_estado[6].'">
-				</td>
-				<td width="12.5%" scope="col">
- 					<b>Reportes:</b>
- 				</td>
-     			<td width="37.5%">
- 					<a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick="imprimir();">Descargar</a>
-				    <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
- 				</td>
- 			</tr>
- 			</tbody></table>
-				 </div></div></div>'	;
+				echo '
+      <div class="row detail-view-row" style="background:#FFF;margin-top:-15px;">
+        <div class="col-xs-12 col-sm-6 detail-view-row-item">
+              <div class="col-xs-12 col-sm-4 label col-1-label">
+                <b>Estado Actual:</b>
+              </div>
+              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar" >
+                <span style="color:#ff0000">
+                  <b>'	.$arr_estado[4].' </b>
+                </span>
+                <input type="button" id="btn-estados" class="btn btn-sm btn-success" onClick="estado(6);" value="'	.$arr_estado[6].'">
+              </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 detail-view-row-item">
+              <div class="col-xs-12 col-sm-4 label col-1-label">
+                <b>Reportes:</b>
+              </div>
+              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
+                  <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick="imprimir();">Descargar</a>
+                  <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
+              </div>
+        </div>
+      </div>
+     '	;
 				echo $js.$st."<script>$('#list_subpanel_sco_ordencompra_sco_documentos .sugar_action_button').show();</script>";
 
 				break;
@@ -375,28 +383,29 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
 			$('#desc_val').prop('disabled', true);
 </script>"	;
 				parent::display();
-				echo '<div class="yui-navset detailview_tabs yui-navset-top"><div class="yui-content"><div class="detail view  detail508 expanded">
-			<table class="panelContainer" cellspacing="1"><tbody>
-			<tr>
-				<td width="12.5%" scope="col">
-					<b>Estado Actual:</b>
-				</td>
-				<td>
-					<span style="color:red"><b>'	.$arr_estado[5].'</b></span>
-				</td>
-				<td width="12.5%" >
-				<!--<input type="button" id="btn-estados" class="btn btn-sm btn-success" onClick="estado(2);" value="'	.$arr_estado[2].'">-->
-			</td>
-			<td width="12.5%" scope="col">
-					<b>Reportes:</b>
-				</td>
-			<td width="37.5%">
-					<a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick="imprimir();">Descargar</a>
-			    <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
-				</td>
-			</tr>
-			</tbody></table>
-			 </div></div></div>'	;
+				echo '
+    <div class="row detail-view-row" style="background:#FFF;margin-top:-15px;">
+      <div class="col-xs-12 col-sm-6 detail-view-row-item">
+            <div class="col-xs-12 col-sm-4 label col-1-label">
+              <b>Estado Actual:</b>
+            </div>
+            <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar" >
+              <span style="color:#ff0000">
+                <b>'	.$arr_estado[5].' </b>
+              </span>
+            </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 detail-view-row-item">
+            <div class="col-xs-12 col-sm-4 label col-1-label">
+              <b>Reportes:</b>
+            </div>
+            <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
+                <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick="imprimir();">Descargar</a>
+                <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
+            </div>
+      </div>
+    </div>
+    '	;
 				echo $js.$st;
 				break;
 			case '6':
@@ -419,28 +428,29 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
 				$('#desc_val').prop('disabled', true);
 </script>"	;
 				parent::display();
-				echo '<div class="yui-navset detailview_tabs yui-navset-top"><div class="yui-content"><div class="detail view  detail508 expanded">
-				<table class="panelContainer" cellspacing="1"><tbody>
-				<tr>
-					<td width="12.5%" scope="col">
- 					<b>Estado Actual:</b>
- 				</td>
- 				<td>
- 					<span style="color:#333"><b>'	.$arr_estado[6].'</b></span>
- 				</td>
- 				<td width="12.5%" >
-
-				</td>
-				<td width="12.5%" scope="col">
- 					<b>Reportes:</b>
- 				</td>
-     			<td width="37.5%">
- 					<a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick="imprimir();">Descargar</a>
-				    <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
- 				</td>
- 			</tr>
- 			</tbody></table>
-				 </div></div></div>'	;
+				echo '
+      <div class="row detail-view-row" style="background:#FFF;margin-top:-15px;">
+        <div class="col-xs-12 col-sm-6 detail-view-row-item">
+              <div class="col-xs-12 col-sm-4 label col-1-label">
+                <b>Estado Actual:</b>
+              </div>
+              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar" >
+                <span style="color:green">
+                  <b>'	.$arr_estado[6].' </b>
+                </span>
+              </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 detail-view-row-item">
+              <div class="col-xs-12 col-sm-4 label col-1-label">
+                <b>Reportes:</b>
+              </div>
+              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
+                  <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick="imprimir();">Descargar</a>
+                  <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
+              </div>
+        </div>
+      </div>
+      '	;
 				#echo $js.$st;
 				break;
 			default:
