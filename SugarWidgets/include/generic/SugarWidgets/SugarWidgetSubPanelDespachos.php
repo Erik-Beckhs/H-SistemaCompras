@@ -14,7 +14,7 @@ require_once ('include/entryPoint.php');
 
 class SugarWidgetSubPanelDespachos extends SugarWidgetField {
   function displayHeaderCell($layout_def) {
-    return '<span style="font-size:13px;">Eventos</span>';
+    return '<a style="font-weight: normal;">Eventos</a>';
   }
   function displayList($layout_def) {
     $html = '<style>

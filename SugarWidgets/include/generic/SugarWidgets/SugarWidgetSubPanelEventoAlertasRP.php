@@ -13,7 +13,7 @@ require_once('include/entryPoint.php');
 class SugarWidgetSubPanelEventoAlertasRP extends SugarWidgetField
 {
     function displayHeaderCell($layout_def){
-        return '<a style="font-weight: normal;color: #fff;">Alertas</a><span style="margin-left:2px; margin-top: -3px; font-size:16px; position:absolute;">&#128681;</span>';
+        return '<a style="font-weight: normal;">Alertas</a>';
     }
     function displayList($layout_def)
     {

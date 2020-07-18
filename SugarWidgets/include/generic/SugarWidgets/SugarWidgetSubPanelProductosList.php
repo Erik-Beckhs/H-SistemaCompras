@@ -14,7 +14,7 @@ require_once('include/entryPoint.php');
 class SugarWidgetSubPanelProductosList extends SugarWidgetField
 {
 	  function displayHeaderCell($layout_def){
-        return '<a style="font-weight: normal;color: #fff;">Items</a>';
+        return '<a style="font-weight: normal;">Items</a>';
     }
     
     function displayList($layout_def)
