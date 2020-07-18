@@ -39,7 +39,6 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 				        <div id="step-1" class="tab-pane consolidacionProductos" role="tabpanel" aria-labelledby="step-1">
 								<div class="container-fluid">
 									<div class="row filtro">
-
 										<div class="col-sm-3">
 											<div class="input-group" style="display: flex;">
 												<div class="input-group">
@@ -64,7 +63,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 													<span class="input-group-addon">Fabricante</span>
 													<select class="form-control filter" id="idFabricante" name="idFabricante">
 														<option value="" selected="selected">Todo</option>
-														</select>
+													</select>
 												</div>
 											</div>
 										</div>
@@ -98,8 +97,6 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 													</select>
 												</div>
 											</div>
-										</div>
-										<div class="col-sm-1">
 										</div>
 									</div>
 									</br>
