@@ -15870,7 +15870,7 @@ tr#pagination {
 }
 
 .list thead {
-	background-color: #f3f3ff;
+	background-color: #31708f;
 }
 
 .list .oddListRowS1 td[nowrap] {
@@ -15920,7 +15920,7 @@ a.listViewTdToolsS1 {
 	font-size: 13px;
 	font-weight: 500;
 	padding-right: 5px;
-	color: #d9edf7;	
+	color: #ffffff;	
 }
 
 .list {
@@ -16184,7 +16184,7 @@ a.listViewTdToolsS1 {
 }
 
 .list tr th a:visited {
-	color: #003c79
+	color: #eee
 }
 
 .list tr td[scope=col] a:link {
@@ -20166,7 +20166,7 @@ option[selected] {
 
 .sqsEnabled {
 	font-weight: normal;
-	color: #817c8d
+	color: #515151
 }
 
 .edit {

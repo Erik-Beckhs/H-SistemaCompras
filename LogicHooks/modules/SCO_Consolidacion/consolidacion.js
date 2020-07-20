@@ -507,8 +507,8 @@ function envioDeDatos(jsonDatos){
             var id = e;
             $(".loader").removeClass("is-active");
             $("#modalConfirmacion").modal("hide"); 
-            alert("Se redireccionara a su vista creada"+id);
-            //$(location).attr("href","index.php?module=SCO_Consolidacion&action=DetailView&record="+id);
+            alert("Se redireccionara a su Consolidación");
+            $(location).attr("href","index.php?module=SCO_Consolidacion&action=DetailView&record="+id);
         },
         error: function(data) {
             $(".loader").removeClass("is-active");
