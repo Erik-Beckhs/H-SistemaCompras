@@ -31,7 +31,7 @@ global $current_user;
         $pcv_numerocotizacion = $_POST['pcv_numerocotizacion'];
         $query = "SELECT sco_proveedor_id_c,pcv_nombreproveedor,pcv_proveedoraio
         FROM suitecrm.sco_productoscotizadosventa
-        WHERE pcv_numerocotizacion = '$pcv_numerocotizacion' AND
+        WHERE 
         deleted = 0
         group by pcv_proveedoraio;
         ";

@@ -7,33 +7,42 @@ var fobTotal = 0;
 var proveedores = [];
 // Filtro inicial
 $(document).ready(function () {
-  // $.ajax({
-  //   type: 'POST',
-  //   url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesLista',
-  //   datatype: 'json',
-  //   data: {
-  //     filtro: "cotizacionList"
-  //   },
-  //   async: false,
-  //   success: function (e) {
-  //     var res = JSON.parse(e);
-  //     var html = '<option value="">Todo</option>';
-  //     for (var i = 0; i < res.length; i++) {
-  //       html += '<option value="' + res[i]["pcv_numerocotizacion"] + '">' + res[i]["pcv_numerocotizacion"] + '</option>';
-  //     }
-  //     $('#nroCotizacion').html(html);
-  //   },
-  //   error: function (data) {
-  //     console.log('ERROR, No se pudo conectar', data);
-  //   }
-  // });
+  $.ajax({
+    type: 'POST',
+    url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesLista',
+    datatype: 'json',
+    data: {
+      filtro: "fabricante"
+    },
+    async: false,
+    success: function (e) {
+      var res = JSON.parse(e);
+      var html = '<option value="">Todo</option>';
+      for (var i = 0; i < res.length; i++) {
+        html += '<option value="' + res[i]["sco_proveedor_id_c"] + '">' + res[i]["pcv_nombreproveedor"] + '</option>';
+      }
+      proveedores = res;
+      $('#idFabricante').html(html);
+    },
+    error: function (data) {
+      console.log('ERROR, No se pudo conectar', data);
+    }
+  });
 });
 // Detector de cambios filtro de fabricante
 $("#nroCotizacion").on('keyup', function (event) {
   if (event.keyCode === 13) {
-    buscarPorCotizacion();
+    // buscarPorCotizacion();
+    buscar();
   }
 });
+function buscar() {
+  // buscarPorCotizacion();
+  buscarcodaio();
+  buscarClientes();
+  buscarPlazoEntrega();
+  mostrarTabla1();
+}
 function buscarPorCotizacion() {
   var nroCotizacion = $('#nroCotizacion').val();
   if (nroCotizacion != '') {
@@ -48,8 +57,6 @@ function buscarPorCotizacion() {
       async: false,
       success: function (e) {
         var res = JSON.parse(e);
-        console.log(res);
-        
         var html = '<option value="">Todo</option>';
         for (var i = 0; i < res.length; i++) {
           html += '<option value="' + res[i]["sco_proveedor_id_c"] + '">' + res[i]["pcv_nombreproveedor"] + '</option>';
@@ -65,7 +72,7 @@ function buscarPorCotizacion() {
   }
 }
 // Detector de filtro de nro cotización 
-$('#idFabricante').on('change', function () {
+function buscarcodaio() {
   var pcv_proveedoraio = $("#idFabricante").val();
   var nroCotizacion = $('#nroCotizacion').val();
   if (nroCotizacion != '') {
@@ -92,9 +99,9 @@ $('#idFabricante').on('change', function () {
       }
     });
   }
-});
+}
 // Detector de filtro de nro cotización a Cliente
-$('#idFabricante').on('change', function () {
+function buscarClientes() {
   var pcv_proveedoraio = $("#idFabricante").val();
   var nroCotizacion = $('#nroCotizacion').val();
   if (nroCotizacion != '') {
@@ -121,7 +128,7 @@ $('#idFabricante').on('change', function () {
       }
     });
   }
-});
+}
 // Detector de datos del fabricante en formulario envio de consolidacion
 $('#idFabricante').on('change', function () {
   var pcv_proveedoraio = $("#idFabricante").val();
@@ -140,7 +147,7 @@ $('#idFabricante').on('change', function () {
 
 });
 // Detector de filtro de nro cotización a plazo entrega
-$('#idFabricante').on('change', function () {
+function buscarPlazoEntrega() {
   var pcv_proveedoraio = $("#idFabricante").val();
   var nroCotizacion = $('#nroCotizacion').val();
   if (nroCotizacion != '') {
@@ -161,14 +168,13 @@ $('#idFabricante').on('change', function () {
           html += '<option value="' + res[i]["pcv_plzentrega"] + '">' + res[i]["pcv_plzentrega"] + '</option>';
         }
         $('#plazoEntrega').html(html);
-        mostrarTabla1();
       },
       error: function (data) {
         console.log('ERROR, No se pudo conectar', data);
       }
     });
   }
-});
+}
 // Detector de filtro de nro cotización a familia
 $('#idFabricante').on('change', function () {
   var pcv_proveedoraio = $("#idFabricante").val();
@@ -519,10 +525,10 @@ function actualizarItemT1(item) {
 function validarProveedor() {
   if (consProducto2.length > 0) {
     $('#idFabricante option:not(:selected)').attr('disabled', true);
-    $('#nroCotizacion').attr('disabled', true);
+    // $('#nroCotizacion').attr('disabled', true);
   } else {
     $('#idFabricante option:not(:selected)').attr('disabled', false);
-    $('#nroCotizacion').attr('disabled', false);
+    // $('#nroCotizacion').attr('disabled', false);
   }
 
 }
