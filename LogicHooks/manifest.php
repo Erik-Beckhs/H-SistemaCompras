@@ -411,8 +411,8 @@ $installdefs = array(
         'to'   => 'modules/SCO_Productos/buscap.php',
       ),
       array(
-        'from' => '<basepath>/modules/SCO_ProductosCotizados/CotizacionesList.php',
-        'to'   => 'modules/SCO_ProductosCotizados/CotizacionesList.php',
+        'from' => '<basepath>/modules/SCO_ProductosCotizadosVenta/CotizacionesList.php',
+        'to'   => 'modules/SCO_ProductosCotizadosVenta/CotizacionesList.php',
       ),
       array(
         'from' => '<basepath>/modules/SCO_Productos/buscaproy.php',
@@ -661,7 +661,7 @@ $installdefs = array(
       array(
        'module'  => 'SCO_OrdenCompra',
        'hook'    => 'after_save',
-       'order'   => 4,
+       'order'   => 5,
        'description' => 'notificacionAprobadores',
        'file'   => 'custom/modules/SCO_OrdenCompra/Notifica.php',
        'class'   => 'Clnotifica',
