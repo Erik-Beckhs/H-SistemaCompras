@@ -17,12 +17,25 @@ class SCO_OrdenCompraViewBackorder extends ViewHtml {
 		$js = '
 				<script src="modules/SCO_OrdenCompra/BackOrder/backorder.js?'.time().'"></script>
 				';
-		$body = '			
+		$body = '	
+			<link href="bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
+			<script src="bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+
 			<div class="container-fluid">
 				<div class="row filtro">
 					<div class="col-sm-2">
-					</div>									
+						<div class="input-group">	
+							<span class="input-group-addon">Fecha de: </span>				
+					 		<input type="text" class="form-control" id="datepicker">
+						</div>
+					</div>	
 					<div class="col-sm-2">
+						<div class="input-group">	
+							<span class="input-group-addon">Hasta: </span>				
+					 		<input type="text" class="form-control" id="datepicker2">
+						</div>
+					</div>								
+					<div class="col-sm-3">
 						<div class="input-group">
 							<div class="input-group">
 								<span class="input-group-addon">Cod. proveedor :</span>
@@ -32,7 +45,7 @@ class SCO_OrdenCompraViewBackorder extends ViewHtml {
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-2">
+					<div class="col-sm-3">
 						<div class="input-group">
 							<div class="input-group">
 								<span class="input-group-addon">Codigo AIO :</span>
@@ -42,28 +55,6 @@ class SCO_OrdenCompraViewBackorder extends ViewHtml {
 								</select>
 							</div>
 						</div>
-					</div>
-					<div class="col-sm-2">
-						<div class="input-group">
-							<div class="input-group">
-								<span class="input-group-addon">Fecha :</span>
-								<select class="form-control filter" id="idCliente" name="idCliente">
-									<option value="" selected="selected">Todo</option>
-								</select>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-2">
-						<!--div class="input-group">
-							<div class="input-group">
-								<span class="input-group-addon">Plazo entrega</span>
-								<select class="form-control filter" id="plazoEntrega" name="plazoEntrega">
-									<option value="" selected="selected">Todo</option>
-								</select>
-							</div>
-						</div-->
-					</div>
-					<div class="col-sm-2">
 					</div>
 				</div>
 				</br>
