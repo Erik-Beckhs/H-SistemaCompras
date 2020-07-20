@@ -16,11 +16,8 @@ $fecha_desde = $_POST['fecha_desde'];
 $fecha_hasta = $_POST['fecha_hasta'];
 
 $idDiv = $current_user->iddivision_c;
-try {
-	$pcv_proveedoraio = $_POST['pcv_proveedoraio'] ? $_POST['pcv_proveedoraio'] : "";
-    $pcv_numerocotizacion = $_POST['nroCotizacion'] ? $_POST['nroCotizacion'] :"";
-    
-    $query = "call suitecrm.sp_consolidacion_backorder('2019-01-01','2020-01-01');";
+try {    
+    $query = "call suitecrm.sp_consolidacion_backorder('$fecha_desde','$fecha_hasta','03','');";
     $results = $GLOBALS['db']->query($query, true);
     $object= array();
     while($row = $GLOBALS['db']->fetchByAssoc($results))

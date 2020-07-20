@@ -49,17 +49,18 @@ $nombreConsolidacion  = $_POST['nombreConsolidacion']?$_POST['nombreConsolidacio
 $nombreOc             = $_POST['nombreOc']?$_POST['nombreOc']:"";
 $proyecto             = $_POST['proyecto']?$_POST['proyecto']:"";
 $proyecto_id          = $_POST['proyecto_id']?$_POST['proyecto_id']:"";
-$proyecto_tipo          = $_POST['proyecto_tipo']?$_POST['proyecto_tipo']:"";
+$proyecto_tipo        = $_POST['proyecto_tipo']?$_POST['proyecto_tipo']:"";
 $items                = $_POST['items']?$_POST['items']:"";
 
 $dateFC = date_create(date("Y-m-d H:i:s"));
 #Extrayendo el Proveedor por su codigo AIO
 /*
 $queryProveedor = "SELECT id FROM suitecrm.sco_proveedor where prv_codaio = '".$proveedor_id."'  and deleted = 0;";
+
 $proveedorObj  = $GLOBALS['db']->query($queryProveedor, true);
 $proveedorDato = $GLOBALS['db']->fetchByAssoc($proveedorObj);
 $proveedorDato["id"];
-*/
+ */
 #Creación de la Orden de compra
 $beanOc                                                 = BeanFactory::newBean('SCO_OrdenCompra');
 $beanOc->name                                           = "OC_".$nombre;
@@ -103,13 +104,13 @@ $idOc = $beanOc->id;
 $cantidadItems = 0;
 foreach ($items as $key => $value) {
 	$cantidadItems++;
-	$idItem     = $value['id'];
-	$subtotal   = $value['pcv_cantidadconsolidado'] * $value['pcv_preciofob'];
-	if($cantidadItems < count($items)){
-		$arrayItems .= '["'.$value['name'].'","'.$value['pcv_descripcion'].'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","'.$proyecto.'","'.$value['sco_productoscompras_id_c'].'","'.$proyecto_id.'","'.$proyecto_tipo.'","'.$value['name'].'"],';	
-	}else{
-		$arrayItems .= '["'.$value['name'].'","'.$value['pcv_descripcion'].'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","'.$proyecto.'","'.$value['sco_productoscompras_id_c'].'","'.$proyecto_id.'","'.$proyecto_tipo.'","'.$value['name'].'"]';	
-	}		
+	$idItem   = $value['id'];
+	$subtotal = $value['pcv_cantidadconsolidado']*$value['pcv_preciofob'];
+	if ($cantidadItems < count($items)) {
+		$arrayItems .= '["'.$value['name'].'","'.$value['pcv_descripcion'].'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","'.$proyecto.'","'.$value['sco_productoscompras_id_c'].'","'.$proyecto_id.'","'.$proyecto_tipo.'","'.$value['name'].'"],';
+	} else {
+		$arrayItems .= '["'.$value['name'].'","'.$value['pcv_descripcion'].'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","'.$proyecto.'","'.$value['sco_productoscompras_id_c'].'","'.$proyecto_id.'","'.$proyecto_tipo.'","'.$value['name'].'"]';
+	}
 }
 $arrayItemsTotal = '['.$arrayItems.']|'.$precioTotalFob.',0,0,'.$precioTotalFob.'|'.$idOc;
 

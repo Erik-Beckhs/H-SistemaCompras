@@ -7,12 +7,13 @@ class SCO_OrdenCompraViewBackorder extends ViewHtml {
 		global $current_user, $db, $current_language, $mod_strings;
 		$head = '
 				<link rel="stylesheet" href="modules/SCO_OrdenCompra/BackOrder/backorder.css?'.time().'" type="text/css" />
+				<link href="modules/SCO_Consolidacion/css-loader.css?'.time().'" rel="stylesheet" type="text/css" />  
 	   			';
 		$head .= '
 				<div class="moduleTitle">
 				<h2 class="module-title-text"> Reporte BackOrder </h2>
 				<span class="utils"></span><div class="clear"></div></div>
-				<div class="loader loader-default" data-text="Enviando datos"></div>
+				<div class="loader loader-default" data-text="Cargando"></div>
 				';
 		$js = '
 				<script src="modules/SCO_OrdenCompra/BackOrder/backorder.js?'.time().'"></script>
@@ -35,7 +36,7 @@ class SCO_OrdenCompraViewBackorder extends ViewHtml {
 					 		<input type="text" class="form-control" id="datepicker2">
 						</div>
 					</div>								
-					<div class="col-sm-3">
+					<!--div class="col-sm-3">
 						<div class="input-group">
 							<div class="input-group">
 								<span class="input-group-addon">Cod. proveedor :</span>
@@ -55,7 +56,7 @@ class SCO_OrdenCompraViewBackorder extends ViewHtml {
 								</select>
 							</div>
 						</div>
-					</div>
+					</div-->
 				</div>
 				</br>
 				<div class="row">
@@ -63,6 +64,7 @@ class SCO_OrdenCompraViewBackorder extends ViewHtml {
 						<table class="list view table-responsive tableCotizacion table-striped">
 							<thead>
 								<tr>
+									<th>#</th>
 									<th>Codigo Proveedor</th>
 									<th>Codigo AIO</th>
 									<th>Descripci&oacute;n</th>
@@ -74,7 +76,7 @@ class SCO_OrdenCompraViewBackorder extends ViewHtml {
 									<th>Consolidado</th>
 								</tr>
 							</thead>
-							<tbody id="tabla1">
+							<tbody id="tablaBackOrder">
 							</tbody>
 						</table>
 					</div>
