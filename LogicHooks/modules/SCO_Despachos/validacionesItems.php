@@ -83,6 +83,7 @@
 
     $('#productosDespacho2').jexcel({
         data:data2,
+        colHeaders: ['Producto','Descripcion', 'Observacion','Cantidad', 'Prec Uni','Sub toal'],
         colWidths: [ 140, 150, 60, 70, 80, 80],
         columns: [
             {type: 'text'},
