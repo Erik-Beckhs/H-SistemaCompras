@@ -17,7 +17,7 @@ $(document).ready(function(){
 		fecha_hasta = fecha_hasta.split("/");
 		fecha_hasta = fecha_hasta[2]+"-"+fecha_hasta[0]+"-"+fecha_hasta[1];
 
-		alert(fecha_desde+" == "+fecha_hasta);
+		alert("LAS FECHAS SON: "+fecha_desde+" == "+fecha_hasta);
 		$.ajax({
 	    type: 'POST',
 	    url: 'index.php?to_pdf=true&module=SCO_OrdenCompra&action=backorderdata',
