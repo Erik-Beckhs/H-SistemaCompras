@@ -77,10 +77,10 @@ class Clproddes
     $query = "SELECT * FROM sco_productos_co WHERE pro_idco = '".$idoc."' AND deleted = 0; ";
     $obj = $GLOBALS['db']->query($query, true);
     //Condicion, la cantidad de productos menos la cantidad total de productos despachos sea dif de 0
-    if(($row_total_cant['cantidad_pr'] - $row_pro['total_cantidad']) != 0)
+    if(($row_total_cant['cantidad_pr'] - $row_pro['total_cantidad']) > 0)
     {
       while($row = $GLOBALS['db']->fetchByAssoc($obj)){
-        if($row["pro_saldos"] != 0 || $row["pro_canttrans"] == 0){
+        if($row["pro_saldos"] > 0 || $row["pro_canttrans"] == 0){
             //Operacion, resta de cantidad del producto con la cantidad en transito
             $cant_new = $row["pro_saldos"] + $row["pro_canttrans"];
             $cant_new = abs($cant_new);
