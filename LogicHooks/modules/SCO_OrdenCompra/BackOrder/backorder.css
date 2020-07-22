@@ -1,0 +1,10 @@
+.modal-dialog{
+	margin-top:5%;
+	width: 70%;
+}
+.modal-body {
+    padding: 20px 40px 10px 40px;
+}
+.tablaProductos{
+	background: #ccc;
+}

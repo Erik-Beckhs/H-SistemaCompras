@@ -47,7 +47,8 @@ switch ($filtro) {
 						pro_descpor,
 						pro_saldos
 						FROM suitecrm.sco_productos_co
-						WHERE pro_idco = '".$idco."';";
+						WHERE pro_idco = '".$idco."'
+						AND pro_saldos > 0;";
 		    $results = $GLOBALS['db']->query($query, true);
 		    $objectPro= array();
 		    while($row = $GLOBALS['db']->fetchByAssoc($results))
