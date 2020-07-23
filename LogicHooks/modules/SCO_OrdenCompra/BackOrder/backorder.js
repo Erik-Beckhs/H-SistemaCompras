@@ -1,4 +1,35 @@
 $(document).ready(function(){
+	var usuarioNombre = $("#usuarioNombre").val();
+	var usuarioDivision = $("#usuarioDivision").val();
+	var usuarioAmercado = $("#usuarioAmercado").val();
+	var usuarioRol = $("#usuarioRol").val();
+	$("#division").val(usuarioDivision);
+	$("#aMercado").val(usuarioAmercado);
+	console.log(usuarioNombre+usuarioDivision+usuarioAmercado+usuarioRol);
+	//Fltro, filtra los datos de la division junto a area de mercado
+	if(usuarioDivision != 00){      
+		$('.am').hide();
+		$('.'+usuarioDivision+'').show();
+	}
+	$("#division").change(function() {  
+		$('.am').show();   
+		if ($(this).data('options') === undefined) {    
+		  $(this).data('options', $('#aMercado option').clone());
+		}
+		var id = $(this).val();  
+		var options = $(this).data('options').filter('.'+id+'');      
+		$('#aMercado').html(options);
+		$('#aMercado').append('<option value="00" selected="selected">Todo</option>');    
+	});
+	$("#aMercado").on("change", function(){
+		console.log($("#divCompra").val(),$("#estadoDiv").val(),$("#estadoEmbarque").val(),$("#rol").val(),$("#aMercado").val());
+	});
+
+	$("#division").on("change", function(){              
+		console.log($("#divCompra").val(),$("#estadoDiv").val(),$("#estadoEmbarque").val(),$("#rol").val(),'00');
+	});
+
+	//Filtro, filtra el rango de fechas
 	$('#datepicker').datepicker(); 
 	$('#datepicker2').datepicker();
 
@@ -6,18 +37,18 @@ $(document).ready(function(){
 		var fecha_desde = $("#datepicker").val();
 		var fecha_hasta = $("#datepicker2").val();
 	  if (event.keyCode === 13) {
-	    getData(fecha_desde,fecha_hasta);
+	    getData(fecha_desde,fecha_hasta,$("#division").val(),$("#aMercado").val());
 	  }
 	});
 
-	function getData(fecha_desde,fecha_hasta){
+	function getData(fecha_desde,fecha_hasta,usuarioDivision,usuarioAmercado){
 		fecha_desde = fecha_desde.split("/");
 		fecha_desde = fecha_desde[2]+"-"+fecha_desde[0]+"-"+fecha_desde[1];
 
 		fecha_hasta = fecha_hasta.split("/");
 		fecha_hasta = fecha_hasta[2]+"-"+fecha_hasta[0]+"-"+fecha_hasta[1];
 
-		alert("LAS FECHAS SON: "+fecha_desde+" == "+fecha_hasta);
+		console.log("Rango fechas: "+fecha_desde+", "+fecha_hasta + ", Division: "+ usuarioDivision +", Amercado: "+ usuarioAmercado);
 		$.ajax({
 	    type: 'POST',
 	    url: 'index.php?to_pdf=true&module=SCO_OrdenCompra&action=backorderdata',
@@ -26,6 +57,8 @@ $(document).ready(function(){
 	    	filtro: 1,
 	      	fecha_desde: fecha_desde,
 	      	fecha_hasta: fecha_hasta,
+	      	division: usuarioDivision,
+	      	aMercado: usuarioAmercado,
 	    },
 	    beforeSend:function(){
             $(".loader").addClass("is-active");
@@ -49,23 +82,24 @@ function vistaTabla(res){
 	console.log(res.length);
 	if(res.length > 0){
 		res.forEach(function(elemento,indice,array){
-	  		console.log("valor : " + elemento.nombrepro);
-			html += '<tr id="item1_' + elemento.nombrepro + '" >';
+			html += '<tr id="item">';
 			html += '<td>' + numeracion + '</td>';
 			html += '<td><a href="index.php?module=SCO_OrdenCompra&action=DetailView&record='+elemento.id+'" target="_blank" style="text-decoration: underline;">'+elemento.nombrecompra+'</a></td>';
 			html += '<td><b>' + elemento.orc_fechaord + '</b></td>';
 			html += '<td>' + elemento.orc_nomcorto + '</td>';
+			html += '<td>' + elemento.orc_estado + '</td>';
 			html += '<td>' + elemento.orc_tipoo + '</td>';
 			html += '<td>' + elemento.orc_tipo + '</td>';
 			html += '<td>' + elemento.totalSaldo + '</td>';		
-			html += '<td>' + elemento.subtotal + '</td>';		
-			html += '<td onclick=getProductos("'+elemento.id+'")> <button type="button" class="btn btn-info btn-sm">Productos <span class="badge badge-light">' + elemento.totalSaldo + '</span></button></td>';
+			html += '<td>' + parseFloat(elemento.subtotal) + '</td>';		
+			html += '<td onclick=getProductos("'+elemento.id+'")><button type="button" class="btn btn-custom btn-info btn-sm">Productos <span class="badge badge-light badge-custom">' + elemento.totalSaldo + '</span></button></td>';
 			html += '</tr>';
 			numeracion++;
 	  	});
 	}else{
 		html += '<tr>';
-		html += '<td><span class="label label-warning" style="color:#FFF;">No se encontraron datos...</span></td>';
+		html += '<td></td>';
+		html += '<td><span class="label label-default badge-cerror" style="color:#FFF;">No se encontraron datos...</span></td>';
 		html += '</tr>';
 	}
   	$('#tablaBackOrder').html(html);
@@ -105,11 +139,11 @@ function ventanaModalProductos(res){
 	    html += '        <div class="modal-content">';
 	    html += '            <div class="modal-header">';
 	    html += '                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
-	    html += '                <h4 class="modal-title">Guardar registros</h4>';
+	    html += '                <h4 class="modal-title">Lista de productos</h4>';
 	    html += '            </div>';
 	    html += '            <div class="modal-body">';
-	    html += '                <div class="panel panel-info">';
-    	html += '                    <div class="panel-heading">Consolidacion</div>';
+	    html += '                <div class="panel panel-success">';
+    	html += '                    <div class="panel-heading">Productos de la Orden de Compra</div>';
     	html += '                    <div class="panel-body">';
 	    html += '						<table class="list view table-responsive tablaProductos table-striped">';
 		html += '						<thead>';
@@ -128,11 +162,11 @@ function ventanaModalProductos(res){
 		res.forEach(function(elemento,indice,array){
 	    html += '							<tr id="item1_' + elemento.pro_nombre + '" >';
 		html += '								<td>' + numeracion + '</td>';
-		html += '								<td><b>' + elemento.pro_nombre + '</b></td>';
+		html += '								<td><b class="text-info">' + elemento.pro_nombre + '</b></td>';
 		html += '								<td>' + elemento.pro_descripcion + '</td>';
 		html += '								<td>' + elemento.pro_unidad + '</td>';
 		html += '								<td>' + elemento.pro_cantidad + '</td>';
-		html += '								<td>' + elemento.pro_preciounid + '</td>';		
+		html += '								<td><span class="text-success">' + elemento.pro_preciounid + '</span></td>';		
 		html += '								<td>' + elemento.pro_saldos + '</td>';		
 		html += '							</tr>';
 		numeracion++;

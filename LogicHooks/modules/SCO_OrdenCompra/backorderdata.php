@@ -15,15 +15,21 @@ global $current_user;
 $fecha_desde = $_POST['fecha_desde'];
 $fecha_hasta = $_POST['fecha_hasta'];
 $division = $_POST['division'];
+$aMercado = $_POST['aMercado'];
 $idco = $_POST['idco'];
 $filtro = $_POST['filtro'];
-
+if ($aMercado == '00') {
+	$aMercado = '';
+}
+if ($division == '00') {
+	$division = '';
+}
 $idDiv = $current_user->iddivision_c;
 
 switch ($filtro) {
 	case 1:
 		try {
-		    $query = "call suitecrm.sp_consolidacion_backorder('$fecha_desde','$fecha_hasta','$division','');";
+		    $query = "call suitecrm.sp_consolidacion_backorder('$fecha_desde','$fecha_hasta','$division','$aMercado');";
 		    $results = $GLOBALS['db']->query($query, true);
 		    $object= array();
 		    while($row = $GLOBALS['db']->fetchByAssoc($results))

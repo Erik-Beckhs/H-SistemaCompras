@@ -10,14 +10,22 @@ oc.id,
 oc.name as nombrecompra,
 oc.orc_fechaord,
 case oc.orc_tipo 
-when '1' then 'Compra' 
-when '2' then 'Servicio'  
+	when '1' then 'Compra' 
+	when '2' then 'Servicio'  
 end as orc_tipo,
 case oc.orc_tipoo 
-when '1' then 'Local' 
-when '2' then 'Internacional'  
+	when '1' then 'Local' 
+	when '2' then 'Internacional'  
 end as orc_tipoo,
 oc.orc_nomcorto,
+case oc.orc_estado 
+	when '1' then 'En Curso' 
+	when '2' then 'Borrador' 
+	when '3' then 'Solicitar Aprobacion' 
+	when '4' then 'Aprobado' 
+	when '5' then 'Anulado' 
+	when '6' then 'Cerrado'  
+end as orc_estado,
 SUM(p.pro_saldos) as totalSaldo,
 SUM(p.pro_subtotal) as subtotal
 FROM suitecrm.sco_ordencompra as oc
