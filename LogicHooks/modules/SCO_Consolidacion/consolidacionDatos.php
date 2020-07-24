@@ -134,7 +134,7 @@ $beanConsolidacion->con_descripcion                                      = $desc
 $beanConsolidacion->con_estado                                           = 0;
 $beanConsolidacion->date_entered                                         = date_format($dateFC, 'Y-m-d H:i:s');
 $beanConsolidacion->con_cantitems                                        = $cantidadTotal;
-$beanConsolidacion->sco_consolidacion_sco_proveedorsco_proveedor_ida     = '90b9e6e9-828b-0a13-a68d-5bcdffba815e';
+$beanConsolidacion->sco_consolidacion_sco_proveedorsco_proveedor_ida     = $proveedor_id;
 $beanConsolidacion->sco_consolidacion_sco_ordencomprasco_ordencompra_idb = $idOc;
 $beanConsolidacion->con_preciototal                                      = $precioTotalFob;
 $beanConsolidacion->save();
