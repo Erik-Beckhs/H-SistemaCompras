@@ -57,6 +57,7 @@ function openProyectoPopup(){
         "field_to_name_array": {
             "id": "proyecto_id",
             "name": "proyecto",
+            "proyc_tipo": "proyecto_tipo",
         }
     };
     open_popup('SCO_ProyectosCO', 600, 400, '&proyc_division_advanced[]='+div, true, false, popupRequestData, true);
@@ -233,9 +234,16 @@ function vista(){
     html += '                                <div class="form-group">';
     html += '                                    <div class="col-sm-4 " >Proyecto: <span class="required">*</span></div>';
     html += '                                    <div class="col-sm-6 " >';
-    html += '                                       <input type="text" id="proyecto" name="proyecto" class="desabilidato">';
-    html += '                                       <input type="hidden" name="proyecto_id" id="proyecto_id" size="20" maxlength="50" >';
-    html += '                                       <button class="btn-success btn-sm cons-btn"  title="Seleccionar" accesskey="T" type="button" tabindex="116"  onclick="openProyectoPopup();"><img src="themes/default/images/id-ff-select.png" alt="Seleccionar"></button>';
+    html += '                                       <div class="row">';
+    html += '                                           <div class="col-sm-8 ">';
+    html += '                                               <input type="text" id="proyecto" name="proyecto" class="desabilidato">';
+    html += '                                           </div>';
+    html += '                                           <div class="col-sm-4 ">';
+    html += '                                               <input type="text" id="proyecto_tipo" name="proyecto_tipo" class="desabilidato">';
+    html += '                                               <input type="hidden" name="proyecto_id" id="proyecto_id" size="20" maxlength="50" >';
+    html += '                                               <button class="btn-success btn-sm cons-btn"  title="Seleccionar" accesskey="T" type="button" tabindex="116"  onclick="openProyectoPopup();"><img src="themes/default/images/id-ff-select.png" alt="Seleccionar"></button>';
+    html += '                                           </div>';
+    html += '                                       </div>';    
     html += '                                    </div>';  
     html += '                                </div>';    
     html += '                            </div>';
@@ -499,8 +507,8 @@ function envioDeDatos(jsonDatos){
             var id = e;
             $(".loader").removeClass("is-active");
             $("#modalConfirmacion").modal("hide"); 
-            alert("Se redireccionara a su vista creada"+id);
-            //$(location).attr("href","index.php?module=SCO_Consolidacion&action=DetailView&record="+id);
+            alert("Se redireccionara a su Consolidación");
+            $(location).attr("href","index.php?module=SCO_Consolidacion&action=DetailView&record="+id);
         },
         error: function(data) {
             $(".loader").removeClass("is-active");

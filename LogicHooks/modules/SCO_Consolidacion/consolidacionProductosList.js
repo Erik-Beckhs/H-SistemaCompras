@@ -9,7 +9,7 @@ var proveedores = [];
 $(document).ready(function () {
   $.ajax({
     type: 'POST',
-    url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesList',
+    url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesLista',
     datatype: 'json',
     data: {
       filtro: "fabricante"
@@ -48,7 +48,7 @@ function buscarPorCotizacion() {
   if (nroCotizacion != '') {
     $.ajax({
       type: 'POST',
-      url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesList',
+      url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesLista',
       datatype: 'json',
       data: {
         pcv_numerocotizacion: nroCotizacion,
@@ -78,7 +78,7 @@ function buscarcodaio() {
   if (nroCotizacion != '') {
     $.ajax({
       type: 'POST',
-      url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesList',
+      url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesLista',
       datatype: 'json',
       data: {
         nroCotizacion: nroCotizacion,
@@ -107,7 +107,7 @@ function buscarClientes() {
   if (nroCotizacion != '') {
     $.ajax({
       type: 'POST',
-      url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesList',
+      url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesLista',
       datatype: 'json',
       data: {
         nroCotizacion: nroCotizacion,
@@ -153,7 +153,7 @@ function buscarPlazoEntrega() {
   if (nroCotizacion != '') {
     $.ajax({
       type: 'POST',
-      url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesList',
+      url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesLista',
       datatype: 'json',
       data: {
         nroCotizacion: nroCotizacion,
@@ -182,7 +182,7 @@ $('#idFabricante').on('change', function () {
   if (nroCotizacion != '') {
     $.ajax({
       type: 'POST',
-      url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesList',
+      url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesLista',
       datatype: 'json',
       data: {
         nroCotizacion: nroCotizacion,
@@ -232,7 +232,7 @@ var mostrarTabla1 = function () {
   var fob1 = 0;
   $.ajax({
     type: 'POST',
-    url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesList',
+    url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesLista',
     datatype: 'json',
     data: {
       nroCotizacion: nroCotizacion,

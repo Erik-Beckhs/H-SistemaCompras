@@ -1,0 +1,38 @@
+.modal-dialog{
+	margin-top:5%;
+	width: 70%;
+}
+.modal-body {
+    padding: 20px 40px 10px 40px;
+}
+.tablaProductos{
+	background: #ccc;
+}
+.btn-custom{
+	padding: 0px 10px;
+}
+.badge-custom{
+	padding: 2px 7px;
+}
+.badge-cerror{
+	background: #dc3545;
+}
+.badge-cinfo{
+	background: #17a2b8;
+}
+.badge-csuccess{
+	background: #28a745;
+}
+
+a:link {
+    text-decoration: none;
+}
+.table-responsive.list>tbody>tr>td>a {
+	text-decoration: none !important;
+}
+.custom-input{
+	height: 28px;
+}
+/*div#ui-datepicker-div {
+    margin-top: 145px;
+}*/
