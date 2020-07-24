@@ -82,7 +82,7 @@ class SCO_OrdenCompraViewBackorder extends ViewHtml {
                             </div>
 						</div>
 					</div>
-					<div class="col-sm-2">
+					<div class="col-sm-1">
 					</div>
 					<div class="col-sm-2">
 						<div class="input-group">	
@@ -96,6 +96,11 @@ class SCO_OrdenCompraViewBackorder extends ViewHtml {
 					 		<input type="text" class="form-control custom-input" id="datepicker2">
 						</div>
 					</div>
+					<div class="col-sm-1">
+						<button type="button" class="btn btn-sm btn-info" id="buscarBackOrder">
+							<i class="glyphicon glyphicon-search"></i>
+						</button>
+					</div>					
 				</div>
 				</br>
 				<div class="row">

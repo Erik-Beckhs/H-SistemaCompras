@@ -27,7 +27,8 @@ case oc.orc_estado
 	when '6' then 'Cerrado'  
 end as orc_estado,
 SUM(p.pro_saldos) as totalSaldo,
-SUM(p.pro_subtotal) as subtotal
+SUM(p.pro_subtotal) as subtotal,
+COUNT(p.id) as cantidadRegistro
 FROM suitecrm.sco_ordencompra as oc
 INNER JOIN suitecrm.sco_productos_co as p
 ON oc.id = p.pro_idco

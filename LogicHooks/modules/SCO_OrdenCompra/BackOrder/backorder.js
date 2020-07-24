@@ -40,7 +40,13 @@ $(document).ready(function(){
 	    getData(fecha_desde,fecha_hasta,$("#division").val(),$("#aMercado").val());
 	  }
 	});
+	$("#buscarBackOrder").on("click", function(event){
+		var fecha_desde = $("#datepicker").val();
+		var fecha_hasta = $("#datepicker2").val();
+		getData(fecha_desde,fecha_hasta,$("#division").val(),$("#aMercado").val());
+	});
 
+	
 	function getData(fecha_desde,fecha_hasta,usuarioDivision,usuarioAmercado){
 		fecha_desde = fecha_desde.split("/");
 		fecha_desde = fecha_desde[2]+"-"+fecha_desde[0]+"-"+fecha_desde[1];
@@ -76,6 +82,8 @@ $(document).ready(function(){
 
 }); 
 
+
+
 function vistaTabla(res){
 	var html = '';
 	var numeracion = 1;
@@ -92,7 +100,7 @@ function vistaTabla(res){
 			html += '<td>' + elemento.orc_tipo + '</td>';
 			html += '<td>' + elemento.totalSaldo + '</td>';		
 			html += '<td>' + parseFloat(elemento.subtotal) + '</td>';		
-			html += '<td onclick=getProductos("'+elemento.id+'")><button type="button" class="btn btn-custom btn-info btn-sm">Productos <span class="badge badge-light badge-custom">' + elemento.totalSaldo + '</span></button></td>';
+			html += '<td onclick=getProductos("'+elemento.id+'")><button type="button" class="btn btn-custom btn-info btn-sm">Productos <span class="badge badge-light badge-custom">' + elemento.cantidadRegistro + '</span></button></td>';
 			html += '</tr>';
 			numeracion++;
 	  	});

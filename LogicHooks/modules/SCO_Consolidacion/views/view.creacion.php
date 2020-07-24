@@ -62,7 +62,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 												</div>
 											</div>
 											<div class="buscador">
-												<button class="btn btn-primary form-control" onclick="buscar()">
+												<button class="btn btn-info btn-sm" onclick="buscar()">
 													<i class="glyphicon glyphicon-search"></i>
 												</button>
 											</div>											
