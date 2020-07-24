@@ -23,7 +23,7 @@
                 <div class="row">
                     <center>
                         <button class="btn btn-xs btn-danger">Cancelar</button>
-                        <button class="btn btn-success btn-xs">Validar</button>
+                        <button class="btn btn-success btn-xs" onclick="validarItems()">Validar</button>
                     </center>
                 </div>
             </div>
@@ -40,6 +40,12 @@
         margin-top: -34.5px;
         z-index: 1000;
         position: relative;
+    }
+    .encontrado{
+        background-color: greenyellow;
+    }
+    .noEncontrado{
+        background-color: red;
     }
 </style>
 <script>
@@ -58,21 +64,26 @@
             success: function(productos) {
                 console.log(productos);
                 var data = [];
+                var numeracion = 0;
                 for (var i = 0; i < productos.length; i++) {
-                    data[i] = [productos[i]["name"],productos[i]["prdes_descripcion"],'',productos[i]["prdes_cantidad"],productos[i]["punitario"],(productos[i]["prdes_cantidad"] * 1 * productos[i]["punitario"]).toFixed(2)]
+                    if (productos[i]["prdes_numeracion"] == null) {
+                        numeracion = i * 1 + 1;
+                    }else{numeracion = productos[i]["prdes_numeracion"];}
+                    data[i] = [numeracion,productos[i]["name"],productos[i]["prdes_descripcion"],'',productos[i]["prdes_cantidad"],productos[i]["punitario"],(productos[i]["prdes_cantidad"] * 1 * productos[i]["punitario"]).toFixed(2),productos[i]["idPro"]]
                 }
-                console.log(data);
                 $('#productosDespacho1').jexcel({
                     data:data,
-                    colHeaders: ['Producto','Descripcion', 'Observacion','Cantidad', 'Prec Uni','Sub toal'],
-                    colWidths: [ 140, 150, 60, 70, 80, 80],
+                    colHeaders: ['#','Producto','Descripcion', 'Observacion','Cantidad', 'Prec Uni','Sub toal','idProducto'],
+                    colWidths: [20,140, 150, 60, 70, 80, 80],
                     columns: [
                         {type: 'text'},
                         {type: 'text'},
                         {type: 'text'},
                         {type: 'text'},
                         {type: 'text'},
-                        {type: 'text'}
+                        {type: 'text'},
+                        {type: 'text'},
+                        {type: 'hidden'},
                     ]
                 });
             }
@@ -94,5 +105,35 @@
             {type: 'text'}
         ]
     });
-
+    function validarItems() {
+        var data1 = $('#productosDespacho1').jexcel('getData');
+        var data2 = $('#productosDespacho2').jexcel('getData');
+        var arrayOrden = [];
+        for (let index = 0; index < data2.length; index++) {
+            for (let i = 0; i < data1.length; i++) {
+                if (data1[i][1]==data2[index][0]) {
+                    arrayOrden[index]= data1[i];
+                    arrayOrden[index][0] == index + 1;
+                    arrayOrden[index][7] == data1[i][7];
+                    $('#productosDespacho1 #row-'+i).css( "background-color", "greenyellow" );
+                    $('#productosDespacho2 #row-'+index).css( "background-color", "greenyellow" );
+                }
+            }
+        }
+        $('#productosDespacho1').jexcel({
+                    data:arrayOrden,
+                    colHeaders: ['#','Producto','Descripcion', 'Observacion','Cantidad', 'Prec Uni','Sub toal','idProducto'],
+                    colWidths: [20,140, 150, 60, 70, 80, 80],
+                    columns: [
+                        {type: 'text'},
+                        {type: 'text'},
+                        {type: 'text'},
+                        {type: 'text'},
+                        {type: 'text'},
+                        {type: 'text'},
+                        {type: 'text'},
+                        {type: 'hidden'},
+                    ]
+                });
+    }
 </script>
