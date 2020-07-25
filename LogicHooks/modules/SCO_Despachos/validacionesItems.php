@@ -3,7 +3,7 @@
 
 <!-- MODAL VALIDACIONES -->
 <div class="modal fade" id="modalValProd" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-    <div class="modal-dialog" style="width: 75% !important;">
+    <div class="modal-dialog" style="width: 93% !important;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -46,6 +46,9 @@
     }
     .noEncontrado{
         background-color: red;
+    }
+    .modal {
+        margin-top: 3%;
     }
 </style>
 <script>

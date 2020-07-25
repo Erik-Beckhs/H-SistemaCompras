@@ -57,7 +57,7 @@ class SCO_OrdenCompraViewBackorder extends ViewHtml {
 			<input id="usuarioDivision" type="hidden" value="'.$usuarioDivision.'" disabled>
 			<input id="usuarioAmercado" type="hidden" value="'.$usuarioAmercado.'" disabled>
 			<input id="usuarioRol" type="hidden" value="'.$usuarioRol.'" disabled>
-			<div id="ventanaModal"></div>	
+				
 			<div class="container-fluid">
 				<div class="row filtro">													
 					<div class="col-sm-3">
@@ -104,7 +104,8 @@ class SCO_OrdenCompraViewBackorder extends ViewHtml {
 				</div>
 				</br>
 				<div class="row">
-					<div class="col-md-12 table-responsive">					
+					<div class="col-md-12 table-responsive">		
+						<div id="ventanaModal"></div>			
 						<table class="list view table-responsive tableCotizacion table-striped">
 							<thead>
 								<tr>
@@ -115,8 +116,9 @@ class SCO_OrdenCompraViewBackorder extends ViewHtml {
 									<th>Estado</th>
 									<th>Tipo origen</th>
 									<th>Tipo</th>
-									<th>Total saldo</th>
-									<th>Precio subtotal</th>									
+									<th>Total saldo Items</th>
+									<th>Precio subtotal</th>	
+									<th>Tipo moneda</th>								
 									<th>Items</th>
 								</tr>
 							</thead>

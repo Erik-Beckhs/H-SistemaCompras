@@ -477,10 +477,10 @@ function ventanaModal(jsonDatos){
     html += '            <div class="modal-footer">';
     html += '            <div class="row">';
     html += '               <div class="col-sm-6">';
-    html += '                   <button type="button" class="btn-sm btn-danger" data-dismiss="modal">Cancelar</button>';
+    html += '                   <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancelar</button>';
     html += '               </div>';
     html += '               <div class="col-sm-6">';
-    html += '                   <button type="button" class="btn-sm btn-primary" onclick=envioDeDatos(jsonDatos);>Confirmar y Guardar</button>';
+    html += '                   <button type="button" class="btn btn-sm btn-verde" onclick=envioDeDatos(jsonDatos);>Confirmar y Guardar</button>';
     html += '               </div>';
     html += '            </div>';
     html += '        </div>';

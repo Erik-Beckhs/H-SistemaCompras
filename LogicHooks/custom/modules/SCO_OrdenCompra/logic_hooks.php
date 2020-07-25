@@ -1,7 +1,7 @@
 <?php
 // Do not store anything in this file that is not part of the array or the hook version.  This file will	
 // be automatically rebuilt in the future. 
- $hook_version = 1; 
+ $hook_version =11; 
 $hook_array = Array(); 
 // position, file, function 
 $hook_array['after_save'] = Array(); 
@@ -9,7 +9,7 @@ $hook_array['after_save'][] = Array(1, 'datosOrdenCompra', 'custom/modules/SCO_O
 $hook_array['after_save'][] = Array(2, 'datosContactos', 'custom/modules/SCO_OrdenCompra/datosco.php','Cldatosco', 'Fndatosco'); 
 $hook_array['after_save'][] = Array(3, 'datosAprobadores', 'custom/modules/SCO_OrdenCompra/datosap.php','Cldatosap', 'Fndatosap'); 
 $hook_array['after_save'][] = Array(4, 'contactosAprobadores', 'custom/modules/SCO_OrdenCompra/contap.php','Clcontap', 'Fncontap'); 
-$hook_array['after_save'][] = Array(4, 'notificacionAprobadores', 'custom/modules/SCO_OrdenCompra/Notifica.php','Clnotifica', 'Fnnotifica'); 
+#$hook_array['after_save'][] = Array(4, 'notificacionAprobadores', 'custom/modules/SCO_OrdenCompra/Notifica.php','Clnotifica', 'Fnnotifica'); 
 $hook_array['before_save'] = Array(); 
 $hook_array['before_save'][] = Array(1, 'clonarOrdenCompraModulos', 'custom/modules/SCO_OrdenCompra/clonar.php','Clclonar', 'Fnclonar'); 
 $hook_array['after_ui_frame'] = Array(); 

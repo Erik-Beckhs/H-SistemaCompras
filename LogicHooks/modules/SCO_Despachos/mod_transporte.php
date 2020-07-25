@@ -115,7 +115,8 @@ require_once('include/entryPoint.php');
 									where pro.pro_nombre = prds.name and
 												ds.id = '$idDespacho' and
 												oc.id = pro.pro_idco and
-												pro.pro_descripcion = prds.prdes_descripcion";
+												pro.pro_descripcion = prds.prdes_descripcion
+												and prds.deleted = 0";
 	      $productos = array();
 	  		$obj = $GLOBALS['db']->query($query, true);
   			while($row2 = $GLOBALS['db']->fetchByAssoc($obj)){

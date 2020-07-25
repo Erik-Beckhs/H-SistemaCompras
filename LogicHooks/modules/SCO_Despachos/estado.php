@@ -56,7 +56,7 @@ switch ($est) {
                 $bean_oc->orc_estado = 6;
                 $bean_oc->save();
             }
-            $notificaciones->FnnotificaDespacho($bean_des,$est,$cantidadProductos);
+            #$notificaciones->FnnotificaDespacho($bean_des,$est,$cantidadProductos);
 			echo json_encode($est);
 		}else{
 			echo json_encode('9');
@@ -64,7 +64,7 @@ switch ($est) {
 		break;
 		default:
 			$bean_des = BeanFactory::getBean('SCO_Despachos',$id);
-			$notificaciones->FnnotificaDespacho($bean_des,$est,$cantidadProductos);
+			#$notificaciones->FnnotificaDespacho($bean_des,$est,$cantidadProductos);
 			$despachos = "UPDATE sco_despachos SET des_est = '".$est."' WHERE id = '".$id."';";
 		    $obj_des = $GLOBALS['db']->query($despachos, true);
 			echo json_encode($est);

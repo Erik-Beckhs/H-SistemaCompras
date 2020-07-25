@@ -22,6 +22,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
     }
 
   function display(){
+    echo '<link href="modules/SCO_Consolidacion/css-loader.css?'.time().'" rel="stylesheet" type="text/css" />';
 	$sty = "<style>
  .btnCompra {
     /* padding: 10px !important; */
@@ -153,8 +154,10 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
   					//alert('Procesando los datos');
   					$('#btn-estados').css('pointer-events','none');
   					$('#btn-estados').css('background','#CCC');
+            $('.loader').addClass('is-active');
   				},
   	 			success: function(data) {
+            $('.loader').removeClass('is-active');
   	 				data = data.replace('$','');
   	 				var desctot = $.parseJSON(data);
               	desctot = desctot.split('~');

@@ -9,6 +9,7 @@ SELECT
 oc.id,
 oc.name as nombrecompra,
 oc.orc_fechaord,
+oc.orc_tcmoneda,
 case oc.orc_tipo 
 	when '1' then 'Compra' 
 	when '2' then 'Servicio'  

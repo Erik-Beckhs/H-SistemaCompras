@@ -13,9 +13,10 @@ textarea{
 	width: -webkit-fill-available;	
 }
 .btn-danger{
-	background: #ff5757;
+	background: #dc3545;
 	width: 100%;
     height: 29px;
+    border: 1px solid #dc3545;
 }
 .btn-danger:active,
 .btn-danger:hover{
@@ -35,6 +36,11 @@ textarea{
 .btn-primary{
 	background: #378cbe;
 	width: 100%;
+}
+#modalConfirmacion button.btn.btn-sm.btn-verde {
+    background: #28a745;
+    color: #fff;
+    width: 100%;
 }
 
 
@@ -113,7 +119,7 @@ input[type=text] .error{
 }
 
 .sw-theme-default > .nav .nav-link.active{
-	background: #ecfdff;
+	background: #D7F7FB;
 }
 
 #smartwizard{

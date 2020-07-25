@@ -40,6 +40,13 @@ $(document).ready(function(){
 	    getData(fecha_desde,fecha_hasta,$("#division").val(),$("#aMercado").val());
 	  }
 	});
+	$("#datepicker").on('keyup', function (event) {
+		var fecha_desde = $("#datepicker").val();
+		var fecha_hasta = $("#datepicker2").val();
+	  if (event.keyCode === 13) {
+	    getData(fecha_desde,fecha_hasta,$("#division").val(),$("#aMercado").val());
+	  }
+	});
 	$("#buscarBackOrder").on("click", function(event){
 		var fecha_desde = $("#datepicker").val();
 		var fecha_hasta = $("#datepicker2").val();
@@ -72,6 +79,7 @@ $(document).ready(function(){
 	    success: function (e) {
 	    	$(".loader").removeClass("is-active");
 	      	var res = JSON.parse(e);
+	      	console.log(res);
 	      	vistaTabla(res);	      		    
 	    },
 	    error: function (data) {
@@ -80,38 +88,39 @@ $(document).ready(function(){
 	  });
 	}
 
+	function vistaTabla(res){
+		var html = '';
+		var numeracion = 1;
+		console.log(res.length);
+		if(res.length > 0){
+			res.forEach(function(elemento,indice,array){
+				html += '<tr id="item">';
+				html += '<td>' + numeracion + '</td>';
+				html += '<td><a href="index.php?module=SCO_OrdenCompra&action=DetailView&record='+elemento.id+'" target="_blank" style="text-decoration: underline;">'+elemento.nombrecompra+'</a></td>';
+				html += '<td><b>' + elemento.orc_fechaord + '</b></td>';
+				html += '<td>' + elemento.orc_nomcorto + '</td>';
+				html += '<td>' + elemento.orc_estado + '</td>';
+				html += '<td>' + elemento.orc_tipoo + '</td>';
+				html += '<td>' + elemento.orc_tipo + '</td>';
+				html += '<td style="color:red">' + elemento.totalSaldo + '</td>';		
+				html += '<td>' + parseFloat(elemento.subtotal).toFixed(2) + '</td>';
+				html += '<td>' + elemento.orc_tcmoneda + '</td>';			
+				html += '<td onclick=getProductos("'+elemento.id+'")><button type="button" class="btn btn-custom btn-info btn-sm">Productos <span class="badge badge-light badge-custom">' + elemento.cantidadRegistro + '</span></button></td>';
+				html += '</tr>';
+				numeracion++;
+		  	});
+		}else{
+			html += '<tr>';
+			html += '<td></td>';
+			html += '<td><span class="label label-default badge-cerror" style="color:#FFF;">No se encontraron datos...</span></td>';
+			html += '</tr>';
+		}
+	  	$('#tablaBackOrder').html(html);
+	}
+
 }); 
 
 
-
-function vistaTabla(res){
-	var html = '';
-	var numeracion = 1;
-	console.log(res.length);
-	if(res.length > 0){
-		res.forEach(function(elemento,indice,array){
-			html += '<tr id="item">';
-			html += '<td>' + numeracion + '</td>';
-			html += '<td><a href="index.php?module=SCO_OrdenCompra&action=DetailView&record='+elemento.id+'" target="_blank" style="text-decoration: underline;">'+elemento.nombrecompra+'</a></td>';
-			html += '<td><b>' + elemento.orc_fechaord + '</b></td>';
-			html += '<td>' + elemento.orc_nomcorto + '</td>';
-			html += '<td>' + elemento.orc_estado + '</td>';
-			html += '<td>' + elemento.orc_tipoo + '</td>';
-			html += '<td>' + elemento.orc_tipo + '</td>';
-			html += '<td>' + elemento.totalSaldo + '</td>';		
-			html += '<td>' + parseFloat(elemento.subtotal) + '</td>';		
-			html += '<td onclick=getProductos("'+elemento.id+'")><button type="button" class="btn btn-custom btn-info btn-sm">Productos <span class="badge badge-light badge-custom">' + elemento.cantidadRegistro + '</span></button></td>';
-			html += '</tr>';
-			numeracion++;
-	  	});
-	}else{
-		html += '<tr>';
-		html += '<td></td>';
-		html += '<td><span class="label label-default badge-cerror" style="color:#FFF;">No se encontraron datos...</span></td>';
-		html += '</tr>';
-	}
-  	$('#tablaBackOrder').html(html);
-}
 
 function getProductos(idco){
 	$.ajax({
@@ -139,57 +148,57 @@ function getProductos(idco){
 }
 
 //Estructura de la vista de la venta modal
-function ventanaModalProductos(res){  
+function ventanaModalProductos(res){
     console.log(res);
-	    var html = '';
-	    html += '<div class="modal fade" id="modalProductos">';
-	    html += '    <div class="modal-dialog">';
-	    html += '        <div class="modal-content">';
-	    html += '            <div class="modal-header">';
-	    html += '                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
-	    html += '                <h4 class="modal-title">Lista de productos</h4>';
-	    html += '            </div>';
-	    html += '            <div class="modal-body">';
-	    html += '                <div class="panel panel-success">';
-    	html += '                    <div class="panel-heading">Productos de la Orden de Compra</div>';
-    	html += '                    <div class="panel-body">';
-	    html += '						<table class="list view table-responsive tablaProductos table-striped">';
-		html += '						<thead>';
-		html += '							<tr>';
-		html += '								<th>#</th>';
-		html += '								<th>Codigo Proveedor / SAP</th>';
-		html += '								<th>Descripcion</th>';
-		html += '								<th>Unidad</th>';
-		html += '								<th>Cantidad</th>';
-		html += '								<th>Precio unidad</th>';
-		html += '								<th>saldo</th>';
-		html += '							</tr>';
-		html += '						</thead>';
-		html += '						<tbody id="tablaBackOrder">';
+	    var htmlm = '';
+	    htmlm += '<div class="modal fade" id="modalProductos">';
+	    htmlm += '    <div class="modal-dialog">';
+	    htmlm += '        <div class="modal-content">';
+	    htmlm += '            <div class="modal-header">';
+	    htmlm += '                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
+	    htmlm += '                <h4 class="modal-title">Lista de productos</h4>';
+	    htmlm += '            </div>';
+	    htmlm += '            <div class="modal-body">';
+	    htmlm += '                <div class="panel panel-success">';
+    	htmlm += '                    <div class="panel-heading">Productos de la Orden de Compra</div>';
+    	htmlm += '                    <div class="panel-body">';
+	    htmlm += '						<table class="list view table-responsive tablaProductos table-striped">';
+		htmlm += '						<thead>';
+		htmlm += '							<tr>';
+		htmlm += '								<th>#</th>';
+		htmlm += '								<th>Codigo Proveedor / SAP</th>';
+		htmlm += '								<th>Descripcion</th>';
+		htmlm += '								<th>Unidad</th>';
+		htmlm += '								<th>Cantidad</th>';
+		htmlm += '								<th>Precio unidad</th>';
+		htmlm += '								<th>saldo</th>';
+		htmlm += '							</tr>';
+		htmlm += '						</thead>';
+		htmlm += '						<tbody >';
 		var numeracion = 1;
 		res.forEach(function(elemento,indice,array){
-	    html += '							<tr id="item1_' + elemento.pro_nombre + '" >';
-		html += '								<td>' + numeracion + '</td>';
-		html += '								<td><b class="text-info">' + elemento.pro_nombre + '</b></td>';
-		html += '								<td>' + elemento.pro_descripcion + '</td>';
-		html += '								<td>' + elemento.pro_unidad + '</td>';
-		html += '								<td>' + elemento.pro_cantidad + '</td>';
-		html += '								<td><span class="text-success">' + elemento.pro_preciounid + '</span></td>';		
-		html += '								<td>' + elemento.pro_saldos + '</td>';		
-		html += '							</tr>';
+	    htmlm += '							<tr id="item1_' + elemento.pro_nombre + '" >';
+		htmlm += '								<td>' + numeracion + '</td>';
+		htmlm += '								<td><b class="text-info">' + elemento.pro_nombre + '</b></td>';
+		htmlm += '								<td>' + elemento.pro_descripcion + '</td>';
+		htmlm += '								<td>' + elemento.pro_unidad + '</td>';
+		htmlm += '								<td>' + elemento.pro_cantidad + '</td>';
+		htmlm += '								<td><span class="text-success">' + elemento.pro_preciounid + '</span></td>';		
+		htmlm += '								<td style="color:red;">' + elemento.pro_saldos + '</td>';
+		htmlm += '							</tr>';
 		numeracion++;
 		});
-		html += '						</tbody>';
-		html += '					</table>';
-		html += '					</div>';
-		html += '				</div>';
-	    html += '            </div>';
-	    html += '            <div class="modal-footer">';
-	    html += '            <div class="row">';
-	    html += '            </div>';
-	    html += '        </div>';
-	    html += '    </div>';
-	    html += '</div>';    
+		htmlm += '						</tbody>';
+		htmlm += '					</table>';
+		htmlm += '					</div>';
+		htmlm += '				</div>';
+	    htmlm += '            </div>';
+	    htmlm += '            <div class="modal-footer">';
+	    htmlm += '            <div class="row">';
+	    htmlm += '            </div>';
+	    htmlm += '        </div>';
+	    htmlm += '    </div>';
+	    htmlm += '</div>';    
 
-    $("#ventanaModal").html(html);
+    $("#ventanaModal").html(htmlm);
 }
