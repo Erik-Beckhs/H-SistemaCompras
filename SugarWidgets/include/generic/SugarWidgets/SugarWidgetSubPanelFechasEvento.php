@@ -13,7 +13,7 @@ require_once('include/entryPoint.php');
 class SugarWidgetSubPanelFechasEvento extends SugarWidgetField
 { 
     function displayHeaderCell($layout_def){
-        return '<a style="font-weight: normal">Fecha Real</a>';
+        return '<a style="font-weight: normal;color:#fff;">Fecha Real</a>';
     }
     function displayList($layout_def)
     {           

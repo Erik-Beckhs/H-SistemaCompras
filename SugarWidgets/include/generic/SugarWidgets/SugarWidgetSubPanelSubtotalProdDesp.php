@@ -13,7 +13,7 @@ require_once('include/entryPoint.php');
 class SugarWidgetSubPanelSubtotalProdDesp extends SugarWidgetField
 {
       function displayHeaderCell($layout_def){        
-       return '<a style="font-weight: normal;"><b>Subtotal</b></a>';
+       return '<a style="font-weight: normal;color:#fff;"><b>Subtotal</b></a>';
     }
     function displayList($layout_def)
     {

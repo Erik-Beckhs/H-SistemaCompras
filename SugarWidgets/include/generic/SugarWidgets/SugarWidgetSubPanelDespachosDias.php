@@ -13,7 +13,7 @@ require_once('include/entryPoint.php');
 class SugarWidgetSubPanelDespachosDias extends SugarWidgetField
 {
 	function displayHeaderCell($layout_def){
-        return '<a style="font-weight: normal;">Días transito</a>';
+        return '<a style="font-weight: normal;color:#fff;">Días transito</a>';
     }
     function displayList($layout_def)
     {

@@ -13,7 +13,7 @@ require_once('include/entryPoint.php');
 class SugarWidgetSubPanelFechasEvento2 extends SugarWidgetField
 {
   function displayHeaderCell($layout_def){
-        return '<a style="font-weight: normal;">Fecha Nueva</a>';
+        return '<a style="font-weight: normal;color:#fff;">Fecha Nueva</a>';
     }
   function displayList($layout_def)
   {

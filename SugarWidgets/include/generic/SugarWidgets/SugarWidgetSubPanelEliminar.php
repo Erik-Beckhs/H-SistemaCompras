@@ -19,15 +19,16 @@ class SugarWidgetSubPanelEliminar extends SugarWidgetField
 	{
 		echo '<style>
           #eliminar{          
-          background-color: #eee !important;
-          color:#333 !important;
-          border: 1px solid #cccccc;
+          background-color: #61c7ba !important;
+          color:#fff !important;
+          border: 1px solid #61c7ba;
           padding: 0;
           margin: 0 !important;
           display: inline-block;
           font-size: 1.1em !important;
-          padding: 5px 10px;
+          padding: 3px 10px;
           float:center;
+          border-radius:5px;
         }
         #eliminar:hover{
           opacity: 0.8 !important;

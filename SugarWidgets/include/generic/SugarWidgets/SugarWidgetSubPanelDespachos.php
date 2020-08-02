@@ -14,7 +14,7 @@ require_once ('include/entryPoint.php');
 
 class SugarWidgetSubPanelDespachos extends SugarWidgetField {
   function displayHeaderCell($layout_def) {
-    return '<a style="font-weight: normal;">Eventos</a>';
+    return '<a style="font-weight: normal; color:#fff;">Eventos</a>';
   }
   function displayList($layout_def) {
     $html = '<style>
@@ -357,19 +357,19 @@ class SugarWidgetSubPanelDespachos extends SugarWidgetField {
           return $html;
           break;
         case '1':
-          $html = '<div class="alert-warning" style="box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.4);border-radius: 5px;padding:5px 10px; width:177px;">Embarque Solicitado <span style="position:absolute;font-size:20px;margin-top:-5.3px;margin-left: 8px;"> &#9872;</span></div>';
+          $html = '<div class="alert-warning" style="border-radius: 5px;padding:5px 10px; width:177px;">Embarque Solicitado <span style="position:absolute;font-size:20px;margin-top:-5.3px;margin-left: 8px;"> &#9872;</span></div>';
           return $html;
           break;
         case '3':
-          $html = '<div class="alert-success" style="box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.4);border-radius: 5px;padding:5px 10px; width:152px;">Embarque Cerrado <span style="position:absolute;font-size:20px;margin-top:-5.3px;margin-left: 8px;">&#9875;</span></div>';
+          $html = '<div class="alert-success" style="border-radius: 5px;padding:5px 10px; width:152px;">Embarque Cerrado <span style="position:absolute;font-size:20px;margin-top:-5.3px;margin-left: 8px;">&#9875;</span></div>';
           return $html;
           break;
         case '4':
-          $html = '<div class="alert-danger" style="background:#d9534f; color:#FFF;box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.4);border-radius: 5px;padding:5px 10px; width:152px;">Despacho Anulado <span style="position:absolute;font-size:20px;margin-top:-5.3px;margin-left: 8px;"> &#x02672;</span></div>';
+          $html = '<div class="alert-danger" style="background:#d9534f; color:#FFF;border-radius: 5px;padding:5px 10px; width:152px;">Despacho Anulado <span style="position:absolute;font-size:20px;margin-top:-5.3px;margin-left: 8px;"> &#x02672;</span></div>';
           return $html;
           break;
         default:
-          $html = '<div class="alert-danger" style="box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.4);border-radius: 5px;padding:5px 10px; width:118px;">Sin Embarcar <span style="position:absolute;font-size:20px;margin-top:-5.3px;margin-left: 8px;">&#x026A0;</span></div>';
+          $html = '<div class="alert-danger" style="border-radius: 5px;padding:5px 10px; width:118px;">Sin Embarcar <span style="position:absolute;font-size:20px;margin-top:-5.3px;margin-left: 8px;">&#x026A0;</span></div>';
           return $html;
           break;
       }

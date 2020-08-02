@@ -220,7 +220,7 @@ class SCO_DespachosViewDetail extends ViewDetail {
  			echo $st;
  			parent::display();
  			echo '
-      <div class="row detail-view-row" style="background:#FFF;margin-top:-15px;">
+      <!--div class="row detail-view-row" style="background:#FFF;margin-top:-15px;">
         <br>
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
               <div class="col-xs-12 col-sm-4 label col-1-label">
@@ -240,7 +240,7 @@ class SCO_DespachosViewDetail extends ViewDetail {
                 </span>
               </div>          
         </div>
-      </div>       
+      </div-->       
       '.$html;        
 			echo '<script>
 				var id_des = "'.$id_des.'";
@@ -264,8 +264,26 @@ class SCO_DespachosViewDetail extends ViewDetail {
 
  			case '4':
  			//$notificaciones->FnnotificaDespacho($this->bean);
- 			echo $st;
+      echo '<script>
+        var id_des = "'.$id_des.'";
+        function solicitar(est){
+          //debugger;
+          $.ajax({
+          type: "get",
+          url: "index.php?to_pdf=true&module=SCO_Despachos&action=estado&id="+id_des,
+          data: {est},
+          success: function(data) {
+            data = data.replace("$","");
+
+            var estado = $.parseJSON(data);
+            }
+          });
+          location.reload();
+        }
+        '.$js.'
+      </script>';
  			parent::display();
+      echo $st.$html;
  				break;
 
  			default:

@@ -14,9 +14,9 @@ class SugarWidgetSubPanelDespachosCantidad extends SugarWidgetField
 {
 	function displayHeaderCell($layout_def){
         if($id_pro = $_REQUEST['module'] == 'SCO_ProductosCompras'){
-            return '<a style="font-weight: normal;">Cantidad del Producto</a>';
+            return '<a style="font-weight: normal;color:#fff;">Cantidad Producto</a>';
         }else{
-            return '<a style="font-weight: normal;">Cantidad Productos</a>';
+            return '<a style="font-weight: normal;color:#fff;">Cantidad Productos</a>';
         }
     }
     function displayList($layout_def)
@@ -41,7 +41,7 @@ class SugarWidgetSubPanelDespachosCantidad extends SugarWidgetField
         $row_pc_des = $GLOBALS['db']->fetchByAssoc($obj_pc_des);
 
         if($row_pc_des['cantidad'] != 0){
-            return "<span style='box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.4);font-size:12px; background: #FFCC66;color:#fff;' class='label label-warning' class='text-info'>".$row_pc_des['cantidad']."</span>";
+            return "<span style='box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.4);font-size:12px; background: #fff;color:#000;' class='label label-info' class='text-info'>".$row_pc_des['cantidad']."</span>";
         }else{
             //Query para obtener cantidades de productos en despachos de acuerdo al Id de Despacho ($id_des)
             $despacho = "SELECT SUM(pd.prdes_cantidad) as cantidad
@@ -55,7 +55,7 @@ class SugarWidgetSubPanelDespachosCantidad extends SugarWidgetField
             AND d_pd.sco_despachos_sco_productosdespachossco_despachos_ida = '$id_des';";
             $obj_despacho = $GLOBALS['db']->query($despacho, true);
             $row_despacho = $GLOBALS['db']->fetchByAssoc($obj_despacho);
-            return "<span style='box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.4);font-size:12px; background: #FFCC66;color:#fff;' class='label label-warning'>".$row_despacho['cantidad']."</span>";
+            return "<span style='box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.4);font-size:12px; background: #fff;color:#000;' class='label label-info'>".$row_despacho['cantidad']."</span>";
         }
     }
 }
