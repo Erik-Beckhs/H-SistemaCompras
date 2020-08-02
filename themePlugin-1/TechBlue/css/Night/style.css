@@ -18483,21 +18483,21 @@ table.subpanel-table li.sugar_action_button {
 
 table.subpanel-table .pagination .sugar_action_button {
 	padding: 0px;
-	background-color: #0e2741;
+	background-color: #378cbe;
 	border: 1px solid transparent;
 	border-radius: 4px
 }
 
 table.subpanel-table .pagination li.sugar_action_button>form>a {
 	padding: 0;
-	background-color: #0e2741;
+	background-color: #378cbe;
 	border: 1px solid transparent;
 	border-radius: 4px
 }
 
 table.subpanel-table .pagination .sugar_action_button>form>a {
 	padding: 0;
-	background-color: #707d84;
+	background-color: #378cbe;
 	border: 1px solid transparent;
 	border-radius: 4px
 }
@@ -18535,11 +18535,11 @@ table.subpanel-table li.sugar_action_button:hover {
 }
 
 table.subpanel-table .pagination .sugar_action_button:hover {
-	background-color: #0e2741
+	background-color: #378cbe
 }
 
 table.subpanel-table .pagination li.sugar_action_button:hover>form>a {
-	background-color: #929798
+	background-color: #378cbe
 }
 
 table.subpanel-table .pagination .sugar_action_button:hover>form>a {
@@ -18595,7 +18595,7 @@ table.subpanel-table .pagination .sugar_action_button.hover {
 }
 
 table.subpanel-table .pagination li.sugar_action_button.hover>form>a {
-	background-color: #929798
+	background-color: #378cbe
 }
 
 table.subpanel-table .pagination .sugar_action_button.hover>form>a {
@@ -21590,12 +21590,12 @@ ul#detailViewActions.clickMenu {
 }
 
 ul.clickMenu.SugarActionMenu li.single a {
-	background-color: #0e2741;
+	background-color: #378cbe;
 	padding: 0 8px
 }
 
 ul.clickMenu.SugarActionMenu li.single a:hover {
-	background-color: #93a0ab
+	background-color: #378cbe
 	color:#fff;
 }
 
@@ -24810,15 +24810,14 @@ div.content div.pagecontent form#EditView div.edit.view table tbody tr td input[
 .content .nav-tabs>li>a:hover {
     font-size: 13px;
     font-weight: 500;
-    background-color: #76c1b7;
+    background-color: #61c7ba;
     color: #fff;
     cursor: pointer;
     margin: 0 0px 0 0px;
     /* border-color: transparent; */
     letter-spacing: 0.2px;
     line-height: 12px;
-    /* border: 1px solid #fff; */
-    border-right: 1px solid #fff0;
+    border-right: 1px solid ;
 }
 
 .content .nav-tabs>li.active>a,
@@ -25185,7 +25184,8 @@ div.action_buttons .button:hover {
 }
 
 div.sub-panel {
-	margin-bottom: 4px
+	margin-bottom: 4px;
+	border: 1px solid #d9edf7;
 }
 
 .subpanel-table tr:last-of-type td {
@@ -25345,7 +25345,7 @@ div.sub-panel {
 .subpanel-table.list tr.pagination button.button[name="listViewNextButton"][disabled],
 .subpanel-table.list tr.pagination button.button[name="listViewEndButton"][disabled] {
 	cursor: default;
-	background-color: #76c1b7
+	background-color: #42c5b4
 }
 
 .subpanel-table.list tr.pagination button.button[name="listViewStartButton"],

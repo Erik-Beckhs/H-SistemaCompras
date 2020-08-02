@@ -106,9 +106,9 @@ foreach ($items as $key => $value) {
 	$idItem     = $value['id'];
 	$subtotal   = $value['pcv_cantidadconsolidado'] * $value['pcv_preciofob'];
 	if($cantidadItems < count($items)){
-		$arrayItems .= '["'.$value['name'].'","'.$value['pcv_descripcion'].'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","'.$proyecto.'","'.$value['sco_productoscompras_id_c'].'","'.$proyecto_id.'","'.$proyecto_tipo.'","'.$value['name'].'"],';	
+		$arrayItems .= '["'.$value['name'].'","'.$value['pcv_descripcion'].'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","'.$proyecto.'","'.$value['sco_productoscompras_id_c'].'","'.$proyecto_id.'","'.$proyecto_tipo.'","'.$value['name'].'","'.$idItem.'"],';	
 	}else{
-		$arrayItems .= '["'.$value['name'].'","'.$value['pcv_descripcion'].'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","'.$proyecto.'","'.$value['sco_productoscompras_id_c'].'","'.$proyecto_id.'","'.$proyecto_tipo.'","'.$value['name'].'"]';	
+		$arrayItems .= '["'.$value['name'].'","'.$value['pcv_descripcion'].'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","'.$proyecto.'","'.$value['sco_productoscompras_id_c'].'","'.$proyecto_id.'","'.$proyecto_tipo.'","'.$value['name'].'","'.$idItem.'"]';	
 	}		
 }
 $arrayItemsTotal = '['.$arrayItems.']|'.$precioTotalFob.',0,0,'.$precioTotalFob.'|'.$idOc;

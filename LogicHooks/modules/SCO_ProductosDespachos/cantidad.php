@@ -1,6 +1,6 @@
 <?php
 /**
-*Esta clase realiza operaciones matemáticas.
+*Esta clase realiza operaciones matemÃ¡ticas.
 *
 *@author Limberg Alcon <lalcon@hansa.com.bo>
 *@copyright 2018
@@ -18,31 +18,29 @@ require_once('include/entryPoint.php');
 
   	switch ($tipo) {
   		case 'cantidad':
-	  		#$query = "SELECT id, pro_cantidad, pro_saldos
-				#FROM sco_productos_co
-				#WHERE deleted = 0 AND id = '$id_pr_co'";
-				#$results = $GLOBALS['db']->query($query, true);
-				#$row = $GLOBALS['db']->fetchByAssoc($results);
-		  	#$cant = $row['pro_cantidad'] - $row['pro_saldos'];
-  			if($value >= 0){
+	  		$query = "SELECT id, pro_cantidad, pro_canttrans,pro_cantresivida, pro_saldos
+				FROM sco_productos_co
+				WHERE deleted = 0 AND id = '$id_pr_co'";
+				$results = $GLOBALS['db']->query($query, true);
+				$row = $GLOBALS['db']->fetchByAssoc($results);
+        $pro_cantidad = $row['pro_cantidad'];
+		  	$cant = $row['pro_canttrans'] + $row['pro_saldos'];
+        $diferencia =  $row['pro_cantidad'] - $value;  
+  			if($diferencia <= $pro_cantidad && $value > 0){
 			  	$beanpd1 = BeanFactory::getBean('SCO_ProductosDespachos', $id);
 					$beanpd1->prdes_cantidad = $value;
 					$beanpd1->save();
 
-					$query_pd = "SELECT sum(prdes_cantidad) as cantidad_pd
-					FROM sco_productosdespachos as pd
-					INNER JOIN sco_despachos_sco_productosdespachos_c as dpd
-					ON pd.id = dpd.sco_despachos_sco_productosdespachossco_productosdespachos_idb
-					WHERE pd.prdes_idproductos_co = '".$id_pr_co."'
-					AND pd.deleted = 0
-					AND dpd.deleted = 0; ";
+					$query_pd = "SELECT pro_cantidad, pro_canttrans,pro_cantresivida, pro_saldos
+					FROM sco_productos_co			
+					WHERE id = '".$id_pr_co."'
+					AND deleted = 0; ";
 					$results_pd = $GLOBALS['db']->query($query_pd, true);
 					$row_pd = $GLOBALS['db']->fetchByAssoc($results_pd);
-
-			  		$new_cant = $row['pro_cantidad'] - $row_pd['cantidad_pd'];
+	  		  $new_cant = $row['pro_cantidad'] - $row_pd['cantidad_pd'];
 			  		//**Acualizando la tabla sco_productos_co campos de cantidad y saldos
 					$query_p = "UPDATE sco_productos_co
-					SET pro_saldos = '$new_cant', pro_canttrans = '".$row_pd['cantidad_pd']."'
+					SET pro_saldos = '$diferencia', pro_canttrans = '".$value."'
 					WHERE id = '$id_pr_co';";
 					$obj = $GLOBALS['db']->query($query_p, true);
 

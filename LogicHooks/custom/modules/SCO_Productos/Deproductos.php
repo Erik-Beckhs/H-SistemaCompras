@@ -135,18 +135,19 @@ class ClDeproductos {
 			$idproy   = $fila[10];
 			$tipoProy = $fila[11];
 			$aio      = $fila[12];
+			$idProdCot= $fila[13];
 
 			//creando id para productos_co
 			$id_sco_productos_co       = create_guid();
 			$id_sco_productoscotizados = create_guid();
 
 			//Insertando a la TABLA sco_productos_co los datos del array
-			$query = "INSERT INTO sco_productos_co (id, deleted, pro_nombre, pro_descripcion, pro_unidad, pro_cantidad, pro_preciounid, pro_descval, pro_descpor, pro_fecha, pro_nomproyco, pro_idco, pro_idproy, pro_idpro, pro_tipocotiza, pro_subtotal, pro_canttrans, pro_cantresivida, pro_saldos,pro_codaio, iddivision_c, idregional_c) VALUES ('$id_sco_productos_co','0','$idpc','$descr','$unid','$cant','$prec','$dscv','$dscp','$date','$idpo','$arridoc','$idproy','$idpro','$tipoProy','$stot','0','0','$cant','$aio','$bean->iddivision_c','$bean->idregional_c');";
+			$query = "INSERT INTO sco_productos_co (id, deleted, pro_nombre, pro_descripcion, pro_unidad, pro_cantidad, pro_preciounid, pro_descval, pro_descpor, pro_fecha, pro_nomproyco, pro_idco, pro_idproy, pro_idpro, pro_tipocotiza, pro_subtotal, pro_canttrans, pro_cantresivida, pro_saldos,pro_codaio, iddivision_c, idregional_c, pro_idproductocotizado) VALUES ('$id_sco_productos_co','0','$idpc','$descr','$unid','$cant','$prec','$dscv','$dscp','$date','$idpo','$arridoc','$idproy','$idpro','$tipoProy','$stot','0','0','$cant','$aio','$bean->iddivision_c','$bean->idregional_c','$idProdCot');";
 
 			$obj = $bean->db->query($query, true);
 
 			//Insertado al modulo PRODUCTOS COTIZADOS los datos del array del modulo
-			$productoscotizados = "INSERT INTO sco_productoscotizados (id, name, deleted, pro_descripcion, pro_unidad, pro_cantidad, pro_preciounid, pro_descval, pro_descpor, pro_fecha, pro_nomproyco, pro_idco, pro_idproy, pro_idpro, pro_tipocotiza, pro_subtotal, pro_canttrans, pro_cantresivida, pro_saldos, iddivision_c, idregional_c, pro_codaio) VALUES ('$id_sco_productos_co','$idpc','0','$descr','$unid','$cant','$prec','$dscv','$dscp','$date','$idpo','$arridoc','$idproy','$idpro','$tipoProy','$stot','0','0','$cant','$bean->iddivision_c','$bean->idregional_c','$aio');";
+			$productoscotizados = "INSERT INTO sco_productoscotizados (id, name, deleted, pro_descripcion, pro_unidad, pro_cantidad, pro_preciounid, pro_descval, pro_descpor, pro_fecha, pro_nomproyco, pro_idco, pro_idproy, pro_idpro, pro_tipocotiza, pro_subtotal, pro_canttrans, pro_cantresivida, pro_saldos, iddivision_c, idregional_c, pro_codaio, pro_idproductocotizado) VALUES ('$id_sco_productos_co','$idpc','0','$descr','$unid','$cant','$prec','$dscv','$dscp','$date','$idpo','$arridoc','$idproy','$idpro','$tipoProy','$stot','0','0','$cant','$bean->iddivision_c','$bean->idregional_c','$aio','$idProdCot');";
 
 			$obj_productoscotizados = $bean->db->query($productoscotizados, true);
 
