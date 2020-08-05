@@ -1,0 +1,691 @@
+/******************************
+ * Extension Name: White Label Login for SuiteCRM
+ * Description: White Label your Suite CRM to create your own branded custom login page.
+ * Version: 1.0
+ *
+ *This 3rd party module should retain the "Powered by Smackcoders" logo and link in an appropriate manner in its location.
+ *
+ *Portions created by Smackcoders, Inc.
+ *All Rights Reserved.
+ *Contributor(s): Smackcoders **
+ *Author URI: https://www.smackcoders.com
+ */
+
+/*********************************************************************************
+ * White Label Login is a Tool for SuiteCRM to create branded login page
+ * developed by Smackcoders. Copyright (C) 2019 Smackcoders.
+ *
+ * This module is a free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License version 3
+ * as published by the Free Software Foundation with the addition of the
+ * following permission added to Section 15 as permitted in Section 7(a): FOR
+ * ANY PART OF THE COVERED WORK IN WHICH THE COPYRIGHT IS OWNED BY SMACKCODERS,
+ * SMACKCODERS DISCLAIMS THE WARRANTY OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+ *
+ * This module is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Affero General Public
+ * License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program; if not, see http://www.gnu.org/licenses or write
+ * to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301 USA.
+ *
+ * You can contact Smackcoders at email address projects@smackcoders.com.
+ *
+ * The interactive user interfaces in original and modified versions
+ * of this program must display Appropriate Legal Notices, as required under
+ * Section 5 of the GNU Affero General Public License version 3.
+ *
+ * In accordance with Section 7(b) of the GNU Affero General Public License
+ * version 3, these Appropriate Legal Notices must retain the display of the
+ * Smackcoders copyright notice. If the display of the logo is not reasonably
+ * feasible for technical reasons, the Appropriate Legal
+ * Notices must display the words
+ * "Copyright Smackcoders. 2019. All rights reserved".
+ ********************************************************************************/
+table th {
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+    width: 200px;
+}
+
+.description    {
+    font-family: sans-serif;
+    font-size: 12px;
+    font-style: italic;
+}
+
+table td {
+    font-size: 12px;
+    line-height: 20px;
+    margin-bottom: 9px;
+    padding: 8px 10px;
+}
+
+.img_span   {
+    background: none repeat scroll 0 0 #000000;
+    border-radius: 800px 800px 800px 800px;
+    display: inline-block;
+    float: left;
+    margin: 0 4px 3px 7px;
+    transition: all 0.5s ease-in 0s;
+}
+
+.img_span:hover {
+
+}
+
+.img_span img {
+    display: block;
+    height: 16px;
+    opacity: 0.9;
+    padding: 2px;
+    width: 16px;
+}
+
+.overall    {
+    padding-right:20px;
+    padding-left:20px;
+}
+
+.login-ul   {
+    display:inline;
+    width:100%;
+}
+
+#SmackThemeForm ul {
+    list-style:none;
+}
+
+.login-page-template{
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: row wrap;
+}
+
+@media (min-width: 1350px){
+    .login-page-template .login-li .box{
+        max-width: 290px;
+    }
+}
+
+.login-li {
+    margin: 5px;
+    display: inline-block;
+}
+
+.login-li img{
+    height: auto;
+    width: 100%;
+}
+
+.active-link:hover  {
+    text-decoration:none;
+    cursor:none;
+}
+
+.mt15   {
+    margin-top:15px;
+}
+
+.section-heading{
+    margin-top: 30px;
+    margin-bottom: 20px;
+    display: inline-block;
+    width: 100%;
+}
+
+hr{
+    margin: 10px 0px;
+    border-bottom: 1px solid #e8e8e8;
+    display: inline-block;
+    width: 100%;
+}
+
+.mt30    {
+    margin-top:30px;
+}
+
+.mb30   {
+    margin-bottom:30px;
+}
+
+.box{
+    width: 320px;
+    height: auto;
+    background: #fff;
+    box-shadow: 0px 0px 10px 1px rgba(45, 55, 72, 0.1);
+    position: relative;
+}
+
+.box-padding{
+    padding: 10px;
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+}
+
+.box-padding h2{
+    align-self: center;
+    font-size: 20px;
+    margin: 0;
+    display: inline-block;
+    width: 55%;
+}
+
+.box-padding .btn{
+    float: right;
+}
+
+.btn-login{
+    border:2px solid #35aa47;
+    background:none;
+    padding:5px;
+    color:#35aa47;
+    width:40%;
+    font-size:14px;
+}
+
+.btn-login:hover{
+    background: #35aa47;
+    color: #fff;
+}
+
+.btn-primary{
+    border:1px solid #F08377 !important;
+    background:#F08377;
+    color: #fff;
+    font-size:16px !important;
+    padding:5px 15px !important;
+    height: auto !important;
+    font-weight: bold !important;
+    line-height: 25px !important;
+}
+
+.btn-primary:hover, .btn-primary:focus{
+    background:#E95746;
+    color:#FFF;
+    border: 1px solid #E95746 !important;
+}
+
+.btn-primary.active{
+    background: #38A169 !important;
+    border-color: #38A169 !important;
+}
+
+.template-img{
+    width: 100%;
+    position: relative;
+}
+
+.template-img:hover .template-options{
+    transition: all 0.3s;
+    display: flex;
+    cursor: pointer;
+}
+
+.template-img img{
+    width: 100%;
+    height: auto;
+}
+
+.text-center{
+    text-align:center;
+}
+
+.add-template{
+    display: inline-block !important;
+}
+
+.add-template .template-img{
+    margin: 25px auto;
+}
+
+.add-template .template-img img{
+    width: 130px;
+    padding: 20px;
+    border: 2px dotted #e8e8e8;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.add-template .template-img img:hover{
+    box-shadow: 0px 0px 10px 1px rgba(45, 55, 72, 0.1);
+    transition: all 0.3s;
+    transform: scale(1.05);
+}
+
+.custom-modal, .custom-update-modal{
+    position: fixed;
+    display: none;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.custom-modal-box{
+    width: 80%;
+    max-width: 1020px;
+    height: 85vh;
+    max-height: 580px;
+    overflow: hidden;
+    align-self: center;
+    background: #fff;
+    margin-top: 50px;
+    padding: 0px;
+}
+
+.custom-modal-box .template_options{
+    height: 70vh;
+    overflow: hidden;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.custom-modal .template-sidebar{
+    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    padding: 0px 10px 30px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.custom-modal .template-section{
+    padding: 50px 15px;
+    height: 100%;
+}
+
+.custom-modal-header{
+    height: 12%;
+    max-height: 150px;
+    padding: 15px 0px;
+}
+
+.custom-modal-header h2{
+    display: inline-block;
+    width: 100%;
+    margin: auto;
+}
+
+.custom-modal form{
+    height: 100%;
+}
+
+.custom-update-modal form{
+    height: 100%;
+}
+
+.custom-update-modal .template-section{
+    padding: 50px 15px;
+    height: 100%;
+}
+
+.custom-update-modal .template-sidebar{
+    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    padding: 0px 10px 30px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.layout-group .radio-group{
+    display: inline-block;
+}
+
+.layout-group .radio-group input[type="radio"]{
+    position: absolute;
+    opacity: 0;
+}
+
+.layout-group .radio-group input[type="radio"]:checked + label::after{
+    content: "\2714";
+    background: #2585f9;
+    width: 20px;
+    height: 20px;
+    padding: 1px;
+    border-radius: 50%;
+    font-size: 15px;
+    text-align: center;
+    color: #fff;
+    position: absolute;
+    top: -5px;
+    right: -10px;
+}
+
+.layout-group .radio-group label{
+    width: 150px;
+    position: relative;
+    margin-right: 20px;
+    margin-top: 10px;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    padding: 3px;
+    border-radius: 6px;
+}
+
+.layout-group .radio-group label:hover{
+    transition: all 0.3s;
+}
+
+.layout-group .radio-group img{
+    width: 100%;
+}
+
+.section-header{
+    font-size: 22px;
+    margin: 10px auto 20px;
+}
+
+.template-options{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    background: rgba(45, 55, 72, 0.6);
+}
+
+.template-options div{
+    cursor: pointer;
+    display: inline-block;
+    align-self: center;
+}
+
+.template-options div span{
+    font-size: 20px;
+    margin-left: 10px;
+    color: #fff;
+}
+
+.file-upload-file{
+    display: inline-block;
+    margin: 5px;
+}
+
+input[type="file"]{
+    padding: 0;
+}
+
+input.form-control{
+    background: none;
+    border-color: #e8e8e8;
+}
+
+.bg-image-option, .bg-color-option{
+    position: relative;
+}
+
+.form-group{
+    padding: 0px 12px;
+    margin-bottom: 20px;
+}
+
+.form-group .file-upload-btn {
+  width: 100%;
+  display: block;
+  border: 1px solid #e8e8e8;
+  position: relative;
+  border-radius: 4px;
+  background-color: #fff;
+  margin: 0px 0px;
+  position: relative;
+  top: 25;
+  z-index: 0;
+  font-size: 14px; }
+  .form-group .file-upload-btn p {
+    background-color: #f2f2f2;
+    margin-bottom: 0px;
+    display: inline-block;
+    padding: 6px 10px;
+    font-size: 14px; }
+  .form-group .file-upload-btn span {
+    height: 34px;
+    position: absolute;
+    top: 1px;
+    padding: 7px 10px;
+    width: 65%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; }
+.form-group input[type="file"] {
+  width: 100%;
+  height: 40px;
+  margin: 5px 0px;
+  z-index: 1000;
+  opacity: 0;
+  top: 25px;
+  position: absolute; }
+
+.bg-radio-group label{
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.bg-radio-group{
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.bg-image-option, .bg-color-option{
+    display: none;
+}
+
+.bg-image-option.active, .bg-color-option.active{
+    display: block;
+}
+
+.form-group label{
+    font-size: 15px;
+    font-weight: normal;
+    color: #303030;
+}
+
+.form-group input:focus{
+    border-color: #f08377;
+}
+
+.fieldset{
+    padding: 30px 10px 15px;
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    position: relative;
+    margin: 20px 0px;
+    display: inline-block;
+    width: 100%;
+}
+
+.fieldset h2{
+    background: #fff;
+    padding: 5px;
+    position: absolute;
+    top: -15px;
+    margin: 0;
+    font-size: 18px;
+}
+
+input[type="color"].form-control{
+    border: none;
+    height: 15px;
+    padding: 0;
+    margin: 10px auto;
+    cursor: pointer;
+}
+
+/* Preview style */
+
+.img-preview{
+    height: 90%;
+    padding: 5px;
+    border: 1px solid #e8e8e8;
+}
+
+.login-page{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 10px;
+    pointer-events: none;
+    justify-content: center;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login-page[data-id="layout-two-column"]{
+    padding: 0;
+}
+
+.login-page[data-id="layout-two-column"] .form-container{
+    width: 50%;
+    height: 100%;
+    border-radius: 0;
+    position: relative;
+    margin-left: auto;
+    display: flex;
+}
+
+.login-page[data-id="layout-two-column"] .form-container .form{
+    width: 130px;
+    margin: auto;
+}
+
+.login-page[data-id="layout-two-column"] .form-container .form input{
+    width: 100%;
+}
+
+.login-page[data-id="layout-circle"] .form-container{
+    width: 40%;
+    height: 60%;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-page[data-id="layout-circle"] .form-container .form-group{
+    width: 100%;
+    margin: auto;
+}
+
+.login-page[data-id="layout-circle"] .form-container .form{
+    width: 130px;
+}
+
+.login-page[data-id="layout-circle"] .form-container .form-group label{
+    font-size: 8px;
+    margin-bottom: 1px;
+} 
+
+input[type="button"].btn-default{
+    background: #94a6b5;
+    border-color: #94a6b5;
+}
+
+.login-page[data-id="layout-circle"] .form-container .form-group input{
+    width: 100%;
+    font-size: 8px;
+    height: 14px;
+    min-height: 12px;
+    padding: 0px;
+}
+
+.login-page[data-id="layout-circle"] .form-container .form-group button{
+    height: 12px;
+    font-size: 8px;
+}
+
+.login-page[data-id="layout-default"] .form-container .form-group label{
+    font-size: 8px;
+}
+
+.login-page[data-id="layout-default"] .form-container .form-group input{
+    font-size: 8px;
+    height: 15px;
+    min-height: 12px;
+}
+
+.login-page[data-id="layout-default"] .form-container .form-group button{
+    font-size: 8px;
+    height: 15px;
+}
+
+.login-page[data-id="layout-right"] .form-container{
+    width: 35%;
+    height: 70%;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-page[data-id="layout-right"] .form-container{
+    width: 130px;
+}
+
+.login-page[data-id="layout-right"] .form-container .form-group label{
+    font-size: 8px;
+}
+
+.login-page[data-id="layout-right"] .form-container .form-group input{
+    font-size: 8px;
+    height: 15px;
+    width: 100%;
+    min-height: 12px;
+}
+
+.login-page[data-id="layout-right"] .form-container .form-group button{
+    font-size: 8px;
+    height: 15px;
+}
+
+.login-page .form-container{
+    background: #fff;
+    padding: 10px;
+    align-self: center;
+    border-radius: 6px;
+}
+
+.login-page .form-container img{
+    width: 60px;
+    height: 20px;
+}
+
+.login-page .form-container .form-group{
+    margin-bottom: 5px;
+}
+
+.login-page .form-container .form-group button{
+    width: 100%;
+    margin-top: 5px;
+    background: #35aa47;
+    color: #fff;
+    border: none;
+}
+
+.image-container{
+    display: flex;
+    justify-content: center;
+}
+
+.login-page .form-container .form-group label{
+    display: block;
+    font-size: 12px;
+}
+
+.login-page .form-container .form-group input{
+    height: 20px;
+}
+
+/* Preview style end */
