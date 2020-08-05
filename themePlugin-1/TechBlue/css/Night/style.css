@@ -6503,8 +6503,8 @@ button.list-group-item-danger.active:focus {
 	background-color: #fff;
 	border: 0px solid transparent;
 	border-radius: 4px;
-	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05)
+	/*-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05)*/
 }
 
 .panel-body {
@@ -20054,7 +20054,7 @@ slot {
 	display: inline;
 	font-size: 13px;
 	font-weight: 500;
-	background-color: #f3f3ff;
+	background-color: #fafafa;
 	color: #555;
 	padding: 5px 5px;
 	border: 1px solid transparent;
@@ -25041,7 +25041,7 @@ div.content div.pagecontent form#EditView div.edit.view table tbody tr td input[
 }
 
 .panel-default>.panel-heading {
-	background: #d9edf7;
+	background: #f2f7f9;
 	color: #fff;
 	padding: 0;
 	height: 32px;
@@ -25185,7 +25185,7 @@ div.action_buttons .button:hover {
 
 div.sub-panel {
 	margin-bottom: 4px;
-	border: 1px solid #d9edf7;
+	border: 1px solid #e2f5ff;
 }
 
 .subpanel-table tr:last-of-type td {
