@@ -1,5 +1,5 @@
 <script language="javaScript" type="text/javascript" src="modules/SCO_Despachos/paginado.js"></script>
-<div style="margin-top: 10px;">
+<!--div style="margin-top: 10px;">
   <div class="yui-content">
     <div class="detail view  detail508 expanded">
       <table class="panelContainer" cellspacing="1"><tbody>
@@ -17,7 +17,22 @@
       </tbody></table>
     </div>
   </div>
-</div>
+</div-->
+
+<div class="row detail-view-row" style="background:#FFF;margin-top:-15px;">
+    <div class="col-xs-12 col-sm-6 detail-view-row-item">     
+    </div>      
+    <div class="col-xs-12 col-sm-6 detail-view-row-item">
+          <div class="col-xs-12 col-sm-4 label col-1-label">
+          Dividir despacho
+          </div>        
+          <div class="col-sm-7 detail-view-field " type="varchar">
+            <span class="sugar_field">
+              <button class="btn btn-success btn-xs" style="padding: 2px 5px;background: #42c5b4 !important;" onClick="mostrarModal()">Dividir Despacho</button>
+            </span>
+          </div>          
+    </div>
+  </div>   
 
 <script>
 var despacho = '<?php echo $this->bean->id; ?>' ;
@@ -34,7 +49,7 @@ function datos(dato1,dato2,dato3,dato4,dato5,dato6,dato7){
  this.dato6 = dato6;
  this.dato7 = dato7;
 }
-var encabeza = new Array("Producto","DescripciÃ³n","Proyecto","Cantidades","Agregar");
+var encabeza = new Array("Producto","Descripcion","Proyecto","Cantidades","Agregar");
 function mostrarModal()
 {
   $("#modalDivir").modal("show");
@@ -62,7 +77,7 @@ function mostrarModal()
       }
       //$("#listaProductosDespacho").empty();
       //$("#listaProductosDespacho").html(html);
-      pinta(8,0);
+      pinta(20,0);
     }
   });
 }
@@ -195,65 +210,87 @@ function imprimirTotales(totalPro,totalCosto) {
 agregarTotalesDespacho();
 //$("#list_subpanel_sco_despachos_sco_productosdespachos .list ").append(htmlTfoot);
 </script>
+<style>
+div#paginacion {padding-left: 30%;}
+.pagination li {float: left;padding: 2px;}
+.pagination li a {margin-left: 3px;margin-right: 3px;}
+#contenido table,#formNuevoDespacho table{width: -webkit-fill-available;width: -moz-available;}
+#contenido table tbody tr td {padding: 3px 10px;font-size: 12px;color: #555;}
+#contenido td button {border-radius: 50%;height: 25px;width: 25px;color: #fff;background: #2263a5;}
+#nuevoDespacho tr td {padding: 3px 10px;font-size: 12px;}
+#nuevoDespacho button.btn.btn-xs {background: red;color: #fff;border-radius: 50%;}
+</style>
 <input type="hidden" id="idOrdenCompra" value="">
 <div class="modal fade" id="modalDivir" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-  <div class="modal-dialog" style="width: 75% !important;">
+  <div class="modal-dialog" style="width: 90% !important;">
     <div class="modal-content">
       <div class="modal-header" style="background-color:#003C79 !important; color:#ffffff!important;">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" style="color:#fff!important;"id="">Dividir Despacho</h4>
       </div>
       <div class="modal-body">
-        <div class="col-lg-12 row">
-          <div class="col-lg-7 table-responsive" >
-          <center><h2>Productos</h2></center>
-            <div id="contenido">Paginaci�n en local<br></div>
-            <center><div id="paginacion"></div></center>
+        <div class="col-lg-12 container">
+          <div class="col-lg-6 table-responsive">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <center>Productos</center>
+                </div>
+                <div class="panel-body">
+                    <div id="contenido">Paginación en local<br></div>
+                    <center><div id="paginacion"></div></center> 
+                </div>
+            </div> 
           </div>
-          <div class="col-lg-5 table-responsive" >
-            <form id="formNuevoDespacho" method="post" enctype="multipart/form-data">
-              <center><h2>Nuevo despacho</h2></center>
 
-              <table class="table-bordered ">
-                <thead>
-                  <tr>
-                    <th>Productos</th>
-                    <th>Descripci�n</th>
-                    <th>Cantidades</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody id="nuevoDespacho">
+          <div class="col-lg-6 table-responsive" >
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <center>Nuevo despacho</center>
+                </div>
+                <div class="panel-body">
+                    <form id="formNuevoDespacho" method="post" enctype="multipart/form-data">                      
+                      <table class="table-bordered ">
+                        <thead>
+                          <tr>
+                            <th>Productos</th>
+                            <th>Descripción</th>
+                            <th>Cantidades</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody id="nuevoDespacho">
 
-                </tbody>
-              </table>
-              
-              </br>
-              
-              <table>
-                <tr>
-                  <td>
-                    <strong>Origen</strong>
-                  </td>
-                  <td><select id="des_orig"  name="origen">
-                    </select></td>
-                </tr>
-                <tr>
-                  <td><strong>Modalidad Transporte</strong></td>
-                  <td><select id="des_modtra"  name="mod_trans">
-                  </select></td>
-                </tr>
-                <tr>
-                  <td><strong>Dias llegada</strong></td>
-                  <td><input type="text" placeholder="" name="dias_trans" id="ndes_diasLlegada" readonly></td>
-                </tr>
-              </table>
-            </form>
+                        </tbody>
+                      </table>
+                      
+                      </br>
+                      
+                      <table>
+                        <tr>
+                          <td>
+                            <strong>Origen</strong>
+                          </td>
+                          <td><select id="des_orig"  name="origen">
+                            </select></td>
+                        </tr>
+                        <tr>
+                          <td><strong>Modalidad Transporte</strong></td>
+                          <td><select id="des_modtra"  name="mod_trans">
+                          </select></td>
+                        </tr>
+                        <tr>
+                          <td><strong>Dias llegada</strong></td>
+                          <td><input type="text" placeholder="" name="dias_trans" id="ndes_diasLlegada" readonly></td>
+                        </tr>
+                      </table>
+                    </form>
+                </div>
+            </div>             
           </div>
         </div>
       </div>
       <br>
-      <div class="row">
+      <div class="container">
           <center>
             <button type="button" class="btn  btn-xs" data-dismiss="modal">Cancelar</button>
             <button type="button" class="btn btn-default btn-xs" onclick="crearDespacho()">Crear Nuevo despacho en modo borrador</button>

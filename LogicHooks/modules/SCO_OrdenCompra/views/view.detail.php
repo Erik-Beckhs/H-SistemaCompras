@@ -252,10 +252,20 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
         </div>
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
               <div class="col-xs-12 col-sm-4 label col-1-label">
-                <b>Reportes:</b>
+                <b>Reporte Compra:</b>
               </div>        
               <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
-                  <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick="imprimir();">Descargar</a>
+                  <a class="btn btn-sm" style="padding: 2px 5px;background: #ffc107!important;color:#fff;"onClick="imprimir();">Descarga pdf</a>
+                  <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
+              </div>          
+        </div>
+
+         <div class="col-xs-12 col-sm-6 detail-view-row-item">
+              <div class="col-xs-12 col-sm-4 label col-1-label">
+                <b>Reporte Gerencial:</b>
+              </div>        
+              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
+                  <a class="btn btn-success btn-sm" style="padding: 2px 5px;background: #42c5b4 !important;" onClick="imprimir();">Descarga Excel</a>
                   <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
               </div>          
         </div>

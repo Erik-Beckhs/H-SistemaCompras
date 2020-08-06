@@ -1,5 +1,5 @@
 var ProductosNuevos = new Array();
-function pinta(num,inicio){//funci�n creada por Jorge Zazo de la Encarnaci�n http://www.forosdelweb.com/1201706-post4.html
+function pinta(num,inicio){//funciï¿½n creada por Jorge Zazo de la Encarnaciï¿½n http://www.forosdelweb.com/1201706-post4.html
 	//Modificaciones Ariel Oliva codigosutiles.com
 	var pagNow = inicio;
 	var limSup;
@@ -9,27 +9,27 @@ function pinta(num,inicio){//funci�n creada por Jorge Zazo de la Encarnaci�n
 	var pagAnt;
 	var pagSig;
 	var rutaIma=""; //Ruta base de las imagenes
-	var numPaginas = misDatos.length /num; //Detecto el n�mero "entero" de p�ginas
+	var numPaginas = misDatos.length /num; //Detecto el nï¿½mero "entero" de pï¿½ginas
 	numPaginas = numPaginas.toString();
 	numPaginas = numPaginas.split(".");
 	numPaginasF = eval(numPaginas[0]);
 
-	if (misDatos.length % num != 0){ //Si el resultado de la divisi�n anterior no es exacto le a�ado manualmente una p�gina m�s
+	if (misDatos.length % num != 0){ //Si el resultado de la divisiï¿½n anterior no es exacto le aï¿½ado manualmente una pï¿½gina mï¿½s
 		numPaginasF ++;
 	}
 
 
-	if((pagNow + 1) != numPaginasF){//Establezco el n�mero de datos a mostrar si la �ltima p�gina no tiene el mismo n�mero de datos
+	if((pagNow + 1) != numPaginasF){//Establezco el nï¿½mero de datos a mostrar si la ï¿½ltima pï¿½gina no tiene el mismo nï¿½mero de datos
 		limSup = -1;
 	} else {
 		limSup = (misDatos.length - (numPaginasF * num))-1;
 	}
 
-	DatoI = pagNow * num;//Establezco el dato inicial y el dato final de la paginaci�n
+	DatoI = pagNow * num;//Establezco el dato inicial y el dato final de la paginaciï¿½n
 	DatoF = DatoI + (num+limSup);
 
 
-	if (pagNow == 0){//Establezco cual es la p�gina anterior y la siguiente
+	if (pagNow == 0){//Establezco cual es la pï¿½gina anterior y la siguiente
 		pagAnt = 0;
 	} else {
 		pagAnt = pagNow - 1;
@@ -40,7 +40,7 @@ function pinta(num,inicio){//funci�n creada por Jorge Zazo de la Encarnaci�n
 		pagSig = pagNow + 1;
 	}
 
-	for (i=0;i<numPaginasF;i++){//Pinto la cadena con el n�mero de p�ginas y sus correspondientes enlaces
+	for (i=0;i<numPaginasF;i++){//Pinto la cadena con el nï¿½mero de pï¿½ginas y sus correspondientes enlaces
 		//numPaginasFSt += "<li><a href='javascript:pinta("+ num +","+ i +");'>"+ (i+1) +"</a><li> ";
 		numPaginasFSt += "<li><a href='#' onClick='pinta("+ num +","+ i +");return false'>"+ (i+1) +"</a><li> ";
 	}
@@ -74,10 +74,10 @@ function pinta(num,inicio){//funci�n creada por Jorge Zazo de la Encarnaci�n
 							"<div></td>";
 						}
 						if (j == 4) {
-							cadena = cadena + "<td nowrap='nowrap'><center><button type='button' class='btn btn-defaul btn-xs' id='"+DatoI+"btn' onClick='moverItem("+DatoI+")'>&raquo;</button></center></td>";
+							cadena = cadena + "<td nowrap='nowrap'><center><button type='button' class='btn btn-success btn-xs' id='"+DatoI+"btn' onClick='moverItem("+DatoI+")'>&raquo;</button></center></td>";
 						}
 						if (j == 2) {
-							cadena = cadena + "<td nowrap='nowrap' style ='width: 370px'>&nbsp;"+eval(obtDatos) + "&nbsp;</td>";
+							cadena = cadena + "<td nowrap='nowrap' style ='width: 250px'>&nbsp;"+eval(obtDatos) + "&nbsp;</td>";
 						}
 						if(j!= 3 && j != 4 && j != 5 && j != 6 && j != 2){
 							cadena = cadena + "<td nowrap='nowrap'>&nbsp;"+eval(obtDatos) + "&nbsp;</td>";
@@ -88,7 +88,7 @@ function pinta(num,inicio){//funci�n creada por Jorge Zazo de la Encarnaci�n
 			}
 			cadena = cadena + "</tbody></table>";
 			contenido.innerHTML = cadena;
-		var pagina = document.createElement("span");//... y la paginaci�n.
+		var pagina = document.createElement("span");//... y la paginaciï¿½n.
 		document.getElementById("paginacion").appendChild( pagina);
 		paginacion.innerHTML += "<center><ul class='pagination'>"+
 				"<li><a href='#'  onClick='javascript:pinta("+ num +",0);return false'>&larr; Primero</a></li>"+
@@ -126,7 +126,7 @@ function pinta(num,inicio){//funci�n creada por Jorge Zazo de la Encarnaci�n
 							cadena = cadena + "<td nowrap='nowrap'><center><button type='button' class='btn btn-defaul btn-xs' id='"+DatoI+"btn' onClick='moverItem("+DatoI+")'>&raquo;</button></center></td>";
 						}
 						if (j == 2) {
-							cadena = cadena + "<td nowrap='nowrap' style ='width: 370px'>&nbsp;"+eval(obtDatos) + "&nbsp;</td>";
+							cadena = cadena + "<td nowrap='nowrap' style ='width: 250px'>&nbsp;"+eval(obtDatos) + "&nbsp;</td>";
 						}
 						if(j!= 3 && j != 4 && j != 5 && j != 6 && j != 2){
 							cadena = cadena + "<td nowrap='nowrap'>&nbsp;"+eval(obtDatos) + "&nbsp;</td>";
@@ -138,7 +138,7 @@ function pinta(num,inicio){//funci�n creada por Jorge Zazo de la Encarnaci�n
 			}
 			cadena = cadena + "</tbody></table>";
 			contenido.innerHTML = cadena;
-		var pagina = document.createElement("span");//... y la paginaci�n.
+		var pagina = document.createElement("span");//... y la paginaciï¿½n.
 		document.getElementById("paginacion").appendChild( pagina);
 		paginacion.innerHTML += "<center><ul class='pagination'>"+
 				"<li><a href='#' onClick='javascript:pinta("+ num +",0);return false'>&larr; Primero</a></li>"+
@@ -180,7 +180,7 @@ function moverItem(index)
 			}
 			html += "<tr id='n"+index+"'>"+
 								"<td>"+misDatos[index].dato1+"</td>"+
-								"<td style = 'width: 370px'>"+misDatos[index].dato2+"</td>"+
+								"<td style = 'width: 250px'>"+misDatos[index].dato2+"</td>"+
 								"<td><div col-lg-12>"+
 										"<div class='col-lg-12'>"+
 											"<input class='form-control' type='hidden' name='saldo[]' value='"+saldo+"' size='10' readonly>"+
@@ -203,7 +203,7 @@ function moverItem(index)
 		else {
 			html += "<tr id='n"+index+"'>"+
 								"<td>"+misDatos[index].dato1+"</td>"+
-								"<td style = 'width: 370px'>"+misDatos[index].dato2+"</td>"+
+								"<td style = 'width: 250px'>"+misDatos[index].dato2+"</td>"+
 								"<td><div col-lg-12>"+
 										"<div class='col-lg-12'>"+
 											"<input class='form-control' type='hidden' name='saldo[]' value='"+saldo+"' size='10' readonly>"+
@@ -234,7 +234,7 @@ function moverItem(index)
 		ProductosNuevos[index].dato3 = NuevaCantidad;
 		html += "<tr id='n"+index+"'>"+
 							"<td>"+misDatos[index].dato1+"</td>"+
-							"<td style = 'width: 370px'>"+misDatos[index].dato2+"</td>"+
+							"<td style = 'width: 250px'>"+misDatos[index].dato2+"</td>"+
 							"<td><div col-lg-12>"+
 									"<div class='col-lg-12'>"+
 										"<input class='form-control' type='hidden' name='saldo[]' value='"+saldo+"' size='10' readonly>"+

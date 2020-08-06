@@ -18,13 +18,13 @@ class SCO_DespachosViewDetail extends ViewDetail {
 
  	function display(){
     $html = '
+    <style>.campopersonalizado{margin-top:10px;}</style>
     <div class="row detail-view-row" style="background:#FFF;">
-      <br>
       <div class="col-xs-12 col-sm-6 detail-view-row-item">
         <div class="col-xs-12 col-sm-4 label col-1-label">
           Total precio productos:
         </div>        
-        <div class="col-sm-2 detail-view-field " type="varchar" >
+        <div class="col-sm-2 campopersonalizado " type="varchar" >
           <span class="sugar_field" ><b class="mostrarSubtotalProducto"></b></span>
         </div>  
       </div>
@@ -33,7 +33,7 @@ class SCO_DespachosViewDetail extends ViewDetail {
         <div class="col-xs-12 col-sm-4 label col-1-label">
           Total cantidad productos:
         </div>      
-        <div class="col-sm-2 detail-view-field " type="varchar">
+        <div class="col-sm-2 campopersonalizado " type="varchar">
           <span class="sugar_field"><b class="mostrarTotalItems"></b></span>
         </div>        
       </div>
@@ -88,18 +88,17 @@ class SCO_DespachosViewDetail extends ViewDetail {
  			//$notificaciones->FnnotificaDespacho($this->bean);
  			parent::display();
  			echo '
-      <div class="row detail-view-row" style="background:#FFF;margin-top:-15px;">
-        <br>
-        <div class="col-xs-12 col-sm-6 detail-view-row-item">
+      <div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
+               <div class="col-xs-12 col-sm-6 detail-view-row-item">
               <div class="col-xs-12 col-sm-4 label col-1-label">
               Anular Despacho:
               </div>          
-              <div class="col-sm-3 detail-view-field " type="varchar" >
+              <div class="col-sm-4 campopersonalizado " type="varchar" >
                 <span class="sugar_field" >
                    <a class="btn btn-sm btn-success" style="padding: 2px 5px;background: #d9534f !important;" onClick="solicitar(4)" value="Ver Reporte">Anular despacho con Productos</a>
                 </span>
               </div>        
-              <div class="col-sm-2 detail-view-field " type="varchar" >
+              <div class="col-sm-4 campopersonalizado " type="varchar" >
                 <span class="sugar_field" >
                    <a class="btn btn-sm btn-success" style="padding: 2px 5px;background: #328fdb !important;" onClick="intangible(3)" value="Ver Reporte">Despacho intangible</a>
                 </span>
@@ -107,15 +106,15 @@ class SCO_DespachosViewDetail extends ViewDetail {
         </div>      
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
               <div class="col-xs-12 col-sm-4 label col-1-label">
-              Enviar a:
+              Solicitud de Embarque:
               </div>        
-              <div class="col-sm-2 detail-view-field " type="varchar">
+              <div class="col-sm-7 campopersonalizado " type="varchar">
                 <span class="sugar_field">
                   <a class="btn btn-sm btn-success" style="padding: 2px 5px;background: #328fdb !important;" onClick="solicitar(1);" value="Ver Reporte">Solicitar Embarque</a>
                 </span>
               </div>          
         </div>
-      </div>       
+      </div>  
       '.$html.'
       ';
 			echo '<script>
@@ -163,7 +162,7 @@ class SCO_DespachosViewDetail extends ViewDetail {
  			//$notificaciones->FnnotificaDespacho($this->bean);
  			parent::display();
  			echo '
-      <div class="row detail-view-row" style="background:#FFF;margin-top:-15px;">
+      <div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
         <br>
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
               <div class="col-xs-12 col-sm-4 label col-1-label">
@@ -177,9 +176,9 @@ class SCO_DespachosViewDetail extends ViewDetail {
         </div>      
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
               <div class="col-xs-12 col-sm-4 label col-1-label">
-              Pasar a estado:
+              Cancelar:
               </div>        
-              <div class="col-sm-2 detail-view-field " type="varchar">
+              <div class="col-sm-2 campopersonalizado " type="varchar">
                 <span class="sugar_field">
                   <a class="btn btn-sm btn-success" style="padding: 2px 5px;background: #d9534f !important;" onClick="solicitar(0);" value="Cancelar">Cancelar solicitud</a>
                 </span>
@@ -220,7 +219,7 @@ class SCO_DespachosViewDetail extends ViewDetail {
  			echo $st;
  			parent::display();
  			echo '
-      <!--div class="row detail-view-row" style="background:#FFF;margin-top:-15px;">
+      <!--div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
         <br>
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
               <div class="col-xs-12 col-sm-4 label col-1-label">
@@ -234,7 +233,7 @@ class SCO_DespachosViewDetail extends ViewDetail {
               <div class="col-xs-12 col-sm-4 label col-1-label">
               Pasar a estado:
               </div>        
-              <div class="col-sm-2 detail-view-field " type="varchar">
+              <div class="col-sm-2 campopersonalizado " type="varchar">
                 <span class="sugar_field">
                   <a class="btn btn-sm btn-success" style="padding: 2px 5px;background: #d9534f !important;" onClick="solicitar(1);" value="Cancelar">Cancelar solicitud</a>
                 </span>
