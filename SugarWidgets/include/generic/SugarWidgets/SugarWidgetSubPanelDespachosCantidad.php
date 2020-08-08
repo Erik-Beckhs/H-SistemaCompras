@@ -14,9 +14,9 @@ class SugarWidgetSubPanelDespachosCantidad extends SugarWidgetField
 {
 	function displayHeaderCell($layout_def){
         if($id_pro = $_REQUEST['module'] == 'SCO_ProductosCompras'){
-            return '<a style="font-weight: normal;color:#fff;">Cantidad Producto</a>';
+            return '<a style="font-weight: normal;color:#fff;">Cnt. Producto</a>';
         }else{
-            return '<a style="font-weight: normal;color:#fff;">Cantidad Productos</a>';
+            return '<a style="font-weight: normal;color:#fff;">Cnt. Productos</a>';
         }
     }
     function displayList($layout_def)

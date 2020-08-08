@@ -130,7 +130,9 @@ input[type=text] .error{
 }
 .cantidades1{
 	float: left;
+	font-size: 12px;
 }
 .cantidades2{
 	float: right;
+	font-size: 12px;
 }

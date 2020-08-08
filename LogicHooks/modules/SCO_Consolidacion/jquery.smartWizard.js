@@ -62,15 +62,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     anchorSettings: {
       anchorClickable: true,
       // Enable/Disable anchor navigation
-      enableAllAnchors: false,
+      enableAllAnchors: true,
       // Activates all anchors clickable all times
       markDoneStep: true,
       // Add done state on navigation
-      markAllPreviousStepsAsDone: false,
+      markAllPreviousStepsAsDone: true,
       // When a step selected by url hash, all previous steps are marked done
-      removeDoneStepOnNavigateBack: false,
+      removeDoneStepOnNavigateBack: true,
       // While navigate back done step after active step will be cleared
-      enableAnchorOnDoneStep: false // Enable/Disable the done steps navigation
+      enableAnchorOnDoneStep: true // Enable/Disable the done steps navigation
 
     },
     keyboardSettings: {

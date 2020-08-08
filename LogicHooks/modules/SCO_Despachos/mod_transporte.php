@@ -102,11 +102,21 @@ require_once('include/entryPoint.php');
   			}
 			echo json_encode($origen);
 	 		break;
-			case '4':
+		case '4':
 		 	//Query, obtiene la lista de productos del despacho
 				$idDespacho = $_POST["despacho"];
 
-		 		$query = "SELECT prds.name,prds.prdes_descripcion,prds.prdes_cantidad,prds.id as idPro, oc.id as idOc,prds.prdes_idproductos_co,ds.id as idDespacho,pro.pro_nomproyco as proyecto,prds.prdes_unidad as punitario,prds.prdes_numeracion
+		 		$query = "SELECT 
+		 					prds.name,
+		 					prds.prdes_descripcion,
+		 					prds.prdes_cantidad,
+		 					prds.prdes_codaio,
+		 					prds.id as idPro, 
+		 					oc.id as idOc,
+		 					prds.prdes_idproductos_co,ds.id as idDespacho,
+		 					pro.pro_nomproyco as proyecto,
+		 					prds.prdes_unidad as punitario,
+		 					prds.prdes_numeracion
 									from sco_productos_co pro, sco_productosdespachos prds
 									inner join sco_despachos_sco_productosdespachos_c dsprds on prds.id = dsprds.sco_despachos_sco_productosdespachossco_productosdespachos_idb
 									inner join sco_despachos ds on ds.id = dsprds.sco_despachos_sco_productosdespachossco_despachos_ida
@@ -115,8 +125,9 @@ require_once('include/entryPoint.php');
 									where pro.pro_nombre = prds.name and
 												ds.id = '$idDespacho' and
 												oc.id = pro.pro_idco and
-												pro.pro_descripcion = prds.prdes_descripcion
-												and prds.deleted = 0";
+												pro.pro_descripcion = prds.prdes_descripcion and 
+												pro.id = prds.prdes_idproductos_co and
+												prds.deleted = 0";
 	      $productos = array();
 	  		$obj = $GLOBALS['db']->query($query, true);
   			while($row2 = $GLOBALS['db']->fetchByAssoc($obj)){

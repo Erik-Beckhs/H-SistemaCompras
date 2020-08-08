@@ -80,12 +80,12 @@
                     if (productos[i]["prdes_numeracion"] == null) {
                         numeracion = i * 1 + 1;
                     }else{numeracion = productos[i]["prdes_numeracion"];}
-                    data[i] = [numeracion,productos[i]["name"],productos[i]["prdes_descripcion"],'',productos[i]["prdes_cantidad"],productos[i]["punitario"],(productos[i]["prdes_cantidad"] * 1 * productos[i]["punitario"]).toFixed(2),productos[i]["idPro"]]
+                    data[i] = [numeracion,productos[i]["name"],productos[i]["prdes_descripcion"],'',productos[i]["prdes_cantidad"],productos[i]["punitario"],(productos[i]["prdes_cantidad"] * 1 * productos[i]["punitario"]).toFixed(2),productos[i]["idPro"],productos[i]["prdes_codaio"]]
                 }
                 $('#productosDespacho1').jexcel({
                     data:data,
-                    colHeaders: ['#','Producto','Descripcion', 'Observacion','Cantidad', 'Prec Uni','Sub toal','idProducto'],
-                    colWidths: [20,50, 170, 60, 50, 80, 80],
+                    colHeaders: ['#','Producto','Descripcion', 'Observacion','Cantidad', 'Prec Uni','Sub toal','idProducto','Cod SAP'],
+                    colWidths: [20,50, 170, 60, 50, 80, 80,50,50],
                     columns: [
                         {type: 'text', readOnly:true},
                         {type: 'text', readOnly:true},
@@ -95,6 +95,7 @@
                         {type: 'text', readOnly:true},
                         {type: 'text', readOnly:true},
                         {type: 'hidden', readOnly:true},
+                        {type: 'text', readOnly:true},
                     ]
                 });
             }

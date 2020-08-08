@@ -74,7 +74,7 @@ if(isset($_POST["idPro"]))
   if (count($idPro) > 0){
     for ($i=0; $i < count($idPro); $i++) {
       if($original[$i] == $nuevoTotal[$i] && $original[$i] > 0){
-        $queryPrd = "SELECT * from sco_productosdespachos where id = '".$idPro[$i]."'";
+        $queryPrd = "SELECT * from sco_productosdespachos where id = '".$idPro[$i]."' AND deleted = 0";
         $objs = $GLOBALS['db']->query($queryPrd, true);
         while($row = $GLOBALS['db']->fetchByAssoc($objs))
         {
@@ -82,12 +82,29 @@ if(isset($_POST["idPro"]))
           $id_ProductoDespacho = create_guid();
           //Insertamos el nuevo PRODUCTO DESPACHO
           $productoDespacho = "INSERT INTO sco_productosdespachos
-            (id, name,prdes_codaio,prdes_cantidad,prdes_unidad,prdes_idproductos_co,assigned_user_id,prdes_descripcion,iddivision_c,idregional_c,idamercado_c)
+            (
+            id, 
+            name,
+            prdes_codaio,
+            prdes_cantidad,
+            prdes_unidad,
+            prdes_idproductos_co,
+            assigned_user_id,
+            prdes_descripcion,
+            iddivision_c,
+            idregional_c,
+            idamercado_c,
+            prdes_desc,
+            prdes_descmonto,
+            prdes_nomproyco,
+            prdes_tipocotiza,
+            prdes_idproductocotiazdo
+            )
             VALUES
             (
               '".$id_ProductoDespacho."',
               '".$row["name"]."',
-              '0',
+              '".$row["prdes_codaio"]."',
               '".$nuevoTotal[$i]."',
               '".$row["prdes_unidad"]."',
               '".$row["prdes_idproductos_co"]."',
@@ -95,7 +112,12 @@ if(isset($_POST["idPro"]))
               '".$row["prdes_descripcion"]."',
               '".$current_user->iddivision_c."',
               '".$current_user->idregional_c."',
-              '".$current_user->idamercado_c."'
+              '".$current_user->idamercado_c."',
+              '".$row["prdes_desc"]."',
+              '".$row["prdes_descmonto"]."',
+              '".$row["prdes_nomproyco"]."',
+              '".$row["prdes_tipocotiza"]."',
+              '".$row["prdes_idproductocotiazdo"]."'
             )";
           $GLOBALS['db']->query($productoDespacho, true);
           //Creando ID para pa relacion
@@ -141,12 +163,27 @@ if(isset($_POST["idPro"]))
             $id_ProductoDespacho = create_guid();
             //Insertamos el nuevo PRODUCTO DESPACHO
             $productoDespacho = "INSERT INTO sco_productosdespachos
-              (id, name,prdes_codaio,prdes_cantidad,prdes_unidad,prdes_idproductos_co,assigned_user_id,prdes_descripcion,iddivision_c,idregional_c,idamercado_c)
+              (id, 
+              name,
+              prdes_codaio,
+              prdes_cantidad,
+              prdes_unidad,
+              prdes_idproductos_co,
+              assigned_user_id,
+              prdes_descripcion,
+              iddivision_c,
+              idregional_c,
+              idamercado_c,
+              prdes_desc,
+              prdes_descmonto,
+              prdes_nomproyco,
+              prdes_tipocotiza,
+              prdes_idproductocotiazdo)
               VALUES
               (
                 '".$id_ProductoDespacho."',
                 '".$row["name"]."',
-                '0',
+                '".$row["prdes_codaio"]."',
                 '".$nuevoTotal[$i]."',
                 '".$row["prdes_unidad"]."',
                 '".$row["prdes_idproductos_co"]."',
@@ -154,7 +191,12 @@ if(isset($_POST["idPro"]))
                 '".$row["prdes_descripcion"]."',
                 '".$current_user->iddivision_c."',
                 '".$current_user->idregional_c."',
-                '".$current_user->idamercado_c."'
+                '".$current_user->idamercado_c."',
+                '".$row["prdes_desc"]."',
+                '".$row["prdes_descmonto"]."',
+                '".$row["prdes_nomproyco"]."',
+                '".$row["prdes_tipocotiza"]."',
+                '".$row["prdes_idproductocotiazdo"]."'
               )";
             $GLOBALS['db']->query($productoDespacho, true);
             //Creando ID para la relacion

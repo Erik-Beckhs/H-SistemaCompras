@@ -26,12 +26,12 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 				    <ul class="nav">
 				        <li class="nav-item">
 				          <span class="nav-link" href="#step-1">
-				            <strong><span class="suitepicon suitepicon-module-aor-reports"></span></strong> <br>Consolidacion
+				           Consolidacion
 				          </span>
 				        </li>
 				        <li class="nav-item">
 				          <span class="nav-link" href="#step-2">
-				            <strong><span class="suitepicon suitepicon-module-outcomebymonthdashlet"></span></strong> <br>Orden de Compra
+				      		Orden de Compra
 				          </span>
 				        </li>            
 				    </ul>
@@ -68,7 +68,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 											</div>											
 										</div>										
 										
-										<div class="col-sm-2">
+										<div class="col-sm-3">
 											<div class="input-group">
 												<div class="input-group">
 													<span class="input-group-addon">Cod. Proveedor</span>
@@ -99,10 +99,8 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 												</div>
 											</div>
 										</div>
-										<div class="col-sm-1">
-										</div>
 									</div>
-									</br>
+											
 									<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="modalMensaje">
 										<div class="modal-dialog modal-md" role="document">
 											<div class="modal-content">
@@ -160,27 +158,25 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 										<div class="col-md-6 table-responsive">
 											<div class="panel panel-info">
 					                            <div class="panel-heading">
-					                                Productos Consolidados
+					                                <center>Productos Consolidados</center>
 					                            </div>
-					                            <div class="panel-body">
-					                                <div class="detail view  detail508 expanded">
-					                                     <div class="totales">
-															<button class="btn izquierda" onclick="regresarTodo()"><<</button>
-															<div class="cantidades2">
-															<label>Total FOB</label> <input type="number" id="totalFob2" value="0"> 
-															<label>Cant. Total</label> <input type="number" id="cantidadTabla2" value="0">
-															</div>	
-														</div>
-														<table class="list view table-responsive tableCotizacion table-striped">
-															<thead>
-																<tr>
-																<th>Nro. Cont</th><th>Familia</th><th>Cod. Proveedor</th><th>Fabricante</th><th>Descipci&oacute;n</th><th>Vendedor</th><th>Cliente</th><th>FOB</th><th>Cant. Consolidado</th><th>Sub Total</th><th></th>
-																</tr>
-															</thead>
-															<tbody id="tabla2">
-															</tbody>
-														</table>
-					                                </div>  
+					                            <div class="panel-body">					                 
+				                                     <div class="totales">
+														<button class="btn izquierda" onclick="regresarTodo()"><<</button>
+														<div class="cantidades2">
+														<label>Total FOB</label> <input type="number" id="totalFob2" value="0"> 
+														<label>Cant. Total</label> <input type="number" id="cantidadTabla2" value="0">
+														</div>	
+													</div>
+													<table class="list view table-responsive tableCotizacion table-striped">
+														<thead>
+															<tr>
+															<th>Nro. Cont</th><th>Familia</th><th>Cod. Proveedor</th><th>Fabricante</th><th>Descipci&oacute;n</th><th>Vendedor</th><th>Cliente</th><th>FOB</th><th>Cant. Consolidado</th><th>Sub Total</th><th></th>
+															</tr>
+														</thead>
+														<tbody id="tabla2">
+														</tbody>
+													</table>					                            
 					                            </div>
 					                        </div>   
 											
@@ -229,9 +225,9 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 				        // Smart Wizard
 				        $("#smartwizard").smartWizard({
 				            selected: 0,
-				            theme: "default", //default, arrows, dots, dark
+				            theme: "arrows", //default, arrows, dots, dark
 				            transition: {
-				                animation: "slide-vertical", // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
+				                animation: "slide-swing", // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
 				            },
 				            toolbarSettings: {
 				                toolbarPosition: "both" // both bottom
