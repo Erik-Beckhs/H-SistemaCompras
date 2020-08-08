@@ -121,52 +121,69 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 									</div>
 									<div class="row">
 										<div class="col-md-6 table-responsive">
-										
-										<div class="totales">
-										<div class="cantidades1">																				
-										<label>Total FOB</label> <input type="number" id="totalFob1" value="0"> 
-										<label>Cant. Total</label> <input type="number" id="cantidadTabla1" value="0">
-										</div>
-										<button class="btn derecha" onclick="enviarTodo()">>></button>
-										</div>
-											<table class="list view table-responsive tableCotizacion table-striped">
-												<thead>
-													<tr>
-														<th>Nro. Cont</th>
-														<th>Familia</th>
-														<th>Cod. Proveedor</th>
-														<th>Fabricante</th>
-														<th>Descipci&oacute;n</th>
-														<th>Vendedor</th>
-														<th>Cliente</th>
-														<th>Cantidad</th>
-														<th>FOB</th>
-														
-														<th>Sub Total</th>
-														<th></th>
-													</tr>
-												</thead>
-												<tbody id="tabla1">
-												</tbody>
-											</table>
+											<div class="panel panel-success">
+								                <div class="panel-heading">
+								                    <center>Productos Cotizados CRM Ventas</center>
+								                </div>
+								                <div class="panel-body">
+								                    <div class="totales">
+														<div class="cantidades1">						
+															<label>Total FOB</label> <input type="number" id="totalFob1" value="0"> 
+															<label>Cant. Total</label> <input type="number" id="cantidadTabla1" value="0">
+														</div>
+														<button class="btn derecha" onclick="enviarTodo()">>></button>
+													</div>
+													<table class="list view table-responsive tableCotizacion table-striped">
+														<thead>
+															<tr>
+																<th>Nro. Cont</th>
+																<th>Familia</th>
+																<th>Cod. Proveedor</th>
+																<th>Fabricante</th>
+																<th>Descipci&oacute;n</th>
+																<th>Vendedor</th>
+																<th>Cliente</th>
+																<th>Cantidad</th>
+																<th>FOB</th>
+																
+																<th>Sub Total</th>
+																<th></th>
+															</tr>
+														</thead>
+														<tbody id="tabla1">
+														</tbody>
+													</table>
+								                </div>
+								            </div> 
+											
 										</div>
 										<div class="col-md-6 table-responsive">
-										<div class="totales">
-											<button class="btn izquierda" onclick="regresarTodo()"><<</button>
-											<div class="cantidades2">
-											<label>Total FOB</label> <input type="number" id="totalFob2" value="0"> 
-											<label>Cant. Total</label> <input type="number" id="cantidadTabla2" value="0">
-											</div>	
-										</div>
-										<table class="list view table-responsive tableCotizacion table-striped">
-										<thead>
-											<tr>
-												<th>Nro. Cont</th><th>Familia</th><th>Cod. Proveedor</th><th>Fabricante</th><th>Descipci&oacute;n</th><th>Vendedor</th><th>Cliente</th><th>FOB</th><th>Cant. Consolidado</th><th>Sub Total</th><th></th>
-											</tr>
-										</thead>
-										<tbody id="tabla2">
-										</tbody>
-									</table>
+											<div class="panel panel-info">
+					                            <div class="panel-heading">
+					                                Productos Consolidados
+					                            </div>
+					                            <div class="panel-body">
+					                                <div class="detail view  detail508 expanded">
+					                                     <div class="totales">
+															<button class="btn izquierda" onclick="regresarTodo()"><<</button>
+															<div class="cantidades2">
+															<label>Total FOB</label> <input type="number" id="totalFob2" value="0"> 
+															<label>Cant. Total</label> <input type="number" id="cantidadTabla2" value="0">
+															</div>	
+														</div>
+														<table class="list view table-responsive tableCotizacion table-striped">
+															<thead>
+																<tr>
+																<th>Nro. Cont</th><th>Familia</th><th>Cod. Proveedor</th><th>Fabricante</th><th>Descipci&oacute;n</th><th>Vendedor</th><th>Cliente</th><th>FOB</th><th>Cant. Consolidado</th><th>Sub Total</th><th></th>
+																</tr>
+															</thead>
+															<tbody id="tabla2">
+															</tbody>
+														</table>
+					                                </div>  
+					                            </div>
+					                        </div>   
+											
 										</div>
 									</div>
 								</div>
