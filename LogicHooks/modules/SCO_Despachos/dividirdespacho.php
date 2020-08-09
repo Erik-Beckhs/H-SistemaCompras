@@ -222,7 +222,7 @@ div#paginacion {padding-left: 30%;}
 </style>
 <input type="hidden" id="idOrdenCompra" value="">
 <div class="modal fade" id="modalDivir" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-  <div class="modal-dialog" style="width: 90% !important;">
+  <div class="modal-dialog" style="width: 95% !important;">
     <div class="modal-content">
       <div class="modal-header" style="background-color:#003C79 !important; color:#ffffff!important;">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
