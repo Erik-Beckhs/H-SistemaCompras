@@ -95,6 +95,7 @@ function buscaproy(nomproy, row) {
 
 function buscaind(pronum) {
     var nomp = document.getElementById('pro_nombre' + pronum).value;
+    nomp = nomp.trim();
     $.ajax({
         type: 'get',
         url: 'index.php?to_pdf=true&module=SCO_Productos&action=buscap',
@@ -109,6 +110,7 @@ function buscaind(pronum) {
                 if (sqlprod.length == 1) {
                   $('#producto_id' + pronum).val(sqlprod[0]['id']);
                   $('#pro_nombre' + pronum).val(sqlprod[0]['name']);
+                  $('#pro_codaio' + pronum).val(sqlprod[0]['proge_codaio']);
                   $('#pro_unidad' + pronum).val(sqlprod[0]['proge_unidad']);
                   $('#pro_descripcion' + pronum).val(sqlprod[0]['proge_nompro'].replace(/&quot;/g,'\"').replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
                   $('#pro_precio' + pronum).val(sqlprod[0]['proge_preciounid']);
@@ -140,6 +142,7 @@ function buscaind(pronum) {
                 if($('#pro_nombre' + pronum).val() != ''){
                   alert('El Codigo de Proveedor no existe');
                 }
+                $('#proge_codaio' + pronum).val('');
                 $('#producto_id' + pronum).val('');
                 $('#pro_unidad' + pronum).val('');
                 $('#pro_descripcion' + pronum).val('');
@@ -165,6 +168,7 @@ function codproducto(index,num,tipo) {
   if (tipo == 0) {
     $("#codprdup").modal("hide");
     $('#producto_id' + num).val(dataArray[index]['id']);
+    $('#pro_codaio' + num).val(dataArray[index]['proge_codaio']);
     $('#pro_unidad' + num).val(dataArray[index]['proge_unidad']);
     $('#pro_descripcion' + num).val(dataArray[index]['proge_nompro'].replace(/&quot;/g,'\"').replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
     $('#pro_precio' + num).val(dataArray[index]['proge_preciounid']);

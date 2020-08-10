@@ -216,6 +216,7 @@ class SCO_ProductosViewEdit extends ViewEdit {
               $('#proy_id'+i).val(d[10]);
               $('#tipo_proy'+i).val(d[11]);
               $('#pro_codaio'+i).val(d[12]);
+              $('#pro_idproductocotizado'+i).val(d[13]);
             }
           }
         }
@@ -316,7 +317,7 @@ class SCO_ProductosViewEdit extends ViewEdit {
       $('#my').jexcel({
         data:data,
         onchange:update,
-        colHeaders: ['Cod Prov','Descripcion', 'Unidad','Cantidad', 'Prec Uni','Desc %','Desc Valor', 'Sub Total', 'Proy / CO','idpro','idproy','T / Proy','Cod Aio'],
+        colHeaders: ['Cod. Prov / Cod. SAP','Descripcion', 'Unidad','Cantidad', 'Prec Uni','Desc %','Desc Valor', 'Sub Total', 'Proy / CO','idpro','idproy','T / Proy','Cod Aio','pro_idproductocotizado'],
         colWidths: [ 150, 300, 60, 70, 80, 80, 80, 80, 100, 50, 50, 50, 50 ],
         columns: [
             { type: 'text'},
@@ -332,6 +333,7 @@ class SCO_ProductosViewEdit extends ViewEdit {
             { type: 'hidden'},
             { type: 'text', readOnly:true},
             { type: 'text', readOnly:true},
+            { type: 'text', readOnly:false},
           ]
       });
       $('#9-0').css('display','none');
