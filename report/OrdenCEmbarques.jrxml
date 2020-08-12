@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2018-07-09T15:23:50 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="OrdenCEmbarques" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d7ac4454-ae50-4809-8883-59eb78296b25">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="crm"/>
+	<parameter name="ide" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+	oc.name as ordenCompra, 
+    oc.orc_tcmoneda as moneda,
+    oc.orc_depais as pais,
+    oc.orc_tcinco as incot,
+    prov.prv_codaio as codprov,
+    if(LENGTH(prov.name)>6, prov.name,'0') as proveedor,
+    if(LENGTH(prods.name)>6, prods.name,'0') as producto,
+    prods.prdes_descripcion as pro_descripcion,
+    prods.prdes_cantidad,
+    prods.prdes_unidad
+from suitecrm.sco_ordencompra oc
+INNER JOIN suitecrm.sco_proveedor_sco_ordencompra_c pvoc ON pvoc.sco_proveedor_sco_ordencomprasco_ordencompra_idb = oc.id 
+INNER JOIN suitecrm.sco_proveedor prov ON prov.id = pvoc.sco_proveedor_sco_ordencomprasco_proveedor_ida 
+inner join suitecrm.sco_despachos_sco_ordencompra_c deor on deor.sco_despachos_sco_ordencomprasco_ordencompra_ida = oc.id
+inner join suitecrm.sco_despachos des on des.id = deor.sco_despachos_sco_ordencomprasco_despachos_idb 
+inner join suitecrm.sco_despachos_sco_productosdespachos_c despro on despro.sco_despachos_sco_productosdespachossco_despachos_ida = des.id
+inner join suitecrm.sco_productosdespachos prods on prods.id = despro.sco_despachos_sco_productosdespachossco_productosdespachos_idb
+inner join suitecrm.sco_embarque_sco_despachos_c emdes on emdes.sco_embarque_sco_despachossco_despachos_idb = des.id
+inner join suitecrm.sco_embarque emb on emb.id = emdes.sco_embarque_sco_despachossco_embarque_ida
+WHERE emb.id = $P{ide} and des.deleted = 0]]>
+	</queryString>
+	<field name="ordenCompra" class="java.lang.String"/>
+	<field name="moneda" class="java.lang.String"/>
+	<field name="pais" class="java.lang.String"/>
+	<field name="incot" class="java.lang.String"/>
+	<field name="codprov" class="java.lang.String"/>
+	<field name="proveedor" class="java.lang.String"/>
+	<field name="producto" class="java.lang.String"/>
+	<field name="pro_descripcion" class="java.lang.String"/>
+	<field name="prdes_cantidad" class="java.lang.Integer"/>
+	<field name="prdes_unidad" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="124" splitType="Stretch">
+			<staticText>
+				<reportElement x="40" y="0" width="100" height="18" uuid="e630703d-fc8a-4408-83b2-d37013d754a7"/>
+				<text><![CDATA[Orden de compra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="21" width="100" height="18" uuid="e45d7b1e-89cc-42af-ab72-f3e211028319"/>
+				<text><![CDATA[Codigo proveedor]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="0" width="100" height="19" uuid="dfb45d12-2d97-4f3f-abf5-4f1448021b9b"/>
+				<textFieldExpression><![CDATA[$F{ordenCompra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="21" width="100" height="18" uuid="78188256-d3c2-417e-9ec0-08cda56c9844"/>
+				<textFieldExpression><![CDATA[$F{codprov}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="140" y="40" width="100" height="40" uuid="7a07e85f-aa8b-4923-8762-be3179c4fbd6"/>
+				<text><![CDATA[1600
+601
+1000]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="80" width="100" height="19" uuid="2706b8a2-3f2d-4373-82ed-cc12adcc653c"/>
+				<text><![CDATA[Moneda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="100" width="100" height="19" uuid="d68fd398-16e4-4356-9b68-caaf2eb49d21"/>
+				<text><![CDATA[Incoterm]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="80" width="100" height="19" uuid="60b4d5e8-05f0-45d9-a2a7-e03170012e36"/>
+				<textFieldExpression><![CDATA[$F{moneda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="99" width="100" height="19" uuid="99139549-b531-4938-9e5c-a67deb007f5b"/>
+				<textFieldExpression><![CDATA[$F{incot}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="1" width="140" height="23" uuid="26e0aadf-bfbc-4849-9862-65786ffe8d29"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[Material]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="1" width="100" height="23" uuid="b73d2817-b564-4319-a35a-5c73573b3607"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[Ctd.Pedido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="1" width="50" height="23" uuid="18708d3d-bfa8-46c5-ae5d-4a4be3aab4c9"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[Txt.brv.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="1" width="30" height="23" uuid="ba56018a-6a5c-4281-80f9-f68db0803e7f"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[UMP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="1" width="30" height="23" uuid="6056497e-298a-4054-aebd-d5285217dbaf"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[Ce.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="1" width="30" height="23" uuid="02ab61c1-dfa3-4407-82b8-94afc88fc642"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[Almacen]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="1" width="30" height="23" uuid="65afbf63-9772-42e9-a804-e1f6901e03d5"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[Lote]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="1" width="30" height="23" uuid="cec4acd2-2729-49b7-8e6d-69ec2750c891"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[T]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="1" width="30" height="23" uuid="c0b9310b-3225-4dce-be21-b4b1b8f1e00b"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[Fe.entrega]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="1" width="230" height="23" uuid="4ce7c6b6-560a-4da8-9488-5a24cf42ae31"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[Prc.neto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="700" y="1" width="102" height="23" uuid="3372dc9b-d871-4b9b-a2b7-f9101dbf4464"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[MONEDA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="1" width="140" height="18" uuid="50f322db-fec1-4a04-97d1-d8bc7aa11a4a"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="140" y="1" width="50" height="18" uuid="4850774c-c17e-4afe-991f-4d5e074cba45"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="190" y="1" width="100" height="18" uuid="a024a9f1-fe6c-4c5f-8996-447a8586eaad"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{prdes_cantidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="1" width="30" height="18" uuid="cc594362-c9c7-4090-9bae-64458933d481"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="320" y="1" width="30" height="18" uuid="fc6300ef-a263-4db5-b845-b11ecd50fe60"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="1" width="30" height="18" uuid="a846c99f-48ee-42b3-9e06-b25b6c5f6b13"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="1" width="30" height="18" uuid="b30ee70c-b28f-4359-ba65-a6647a7cd34a"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="1" width="30" height="18" uuid="8cef8d78-5e65-46f0-91bf-2852059d9f83"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="1" width="30" height="18" uuid="66266bf0-9abd-404b-a188-599c5379093e"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="470" y="1" width="230" height="18" uuid="9839f86a-5a7a-4777-a8a0-9f78b97f70ff"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{prdes_unidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="700" y="1" width="102" height="18" uuid="e0f6b02b-12fb-4f95-b1bd-70a40358fe01"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{moneda}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
