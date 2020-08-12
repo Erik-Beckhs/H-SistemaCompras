@@ -136,6 +136,16 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
       var url2 = "/modules/reportes/descargaoc.php?id='.$this->bean->id.'&name='.$this->bean->name.'&nameprov='.$this->bean->orc_nomcorto.'&ejec='.time().'";
       window.open(url2,"","");
 		}
+    function showReporteGerencialDiv03(num)
+    {
+      var url1 = "/modules/reportes/reporteGerencialDiv03.php?id='.$this->bean->id.'&ejec='.time().'";
+      window.open(url1,"","width=1220,height=650");
+    }
+    function descargaReporteGerencialDiv03()
+    {
+      var url2 = "/modules/reportes/descargaReporteGerencialDiv03.php?id='.$this->bean->id.'&name='.$this->bean->name.'&nameprov='.$this->bean->orc_nomcorto.'&ejec='.time().'";
+      window.open(url2,"","");
+    }
 	</script>';
    	#script para cambio de estados
 	echo "
@@ -265,8 +275,8 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                 <b>Reporte Gerencial:</b>
               </div>        
               <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
-                  <a class="btn btn-success btn-sm" style="padding: 2px 5px;background: #42c5b4 !important;" onClick="imprimir();">Descarga Excel</a>
-                  <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
+                  <a class="btn btn-success btn-sm" style="padding: 2px 5px;background: #42c5b4 !important;" onClick="descargaReporteGerencialDiv03();">Descarga Excel</a>
+                  <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showReporteGerencialDiv03(Math.random());" value="Ver Reporte">Ver Reporte</a>
               </div>          
         </div>
       </div>
