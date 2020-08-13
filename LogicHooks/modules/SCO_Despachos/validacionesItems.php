@@ -165,4 +165,54 @@
                     ]
                 });*/
     }
+
+    //Busca el producto conectandose al Servicio SOAP de SAP para traer el item
+    function buscap(nomp, row) {
+        $.ajax({
+            type: 'get',
+            url: 'index.php?to_pdf=true&module=SCO_Productos&action=buscap',
+            data: {
+                nomp
+            },
+            success: function(data) {
+                //debugger;
+                var sqlprod = $.parseJSON(data);
+                if (Object.keys(sqlprod) != '') {
+                    if (sqlprod.length == 1) {
+                      $('#0-' + row).text(sqlprod[0]['name']);
+                      $('#1-' + row).text(sqlprod[0]['proge_nompro'].replace(/&quot;/g,'\"').replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
+                      $('#2-' + row).text(sqlprod[0]['proge_unidad']);
+                      $('#4-' + row).text(sqlprod[0]['proge_preciounid']);
+                      $('#9-' + row).text(sqlprod[0]['id']);
+                      $('#12-' + row).text(sqlprod[0]['proge_codaio']);
+                      //$('#4-'+row).text(sqlprod['proge_preciounid']);
+                      $('#0-' + row).css({
+                          'background': '#FFF',
+                          'color': '#000'
+                      });
+                    }
+                    if (sqlprod.length > 1) {
+                      //alert("codigo duplicado");
+                      var html = '';
+                      $("#codprdup").modal("show");
+                      for (var i = 0; i < sqlprod.length; i++) {
+                        html+= "<h5>"+sqlprod[i]["name"]+" "+sqlprod[i]["proge_nompro"]+" "+sqlprod[i]["proge_subgrupo"]+"-"+sqlprod[i]["proge_codaio"]+" <button type='button' name='button' class='btn btn-xs btn-success' onclick='codproducto("+i+","+row+","+"1"+")'>Seleccionar</button></h5>";
+                      }
+                      $("#duplicados").html(html);
+                      dataArray = sqlprod;
+                    }
+                } else {
+                    alert('El Codigo de Proveedor no existe');
+                    $('#0-' + row).css({
+                        'background': '#d9534f',
+                        'color': '#FFF'
+                    });
+                    $('#1-' + row).text('');
+                    $('#2-' + row).text('');
+                    $('#4-' + row).text('');
+                }
+            }
+        });
+        return (false);
+    }
 </script>

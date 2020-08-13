@@ -16,7 +16,8 @@ $hook_array['after_ui_frame'] = Array();
 $hook_array['after_ui_frame'][] = Array(1, 'vistas de orden de compra con js', 'custom/modules/SCO_OrdenCompra/viewoc.php','Clviewoc', 'Fnviewoc'); 
 $hook_array['after_relationship_delete'] = Array(); 
 $hook_array['after_relationship_delete'][] = Array(1, 'Eliminar_relacion_de_despachos', 'custom/modules/SCO_OrdenCompra/deselimina.php','Cldeselimina', 'Fndeselimina'); 
-
+$hook_array['before_delete'] = Array();
+$hook_array['before_delete'][] = Array(1, 'EliminaOrdenDeCompra', 'custom/modules/SCO_OrdenCompra/elimnaOrdenCompra.php','ClelimanOrdenCompra','Fnelimina');
 
 
 ?>
