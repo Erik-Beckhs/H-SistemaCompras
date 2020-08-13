@@ -80,15 +80,24 @@
                     if (productos[i]["prdes_numeracion"] == null) {
                         numeracion = i * 1 + 1;
                     }else{numeracion = productos[i]["prdes_numeracion"];}
-                    data[i] = [numeracion,productos[i]["name"],productos[i]["prdes_descripcion"],'',productos[i]["prdes_cantidad"],productos[i]["punitario"],(productos[i]["prdes_cantidad"] * 1 * productos[i]["punitario"]).toFixed(2),productos[i]["idPro"],productos[i]["prdes_codaio"]]
+                    data[i] = [
+                            numeracion,
+                            productos[i]["name"],
+                            productos[i]["prdes_descripcion"],
+                            '',
+                            productos[i]["prdes_cantidad"],
+                            productos[i]["punitario"],
+                            (productos[i]["prdes_cantidad"] * 1 * productos[i]["punitario"]).toFixed(2),productos[i]["idPro"],
+                            productos[i]["prdes_codaio"]
+                            ]
                 }
                 $('#productosDespacho1').jexcel({
                     data:data,
                     colHeaders: ['#','Producto','Descripcion', 'Observacion','Cantidad', 'Prec Uni','Sub toal','idProducto','Cod SAP'],
-                    colWidths: [20,50, 170, 60, 50, 80, 80,50,50],
+                    colWidths: [20,50, 170, 80, 40, 60, 60,50,50],
                     columns: [
-                        {type: 'text', readOnly:true},
-                        {type: 'text', readOnly:true},
+                        {type: 'text', readOnly:false},
+                        {type: 'text'},
                         {type: 'text', readOnly:false},
                         {type: 'text', readOnly:true},
                         {type: 'text', readOnly:true},
@@ -120,19 +129,27 @@
     function validarItems() {
         var data1 = $('#productosDespacho1').jexcel('getData');
         var data2 = $('#productosDespacho2').jexcel('getData');
+        console.log(data1.sort());
+        console.log(data2.sort());
         var arrayOrden = [];
         for (let index = 0; index < data2.length; index++) {
             for (let i = 0; i < data1.length; i++) {
-                if (data1[i][1]==data2[index][0]) {
+                console.log(data1[i][1].trim() + " == " + data2[index][0].trim());
+                console.log(data1[i][1].trim() == data2[index][0].trim());
+                if (data1[i][1].trim() == data2[index][0].trim()) {
                     arrayOrden[index]= data1[i];
                     arrayOrden[index][0] == index + 1;
                     arrayOrden[index][7] == data1[i][7];
-                    $('#productosDespacho1 #row-'+i).css( "background-color", "greenyellow" );
-                    $('#productosDespacho2 #row-'+index).css( "background-color", "greenyellow" );
+                    console.log("es verdad la condicion");
+                    $('#productosDespacho1 #row-'+i).css( "background-color", "greenyellow" );        
+                    $('#productosDespacho2 #row-'+index).css( "background-color", "greenyellow" );                 
+                }else{
+                    $('#productosDespacho1 #row-'+i).css( "background-color", "red" ); 
+                    $('#productosDespacho2 #row-'+index).css( "background-color", "red" );
                 }
             }
         }
-        $('#productosDespacho1').jexcel({
+        /*$('#productosDespacho1').jexcel({
                     data:arrayOrden,
                     colHeaders: ['#','Producto','Descripcion', 'Observacion','Cantidad', 'Prec Uni','Sub toal','idProducto'],
                     colWidths: [20,140, 150, 60, 70, 80, 80],
@@ -146,6 +163,6 @@
                         {type: 'text'},
                         {type: 'hidden'},
                     ]
-                });
+                });*/
     }
 </script>

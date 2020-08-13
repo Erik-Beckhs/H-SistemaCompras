@@ -124,6 +124,17 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
               .footable-last-visible{display:none}
         	</style>';
 	#script para cambio Reporte
+    $reporteGerencial = '
+      <div class="col-xs-12 col-sm-6 detail-view-row-item">
+          <div class="col-xs-12 col-sm-4 label col-1-label">
+            <b>Reporte Gerencial:</b>
+          </div>        
+          <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
+              <a class="btn btn-success btn-sm" style="padding: 2px 5px;background: #42c5b4 !important;" onClick="descargaReporteGerencialDiv03();">Descarga Excel</a>
+              <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showReporteGerencialDiv03(Math.random());" value="Ver Reporte">Ver Reporte</a>
+          </div>          
+      </div>
+    ';
 	echo '
 	<script>
 		function showreport(num)
@@ -269,16 +280,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                   <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
               </div>          
         </div>
-
-         <div class="col-xs-12 col-sm-6 detail-view-row-item">
-              <div class="col-xs-12 col-sm-4 label col-1-label">
-                <b>Reporte Gerencial:</b>
-              </div>        
-              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
-                  <a class="btn btn-success btn-sm" style="padding: 2px 5px;background: #42c5b4 !important;" onClick="descargaReporteGerencialDiv03();">Descarga Excel</a>
-                  <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showReporteGerencialDiv03(Math.random());" value="Ver Reporte">Ver Reporte</a>
-              </div>          
-        </div>
+        '.$reporteGerencial.'
       </div>
       ';
 			#echo $js.$st;
@@ -308,6 +310,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                   <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
               </div>          
         </div>
+        '.$reporteGerencial.'
       </div>
       ';
 			break;
@@ -349,6 +352,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                     <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
                 </div>          
           </div>
+          '.$reporteGerencial.'
         </div>
        ';
  			echo "<style>#list_subpanel_sco_ordencompra_sco_documentos .sugar_action_button{display:block;}</style>";
@@ -377,6 +381,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                   <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
               </div>          
         </div>
+        '.$reporteGerencial.'
       </div>
      ';
 			 echo $js.$st."<script>$('#list_subpanel_sco_ordencompra_sco_documentos .sugar_action_button').show();</script>";
@@ -412,6 +417,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                 <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
             </div>          
       </div>
+      '.$reporteGerencial.'
     </div>
     ';
 		echo $js.$st;
@@ -456,6 +462,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                   <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
               </div>          
         </div>
+        '.$reporteGerencial.'
       </div>
       ';
 			#echo $js.$st;
