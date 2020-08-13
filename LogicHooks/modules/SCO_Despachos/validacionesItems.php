@@ -35,14 +35,49 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <center>
-                        <button class="btn btn-xs btn-danger">Cancelar</button>
-                        <button class="btn btn-success btn-xs" onclick="validarItems()">Validar</button>
-                    </center>
-                </div>
+                </div>                             
             </div>
+            <div class="modal-footer">
+              <div class="row">
+                <div class="col-lg-6 "> 
+                    <div class="row">
+                       <br>
+                      <div class="col-lg-6 text-left">   
+                        <p class="pTotalRegistro">Total Registros: <span id="totalRegistroDes1"></span></p>
+                      </div>
+                      <div class="col-lg-3 text-left">   
+                        <p class="pTotalCantidad">Total Cantidad: <span id="totalCantidadDes1"></span></p>
+                      </div>
+                      <div class="col-lg-3 text-left">   
+                        <p class="pTotalPrecio">Total Precio: <span id="totalPrecioDes1"></span></p>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 ">   
+                    <div class="row">
+                       <br>
+                      <div class="col-lg-6 text-left">   
+                        <p class="pTotalRegistro">Total Registros: <span id="totalRegistroDes2"></span></p>
+                      </div>
+                      <div class="col-lg-3 text-left">   
+                        <p class="pTotalCantidad">Total Cantidad: <span id="totalCantidadDes2"></span></p>
+                      </div>
+                      <div class="col-lg-3 text-left">   
+                        <p class="pTotalPrecio">Total Precio: <span id="totalPrecioDes2"></span></p>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-lg-6 "> 
+                  <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>  
+                <div class="col-lg-6 ">   
+                  <button type="button" class="btn btn-sm btn-verde" onclick="validarItems()">Validar</button>
+                </div>
+              </div>
+            </div>  
         </div>
     </div>
 </div>
@@ -58,6 +93,9 @@
     .jexcel .detail tr td{color:#444;}
     .panel-info>.panel-heading {text-align: center;}
     .jexcel>tbody>tr>td.readonly {color: rgb(7 76 41 / 80%);}
+    #modalValProd p{font-size: 12px;}
+    #modalValProd button.btn.btn-sm.btn-verde {background: #28a745; color: #fff;width: 100%;}
+    #modalValProd .btn-danger{background: #dc3545;width: 100%;border: 1px solid #dc3545;}
 </style>
 <script>
     var despacho = '<?php echo $this->bean->id; ?>';
@@ -65,6 +103,7 @@
     $(document).ready(function () {
         $('#subpanel_title_sco_despachos_sco_productosdespachos').after('<div class="validar"><button class="btn btn-sm btn-success" style="position: absolute; right: 0;" onclick="modalValidar()"> Ordenar items </button></div>')
     });
+
     function modalValidar() {
         $("#modalValProd").modal("show");
           $.ajax({
@@ -91,80 +130,200 @@
                             productos[i]["prdes_codaio"]
                             ]
                 }
+
                 $('#productosDespacho1').jexcel({
                     data:data,
-                    colHeaders: ['#','Producto','Descripcion', 'Observacion','Cantidad', 'Prec Uni','Sub toal','idProducto','Cod SAP'],
-                    colWidths: [20,50, 170, 80, 40, 60, 60,50,50],
+                    onchange:update,
+                    colHeaders: ['#','Producto','Descripcion', 'Observacion','Cantidad', 'Prec Uni','Sub toal','idProducto','Cod SAP', ''],
+                    colWidths: [20, 50, 170, 80, 40, 60, 60, 50, 50, 30],
                     columns: [
                         {type: 'text', readOnly:false},
                         {type: 'text'},
                         {type: 'text', readOnly:false},
-                        {type: 'text', readOnly:true},
-                        {type: 'text', readOnly:true},
-                        {type: 'text', readOnly:true},
-                        {type: 'text', readOnly:true},
-                        {type: 'hidden', readOnly:true},
-                        {type: 'text', readOnly:true},
+                        {type: 'text', readOnly:false},
+                        {type: 'text', readOnly:false},
+                        {type: 'text', readOnly:false},
+                        {type: 'text', readOnly:false},
+                        {type: 'hidden', readOnly:false},
+                        {type: 'text', readOnly:false},
+                        {type: 'text', readOnly:false},
                     ]
                 });
+                //total cantidad de registros del listado de productos despachos
+                $('#totalRegistroDes1').text(data.length);
+
+                //total cantidad de items del listado de productos despachos
+                var b, c = 0;
+                for(var a = 0; a < data.length ; a++){
+                  b = data[a][4];              
+                  c = parseInt(b) + parseInt(c);
+                }
+                $('#totalCantidadDes1').text(c);
+
+                //total precio de subtotales del listado de productos despachos
+                for(var a = 0; a < data.length ; a++){
+                  b = data[a][6];
+                  c = parseFloat(b) + parseFloat(c);
+                }
+                //console.log($('#my tbody tr').length);                
+                $('#totalPrecioDes1').text(c.toFixed(2));
+                
             }
           });
+
+        var data2 = [['','','','','','']];
+
+        $('#productosDespacho2').jexcel({
+            data:data2,
+            colHeaders: ['Producto','Descripcion', 'Observacion','Cantidad', 'Prec Uni','Sub toal'],
+            colWidths: [ 50, 170, 60, 50, 80, 80],
+            columns: [
+                {type: 'text'},
+                {type: 'text'},
+                {type: 'text'},
+                {type: 'text'},
+                {type: 'text'},
+                {type: 'text'}
+            ]
+        });
     }
 
-    var data2 = [['','','','','','']];
-
-    $('#productosDespacho2').jexcel({
-        data:data2,
-        colHeaders: ['Producto','Descripcion', 'Observacion','Cantidad', 'Prec Uni','Sub toal'],
-        colWidths: [ 50, 170, 60, 50, 80, 80],
-        columns: [
-            {type: 'text'},
-            {type: 'text'},
-            {type: 'text'},
-            {type: 'text'},
-            {type: 'text'},
-            {type: 'text'}
-        ]
-    });
     function validarItems() {
         var data1 = $('#productosDespacho1').jexcel('getData');
         var data2 = $('#productosDespacho2').jexcel('getData');
-        console.log(data1.sort());
-        console.log(data2.sort());
+        $('#productosDespacho1 td').css( "background-color", "#fff" );
+        $('#productosDespacho2 td').css( "background-color", "#fff" );
+        console.log(data1.length);
+        console.log(data2.length);
         var arrayOrden = [];
-        for (let index = 0; index < data2.length; index++) {
-            for (let i = 0; i < data1.length; i++) {
-                console.log(data1[i][1].trim() + " == " + data2[index][0].trim());
-                console.log(data1[i][1].trim() == data2[index][0].trim());
-                if (data1[i][1].trim() == data2[index][0].trim()) {
-                    arrayOrden[index]= data1[i];
-                    arrayOrden[index][0] == index + 1;
-                    arrayOrden[index][7] == data1[i][7];
-                    console.log("es verdad la condicion");
-                    $('#productosDespacho1 #row-'+i).css( "background-color", "greenyellow" );        
-                    $('#productosDespacho2 #row-'+index).css( "background-color", "greenyellow" );                 
+        for (let filaDes1 = 0; filaDes1 < data1.length; filaDes1++) {        
+            for (let filaDes2 = 0; filaDes2 < data2.length; filaDes2++) {             
+                if (data1[filaDes1][1].trim() == data2[filaDes2][0].trim()) {
+                    //arrayOrden[filaDes2]= data1[filaDes1];
+                    //arrayOrden[filaDes2][0] == filaDes2 + 1;
+                    //arrayOrden[filaDes2][7] == data1[filaDes1][7];
+                    console.log("TRUE");
+                    console.log(data1[filaDes1][1].trim() + " - " + filaDes1 + " == " + data2[filaDes2][0].trim() + " - " + filaDes2);
+
+                    $('#productosDespacho1 #row-'+filaDes1).css( "background-color", "#CBFFC7" ); 
+                    $('#productosDespacho1 #9-'+filaDes1).text('ok');
+                    $('#productosDespacho1 #9-'+filaDes1).css( "background-color", "#CBFFC7" );
+                    $('#productosDespacho1 #2-'+filaDes1).css( "background-color", "#CBFFC7" );
+                    $('#productosDespacho1 #1-'+filaDes1).css( "background-color", "#CBFFC7" );
+                    $('#productosDespacho1 #0-'+filaDes1).text(parseInt(filaDes2)+1);
+
+                    $('#productosDespacho2 #row-'+filaDes2).css( "background-color", "#CBFFC7" );
+                    $('#productosDespacho2 #0-'+filaDes2).css( "background-color", "#CBFFC7" );
+                    break;
                 }else{
-                    $('#productosDespacho1 #row-'+i).css( "background-color", "red" ); 
-                    $('#productosDespacho2 #row-'+index).css( "background-color", "red" );
+                    //$('#productosDespacho1 #row-'+filaDes1).css( "background-color", "red" );
+                    //$('#productosDespacho2 #row-'+filaDes2).css( "background-color", "red" );
                 }
             }
         }
-        /*$('#productosDespacho1').jexcel({
-                    data:arrayOrden,
-                    colHeaders: ['#','Producto','Descripcion', 'Observacion','Cantidad', 'Prec Uni','Sub toal','idProducto'],
-                    colWidths: [20,140, 150, 60, 70, 80, 80],
-                    columns: [
-                        {type: 'text'},
-                        {type: 'text'},
-                        {type: 'text'},
-                        {type: 'text'},
-                        {type: 'text'},
-                        {type: 'text'},
-                        {type: 'text'},
-                        {type: 'hidden'},
-                    ]
-                });*/
+
+        $('#totalRegistroDes2').text(data2.length); 
+        if(data2.length == data1.length){
+           $('.pTotalRegistro').css( "color", "green" );
+        }else{
+          $('.pTotalRegistro').css( "color", "red" );
+        }
+        //total cantidad de items del listado de productos despachos
+        var b, c = 0;
+        for(var a = 0; a < data2.length ; a++){
+          b = data2[a][3];                
+          c = parseInt(b) + parseInt(c);                  
+        }
+
+        $('#totalCantidadDes2').text(c);
+        if($('#totalCantidadDes1').text() == c){
+          $('.pTotalCantidad').css( "color", "green" );
+        }else{
+          $('.pTotalCantidad').css( "color", "red" );
+        }
+        
+
+        //total precio de subtotales del listado de productos despachos
+        for(var a = 0; a < data2.length ; a++){
+          b = data2[a][5];
+          c = parseFloat(b) + parseFloat(c);
+        }
+        //console.log($('#my tbody tr').length);                
+        $('#totalPrecioDes2').text(c.toFixed(2));
     }
+
+    update = function (obj, cel, row) {
+        function checkPos(pos) {
+            return pos == producto;
+        }
+
+        val = $('#my').jexcel('getValue', $(row));
+        var col = $(cel).prop('id').split('-')[0];
+
+        if(col == 0){
+          var row = $(cel).prop('id').split('-')[1];
+          //$('#0-'+row).on('keydown',openProductPopup());
+        }
+
+        if(col == 3 || col == 4){
+          var row = $(cel).prop('id').split('-')[1];
+          //alert($(cel).prop('id'));
+          var cant = $('#3-'+row).text().trim();
+          var prec = $('#4-'+row).text().trim();
+          var tot = cant * prec;
+          $('#7-'+row).text(tot.toFixed(4));
+          $('#5-'+row).text('0.00');
+          $('#6-'+row).text('0.00');
+        }
+
+          var row = $(cel).prop('id').split('-')[1];
+          var cant = $('#3-'+row).text().trim();
+          var prec = $('#4-'+row).text().trim();
+          var tot = cant * prec;
+
+        if(col == 5){
+          var des_por = $('#5-'+row).text().trim();
+          var des_val = (tot * des_por)/100;
+          $('#6-'+row).text(des_val.toFixed(4));
+          var des_val = $('#6-'+row).text();
+          var tot_t = tot - des_val;
+          $('#7-'+row).text(tot_t.toFixed(4));
+        }
+        if (col == 6) {
+          var des_val = $('#6-'+row).text();
+          var des_por = (des_val * 100)/tot;
+          $('#5-'+row).text(des_por.toFixed(4));
+
+          var des_val = $('#6-'+row).text();
+          var tot_t = tot - des_val;
+          $('#7-'+row).text(tot_t.toFixed(4));
+        }
+
+        $('#8-'+row).bind({
+            copy : function(){
+                buscaproy($('#8-'+row).text(), row);
+            },
+        });
+          if($('#8-'+row).text() != '' && col == 8){
+            //buscaproy($('#8-'+row).text(), row);
+            alert("HOLA MUNDO");
+          }
+
+        if($('#0-'+row).text() != '' && col == 0){
+          buscap($('#0-'+row).text(), row);
+          $('#0-'+row).text()
+        }
+
+        var b = '';
+        var c = 0;
+        for(var a=0; a<$('#my tbody tr').length; a++){
+          b = $('#7-'+[a]).text();
+          c = parseFloat(b) + c;
+        }
+        //console.log($('#my tbody tr').length);
+        $('#pro_subto').val(c.toFixed(4));
+        $('#pro_total').val(c.toFixed(4));
+      }
 
     //Busca el producto conectandose al Servicio SOAP de SAP para traer el item
     function buscap(nomp, row) {
