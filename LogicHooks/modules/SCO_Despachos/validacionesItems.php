@@ -196,12 +196,16 @@
         console.log(data1.length);
         console.log(data2.length);
         var arrayOrden = [];
+        var oDiferentesDes1 = [];
+        var oDiferentesDes2 = [];
         for (let filaDes1 = 0; filaDes1 < data1.length; filaDes1++) {        
             for (let filaDes2 = 0; filaDes2 < data2.length; filaDes2++) {             
                 if (data1[filaDes1][1].trim() == data2[filaDes2][0].trim()) {
+                  var oitem = {}
                     //arrayOrden[filaDes2]= data1[filaDes1];
                     //arrayOrden[filaDes2][0] == filaDes2 + 1;
                     //arrayOrden[filaDes2][7] == data1[filaDes1][7];
+
                     console.log("TRUE");
                     console.log(data1[filaDes1][1].trim() + " - " + filaDes1 + " == " + data2[filaDes2][0].trim() + " - " + filaDes2);
 
@@ -214,13 +218,18 @@
 
                     $('#productosDespacho2 #row-'+filaDes2).css( "background-color", "#CBFFC7" );
                     $('#productosDespacho2 #0-'+filaDes2).css( "background-color", "#CBFFC7" );
+                    $('#productosDespacho2 #1-'+filaDes2).css( "background-color", "#CBFFC7" );
                     break;
                 }else{
                     //$('#productosDespacho1 #row-'+filaDes1).css( "background-color", "red" );
                     //$('#productosDespacho2 #row-'+filaDes2).css( "background-color", "red" );
+                  
+
                 }
             }
         }
+        console.log(oDiferentesDes1);
+        console.log(oDiferentesDes2);
 
         $('#totalRegistroDes2').text(data2.length); 
         if(data2.length == data1.length){
@@ -240,16 +249,21 @@
           $('.pTotalCantidad').css( "color", "green" );
         }else{
           $('.pTotalCantidad').css( "color", "red" );
-        }
-        
+        }        
 
         //total precio de subtotales del listado de productos despachos
+        var x, y = 0;
         for(var a = 0; a < data2.length ; a++){
-          b = data2[a][5];
-          c = parseFloat(b) + parseFloat(c);
+          x = data2[a][5];
+          y = parseFloat(x) + parseFloat(y);
         }
         //console.log($('#my tbody tr').length);                
-        $('#totalPrecioDes2').text(c.toFixed(2));
+        $('#totalPrecioDes2').text(y.toFixed(2));
+        if($('#totalPrecioDes1').text() == y){
+          $('.pTotalPrecio').css( "color", "green" );
+        }else{
+          $('.pTotalPrecio').css( "color", "red" );
+        }
     }
 
     update = function (obj, cel, row) {
@@ -306,7 +320,8 @@
         });
           if($('#8-'+row).text() != '' && col == 8){
             //buscaproy($('#8-'+row).text(), row);
-            alert("HOLA MUNDO");
+            //alert("HOLA MUNDO");
+            buscap($('#8-'+row).text(), row);
           }
 
         if($('#0-'+row).text() != '' && col == 0){
@@ -335,33 +350,36 @@
             },
             success: function(data) {
                 //debugger;
-                var sqlprod = $.parseJSON(data);
+                var sqlprod = $.parseJSON(data);  
+                console.log(sqlprod);              
                 if (Object.keys(sqlprod) != '') {
                     if (sqlprod.length == 1) {
-                      $('#0-' + row).text(sqlprod[0]['name']);
-                      $('#1-' + row).text(sqlprod[0]['proge_nompro'].replace(/&quot;/g,'\"').replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
-                      $('#2-' + row).text(sqlprod[0]['proge_unidad']);
-                      $('#4-' + row).text(sqlprod[0]['proge_preciounid']);
-                      $('#9-' + row).text(sqlprod[0]['id']);
-                      $('#12-' + row).text(sqlprod[0]['proge_codaio']);
+                      console.log('DATOS ' + sqlprod);
+                      alert('El item se registro exitosamente : Cod Provedor : '+ sqlprod[0]['name'] +' Descripcion:' +sqlprod[0]['proge_nompro']);
+                      //$('#0-' + row).text(sqlprod[0]['name']);
+                      //$('#1-' + row).text(sqlprod[0]['proge_nompro'].replace(/&quot;/g,'\"').replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
+                      //$('#2-' + row).text(sqlprod[0]['proge_unidad']);
+                      //$('#4-' + row).text(sqlprod[0]['proge_preciounid']);
+                      //$('#9-' + row).text(sqlprod[0]['id']);
+                      //$('#12-' + row).text(sqlprod[0]['proge_codaio']);
                       //$('#4-'+row).text(sqlprod['proge_preciounid']);
-                      $('#0-' + row).css({
-                          'background': '#FFF',
-                          'color': '#000'
-                      });
+                      //$('#0-' + row).css({
+                      //    'background': '#FFF',
+                      //    'color': '#000'
+                      //});
                     }
                     if (sqlprod.length > 1) {
                       //alert("codigo duplicado");
                       var html = '';
                       $("#codprdup").modal("show");
                       for (var i = 0; i < sqlprod.length; i++) {
-                        html+= "<h5>"+sqlprod[i]["name"]+" "+sqlprod[i]["proge_nompro"]+" "+sqlprod[i]["proge_subgrupo"]+"-"+sqlprod[i]["proge_codaio"]+" <button type='button' name='button' class='btn btn-xs btn-success' onclick='codproducto("+i+","+row+","+"1"+")'>Seleccionar</button></h5>";
+                        //html+= "<h5>"+sqlprod[i]["name"]+" "+sqlprod[i]["proge_nompro"]+" "+sqlprod[i]["proge_subgrupo"]+"-"+sqlprod[i]["proge_codaio"]+" <button type='button' name='button' class='btn btn-xs btn-success' onclick='codproducto("+i+","+row+","+"1"+")'>Seleccionar</button></h5>";
                       }
                       $("#duplicados").html(html);
                       dataArray = sqlprod;
                     }
                 } else {
-                    alert('El Codigo de Proveedor no existe');
+                    alert('El Codigo de SAP no existe');
                     $('#0-' + row).css({
                         'background': '#d9534f',
                         'color': '#FFF'

@@ -253,7 +253,7 @@ var mostrarTabla1 = function () {
         if (buscarItem(res[i]["name"], consProducto2) == false) {
           html += '<tr id="item1_' + res[i]["name"] + '">';
           html += '<td>' + res[i]["pcv_numerocotizacion"] + '</td>';
-          html += '<td>' + res[i]["pcv_familia"] + '</td>';
+          //html += '<td>' + res[i]["pcv_familia"] + '</td>';
           html += '<td>' + res[i]["pcv_codigoproveedor"] + '</td>';
           html += '<td>' + res[i]["pcv_nombreproveedor"] + '</td>';
           html += '<td>' + res[i]["pcv_descripcion"] + '</td>';
@@ -272,7 +272,7 @@ var mostrarTabla1 = function () {
           var item = verificarSaldo(res[i]["name"], consProducto2);
           html += '<tr id="item1_' + item["name"] + '">';
           html += '<td>' + item["pcv_numerocotizacion"] + '</td>';
-          html += '<td>' + item["pcv_familia"] + '</td>';
+          //html += '<td>' + item["pcv_familia"] + '</td>';
           html += '<td>' + item["pcv_codigoproveedor"] + '</td>';
           html += '<td>' + item["pcv_nombreproveedor"] + '</td>';
           html += '<td>' + item["pcv_descripcion"] + '</td>';
@@ -346,7 +346,7 @@ function enviarProducto(idProducto) {
       html += '<tr id="item2_' + dataProducto["name"] + '">';
     }
     html += '<td>' + dataProducto["pcv_numerocotizacion"] + '</td>';
-    html += '<td>' + dataProducto["pcv_familia"] + '</td>';
+    //html += '<td>' + dataProducto["pcv_familia"] + '</td>';
     html += '<td>' + dataProducto["pcv_codigoproveedor"] + '</td>';
     html += '<td>' + dataProducto["pcv_nombreproveedor"] + '</td>';
     html += '<td>' + dataProducto["pcv_descripcion"] + '</td>';
@@ -420,7 +420,7 @@ function regresarProducto(idProducto) {
     html += '<tr id="item1_' + dataProducto["name"] + '">';
   }
   html += '<td>' + dataProducto["pcv_numerocotizacion"] + '</td>';
-  html += '<td>' + dataProducto["pcv_familia"] + '</td>';
+  //html += '<td>' + dataProducto["pcv_familia"] + '</td>';
   html += '<td>' + dataProducto["pcv_codigoproveedor"] + '</td>';
   html += '<td>' + dataProducto["pcv_nombreproveedor"] + '</td>';
   html += '<td>' + dataProducto["pcv_descripcion"] + '</td>';

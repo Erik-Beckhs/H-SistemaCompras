@@ -219,6 +219,8 @@ div#paginacion {padding-left: 30%;}
 #contenido td button {border-radius: 50%;height: 25px;width: 25px;color: #fff;background: #2263a5;}
 #nuevoDespacho tr td {padding: 3px 10px;font-size: 12px;}
 #nuevoDespacho button.btn.btn-xs {background: red;color: #fff;border-radius: 50%;}
+#contenido table tbody tr td .form-control {height: 20px !important;width: 70px !important;}
+#nuevoDespacho tr td .form-control {height: 20px !important;width: 70px !important;}
 </style>
 <input type="hidden" id="idOrdenCompra" value="">
 <div class="modal fade" id="modalDivir" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
