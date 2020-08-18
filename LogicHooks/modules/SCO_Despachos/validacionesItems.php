@@ -68,7 +68,7 @@
                   </div>
                   <div class="row">                     
                     <div class="col-lg-6 text-left"> 
-                        <p class="pTotalValidacion">Registros encontrados: <span id="pTotalValidacion2"></span></p>
+                        <p class="pTotalValidacion2">Registros encontrados: <span id="pTotalValidacion2"></span></p>
                     </div>
                   </div>
               </div>
@@ -267,9 +267,11 @@
         console.log(oDiferentesDes1);
         console.log(oDiferentesDes2);
         if(oDiferentesDes2.length == data1.length){
-            $('#pTotalValidacion2').text('');
+            $('#pTotalValidacion2').text(oDiferentesDes2.length + ' / ' + data1.length + ' encontrados');
+            $('.pTotalValidacion2').css( "color", "green" );
         }else{
             $('#pTotalValidacion2').text(oDiferentesDes2.length + ' / ' + data1.length + ' encontrados');
+            $('.pTotalValidacion2').css( "color", "red" );
         }
 
         $('#totalRegistroDes2').text(data2.length); 
