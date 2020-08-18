@@ -415,6 +415,7 @@ class SCO_ProductosViewEdit extends ViewEdit {
         var pryid = $(\"#formPro input[name^='proy_id']\");
         var tproy = $(\"#formPro input[name^='tipo_proy']\");
         var aio = $(\"#formPro input[name^='pro_codaio']\");
+        var pro_idproductocotizado = $(\"#formPro input[name^='pro_idproductocotizado']\");
 
         for(var i = 0; i < pr.length; i++ ){
           var arrpro = [];
@@ -431,6 +432,7 @@ class SCO_ProductosViewEdit extends ViewEdit {
           arrpro.push(pryid[i].value);
           arrpro.push(tproy[i].value);
           arrpro.push(aio[i].value);
+          arrpro.push(pro_idproductocotizado[i].value);
           arrp[i] = arrpro;
         }
         //console.log(arrp);

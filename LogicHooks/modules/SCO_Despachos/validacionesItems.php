@@ -10,6 +10,7 @@
                 <h4 class="modal-title">Ordenar productos Despacho</h4>
             </div>
             <div class="modal-body">
+                <div id="ventanaModal"></div> 
                 <div class="col-lg-12 row">
                     <div class="col-lg-6 table-responsive">                        
                         <div class="panel panel-info">
@@ -37,47 +38,45 @@
                     </div>
                 </div>                             
             </div>
-            <div class="modal-footer">
-              <div class="row">
-                <div class="col-lg-6 "> 
-                    <div class="row">
-                       <br>
-                      <div class="col-lg-6 text-left">   
-                        <p class="pTotalRegistro">Total Registros: <span id="totalRegistroDes1"></span></p>
-                      </div>
-                      <div class="col-lg-3 text-left">   
-                        <p class="pTotalCantidad">Total Cantidad: <span id="totalCantidadDes1"></span></p>
-                      </div>
-                      <div class="col-lg-3 text-left">   
-                        <p class="pTotalPrecio">Total Precio: <span id="totalPrecioDes1"></span></p>
-                      </div>
+            <div class="row">
+              <div class="col-lg-6 "> 
+                  <div class="row">
+                     <br>
+                    <div class="col-lg-6 text-left">   
+                      <p class="pTotalRegistro">Total Registros: <span id="totalRegistroDes1"></span></p>
                     </div>
-                </div>
-                <div class="col-lg-6 ">   
-                    <div class="row">
-                       <br>
-                      <div class="col-lg-6 text-left">   
-                        <p class="pTotalRegistro">Total Registros: <span id="totalRegistroDes2"></span></p>
-                      </div>
-                      <div class="col-lg-3 text-left">   
-                        <p class="pTotalCantidad">Total Cantidad: <span id="totalCantidadDes2"></span></p>
-                      </div>
-                      <div class="col-lg-3 text-left">   
-                        <p class="pTotalPrecio">Total Precio: <span id="totalPrecioDes2"></span></p>
-                      </div>
+                    <div class="col-lg-3 text-left">   
+                      <p class="pTotalCantidad">Total Cantidad: <span id="totalCantidadDes1"></span></p>
                     </div>
-                </div>
+                    <div class="col-lg-3 text-left">   
+                      <p class="pTotalPrecio">Total Precio: <span id="totalPrecioDes1"></span></p>
+                    </div>
+                  </div>
               </div>
-              <br>
-              <div class="row">
-                <div class="col-lg-6 "> 
-                  <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancelar</button>
-                </div>  
-                <div class="col-lg-6 ">   
-                  <button type="button" class="btn btn-sm btn-verde" onclick="validarItems()">Validar</button>
-                </div>
+              <div class="col-lg-6 ">   
+                  <div class="row">
+                     <br>
+                    <div class="col-lg-6 text-left">   
+                      <p class="pTotalRegistro">Total Registros: <span id="totalRegistroDes2"></span></p>
+                    </div>
+                    <div class="col-lg-3 text-left">   
+                      <p class="pTotalCantidad">Total Cantidad: <span id="totalCantidadDes2"></span></p>
+                    </div>
+                    <div class="col-lg-3 text-left">   
+                      <p class="pTotalPrecio">Total Precio: <span id="totalPrecioDes2"></span></p>
+                    </div>
+                  </div>
               </div>
-            </div>  
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-lg-6 "> 
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancelar</button>
+              </div>  
+              <div class="col-lg-6 ">   
+                <button type="button" class="btn btn-sm btn-verde" onclick="validarItems()">Validar</button>
+              </div>
+            </div>
         </div>
     </div>
 </div>
@@ -134,7 +133,7 @@
                 $('#productosDespacho1').jexcel({
                     data:data,
                     onchange:update,
-                    colHeaders: ['#','Producto','Descripcion', 'Observacion','Cantidad', 'Prec Uni','Sub toal','idProducto','Cod SAP', ''],
+                    colHeaders: ['#','Producto','Descripcion', 'Observacion','Cantidad', 'Prec / U','Sub toal','idProducto','Cod SAP', ''],
                     colWidths: [20, 50, 170, 80, 40, 60, 60, 50, 50, 30],
                     columns: [
                         {type: 'text', readOnly:false},
@@ -175,9 +174,10 @@
 
         $('#productosDespacho2').jexcel({
             data:data2,
-            colHeaders: ['Producto','Descripcion', 'Observacion','Cantidad', 'Prec Uni','Sub toal'],
+            colHeaders: ['Producto','Descripcion', 'Observacion','Cantidad', 'Prec Uni','Sub toal','validado'],
             colWidths: [ 50, 170, 60, 50, 80, 80],
             columns: [
+                {type: 'text'},
                 {type: 'text'},
                 {type: 'text'},
                 {type: 'text'},
@@ -198,10 +198,11 @@
         var arrayOrden = [];
         var oDiferentesDes1 = [];
         var oDiferentesDes2 = [];
-        for (let filaDes1 = 0; filaDes1 < data1.length; filaDes1++) {        
-            for (let filaDes2 = 0; filaDes2 < data2.length; filaDes2++) {             
+        for (let filaDes2 = 0; filaDes2 < data2.length; filaDes2++) {        
+            for (let filaDes1 = 0; filaDes1 < data1.length; filaDes1++) {    
+              var oitem = {};
+              var oitem2 = {};         
                 if (data1[filaDes1][1].trim() == data2[filaDes2][0].trim()) {
-                  var oitem = {}
                     //arrayOrden[filaDes2]= data1[filaDes1];
                     //arrayOrden[filaDes2][0] == filaDes2 + 1;
                     //arrayOrden[filaDes2][7] == data1[filaDes1][7];
@@ -210,7 +211,7 @@
                     console.log(data1[filaDes1][1].trim() + " - " + filaDes1 + " == " + data2[filaDes2][0].trim() + " - " + filaDes2);
 
                     $('#productosDespacho1 #row-'+filaDes1).css( "background-color", "#CBFFC7" ); 
-                    $('#productosDespacho1 #9-'+filaDes1).text('ok');
+                    $('#productosDespacho1 #9-'+filaDes1).text('V');
                     $('#productosDespacho1 #9-'+filaDes1).css( "background-color", "#CBFFC7" );
                     $('#productosDespacho1 #2-'+filaDes1).css( "background-color", "#CBFFC7" );
                     $('#productosDespacho1 #1-'+filaDes1).css( "background-color", "#CBFFC7" );
@@ -218,13 +219,34 @@
 
                     $('#productosDespacho2 #row-'+filaDes2).css( "background-color", "#CBFFC7" );
                     $('#productosDespacho2 #0-'+filaDes2).css( "background-color", "#CBFFC7" );
-                    $('#productosDespacho2 #1-'+filaDes2).css( "background-color", "#CBFFC7" );
+                    $('#productosDespacho2 #1-'+filaDes2).css( "background-color", "#CBFFC7" ); 
+                    $('#productosDespacho2 #6-'+filaDes2).text('Encontrado'); 
+                    $('#productosDespacho2 #5-'+filaDes2).css( "background-color", "#CBFFC7" );                
                     break;
                 }else{
                     //$('#productosDespacho1 #row-'+filaDes1).css( "background-color", "red" );
                     //$('#productosDespacho2 #row-'+filaDes2).css( "background-color", "red" );
-                  
 
+                    oitem.nombre = data1[filaDes1][1].trim();
+                    oitem.descripcion = data1[filaDes1][2].trim();
+                    oitem.posicion = parseInt(filaDes1) + 1;
+                    oDiferentesDes1.push(oitem);
+
+                    oitem2.nombre = data1[filaDes2][1].trim();
+                    oitem2.descripcion = data1[filaDes2][2].trim();
+                    oitem2.posicion = parseInt(filaDes2) + 1;
+                    oDiferentesDes2.push(oitem2);
+
+                    if($('#productosDespacho2 #6-'+filaDes2).text() != 'Encontrado'){
+                      console.log("ESTO SE ECONTRO"+$('#productosDespacho2 #6-'+filaDes2).text());
+                      $('#productosDespacho2 #6-'+filaDes2).text('No existe');
+                      $('#productosDespacho2 #6-'+filaDes2).css( "background-color", "#ffc7c7" );
+
+                      $('#productosDespacho2 #0-'+filaDes2).css( "background-color", "#ffc7c7" );
+                      $('#productosDespacho2 #1-'+filaDes2).css( "background-color", "#ffc7c7" );
+                    }else{
+                      $('#productosDespacho2 #5-'+filaDes2).css( "background-color", "#CBFFC7" );
+                    }
                 }
             }
         }
@@ -279,39 +301,10 @@
           //$('#0-'+row).on('keydown',openProductPopup());
         }
 
-        if(col == 3 || col == 4){
-          var row = $(cel).prop('id').split('-')[1];
-          //alert($(cel).prop('id'));
-          var cant = $('#3-'+row).text().trim();
-          var prec = $('#4-'+row).text().trim();
-          var tot = cant * prec;
-          $('#7-'+row).text(tot.toFixed(4));
-          $('#5-'+row).text('0.00');
-          $('#6-'+row).text('0.00');
-        }
-
-          var row = $(cel).prop('id').split('-')[1];
-          var cant = $('#3-'+row).text().trim();
-          var prec = $('#4-'+row).text().trim();
-          var tot = cant * prec;
-
-        if(col == 5){
-          var des_por = $('#5-'+row).text().trim();
-          var des_val = (tot * des_por)/100;
-          $('#6-'+row).text(des_val.toFixed(4));
-          var des_val = $('#6-'+row).text();
-          var tot_t = tot - des_val;
-          $('#7-'+row).text(tot_t.toFixed(4));
-        }
-        if (col == 6) {
-          var des_val = $('#6-'+row).text();
-          var des_por = (des_val * 100)/tot;
-          $('#5-'+row).text(des_por.toFixed(4));
-
-          var des_val = $('#6-'+row).text();
-          var tot_t = tot - des_val;
-          $('#7-'+row).text(tot_t.toFixed(4));
-        }
+        var row = $(cel).prop('id').split('-')[1];
+        var cant = $('#3-'+row).text().trim();
+        var prec = $('#4-'+row).text().trim();
+        var tot = cant * prec;
 
         $('#8-'+row).bind({
             copy : function(){
@@ -348,32 +341,28 @@
             data: {
                 nomp
             },
-            success: function(data) {
+            success: function(data) {                
                 //debugger;
-                var sqlprod = $.parseJSON(data);  
+                var sqlprod = $.parseJSON(data);                  
                 console.log(sqlprod);              
                 if (Object.keys(sqlprod) != '') {
                     if (sqlprod.length == 1) {
-                      console.log('DATOS ' + sqlprod);
-                      alert('El item se registro exitosamente : Cod Provedor : '+ sqlprod[0]['name'] +' Descripcion:' +sqlprod[0]['proge_nompro']);
-                      //$('#0-' + row).text(sqlprod[0]['name']);
-                      //$('#1-' + row).text(sqlprod[0]['proge_nompro'].replace(/&quot;/g,'\"').replace(/&lt;/g,'<').replace(/&gt;/g,'>'));
-                      //$('#2-' + row).text(sqlprod[0]['proge_unidad']);
-                      //$('#4-' + row).text(sqlprod[0]['proge_preciounid']);
-                      //$('#9-' + row).text(sqlprod[0]['id']);
-                      //$('#12-' + row).text(sqlprod[0]['proge_codaio']);
-                      //$('#4-'+row).text(sqlprod['proge_preciounid']);
-                      //$('#0-' + row).css({
-                      //    'background': '#FFF',
-                      //    'color': '#000'
-                      //});
+                      if(sqlprod[0] == null){
+                        $('#8-' + row).css( "background-color", "#ffc7c7" );
+                      }else{
+                        //modalUpdateItemAio(sqlprod);
+                        //$('#modalUpdateItemAio').modal('show');
+                        console.log('DATOS ' + sqlprod);
+                        console.log('El item se registro exitosamente : Cod Provedor : '+ sqlprod[0]['name'] +' Descripcion:' +sqlprod[0]['proge_nompro']);
+                        $('#8-' + row).css( "background-color", "#CBFFC7" );
+                      }                                          
                     }
                     if (sqlprod.length > 1) {
                       //alert("codigo duplicado");
                       var html = '';
                       $("#codprdup").modal("show");
                       for (var i = 0; i < sqlprod.length; i++) {
-                        //html+= "<h5>"+sqlprod[i]["name"]+" "+sqlprod[i]["proge_nompro"]+" "+sqlprod[i]["proge_subgrupo"]+"-"+sqlprod[i]["proge_codaio"]+" <button type='button' name='button' class='btn btn-xs btn-success' onclick='codproducto("+i+","+row+","+"1"+")'>Seleccionar</button></h5>";
+                        
                       }
                       $("#duplicados").html(html);
                       dataArray = sqlprod;
@@ -391,5 +380,54 @@
             }
         });
         return (false);
+    }
+
+    function modalUpdateItemAio(sqlprod){
+      console.log(sqlprod)
+      var html = '';
+      html += '<div class="modal fade" id="modalUpdateItemAio">';
+      html += '    <div class="modal-dialog">';
+      html += '        <div class="modal-content">';
+      html += '            <div class="modal-header">';
+      html += '                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
+      html += '                <h4 class="modal-title">Guardar registros</h4>';
+      html += '            </div>';
+      html += '            <div class="modal-body">';
+      html += '               <center><span>Seguro que desea guardar la informacion?</span></center></br>';
+      html += '               <div class="row">';
+      html += '                   <div class="form-group"> ';
+      html += '                   <div class="col-sm-6">';
+      html += '                       Consolidacion:';
+      html += '                   </div>';
+      html += '                   <div class="col-sm-6">';
+      html += '                       <input type="text"  id="nombreConsolidacion" name="nombreConsolidacion" value="'+sqlprod[0]['name']+'" disabled>';
+      html += '                   </div>';
+      html += '                   </div>';
+      html += '               </div>';
+      html += '               <div class="row">';
+      html += '                   <div class="form-group"> ';
+      html += '                   <div class="col-sm-6">';
+      html += '                       Orden de Compra:';
+      html += '                   </div>';
+      html += '                   <div class="col-sm-6">';
+      html += '                       <input type="text"  id="nombreOc" name="nombreOc" value="'+sqlprod[0]['name']+'" disabled>';
+      html += '                   </div>';
+      html += '                   </div>';
+      html += '               </div>';
+      html += '            </div>';
+      html += '            <div class="modal-footer">';
+      html += '            <div class="row">';
+      html += '               <div class="col-sm-6">';
+      html += '                   <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancelar</button>';
+      html += '               </div>';
+      html += '               <div class="col-sm-6">';
+      html += '                   <button type="button" class="btn btn-sm btn-verde" onclick=envioDeDatos(jsonDatos);>Confirmar y Guardar</button>';
+      html += '               </div>';
+      html += '            </div>';
+      html += '        </div>';
+      html += '    </div>';
+      html += '</div>';    
+
+      $("#ventanaModal").html(html);
     }
 </script>
