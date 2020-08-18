@@ -60,7 +60,7 @@ require_once('include/nusoap/nusoap.php');
 						'".$result["IDGRUPO"]."',
 						'".$result["IDSUBGRUPO"]."'
 					);";
-	        $GLOBALS['db']->query($query3, true);
+	        		$GLOBALS['db']->query($query3, true);
 					$producto = array(	"id" => $new_idprod,
 										"name"=>$result["IDPRODFABRICA"],
 										"proge_nompro"=>$result["PRODUCTO"],
@@ -69,7 +69,7 @@ require_once('include/nusoap/nusoap.php');
 										"proge_preciounid"=>"",
 										"proge_codaio" => $result["IDPRODUCTO"],
 										"proge_subgrupo"=>$result["IDSUBGRUPO"]);
-}
+				}
 				else {
 					//echo "actualizar";
 					$query_Ap = "UPDATE sco_productoscompras

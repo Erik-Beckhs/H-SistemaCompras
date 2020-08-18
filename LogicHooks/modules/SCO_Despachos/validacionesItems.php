@@ -43,13 +43,13 @@
                   <div class="row">
                      <br>
                     <div class="col-lg-6 text-left">   
-                      <p class="pTotalRegistro">Total Registros: <span id="totalRegistroDes1"></span></p>
+                        <p class="pTotalRegistro">Total Registros: <span id="totalRegistroDes1"></span></p>
                     </div>
                     <div class="col-lg-3 text-left">   
-                      <p class="pTotalCantidad">Total Cantidad: <span id="totalCantidadDes1"></span></p>
+                        <p class="pTotalCantidad">Total Cantidad: <span id="totalCantidadDes1"></span></p>
                     </div>
                     <div class="col-lg-3 text-left">   
-                      <p class="pTotalPrecio">Total Precio: <span id="totalPrecioDes1"></span></p>
+                        <p class="pTotalPrecio">Total Precio: <span id="totalPrecioDes1"></span></p>
                     </div>
                   </div>
               </div>
@@ -57,13 +57,18 @@
                   <div class="row">
                      <br>
                     <div class="col-lg-6 text-left">   
-                      <p class="pTotalRegistro">Total Registros: <span id="totalRegistroDes2"></span></p>
+                        <p class="pTotalRegistro">Total Registros: <span id="totalRegistroDes2"></span></p>
                     </div>
                     <div class="col-lg-3 text-left">   
-                      <p class="pTotalCantidad">Total Cantidad: <span id="totalCantidadDes2"></span></p>
+                        <p class="pTotalCantidad">Total Cantidad: <span id="totalCantidadDes2"></span></p>
                     </div>
                     <div class="col-lg-3 text-left">   
-                      <p class="pTotalPrecio">Total Precio: <span id="totalPrecioDes2"></span></p>
+                        <p class="pTotalPrecio">Total Precio: <span id="totalPrecioDes2"></span></p>
+                    </div>
+                  </div>
+                  <div class="row">                     
+                    <div class="col-lg-6 text-left"> 
+                        <p class="pTotalValidacion">Registros encontrados: <span id="pTotalValidacion2"></span></p>
                     </div>
                   </div>
               </div>
@@ -210,18 +215,29 @@
                     console.log("TRUE");
                     console.log(data1[filaDes1][1].trim() + " - " + filaDes1 + " == " + data2[filaDes2][0].trim() + " - " + filaDes2);
 
+                    oitem2.nombre = data1[filaDes2][1].trim();
+                    oitem2.descripcion = data1[filaDes2][2].trim();
+                    oitem2.posicion = parseInt(filaDes2) + 1;
+                    oDiferentesDes2.push(oitem2);
+
                     $('#productosDespacho1 #row-'+filaDes1).css( "background-color", "#CBFFC7" ); 
                     $('#productosDespacho1 #9-'+filaDes1).text('V');
                     $('#productosDespacho1 #9-'+filaDes1).css( "background-color", "#CBFFC7" );
+                    $('#productosDespacho1 #6-'+filaDes1).css( "background-color", "#CBFFC7" );
+                    $('#productosDespacho1 #5-'+filaDes1).css( "background-color", "#CBFFC7" );
+                    $('#productosDespacho1 #4-'+filaDes1).css( "background-color", "#CBFFC7" );
                     $('#productosDespacho1 #2-'+filaDes1).css( "background-color", "#CBFFC7" );
                     $('#productosDespacho1 #1-'+filaDes1).css( "background-color", "#CBFFC7" );
                     $('#productosDespacho1 #0-'+filaDes1).text(parseInt(filaDes2)+1);
 
                     $('#productosDespacho2 #row-'+filaDes2).css( "background-color", "#CBFFC7" );
                     $('#productosDespacho2 #0-'+filaDes2).css( "background-color", "#CBFFC7" );
-                    $('#productosDespacho2 #1-'+filaDes2).css( "background-color", "#CBFFC7" ); 
+                    $('#productosDespacho2 #1-'+filaDes2).css( "background-color", "#CBFFC7" );
+                    $('#productosDespacho2 #3-'+filaDes2).css( "background-color", "#CBFFC7" );
+                    $('#productosDespacho2 #4-'+filaDes2).css( "background-color", "#CBFFC7" );
+                    $('#productosDespacho2 #5-'+filaDes2).css( "background-color", "#CBFFC7" ); 
                     $('#productosDespacho2 #6-'+filaDes2).text('Encontrado'); 
-                    $('#productosDespacho2 #5-'+filaDes2).css( "background-color", "#CBFFC7" );                
+                    $('#productosDespacho2 #6-'+filaDes2).css( "background-color", "#CBFFC7" );                
                     break;
                 }else{
                     //$('#productosDespacho1 #row-'+filaDes1).css( "background-color", "red" );
@@ -230,28 +246,31 @@
                     oitem.nombre = data1[filaDes1][1].trim();
                     oitem.descripcion = data1[filaDes1][2].trim();
                     oitem.posicion = parseInt(filaDes1) + 1;
-                    oDiferentesDes1.push(oitem);
+                    oDiferentesDes1.push(oitem);                    
 
-                    oitem2.nombre = data1[filaDes2][1].trim();
-                    oitem2.descripcion = data1[filaDes2][2].trim();
-                    oitem2.posicion = parseInt(filaDes2) + 1;
-                    oDiferentesDes2.push(oitem2);
+                    $('#productosDespacho2 #6-'+filaDes2).text('No existe');
+                    $('#productosDespacho2 #6-'+filaDes2).css( "background-color", "#ffc7c7" );
 
                     if($('#productosDespacho2 #6-'+filaDes2).text() != 'Encontrado'){
                       console.log("ESTO SE ECONTRO"+$('#productosDespacho2 #6-'+filaDes2).text());
-                      $('#productosDespacho2 #6-'+filaDes2).text('No existe');
-                      $('#productosDespacho2 #6-'+filaDes2).css( "background-color", "#ffc7c7" );
-
                       $('#productosDespacho2 #0-'+filaDes2).css( "background-color", "#ffc7c7" );
                       $('#productosDespacho2 #1-'+filaDes2).css( "background-color", "#ffc7c7" );
+                      $('#productosDespacho2 #3-'+filaDes2).css( "background-color", "#ffc7c7" );
+                      $('#productosDespacho2 #4-'+filaDes2).css( "background-color", "#ffc7c7" );
+                      $('#productosDespacho2 #5-'+filaDes2).css( "background-color", "#ffc7c7" );
                     }else{
-                      $('#productosDespacho2 #5-'+filaDes2).css( "background-color", "#CBFFC7" );
+                      $('#productosDespacho2 #6-'+filaDes2).css( "background-color", "#CBFFC7" );
                     }
                 }
             }
         }
         console.log(oDiferentesDes1);
         console.log(oDiferentesDes2);
+        if(oDiferentesDes2.length == data1.length){
+            $('#pTotalValidacion2').text('');
+        }else{
+            $('#pTotalValidacion2').text(oDiferentesDes2.length + ' / ' + data1.length + ' encontrados');
+        }
 
         $('#totalRegistroDes2').text(data2.length); 
         if(data2.length == data1.length){
