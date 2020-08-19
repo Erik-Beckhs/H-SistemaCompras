@@ -55,7 +55,9 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
  	#whole_subpanel_sco_productoscotizados_sco_ordencompra {display:none;}
 
  	</style>";
-		$htmlpp ='<div id="alertapp"></div>';
+		$htmlpp ='<div id="alertapp"></div> 
+              <div id="ventanaModal"></div>
+              ';
   	echo $sty.$htmlpp;
     $cantidad_prd = "SELECT SUM(pro_cantidad) as total_cantidad FROM sco_productos_co WHERE pro_idco = '".$this->bean->id."'; ";
     $obj_pro = $GLOBALS['db']->query($cantidad_prd, true);
@@ -142,77 +144,10 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
 		<script>
     var nombreOC = '".$this->bean->name."';
     var nombreCortoOC = '".$this->bean->orc_nomcorto."';
-		function estado(est){
-	 		var id = '".$this->bean->id."';
-	 		var num = est;
-      var respuesta = verificarObs(id,num);
-      if ( respuesta == true) {
-
-        $.ajax({
-  	 			type: 'get',
-  	 			url: 'index.php?to_pdf=true&module=SCO_OrdenCompra&action=ordencompra&id='+id,
-  	 			data: {num},
-  				beforeSend: function(){
-  					//alert('Procesando los datos');
-  					$('#btn-estados').css('pointer-events','none');
-  					$('#btn-estados').css('background','#CCC');
-            $('.loader').addClass('is-active');
-  				},
-  	 			success: function(data) {
-            $('.loader').removeClass('is-active');
-  	 				data = data.replace('$','');
-  	 				var desctot = $.parseJSON(data);
-              	desctot = desctot.split('~');
-  		 				if(desctot[0] == 100){
-                 		if(desctot[1] == 0){
-      		            	if(desctot[2] == desctot[3]){
-      		            	    console.log('conexion exitosa, num = ' + desctot);
-  		            	        location.reload(true);
-                      	}else{
-                         		$('#alertapp').append('<div class=\"alert alert-danger\"><button type=\"button\" style=\" background: transparent !important; color: #000000!important; padding-left: 10px; \" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Verifique los precios totales de <strong>Productos</strong> '+ desctot[3] + ' y <strong>Plan de Pagos</strong> '+ desctot[2] + '</div>');
-                         		$('#btn-estados').css('pointer-events','visible');
-                      	}
-                 		}else{
-                    		console.log('conexion exitosa, num = ' + desctot);
-                    		console.log('Error Proyecto');
-                    		if(desctot[1] == 1){
-                      		$('#alertapp').append('<div class=\"alert alert-danger\"><button type=\"button\" style=\" background: transparent !important; color: #000000!important; padding-left: 10px; \" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button> <strong>Tiene</strong> ' + desctot[1] + ' Proyecto mal registrado en Productos</div>');
-                      		$('#btn-estados').css('pointer-events','visible');
-                    		}else{
-                      		$('#alertapp').append('<div class=\"alert alert-danger\"><button type=\"button\" style=\" background: transparent !important; color: #000000!important; padding-left: 10px; \" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button> <strong>Tiene</strong> ' + desctot[1] + ' Proyectos mal registrados en Productos</div>');
-                       		$('#btn-estados').css('pointer-events','visible');
-                    		}
-                 		}
-            		}else{
-            			$('#alertapp').append('<div class=\"alert alert-danger\"><button type=\"button\" style=\" background: transparent !important; color: #000000!important; padding-left: 10px; \" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button> <strong>Complete el 100 % del Plan de Pagos</strong>. PP = ' + desctot['0'] + ' %  </div>');
-               		$('#btn-estados').css('pointer-events','visible');
-            		}
-          	}
-          });
-      }
-      else {
-        alert(respuesta);
-      }
-	  }
-    function verificarObs(id,estado)
-    {
-      //var estado = false;
-      var Resp = true;
-      $.ajax({
-      	  url: 'index.php?to_pdf=true&module=SCO_OrdenCompra&action=verificarEstado&id='+id,
-          type: 'GET',
-          data: {estado},
-          dataType: 'json',
-    			success:function(data) {
-    				Resp = data['r'];
-    			}
-      	});
-      return Resp;
-    }
+    var idOc = '".$this->bean->id."';		
 	</script>";
 	echo "
 	<script>
-
     $('#list_subpanel_sco_ordencompra_sco_productos #sco_ordencompra_sco_productos_nuevo_button').on('click',function(){
 		$('#idpro').fadeOut();
 		});
@@ -279,7 +214,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                 <span style="color:#333">
                   <b>'.$arr_estado[2].' </b>                  
                 </span>
-                <button id="btn-estados" class="btn btn-success btnCompra" onClick="estado(3);" >'.$arr_estado[3].'</button>
+                <button id="btn-estados" class="btn btn-success btnCompra" onClick=estado(3,idOc); >'.$arr_estado[3].'</button>
               </div>                          
         </div>
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
@@ -319,7 +254,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                     global $current_user;
                        $id_usuario = $current_user->id;
                        if($id_usuario == $this->bean->user_id_c || $id_usuario == '1'){
-                  echo '<button id="btn-estados" class="btn btn-success btnCompra" style="background:#ff4747" onClick="estado(5);" >Anular Orden</button>';
+                  echo '<button id="btn-estados" class="btn btn-success btnCompra" style="background:#ff4747" onClick="estado(5,idOc);" >Anular Orden</button>';
                      }
                   echo '
                 </div>                          
