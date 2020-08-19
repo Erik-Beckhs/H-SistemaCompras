@@ -23,6 +23,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
 
   function display(){
     echo '<link href="modules/SCO_Consolidacion/css-loader.css?'.time().'" rel="stylesheet" type="text/css" />';
+    echo '<script src="modules/SCO_OrdenCompra/viewdetail.js?'.time().'"></script>';
 	$sty = "<style>
  .btnCompra {
     /* padding: 10px !important; */
@@ -130,37 +131,17 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
             <b>Reporte Gerencial:</b>
           </div>        
           <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
-              <a class="btn btn-success btn-sm" style="padding: 2px 5px;background: #42c5b4 !important;" onClick="descargaReporteGerencialDiv03();">Descarga Excel</a>
-              <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showReporteGerencialDiv03(Math.random());" value="Ver Reporte">Ver Reporte</a>
+              <a class="btn btn-success btn-sm" style="padding: 2px 5px;background: #42c5b4 !important;" onClick=descargaReporteGerencialDiv03("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descarga Excel</a>
+              <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showReporteGerencialDiv03("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
           </div>          
       </div>
     ';
-	echo '
-	<script>
-		function showreport(num)
-		{
-			var url1 = "/modules/reportes/ordencompra.php?id='.$this->bean->id.'&ejec='.time().'";
-			window.open(url1,"","width=1220,height=650");
-		}
-		function imprimir()
-		{
-      var url2 = "/modules/reportes/descargaoc.php?id='.$this->bean->id.'&name='.$this->bean->name.'&nameprov='.$this->bean->orc_nomcorto.'&ejec='.time().'";
-      window.open(url2,"","");
-		}
-    function showReporteGerencialDiv03(num)
-    {
-      var url1 = "/modules/reportes/reporteGerencialDiv03.php?id='.$this->bean->id.'&ejec='.time().'";
-      window.open(url1,"","width=1220,height=650");
-    }
-    function descargaReporteGerencialDiv03()
-    {
-      var url2 = "/modules/reportes/descargaReporteGerencialDiv03.php?id='.$this->bean->id.'&name='.$this->bean->name.'&nameprov='.$this->bean->orc_nomcorto.'&ejec='.time().'";
-      window.open(url2,"","");
-    }
-	</script>';
+
    	#script para cambio de estados
 	echo "
 		<script>
+    var nombreOC = '".$this->bean->name."';
+    var nombreCortoOC = '".$this->bean->orc_nomcorto."';
 		function estado(est){
 	 		var id = '".$this->bean->id."';
 	 		var num = est;
@@ -276,8 +257,8 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                 <b>Reporte Compra:</b>
               </div>        
               <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
-                  <a class="btn btn-sm" style="padding: 2px 5px;background: #ffc107!important;color:#fff;"onClick="imprimir();">Descarga pdf</a>
-                  <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
+                  <a class="btn btn-sm" style="padding: 2px 5px;background: #ffc107!important;color:#fff;"onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descarga pdf</a>
+                  <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showreport("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
               </div>          
         </div>
         '.$reporteGerencial.'
@@ -306,8 +287,8 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                 <b>Reportes:</b>
               </div>        
               <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
-                  <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick="imprimir();">Descargar</a>
-                  <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
+                  <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar</a>
+                  <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showreport("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
               </div>          
         </div>
         '.$reporteGerencial.'
@@ -348,8 +329,8 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                   <b>Reportes:</b>
                 </div>        
                 <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
-                    <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick="imprimir();">Descargar</a>
-                    <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
+                    <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar</a>
+                    <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showreport("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
                 </div>          
           </div>
           '.$reporteGerencial.'
@@ -377,8 +358,8 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                 <b>Reportes:</b>
               </div>        
               <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
-                  <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick="imprimir();">Descargar</a>
-                  <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
+                  <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar</a>
+                  <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showreport("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
               </div>          
         </div>
         '.$reporteGerencial.'
@@ -413,8 +394,8 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
               <b>Reportes:</b>
             </div>        
             <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
-                <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick="imprimir();">Descargar</a>
-                <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
+                <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar</a>
+                <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showreport("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
             </div>          
       </div>
       '.$reporteGerencial.'
@@ -458,8 +439,8 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                 <b>Reportes:</b>
               </div>        
               <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
-                  <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick="imprimir();">Descargar</a>
-                  <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick="showreport(Math.random());" value="Ver Reporte">Ver Reporte</a>
+                  <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar</a>
+                  <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showreport("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
               </div>          
         </div>
         '.$reporteGerencial.'

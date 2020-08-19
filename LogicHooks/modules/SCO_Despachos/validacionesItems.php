@@ -36,52 +36,53 @@
                             </div>
                         </div>
                     </div>
-                </div>                             
-            </div>
-            <div class="row">
-              <div class="col-lg-6 "> 
-                  <div class="row">
-                     <br>
-                    <div class="col-lg-6 text-left">   
-                        <p class="pTotalRegistro">Total Registros: <span id="totalRegistroDes1"></span></p>
+                </div>
+                <div class="row">
+                <div class="col-lg-6 "> 
+                    <div class="row">
+                       <br>
+                      <div class="col-lg-6 text-left">   
+                          <p class="pTotalRegistro">Total Registros: <span id="totalRegistroDes1"></span></p>
+                      </div>
+                      <div class="col-lg-3 text-left">   
+                          <p class="pTotalCantidad">Total Cantidad: <span id="totalCantidadDes1"></span></p>
+                      </div>
+                      <div class="col-lg-3 text-left">   
+                          <p class="pTotalPrecio">Total Precio: <span id="totalPrecioDes1"></span></p>
+                      </div>
                     </div>
-                    <div class="col-lg-3 text-left">   
-                        <p class="pTotalCantidad">Total Cantidad: <span id="totalCantidadDes1"></span></p>
+                </div>
+                <div class="col-lg-6 ">   
+                    <div class="row">
+                       <br>
+                      <div class="col-lg-6 text-left">   
+                          <p class="pTotalRegistro">Total Registros: <span id="totalRegistroDes2"></span></p>
+                      </div>
+                      <div class="col-lg-3 text-left">   
+                          <p class="pTotalCantidad">Total Cantidad: <span id="totalCantidadDes2"></span></p>
+                      </div>
+                      <div class="col-lg-3 text-left">   
+                          <p class="pTotalPrecio">Total Precio: <span id="totalPrecioDes2"></span></p>
+                      </div>
                     </div>
-                    <div class="col-lg-3 text-left">   
-                        <p class="pTotalPrecio">Total Precio: <span id="totalPrecioDes1"></span></p>
+                    <div class="row">                     
+                      <div class="col-lg-6 text-left"> 
+                          <p class="pTotalValidacion2">Registros encontrados: <span id="pTotalValidacion2"></span></p>
+                      </div>
+                      
                     </div>
-                  </div>
+                </div>
               </div>
-              <div class="col-lg-6 ">   
-                  <div class="row">
-                     <br>
-                    <div class="col-lg-6 text-left">   
-                        <p class="pTotalRegistro">Total Registros: <span id="totalRegistroDes2"></span></p>
-                    </div>
-                    <div class="col-lg-3 text-left">   
-                        <p class="pTotalCantidad">Total Cantidad: <span id="totalCantidadDes2"></span></p>
-                    </div>
-                    <div class="col-lg-3 text-left">   
-                        <p class="pTotalPrecio">Total Precio: <span id="totalPrecioDes2"></span></p>
-                    </div>
-                  </div>
-                  <div class="row">                     
-                    <div class="col-lg-6 text-left"> 
-                        <p class="pTotalValidacion2">Registros encontrados: <span id="pTotalValidacion2"></span></p>
-                    </div>
-                  </div>
-              </div>
-            </div>
-            <br>
-            <div class="row">
-              <div class="col-lg-6 "> 
-                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancelar</button>
-              </div>  
-              <div class="col-lg-6 ">   
-                <button type="button" class="btn btn-sm btn-verde" onclick="validarItems()">Validar</button>
-              </div>
-            </div>
+              <br>
+              <div class="row">
+                <div class="col-lg-6 "> 
+                  <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cancelar</button>
+                </div>  
+                <div class="col-lg-6 ">   
+                  <button type="button" class="btn btn-sm btn-verde" onclick="validarItems()">Validar</button>
+                </div>
+              </div>                             
+            </div>            
         </div>
     </div>
 </div>
@@ -221,7 +222,7 @@
                     oDiferentesDes2.push(oitem2);
 
                     $('#productosDespacho1 #row-'+filaDes1).css( "background-color", "#CBFFC7" ); 
-                    $('#productosDespacho1 #9-'+filaDes1).text('V');
+                    $('#productosDespacho1 #9-'+filaDes1).text("Existe");
                     $('#productosDespacho1 #9-'+filaDes1).css( "background-color", "#CBFFC7" );
                     $('#productosDespacho1 #6-'+filaDes1).css( "background-color", "#CBFFC7" );
                     $('#productosDespacho1 #5-'+filaDes1).css( "background-color", "#CBFFC7" );
@@ -276,8 +277,10 @@
 
         $('#totalRegistroDes2').text(data2.length); 
         if(data2.length == data1.length){
-           $('.pTotalRegistro').css( "color", "green" );
+          $('.pTotalRegistro').html("Total Registros: <b> &#10004;</b>");
+          $('.pTotalRegistro').css( "color", "green" );
         }else{
+          $('.pTotalRegistro').html("Total Registros: <b> &#x1f5f4;</b>");
           $('.pTotalRegistro').css( "color", "red" );
         }
         //total cantidad de items del listado de productos despachos
