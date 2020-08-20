@@ -43,25 +43,59 @@ class SugarWidgetSubPanelProductosList extends SugarWidgetField
       $nr = 0;
       
       #Despliegue de cantidades de productos
-      $cantidades_p = "SELECT  pro_cantidad,pro_nombre,pro_descripcion,pro_saldos,pro_canttrans,pro_preciounid,pro_cantresivida,pro_nomproyco
-      FROM sco_productos_co
-      WHERE pro_idco = '".$arridoc."' AND deleted = 0 ";
+      $cantidades_p = "SELECT                        
+                      pro_nombre,
+                      pro_descripcion,
+                      pro_unidad,
+                      pro_cantidad,
+                      pro_preciounid,
+                      pro_descval,
+                      pro_descpor,
+                      pro_subtotal,
+                      pro_saldos,
+                      pro_canttrans,
+                      pro_cantresivida,
+                      pro_nomproyco,
+                      pro_tipocotiza,
+                      pro_codaio
+                    FROM sco_productos_co
+                    WHERE pro_idco = '".$arridoc."' 
+                    AND deleted = 0 
+                    ";
       $obj_cantidades_p = $GLOBALS['db']->query($cantidades_p, true);
+      #Variables para los campos
+      $arr_nombre = array();
+      $arr_pro_codaio = array();
+      $arr_descripcion = array();
+      $arr_unidad = array();
+      $arr_cantidadProducto = array();
+      $arr_preciounid  = array();
+      $arr_descval = array();
+      $arr_descpor = array();
+      $arr_subtotal = array();
       $arr_cantidades_p = array();
       $arr_recibido_p = array();
       $arr_saldos_p = array();
-      $arr_nombre = array();
-      $arr_descripcion = array();
-      $arr_cantidadProducto = array();
       $arr_nomProy = array();
+      $arr_nomProyTipo = array();
+
       while($row_cantidades_p = $GLOBALS['db']->fetchByAssoc($obj_cantidades_p)){
+        array_push($arr_nombre, $row_cantidades_p['pro_nombre']);
+        array_push($arr_nombre, $row_cantidades_p['pro_codaio']);
+        array_push($arr_descripcion, $row_cantidades_p['pro_descripcion']);
+        array_push($arr_unidad, $row_cantidades_p['pro_unidad']);        
+        array_push($arr_cantidadProducto, $row_cantidades_p['pro_cantidad']);
+        array_push($arr_preciounid, $row_cantidades_p['pro_preciounid']);
+        array_push($arr_descval, $row_cantidades_p['pro_descval']);
+        array_push($arr_descpor, $row_cantidades_p['pro_descpor']);
+        array_push($arr_subtotal, $row_cantidades_p['pro_subtotal']);
+
         array_push($arr_cantidades_p, $row_cantidades_p['pro_canttrans']);
         array_push($arr_recibido_p, $row_cantidades_p['pro_cantresivida']);
         array_push($arr_saldos_p, $row_cantidades_p['pro_saldos']);
-        array_push($arr_nombre, $row_cantidades_p['pro_nombre']);
-        array_push($arr_descripcion, $row_cantidades_p['pro_descripcion']);
-        array_push($arr_cantidadProducto, $row_cantidades_p['pro_cantidad']);
+          
         array_push($arr_nomProy, $row_cantidades_p['pro_nomproyco']);
+        array_push($arr_nomProyTipo, $row_cantidades_p['pro_tipocotiza']);
       }
       #var_dump($arr_cantidades_p);       
       #-------------------------------------#
@@ -104,7 +138,7 @@ class SugarWidgetSubPanelProductosList extends SugarWidgetField
 		    $tipoProy = $fila[11];
 				$aio = $fila[12];
         
-        if($ocEstado == 1 || $ocEstado== 6 ){
+        if($ocEstado == 1 || $ocEstado == 6 ){
           $filaDato .= "<tr>
           <td style='background:#fff;'>".$nr."</td>
           ";
@@ -114,17 +148,16 @@ class SugarWidgetSubPanelProductosList extends SugarWidgetField
             $filaDato .= "<td style='background:#ffa8a8;'><a href=\"index.php?module=SCO_ProductosCompras&action=DetailView&record=".$idpro."\">".$idpc."</a></td>";
           }   
                  
-          $filaDato .= "<td>".$descr."</td>
-          <td>".$unid."</td>
-          <td>".$cant."</td>
-          <td>".$prec."</td>
-          <td>".$dscp."</td>
-          <td>".$dscv."</td>
-          <td>".$stot."</td>
-          <td>".$idpo."</td>
-          ";
-          
-          $filaDato .= " 
+          $filaDato .= "
+          <td>".$arr_pro_codaio[$i]."</td>
+          <td>".$arr_descripcion[$i]."</td>
+          <td>".$arr_unidad[$i]."</td>
+          <td>".$arr_cantidadProducto[$i]."</td>
+          <td>".$arr_preciounid[$i]."</td>
+          <td>".$arr_descpor[$i]."</td>
+          <td>".$arr_descval[$i]."</td>
+          <td>".$arr_subtotal[$i]."</td>
+          <td>".$arr_nomProy[$i]."</td>
           <td style='Background:#fff;color:green;'>".$arr_cantidades_p[$i]."</td>
           <td style='Background:#fff;'>".$arr_recibido_p[$i]."</td>          
           <td style='Background:#fff; '><span class='text-danger'>".$arr_saldos_p[$i]."</span></td>
@@ -140,6 +173,7 @@ class SugarWidgetSubPanelProductosList extends SugarWidgetField
             $filaDato .= "<td style='background:#ffa8a8;'><a href=\"index.php?module=SCO_ProductosCompras&action=DetailView&record=".$idpro."\">".$idpc."</a></td>";
           }          
           $filaDato .= "
+          <td>".$aio."</td>
           <td>".$descr."</td>
           <td>".$unid."</td>
           <td>".$cant."</td>
@@ -156,9 +190,9 @@ class SugarWidgetSubPanelProductosList extends SugarWidgetField
       #list_subpanel_sco_ordencompra_sco_productos .list tr .oddListRowS1 td .footable-first-visible{display: none;}
       #idpro{margin-bottom: 3px;background: #FFF;font-size: 12px;}
       #idpro:hover {background: #FFF;}
-      #idpro thead tr th{background: #FFF;color:#555;padding: 5px;border-bottom: 1px solid #ccc;}
+      #idpro thead tr th{background: #e6e6e6;color:#555;padding: 5px;border-bottom: 1px solid #ccc;}
       #idpro tfoot tr td {background:#FFF;}
-      #bodyData tr td{background: #ffffffaf;}          
+      #bodyData tr td{background: #ffffffaf;}
       </style>";
 
       $htmlFoot .= '<tfoot>';
@@ -183,6 +217,7 @@ class SugarWidgetSubPanelProductosList extends SugarWidgetField
         <tr>
         <th style='width: 1%;'>#</th>
         <th style='width: 10%;'>Cod Pro</th>
+        <th style='width: 5%;'>AIO</th>
         <th style='width: 40%;'>Descripcion</th>
         <th style='width: 5%;'>Unidad</th>
         <th style='width: 5%;'>Cantidad</th>
@@ -209,6 +244,7 @@ class SugarWidgetSubPanelProductosList extends SugarWidgetField
         <tr>
         <th style='width: 1%;'>#</th>
         <th style='width: 10%;'>Cod Pro</th>
+        <th style='width: 5%;'>AIO</th>
         <th style='width: 40%;'>Descripcion</th>
         <th style='width: 5%;'>Unidad</th>
         <th style='width: 5%;'>Cantidad</th>

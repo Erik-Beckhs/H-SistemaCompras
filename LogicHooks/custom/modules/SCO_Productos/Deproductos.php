@@ -39,28 +39,41 @@ class ClDeproductos {
 
 		$objo_productos_co = $bean->db->query($productos_co, true);
 		while ($row = $GLOBALS['db']->fetchByAssoc($objo_productos_co)) {
-			$relacion = "UPDATE sco_productoscotizados_sco_proyectosco_c SET deleted = 1 WHERE sco_productoscotizados_sco_proyectoscosco_productoscotizados_ida = '".$row['id']."';";
+			$relacion = "DELETE FROM sco_productoscotizados_sco_proyectosco_c 
+			WHERE sco_productoscotizados_sco_proyectoscosco_productoscotizados_ida ='".$row['id']."';";
+
+			#"UPDATE sco_productoscotizados_sco_proyectosco_c SET deleted = 1 WHERE sco_productoscotizados_sco_proyectoscosco_productoscotizados_ida = '".$row['id']."';";
 
 			$obj_relacion = $bean->db->query($relacion, true);
 
 			//Eliminando la relacion de PRODUCTOS COMPRAS con PRODUCTOS COTIZADOS
-			$pc_pcot = "UPDATE sco_productoscompras_sco_productoscotizados_c SET deleted = 1 WHERE sco_produc4599tizados_idb = '".$row['id']."';";
+			$pc_pcot = "DELETE FROM sco_productoscompras_sco_productoscotizados_c WHERE sco_produc4599tizados_idb = '".$row['id']."';";
+
+			#"UPDATE sco_productoscompras_sco_productoscotizados_c SET deleted = 1 WHERE sco_produc4599tizados_idb = '".$row['id']."';";
 
 			$obj_pc_pcot = $bean->db->query($pc_pcot, true);
 		}
 
 		//Eliminando la relacion de PRODUCTOS COMPRAS con PROYECTOS
-		$pcom_py = "UPDATE sco_productoscompras_sco_proyectosco_c SET deleted = 1 WHERE id_ordencompra = '".$idoc."';";
+		$pcom_py = "DELETE FROM sco_productoscompras_sco_proyectosco_c WHERE id_ordencompra ='$idoc';";
+
+		#"UPDATE sco_productoscompras_sco_proyectosco_c SET deleted = 1 WHERE id_ordencompra = '".$idoc."';";
 
 		$obj_pcom_py = $bean->db->query($pcom_py, true);
 
 		//Eliminando la relacion de  ORDEN DE COMPRA con PRODUCTOS COMPRAS
-		$pcom_oc = "UPDATE sco_ordencompra_sco_productoscompras_c SET deleted = 1 WHERE sco_ordencompra_sco_productoscomprassco_ordencompra_ida = '".$idoc."' ;";
+		$pcom_oc = "DELETE FROM sco_ordencompra_sco_productoscompras_c 
+		WHERE sco_ordencompra_sco_productoscomprassco_ordencompra_ida = '$idoc';";
+
+		#"UPDATE sco_ordencompra_sco_productoscompras_c SET deleted = 1 WHERE sco_ordencompra_sco_productoscomprassco_ordencompra_ida = '".$idoc."' ;";
 
 		$obj_pcom_oc = $bean->db->query($pcom_oc, true);
 
 		//Eliminando la realcion de PRODUCTOS COTIZADOS con ORDEN DE COMPRA de acuerdo al id de la ORDEN DE COMPRA
-		$pcot_oc = "UPDATE sco_productoscotizados_sco_ordencompra_c SET deleted = 1 WHERE sco_productoscotizados_sco_ordencomprasco_ordencompra_idb = '$idoc';";
+		$pcot_oc = "
+		DELETE FROM sco_productoscotizados_sco_ordencompra_c WHERE sco_productoscotizados_sco_ordencomprasco_ordencompra_idb='$idoc';";
+
+		#UPDATE sco_productoscotizados_sco_ordencompra_c SET deleted = 1 WHERE sco_productoscotizados_sco_ordencomprasco_ordencompra_idb = '$idoc';";
 
 		$obj_relacion2 = $bean->db->query($pcot_oc, true);
 

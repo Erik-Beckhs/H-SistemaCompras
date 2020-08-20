@@ -47,21 +47,25 @@ class ClProductos
 	    $parentBean = current($relatedBeans);
 	    $idoc = $parentBean->id;
 		//Query, Eliminando el registro anterior al momento de guardar el modulo
-		$query1 = "
-			UPDATE sco_productos  
-			SET deleted = 1 
+		$query1 = 
+		"	DELETE FROM sco_productos  
 			WHERE id 
 			in(SELECT sco_ordencompra_sco_productossco_productos_idb FROM sco_ordencompra_sco_productos_c
 			WHERE deleted = 0 and sco_ordencompra_sco_productossco_ordencompra_ida = '$idoc')
 			and deleted = 0;
 			";
+		#"	UPDATE sco_productos  
+		#	SET deleted = 1 
+		#	WHERE id 
+		#	in(SELECT sco_ordencompra_sco_productossco_productos_idb FROM sco_ordencompra_sco_productos_c
+		#	WHERE deleted = 0 and sco_ordencompra_sco_productossco_ordencompra_ida = '$idoc')
+		#	and deleted = 0;
+		#	";
 		$obj1 = $bean->db->query($query1, true);	
 		//Query, Eliminando la relacion de SCO_ORDENCOMPRA con SCO_PRODUCTOS
-	    $query2 = "
-	    	UPDATE sco_ordencompra_sco_productos_c 
-			SET deleted = 1 
-			WHERE sco_ordencompra_sco_productossco_ordencompra_ida = '$idoc';
-			";
+	    $query2 =  "DELETE FROM sco_ordencompra_sco_productos_c WHERE sco_ordencompra_sco_productossco_ordencompra_ida = '$idoc';";
+
+	    #"UPDATE sco_ordencompra_sco_productos_c 			SET deleted = 1 WHERE sco_ordencompra_sco_productossco_ordencompra_ida = '$idoc';";
 		$obj2 = $bean->db->query($query2, true);	
 
 		$bean->save();

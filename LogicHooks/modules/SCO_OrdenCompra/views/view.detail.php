@@ -25,44 +25,46 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
     echo '<link href="modules/SCO_Consolidacion/css-loader.css?'.time().'" rel="stylesheet" type="text/css" />';
     echo '<script src="modules/SCO_OrdenCompra/viewdetail.js?'.time().'"></script>';
 	$sty = "<style>
- .btnCompra {
-    /* padding: 10px !important; */
-    padding: 0px 10px 0px 10px !important;
-    /* font-size: 10px !important; */
-}
-	#alertapp{
-		position: fixed;
-		float: left;
-		margin-top: 10px;
-		margin-left:35%;
-		z-index:1;
- 	}
- 	#idpro tbody tr{
-	 	border-bottom: 1px solid #ccc;
-	 	background-color: #f2f2f2;
-	}
- 	.search-form{
- 		display: none;
- 	}
- 	.label{
- 		font-size: 11.5px;
- 	}
-  .campopersonalizado{
-    margin-top:10px;
-  }
-  #list_subpanel_sco_ordencompra_sco_productos .oddListRowS1{background:red;}
- 	#whole_subpanel_sco_ordencompra_sco_productoscompras {display:none;}
- 	#whole_subpanel_sco_productoscotizados_sco_ordencompra {display:none;}
+     .btnCompra {
+        /* padding: 10px !important; */
+        padding: 0px 10px 0px 10px !important;
+        /* font-size: 10px !important; */
+    }
+  	#alertapp{
+  		position: fixed;
+  		float: left;
+  		margin-top: 10px;
+  		margin-left:35%;
+  		z-index:1;
+   	}
+   	#idpro tbody tr{
+  	 	border-bottom: 1px solid #ccc;
+  	 	background-color: #f2f2f2;
+  	}
+   	.search-form{
+   		display: none;
+   	}
+   	.label{
+   		font-size: 11.5px;
+   	}
+    .campopersonalizado{
+      margin-top:10px;
+    }
+    #list_subpanel_sco_ordencompra_sco_productos .oddListRowS1{background:red;}
+   	#whole_subpanel_sco_ordencompra_sco_productoscompras {display:none;}
+   	#whole_subpanel_sco_productoscotizados_sco_ordencompra {display:none;}
 
- 	</style>";
+   	</style>";
 		$htmlpp ='<div id="alertapp"></div> 
               <div id="ventanaModal"></div>
               ';
   	echo $sty.$htmlpp;
+    #Consultas SQL para obtecion de informacion de productos
     $cantidad_prd = "SELECT SUM(pro_cantidad) as total_cantidad FROM sco_productos_co WHERE pro_idco = '".$this->bean->id."'; ";
     $obj_pro = $GLOBALS['db']->query($cantidad_prd, true);
     $row = $GLOBALS['db']->fetchByAssoc($obj_pro);
 
+    #Suma total 
     $cantidad_pd = "SELECT SUM(pd.prdes_cantidad) as cantidad_pr
     FROM sco_productosdespachos as pd
     INNER JOIN sco_despachos_sco_productosdespachos_c as dpd
@@ -77,7 +79,12 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
     AND d.deleted = 0;";
     $obj_pd = $GLOBALS['db']->query($cantidad_pd, true);
     $row_pd = $GLOBALS['db']->fetchByAssoc($obj_pd);
-    if($row_pd['cantidad_pr']!=0){$c = $row_pd['cantidad_pr'];}else{$c = 0;}
+    
+    if($row_pd['cantidad_pr']!=0){
+      $c = $row_pd['cantidad_pr'];
+    }else{
+      $c = 0;
+    }
     $disponible = $row['total_cantidad'] - $c;
 
     $cantidades_p = "SELECT  pro_cantidad,pro_nombre,pro_descripcion,pro_saldos,pro_canttrans,pro_preciounid,pro_cantresivida,pro_nomproyco

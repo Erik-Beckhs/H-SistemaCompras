@@ -50,12 +50,12 @@ class PlanPagos
     //Operacion, Suma
     $sumatotal = $rowpp['sumapor'] + $bean->ppg_porc;
     //Validando la cantidad e porcentajes no mayor a 100
-    if(round($sumatotal, 2) > 100){            
-        echo "<script>alert('La suma de los % del Plan de Pagos no debe ser mayor que 100 %');</script>";
+    if(round($sumatotal, 2) > 100.02){            
+        echo "<script>alert('La suma de los % del Plan de Pagos no debe ser mayor que 100%, su plan de pagos suma un total de ".round($sumatotal, 2)."%');</script>";
         exit();
     }else{        
         if($bean->ppg_porc == 0){
-            echo "<script>alert('".$bean->ppg_porc." representa ningun valor');</script>";
+            echo "<script>alert('Su plan de pago es de ".$bean->ppg_porc."%, ingrese un numero mayor a 0.');</script>";
             exit();         
         }else{            
             $bean->save(); 

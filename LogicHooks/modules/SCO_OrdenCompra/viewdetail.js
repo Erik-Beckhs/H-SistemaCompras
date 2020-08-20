@@ -51,20 +51,32 @@ function estado(est,id){
 					console.log('conexion exitosa, num = ' + desctot);
 					console.log('Error Proyecto');
 					if(desctot[1] == 1){
-	  					$('#alertapp').append('<div class="alert alert-danger"><button type="button" style=" background: transparent !important; color: #000000!important; padding-left: 10px; " class="close" data-dismiss="alert" aria-hidden="true">&times;</button> <strong>Tiene</strong> ' + desctot[1] + ' Proyecto mal registrado en Productos</div>');
+	  					//$('#alertapp').append('<div class="alert alert-danger"><button type="button" style=" background: transparent !important; color: #000000!important; padding-left: 10px; " class="close" data-dismiss="alert" aria-hidden="true">&times;</button> <strong>Tiene</strong> ' + desctot[1] + ' Proyecto mal registrado en Productos</div>');
 	  					$('#btn-estados').css('pointer-events','visible');
+	  					var titulo = "Productos";				
+						var mensaje = "<strong>Error!!! Tiene " + desctot[1] + " Proyecto no registrado</strong>";
+						var cuerpo = "<br><center > <p class='text-info'><strong>Todos sus items deben estar relacionados \"registrados\" con un Proyeco / CO existente en el sistema.</strong></p>";
+						cuerpo += "<br><p > Para cambiar de estado <b>\"Borrador\"</b> a \"Aprobacion\", registre los proyectos.</p> </center>";
+						ventanaModal(data,titulo,cuerpo,mensaje);
+			  			$('#modalOrdenCompra').modal('show');
 					}else{	
-	  					$('#alertapp').append('<div class="alert alert-danger"><button type="button" style=" background: transparent !important; color: #000000!important; padding-left: 10px; " class="close" data-dismiss="alert" aria-hidden="true">&times;</button> <strong>Tiene</strong> ' + desctot[1] + ' Proyectos mal registrados en Productos</div>');
+	  					//$('#alertapp').append('<div class="alert alert-danger"><button type="button" style=" background: transparent !important; color: #000000!important; padding-left: 10px; " class="close" data-dismiss="alert" aria-hidden="true">&times;</button> <strong>Tiene</strong> ' + desctot[1] + ' Proyectos mal registrados en Productos</div>');
 	   					$('#btn-estados').css('pointer-events','visible');
+	   					var titulo = "Productos";				
+						var mensaje = "<strong>Error!!! Tiene " + desctot[1] + " Proyecto no registrado</strong>";
+						var cuerpo = "<br><center > <p class='text-info'><strong>Todos sus items deben estar relacionados \"registrados\" con un Proyeco / CO existente en el sistema.</strong></p>";
+						cuerpo += "<br><p > Para cambiar de estado <b>\"Borrador\"</b> a \"Aprobacion\", registre los proyectos.</p> </center>";
+						ventanaModal(data,titulo,cuerpo,mensaje);
+			  			$('#modalOrdenCompra').modal('show');
 					}
 				}
 			}else{
 				//$('#alertapp').append('<div class="alert alert-danger"><button type="button" style=" background: transparent !important; color: #000000!important; padding-left: 10px; " class="close" data-dismiss="alert" aria-hidden="true">&times;</button>');
 				$('#btn-estados').css('pointer-events','visible');
-				var titulo = "Modulo - Plan de Pagos";				
-				var mensaje = " La suma de los porcetajes de su <b>plan de pagos</b>, no coincide con el 100% = " + desctot['3'] + " <b>Productos</b>";
-				var cuerpo = "<center > <p class='text-info'><strong>Complete el 100 % del Plan de Pagos</strong></p>";
-				cuerpo += "<p >  Suma de % de plan de pagos = " + desctot['0'] + " %, equivalente a un monto de " + desctot['2'] + " </p> </center>";
+				var titulo = "Plan de Pagos";				
+				var mensaje = " La suma de los porcetajes de su <b>plan de pagos</b>, no coincide con el 100% = " + desctot['3'] + " del momnto toal de <b>Productos</b>";
+				var cuerpo = "<br><center > <p class='text-info'><strong>Complete el 100 % del Plan de Pagos</strong></p>";
+				cuerpo += "<br><p >  Suma de % de plan de pagos = " + desctot['0'] + " %, equivalente a un monto de " + desctot['2'] + " </p> </center>";
 				ventanaModal(data,titulo,cuerpo,mensaje);
       			$('#modalOrdenCompra').modal('show');
 			}
@@ -80,13 +92,13 @@ function verificarObs(id,estado){
 	//var estado = false;
 	var Resp = true;
 	$.ajax({
-	url: 'index.php?to_pdf=true&module=SCO_OrdenCompra&action=verificarEstado&id='+id,
-	type: 'GET',
-	data: {estado},
-	dataType: 'json',
-	success:function(data) {
-	Resp = data['r'];
-	}
+		url: 'index.php?to_pdf=true&module=SCO_OrdenCompra&action=verificarEstado&id='+id,
+		type: 'GET',
+		data: {estado},
+		dataType: 'json',
+		success:function(data) {
+			Resp = data['r'];
+		}
 	});
 	return Resp;
 }
