@@ -44,8 +44,14 @@ function estado(est,id){
 	        	    	console.log('conexion exitosa, num = ' + desctot);
 	    	        	location.reload(true);
 	  				}else{
-	     				$('#alertapp').append('<div class="alert alert-danger"><button type="button" style=" background: transparent !important; color: #000000!important; padding-left: 10px; " class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Verifique los precios totales de <strong>Productos</strong> '+ desctot[3] + ' y <strong>Plan de Pagos</strong> '+ desctot[2] + '</div>');
+	     				//$('#alertapp').append('<div class="alert alert-danger"><button type="button" style=" background: transparent !important; color: #000000!important; padding-left: 10px; " class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Verifique los precios totales de <strong>Productos</strong> '+ desctot[3] + ' y <strong>Plan de Pagos</strong> '+ desctot[2] + '</div>');
 	     				$('#btn-estados').css('pointer-events','visible');
+	     				var titulo = "Productos - Plan de Pagos";				
+						var mensaje = "Alerta!!! Los montos totales de sus Productos y Plan de pago no son iguales";
+						var cuerpo = "<br><center > <p class='text-info'><strong>Para contiuar sus montos deben ser iguales.</strong></p>";
+						cuerpo += "<br><p >  Productos precio Total = " + desctot['3'] + ", Plan de pagos suma de los Montos = " + desctot['2'] + " </p> </center>";
+						ventanaModal(data,titulo,cuerpo,mensaje);
+		      			$('#modalOrdenCompra').modal('show');
 	  				}
 				}else{
 					console.log('conexion exitosa, num = ' + desctot);
@@ -54,7 +60,7 @@ function estado(est,id){
 	  					//$('#alertapp').append('<div class="alert alert-danger"><button type="button" style=" background: transparent !important; color: #000000!important; padding-left: 10px; " class="close" data-dismiss="alert" aria-hidden="true">&times;</button> <strong>Tiene</strong> ' + desctot[1] + ' Proyecto mal registrado en Productos</div>');
 	  					$('#btn-estados').css('pointer-events','visible');
 	  					var titulo = "Productos";				
-						var mensaje = "<strong>Error!!! Tiene " + desctot[1] + " Proyecto no registrado</strong>";
+						var mensaje = "<strong>Alerta!!! Tiene " + desctot[1] + " Proyecto no registrado</strong>";
 						var cuerpo = "<br><center > <p class='text-info'><strong>Todos sus items deben estar relacionados \"registrados\" con un Proyeco / CO existente en el sistema.</strong></p>";
 						cuerpo += "<br><p > Para cambiar de estado <b>\"Borrador\"</b> a \"Aprobacion\", registre los proyectos.</p> </center>";
 						ventanaModal(data,titulo,cuerpo,mensaje);
@@ -63,7 +69,7 @@ function estado(est,id){
 	  					//$('#alertapp').append('<div class="alert alert-danger"><button type="button" style=" background: transparent !important; color: #000000!important; padding-left: 10px; " class="close" data-dismiss="alert" aria-hidden="true">&times;</button> <strong>Tiene</strong> ' + desctot[1] + ' Proyectos mal registrados en Productos</div>');
 	   					$('#btn-estados').css('pointer-events','visible');
 	   					var titulo = "Productos";				
-						var mensaje = "<strong>Error!!! Tiene " + desctot[1] + " Proyecto no registrado</strong>";
+						var mensaje = "<strong>Alerta!!! Tiene " + desctot[1] + " Proyecto no registrado</strong>";
 						var cuerpo = "<br><center > <p class='text-info'><strong>Todos sus items deben estar relacionados \"registrados\" con un Proyeco / CO existente en el sistema.</strong></p>";
 						cuerpo += "<br><p > Para cambiar de estado <b>\"Borrador\"</b> a \"Aprobacion\", registre los proyectos.</p> </center>";
 						ventanaModal(data,titulo,cuerpo,mensaje);
