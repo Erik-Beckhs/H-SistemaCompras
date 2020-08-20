@@ -17,6 +17,9 @@ class SCO_DespachosViewDetail extends ViewDetail {
  	}
 
  	function display(){
+    echo '
+    <link href="modules/SCO_Consolidacion/css-loader.css" rel="stylesheet" type="text/css" />
+    <div class="loader loader-default" data-text="Cargando"></div>';
     $html = '
     <style>.campopersonalizado{margin-top:10px;}</style>
     <div class="row detail-view-row" style="background:#FFF;">

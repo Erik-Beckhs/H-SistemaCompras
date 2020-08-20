@@ -106,7 +106,7 @@
     var despacho = '<?php echo $this->bean->id; ?>';
     var dataProductosDespacho = [];
     $(document).ready(function () {
-        $('#subpanel_title_sco_despachos_sco_productosdespachos').after('<div class="validar"><button class="btn btn-sm btn-success" style="position: absolute; right: 0;" onclick="modalValidar()"> Ordenar items </button></div>')
+        $('#subpanel_title_sco_despachos_sco_productosdespachos').after('<div class="validar"><button class="btn btn-sm btn-success" style="position: absolute; right: 0;" onclick="modalValidar()"> Ordenar items </button></div>');
     });
 
     function modalValidar() {
@@ -116,7 +116,11 @@
             url: "index.php?to_pdf=true&module=SCO_Despachos&action=mod_transporte&id=4",
             data: {despacho},
             dataType:"json",
+            beforeSend:function(){
+                $(".loader").addClass("is-active");
+            },
             success: function(productos) {
+                $(".loader").removeClass("is-active");
                 console.log(productos);
                 var data = [];
                 var numeracion = 0;
@@ -171,8 +175,10 @@
                   c = parseFloat(b) + parseFloat(c);
                 }
                 //console.log($('#my tbody tr').length);                
-                $('#totalPrecioDes1').text(c.toFixed(2));
-                
+                $('#totalPrecioDes1').text(c.toFixed(2));                
+            },
+            error: function (data) {
+              alert('ERROR, No se pudo conectar', data);
             }
           });
 
@@ -194,7 +200,11 @@
         });
     }
 
-    function validarItems() {
+    function validarItems() {        
+        $(document).ready(function () {
+            $(".loader").addClass("is-active")
+        });
+
         var data1 = $('#productosDespacho1').jexcel('getData');
         var data2 = $('#productosDespacho2').jexcel('getData');
         $('#productosDespacho1 td').css( "background-color", "#fff" );
@@ -274,7 +284,7 @@
             $('#pTotalValidacion2').text(oDiferentesDes2.length + ' / ' + data1.length + ' encontrados');
             $('.pTotalValidacion2').css( "color", "red" );
         }
-
+        $(".loader").removeClass("is-active");
         $('#totalRegistroDes2').text(data2.length); 
         if(data2.length == data1.length){
           $('.pTotalRegistro').html("Total Registros: <b> &#10004;</b>");
