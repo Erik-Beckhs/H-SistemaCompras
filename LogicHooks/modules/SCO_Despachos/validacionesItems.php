@@ -371,7 +371,7 @@
     function buscap(nomp, row) {
         $.ajax({
             type: 'get',
-            url: 'index.php?to_pdf=true&module=SCO_Productos&action=buscap',
+            url: 'index.php?to_pdf=true&module=SCO_Despachos&action=buscaProducto',
             data: {
                 nomp
             },
