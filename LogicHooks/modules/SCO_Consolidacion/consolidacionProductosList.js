@@ -250,8 +250,9 @@ var mostrarTabla1 = function () {
       var jres = [];
       var html = '';
       for (var i = 0; i < res.length; i++) {
-        if (buscarItem(res[i]["name"], consProducto2) == false) {
-          html += '<tr id="item1_' + res[i]["name"] + '">';
+        var idItem = String(res[i]["id"]).trim().replace(/-/g, "");
+        if (buscarItem(idItem, consProducto2) == false) {
+          html += '<tr id="item1_' + idItem + '">';
           html += '<td>' + res[i]["pcv_numerocotizacion"] + '</td>';
           //html += '<td>' + res[i]["pcv_familia"] + '</td>';
           html += '<td>' + res[i]["pcv_codigoproveedor"] + '</td>';
@@ -261,16 +262,16 @@ var mostrarTabla1 = function () {
           html += '<td>' + res[i]["pcv_cliente"] + '</td>';
           html += '<td>' + res[i]["pcv_cantidad"] + '</td>';
           html += '<td>' + Number.parseFloat(res[i]["pcv_preciofob"]).toFixed(2) + '</td>';
-          html += '<input type="hidden" id="cantidad_' + res[i]["name"] + '" value="' + res[i]["pcv_cantidadsaldo"] + '" max="' + res[i]["pcv_cantidadsaldo"] + '" min="0" onkeyup="validaSaldoEnlinea(' + res[i]["name"] + ',' + res[i]["pcv_cantidadsaldo"] + ')">';
-          html += '<td id="subtotal1_' + res[i]["name"] + '">' + (res[i]["pcv_cantidadsaldo"] * 1 * res[i]["pcv_preciofob"]) + '</td>';
-          html += '<td><button class="btn btn-primary btn-xs" onclick="enviarProducto(' + "'" + String(res[i]["name"]).trim() + "'" + ')">+</button></td>';
+          html += '<input type="hidden" id="cantidad_' + idItem + '" value="' + res[i]["pcv_cantidadsaldo"] + '" max="' + res[i]["pcv_cantidadsaldo"] + '" min="0" onkeyup="validaSaldoEnlinea(' + res[i]["name"] + ',' + res[i]["pcv_cantidadsaldo"] + ')">';
+          html += '<td id="subtotal1_' + idItem + '">' + (res[i]["pcv_cantidadsaldo"] * 1 * res[i]["pcv_preciofob"]) + '</td>';
+          html += '<td><button class="btn btn-primary btn-xs" onclick="enviarProducto(' + "'" + idItem + "'" + ')">+</button></td>';
           html += '</tr>';
           total1 = (total1 * 1) + (res[i]["pcv_cantidad"] * 1);
           fob1 = (fob1 * 1) + (res[i]["pcv_preciofob"] * 1 * res[i]["pcv_cantidadsaldo"]);
           jres.push(res[i]);
-        } else if (verificarSaldo(res[i]["name"], consProducto2) != false) {
-          var item = verificarSaldo(res[i]["name"], consProducto2);
-          html += '<tr id="item1_' + item["name"] + '">';
+        } else if (verificarSaldo(idItem, consProducto2) != false) {
+          var item = verificarSaldo(idItem, consProducto2);
+          html += '<tr id="item1_' + idItem + '">';
           html += '<td>' + item["pcv_numerocotizacion"] + '</td>';
           //html += '<td>' + item["pcv_familia"] + '</td>';
           html += '<td>' + item["pcv_codigoproveedor"] + '</td>';
@@ -280,9 +281,9 @@ var mostrarTabla1 = function () {
           html += '<td>' + item["pcv_cliente"] + '</td>';
           html += '<td>' + item["pcv_cantidad"] + '</td>';
           html += '<td>' + Number.parseFloat(item["pcv_preciofob"]).toFixed(2) + '</td>';
-          html += '<input type="hidden" id="cantidad_' + item["name"] + '" value="' + item["pcv_cantidadsaldo"] + '" max="' + item["pcv_cantidadsaldo"] + '" min="0" onkeyup="validaSaldoEnlinea(' + res[i]["name"] + ',' + res[i]["pcv_cantidadsaldo"] + ')">';
-          html += '<td id="subtotal1_' + item["name"] + '">' + (item["pcv_cantidadsaldo"] * 1 * item["pcv_preciofob"]) + '</td>';
-          html += '<td><button class="btn btn-primary btn-xs" onclick="enviarProducto(' + "'" + String(item["name"]).trim() + "'" + ')">+</button></td>';
+          html += '<input type="hidden" id="cantidad_' + idItem + '" value="' + item["pcv_cantidadsaldo"] + '" max="' + item["pcv_cantidadsaldo"] + '" min="0" onkeyup="validaSaldoEnlinea(' + res[i]["name"] + ',' + res[i]["pcv_cantidadsaldo"] + ')">';
+          html += '<td id="subtotal1_' + idItem + '">' + (item["pcv_cantidadsaldo"] * 1 * item["pcv_preciofob"]) + '</td>';
+          html += '<td><button class="btn btn-primary btn-xs" onclick="enviarProducto(' + "'" + idItem + "'" + ')">+</button></td>';
           html += '</tr>';
           total1 = (total1 * 1) + (item["pcv_cantidad"] * 1);
           fob1 = (fob1 * 1) + (item["pcv_preciofob"] * 1 * item["pcv_cantidadsaldo"]);
@@ -310,7 +311,7 @@ function enviarProducto(idProducto) {
   if (validarSelectProveedor() == true) {
     // Eliminando item de lista de productos 1
     for (let index = 0; index < consProducto1.length; index++) {
-      if (consProducto1[index]["name"] == idProducto) {
+      if (consProducto1[index]["id"].replace(/-/g, "") == idProducto) {
         dataProducto = consProducto1[index];
         if (dataProducto["pcv_cantidadconsolidado"] == undefined) { dataProducto["pcv_cantidadconsolidado"] = 0; }
         // Verificar si la cantidad es menor al saldo
@@ -343,7 +344,7 @@ function enviarProducto(idProducto) {
     // Construción del td de tabla 2
     var html = '';
     if (buscarT2 == false) {
-      html += '<tr id="item2_' + dataProducto["name"] + '">';
+      html += '<tr id="item2_' + dataProducto["id"].replace(/-/g, "") + '">';
     }
     html += '<td>' + dataProducto["pcv_numerocotizacion"] + '</td>';
     //html += '<td>' + dataProducto["pcv_familia"] + '</td>';
@@ -355,7 +356,7 @@ function enviarProducto(idProducto) {
     html += '<td>' + Number.parseFloat(dataProducto["pcv_preciofob"]).toFixed(2) + '</td>';
     html += '<td>' + dataProducto["pcv_cantidadconsolidado"] + '</td>';
     html += '<td>' + (dataProducto["pcv_cantidadconsolidado"] * 1 * dataProducto["pcv_preciofob"]).toFixed(2) + '</td>';// sub total
-    html += '<td><button class="btn btn-danger btn-xs" onclick="regresarProducto(' + "'" + String(dataProducto["name"]).trim() + "'" + ')">-</button></td>';
+    html += '<td><button class="btn btn-danger btn-xs" onclick="regresarProducto(' + "'" + String(dataProducto["id"]).trim().replace(/-/g, "") + "'" + ')">-</button></td>';
     if (buscarT2 == false) {
       html += '</tr>';
       $('#tabla2').append(html);
@@ -399,7 +400,7 @@ function regresarProducto(idProducto) {
   var cantConsolidado = 0;
   // Eliminando item de lista de productos 2
   for (let index = 0; index < consProducto2.length; index++) {
-    if (consProducto2[index]["name"] == idProducto) {
+    if (consProducto2[index]["id"].replace(/-/g, "") == idProducto) {
       dataProducto = consProducto2[index];
       // Recalculando las cantidades
       cantConsolidado = (dataProducto["pcv_cantidadconsolidado"] * 1);
@@ -417,7 +418,7 @@ function regresarProducto(idProducto) {
   // Construción del td de tabla 2
   var html = '';
   if (buscarT1 == false) {
-    html += '<tr id="item1_' + dataProducto["name"] + '">';
+    html += '<tr id="item1_' + dataProducto["id"].replace(/-/g, "") + '">';
   }
   html += '<td>' + dataProducto["pcv_numerocotizacion"] + '</td>';
   //html += '<td>' + dataProducto["pcv_familia"] + '</td>';
@@ -428,9 +429,9 @@ function regresarProducto(idProducto) {
   html += '<td>' + dataProducto["pcv_cliente"] + '</td>';
   html += '<td>' + dataProducto["pcv_cantidad"] + '</td>';
   html += '<td>' + Number.parseFloat(dataProducto["pcv_preciofob"]).toFixed(2) + '</td>';
-  html += '<input type="hidden" id="cantidad_' + dataProducto["name"] + '" max="' + dataProducto["pcv_cantidadsaldo"] + '" value="' + dataProducto["pcv_cantidadsaldo"] + '" onkeyup="validaSaldoEnlinea(' + dataProducto["name"] + ',' + dataProducto["pcv_cantidadsaldo"] + ')">';
-  html += '<td id="subtotal1_' + dataProducto["name"] + '" >' + (dataProducto["pcv_cantidadsaldo"] * 1 * dataProducto["pcv_preciofob"]) + '</td>';
-  html += '<td><button class="btn btn-primary btn-xs" onclick="enviarProducto(' + "'" + String(dataProducto["name"]).trim() + "'" + ')">+</button></td>';
+  html += '<input type="hidden" id="cantidad_' + dataProducto["id"].replace(/-/g, "") + '" max="' + dataProducto["pcv_cantidadsaldo"] + '" value="' + dataProducto["pcv_cantidadsaldo"] + '" onkeyup="validaSaldoEnlinea(' + dataProducto["name"] + ',' + dataProducto["pcv_cantidadsaldo"] + ')">';
+  html += '<td id="subtotal1_' + dataProducto["id"].replace(/-/g, "") + '" >' + (dataProducto["pcv_cantidadsaldo"] * 1 * dataProducto["pcv_preciofob"]) + '</td>';
+  html += '<td><button class="btn btn-primary btn-xs" onclick="enviarProducto(' + "'" + String(dataProducto["id"]).trim().replace(/-/g, "") + "'" + ')">+</button></td>';
   if (buscarT1 == false) {
     html += '</tr>';
     $('#tabla1').append(html);
@@ -454,11 +455,13 @@ function regresarProducto(idProducto) {
   var totalFob2 = $('#totalFob2').val();
   totalFob2 = (totalFob2 * 1) - (cantConsolidado * 1 * dataProducto["pcv_preciofob"]);
   $('#totalFob2').val(Number.parseFloat(totalFob2).toFixed(2));
+  $('#precioTotalFob').val(Number.parseFloat(totalFob2).toFixed(2));
   fobTotal = totalFob2;
   // Cantidad
   var cantTotal2 = $('#cantidadTabla2').val();
   cantTotal2 = (cantTotal2 * 1) - (cantConsolidado * 1);
   $('#cantidadTabla2').val(cantTotal2);
+  $('#cantidadTotal').val(cantTotal2);
   cantTotal = cantTotal2;
   validarProveedor()
 }
@@ -469,7 +472,7 @@ function enviarTodo() {
     array.push(consProducto1[index]);
   }
   for (let index = 0; index < array.length; index++) {
-    enviarProducto(array[index]["name"]);
+    enviarProducto(array[index]["id"].replace(/-/g, ""));
   }
 }
 // Regreso masivo
@@ -479,7 +482,7 @@ function regresarTodo() {
     array.push(consProducto2[index]);
   }
   for (let index = 0; index < array.length; index++) {
-    regresarProducto(array[index]["name"]);
+    regresarProducto(array[index]["id"].replace(/-/g, ""));
 
   }
 }
@@ -487,7 +490,7 @@ function regresarTodo() {
 function buscarItem(idItem, tabla) {
   var encontrado = false;
   for (let index = 0; index < tabla.length; index++) {
-    if (tabla[index]["name"] == idItem) {
+    if (tabla[index]["id"].replace(/-/g, "") == idItem) {
       encontrado = true;
     }
   }
@@ -497,7 +500,7 @@ function buscarItem(idItem, tabla) {
 function verificarSaldo(idItem, tabla) {
   var item = false;
   for (let index = 0; index < tabla.length; index++) {
-    if (tabla[index]["name"] == idItem) {
+    if (tabla[index]["id"].replace(/-/g, "") == idItem) {
       if (Number(tabla[index]["pcv_cantidadsaldo"]) > 0) {
         item = tabla[index];
       }
