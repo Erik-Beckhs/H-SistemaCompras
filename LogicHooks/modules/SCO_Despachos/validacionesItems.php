@@ -135,7 +135,9 @@
                             '',
                             productos[i]["prdes_cantidad"],
                             productos[i]["punitario"],
-                            (productos[i]["prdes_cantidad"] * 1 * productos[i]["punitario"]).toFixed(2),productos[i]["idPro"],
+                            (productos[i]["prdes_cantidad"] * 1 * productos[i]["punitario"]).toFixed(2),
+                            productos[i]["prdes_idproductocotiazdo"],
+                            productos[i]["idPro"],
                             productos[i]["prdes_codaio"]
                             ]
                 }
@@ -143,8 +145,8 @@
                 $('#productosDespacho1').jexcel({
                     data:data,
                     onchange:update,
-                    colHeaders: ['#','Producto','Descripcion', 'Observacion','Cantidad', 'Prec / U','Sub toal','idProducto','Cod SAP', ''],
-                    colWidths: [20, 50, 170, 80, 40, 60, 60, 50, 50, 30],
+                    colHeaders: ['#','Producto','Descripcion', 'Observacion','Cantidad', 'Prec / U','Sub toal','idProductoCotizadoVenta', 'idProDes','Cod SAP', ''],
+                    colWidths: [20, 50, 170, 80, 40, 60, 60, 50, 50, 50, 30],
                     columns: [
                         {type: 'text', readOnly:false},
                         {type: 'text'},
@@ -154,7 +156,7 @@
                         {type: 'text', readOnly:false},
                         {type: 'text', readOnly:false},
                         {type: 'hidden', readOnly:false},
-                        {type: 'text', readOnly:false},
+                        {type: 'hidden', readOnly:false},
                         {type: 'text', readOnly:false},
                     ]
                 });
@@ -345,15 +347,15 @@
                 buscaproy($('#8-'+row).text(), row);
             },
         });
-          if($('#8-'+row).text() != '' && col == 8){
+        if($('#9-'+row).text() != '' && col == 9){
             //buscaproy($('#8-'+row).text(), row);
             //alert("HOLA MUNDO");
-            buscap($('#8-'+row).text(), row);
-          }
+            buscaProductoYAcutualizaItem($('#7-'+row).text(), $('#8-'+row).text(), $('#9-'+row).text(), row);
+        }
 
         if($('#0-'+row).text() != '' && col == 0){
-          buscap($('#0-'+row).text(), row);
-          $('#0-'+row).text()
+            buscaProductoYAcutualizaItem($('#7-'+row).text(), $('#8-'+row).text(), $('#9-'+row).text(), row);
+            $('#0-'+row).text()
         }
 
         var b = '';
@@ -368,12 +370,13 @@
       }
 
     //Busca el producto conectandose al Servicio SOAP de SAP para traer el item
-    function buscap(nomp, row) {
+    function buscaProductoYAcutualizaItem(idPcv,idProDes,nomp, row) {
+        console.log(idPcv, idProDes,nomp, row);
         $.ajax({
             type: 'get',
             url: 'index.php?to_pdf=true&module=SCO_Despachos&action=buscaProducto',
             data: {
-                nomp
+                idPcv,idProDes,nomp
             },
             success: function(data) {                
                 //debugger;
@@ -382,34 +385,22 @@
                 if (Object.keys(sqlprod) != '') {
                     if (sqlprod.length == 1) {
                       if(sqlprod[0] == null){
-                        $('#8-' + row).css( "background-color", "#ffc7c7" );
+                        $('#9-' + row).css( "background-color", "#ffc7c7" );
                       }else{
                         //modalUpdateItemAio(sqlprod);
                         //$('#modalUpdateItemAio').modal('show');
                         console.log('DATOS ' + sqlprod);
                         console.log('El item se registro exitosamente : Cod Provedor : '+ sqlprod[0]['name'] +' Descripcion:' +sqlprod[0]['proge_nompro']);
-                        $('#8-' + row).css( "background-color", "#CBFFC7" );
+                        $('#9-' + row).css( "background-color", "#CBFFC7" );
                       }                                          
                     }
-                    if (sqlprod.length > 1) {
-                      //alert("codigo duplicado");
-                      var html = '';
-                      $("#codprdup").modal("show");
-                      for (var i = 0; i < sqlprod.length; i++) {
-                        
-                      }
-                      $("#duplicados").html(html);
-                      dataArray = sqlprod;
-                    }
+                    
                 } else {
                     alert('El Codigo de SAP no existe');
                     $('#0-' + row).css({
-                        'background': '#d9534f',
+                        'background': '#ffc7c7',
                         'color': '#FFF'
                     });
-                    $('#1-' + row).text('');
-                    $('#2-' + row).text('');
-                    $('#4-' + row).text('');
                 }
             }
         });

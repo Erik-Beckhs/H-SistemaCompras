@@ -62,7 +62,7 @@ function estado(est,id){
 	  					var titulo = "Productos";				
 						var mensaje = "<strong>Alerta!!! Tiene " + desctot[1] + " Proyecto no registrado</strong>";
 						var cuerpo = "<br><center > <p class='text-info'><strong>Todos sus items deben estar relacionados \"registrados\" con un Proyeco / CO existente en el sistema.</strong></p>";
-						cuerpo += "<br><p > Para cambiar de estado <b>\"Borrador\"</b> a \"Aprobacion\", registre los proyectos.</p> </center>";
+						cuerpo += "<br><p > Para cambiar de estado <b>\"Borrador\"</b> a \"Aprobacion\" de su Orden de compra, registre los proyectos.</p> </center>";
 						ventanaModal(data,titulo,cuerpo,mensaje);
 			  			$('#modalOrdenCompra').modal('show');
 					}else{	
@@ -71,7 +71,7 @@ function estado(est,id){
 	   					var titulo = "Productos";				
 						var mensaje = "<strong>Alerta!!! Tiene " + desctot[1] + " Proyecto no registrado</strong>";
 						var cuerpo = "<br><center > <p class='text-info'><strong>Todos sus items deben estar relacionados \"registrados\" con un Proyeco / CO existente en el sistema.</strong></p>";
-						cuerpo += "<br><p > Para cambiar de estado <b>\"Borrador\"</b> a \"Aprobacion\", registre los proyectos.</p> </center>";
+						cuerpo += "<br><p > Para cambiar de estado <b>\"Borrador\"</b> a \"Aprobacion\" de su Orden de compra, registre los proyectos.</p> </center>";
 						ventanaModal(data,titulo,cuerpo,mensaje);
 			  			$('#modalOrdenCompra').modal('show');
 					}
@@ -116,7 +116,7 @@ function ventanaModal(datos,titulo,cuerpo,mensaje){
 	    htmlm += '<div class="modal fade" id="modalOrdenCompra" style="display: block;margin-top: 5%;">';
 	    htmlm += '    <div class="modal-dialog">';
 	    htmlm += '        <div class="modal-content">';
-	    htmlm += '            <div class="modal-header">';
+	    htmlm += '            <div class="modal-header" style="background:#a94442 !important;">';
 	    htmlm += '                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
 	    htmlm += '                <h4 class="modal-title">'+titulo+'</h4>';
 	    htmlm += '            </div>';

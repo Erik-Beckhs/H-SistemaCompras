@@ -12,6 +12,9 @@ require_once('include/entryPoint.php');
 require_once('include/nusoap/nusoap.php');
 
 	$nomp = $_GET['nomp'];
+	$idPcv = $_GET['idPcv'];
+	$idProDes = $_GET['idProDes'];
+
 	$nomp = trim($nomp);
 	$query = "SELECT id, 
 					name, 
@@ -30,7 +33,7 @@ require_once('include/nusoap/nusoap.php');
 		while ($row = $GLOBALS['db']->fetchByAssoc($results)) {
 			$data[] = $row;
 		}
-		echo $data;
+		
 		$ap = array('codio' => $nomp );
 		if($data == 0){
 			$client = new nusoap_client("http://hannacwebp01.hansa.com.bo/QAsWebServicesIndustria/producto.asmx?WSDL", 'wsdl');
@@ -38,50 +41,69 @@ require_once('include/nusoap/nusoap.php');
 			$respuesta = $client->call('mostrar_Producto',$parametros);
 			if ($respuesta["mostrar_ProductoResult"]["result"]) {
 				$result = $respuesta["mostrar_ProductoResult"]["result"]["producto"];
-				$qry = "SELECT id FROM sco_productoscompras WHERE TRIM(proge_codaio) = '$nomp'";
+				$qry = "SELECT id 
+						FROM sco_productoscompras 
+						WHERE TRIM(proge_codaio) = '$nomp'";
 			  	$res = $GLOBALS['db']->query($qry, true);
 				$row2 = $GLOBALS['db']->fetchByAssoc($res);
 				if ($row2 == 0) {
+					#echo 'Item Nuevo';
 					$new_idprod = create_guid();
 					$query3 = "INSERT INTO sco_productoscompras
-					(
-						id,
-						deleted,
-						name,
-						proge_unidad,
-						proge_codaio,
-						proge_nompro,
-						proge_division,
-						proge_familia,
-						proge_grupo,
-						proge_subgrupo
-					)
-				VALUES
-					(
-						'".$new_idprod."',
-						0,
-						'".$result["IDPRODFABRICA"]."',
-						'".$result["UMBASE"]."',
-						'".$result["IDPRODUCTO"]."',
-						'".$result["PRODUCTO"]."',
-						'".$result["IDDIVISION"]."',
-						'".$result["IDFAMILIA"]."',
-						'".$result["IDGRUPO"]."',
-						'".$result["IDSUBGRUPO"]."'
-					);";
+									(
+										id,
+										deleted,
+										name,
+										proge_unidad,
+										proge_codaio,
+										proge_nompro,
+										proge_division,
+										proge_familia,
+										proge_grupo,
+										proge_subgrupo
+									)
+								VALUES
+									(
+										'".$new_idprod."',
+										0,
+										'".$result["IDPRODFABRICA"]."',
+										'".$result["UMBASE"]."',
+										'".$result["IDPRODUCTO"]."',
+										'".$result["PRODUCTO"]."',
+										'".$result["IDDIVISION"]."',
+										'".$result["IDFAMILIA"]."',
+										'".$result["IDGRUPO"]."',
+										'".$result["IDSUBGRUPO"]."'
+									);";
 	        		$GLOBALS['db']->query($query3, true);
+
+	        		#Actualiza codigo SAP de Productos cotizados de venta "Consolidaciones"
+					$queryPcvAio = " UPDATE sco_productoscotizadosventa
+									SET
+									name = '".$result["IDPRODUCTO"]."'
+									WHERE id = '".$idPcv."';";
+					$GLOBALS['db']->query($queryPcvAio, true);	
+
+					#Actualiza codigo SAP de Productos Despachos
+					$queryProdDes = " UPDATE sco_productosdespachos
+									SET
+									prdes_codaio = '".$result["IDPRODUCTO"]."'
+									WHERE prdes_idproductocotiazdo = '".$idProDes."';";
+					$GLOBALS['db']->query($queryProdDes, true);	
+					
 					$producto = array(	"id" => $new_idprod,
-										"name"=>$result["IDPRODFABRICA"],
-										"proge_nompro"=>$result["PRODUCTO"],
-										"proge_descripcion"=>"",
-										"proge_unidad"=>$result["UMBASE"],
-										"proge_preciounid"=>"",
-										"proge_codaio" => $result["IDPRODUCTO"],
-										"proge_subgrupo"=>$result["IDSUBGRUPO"]);
+									"name"=>$result["IDPRODFABRICA"],
+									"proge_nompro"=>$result["PRODUCTO"],
+									"proge_descripcion"=>"",
+									"proge_unidad"=>$result["UMBASE"],
+									"proge_preciounid"=>"",
+									"proge_codaio" => $result["IDPRODUCTO"],
+									"proge_subgrupo"=>$result["IDSUBGRUPO"]);
+					
 				}
 				else {
-					//echo "actualizar";
-					$query_Ap = "UPDATE sco_productoscompras
+					#echo "actualizar";
+					$query_Ap = "UPDATE suitecrm.sco_productoscompras
 			                     SET	name = '".$result["IDPRODFABRICA"]."',
 									proge_unidad = '".$result["UMBASE"]."',
 									proge_codaio = '".$result["IDPRODUCTO"]."',
@@ -91,18 +113,53 @@ require_once('include/nusoap/nusoap.php');
 									proge_grupo = '".$result["IDGRUPO"]."',
 									proge_subgrupo = '".$result["IDSUBGRUPO"]."'
 			                     WHERE id = '".$row2["id"]."' " ;
-	        $GLOBALS['db']->query($query_Ap, true);
+	        		$GLOBALS['db']->query($query_Ap, true);
+
+	        		#Actualiza codigo SAP de Productos cotizados de venta "Consolidaciones"
+					$queryPcvAio = " UPDATE suitecrm.sco_productoscotizadosventa
+									SET
+									name = '".$result["IDPRODUCTO"]."'
+									WHERE id = '".$idPcv."';";
+					$GLOBALS['db']->query($queryPcvAio, true);	
+
+					#Actualiza codigo SAP de Productos Despachos
+					$queryProdDes = " UPDATE suitecrm.sco_productosdespachos
+									SET
+									prdes_codaio = '".$result["IDPRODUCTO"]."'
+									WHERE id = '".$idProDes."';";
+					$GLOBALS['db']->query($queryProdDes, true);	
+
 					$producto = array(	"id" => $row2,
-										"name"=>$result["IDPRODFABRICA"],
-										"proge_nompro"=>$result["PRODUCTO"],
-										"proge_descripcion"=>"",
-										"proge_unidad"=>$result["UMBASE"],
-										"proge_preciounid"=>"",
-										"proge_codaio" => $result["IDPRODUCTO"],
-										"proge_subgrupo"=>$result["IDSUBGRUPO"]);
+									"name"=>$result["IDPRODFABRICA"],
+									"proge_nompro"=>$result["PRODUCTO"],
+									"proge_descripcion"=>"",
+									"proge_unidad"=>$result["UMBASE"],
+									"proge_preciounid"=>"",
+									"proge_codaio" => $result["IDPRODUCTO"],
+									"proge_subgrupo"=>$result["IDSUBGRUPO"]);
+					
 				}
-			}
+			}		
 			$data[] = $producto;
 		}
+		else
+		{
+			#echo 'El item existe:';
+			if($data[0]['name'] != ''){
+				#Actualiza codigo SAP de Productos cotizados de venta "Consolidaciones"
+				$queryPcvAio = " UPDATE suitecrm.sco_productoscotizadosventa
+								SET
+								name = '".$data[0]['name']."'
+								WHERE id = '".$idPcv."';";
+				$GLOBALS['db']->query($queryPcvAio, true);	
+
+				#Actualiza codigo SAP de Productos Despachos
+				$queryProdDes = " UPDATE suitecrm.sco_productosdespachos
+								SET
+								prdes_codaio = '".$data[0]['name']."'
+								WHERE id = '".$idProDes."';";
+				$GLOBALS['db']->query($queryProdDes, true);	
+			}
+		}	
 	echo json_encode($data);
  ?>
