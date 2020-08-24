@@ -51,11 +51,11 @@ function insertarProductos() {
     var x = tablapr.insertRow(-1);
     x.id = 'producto' + pronum;
     var b1 = x.insertCell(0);
-    b1.innerHTML = "<input class='sqsEnabled product_part_number yui-ac-input ' style='width:178px;' onblur='buscaind(" + pronum + "); 'autocomplete='off' type='text' name='pro_nombre" + pronum + "' id='pro_nombre" + pronum + "' maxlength='50' value='' tabindex='116' placeholder='Cod Prov / Cod SAP'><input type='hidden' name='producto_id" + pronum + "' id='producto_id" + pronum + "' size='20' maxlength='50' value=''><input type='text' style='border: none;pointer-events: none; height:10px;' name='pro_codaio" + pronum + "' id='pro_codaio" + pronum + "' size='20' maxlength='50' value=''><input type='hidden' name='pro_idproductocotizado" + pronum + "' id='pro_idproductocotizado" + pronum + "' size='20' maxlength='50' value=''>";
+    b1.innerHTML = "<input class='sqsEnabled product_part_number yui-ac-input ' style='width:150px;' onblur='buscaind(" + pronum + "); 'autocomplete='off' type='text' name='pro_nombre" + pronum + "' id='pro_nombre" + pronum + "' maxlength='50' value='' tabindex='116' placeholder='Cod Prov / Cod SAP'><input type='hidden' name='producto_id" + pronum + "' id='producto_id" + pronum + "' size='20' maxlength='50' value=''><input type='text' style='border: none;pointer-events: none; height:10px;' name='pro_codaio" + pronum + "' id='pro_codaio" + pronum + "' size='20' maxlength='50' value=''><input type='hidden' name='pro_idproductocotizado" + pronum + "' id='pro_idproductocotizado" + pronum + "' size='20' maxlength='50' value=''>";
     var b2 = x.insertCell(1);
     b2.innerHTML = "<button  title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='btn-success btn-sm cons-btn' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openProductPopup(" + pronum + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>";
     var b3 = x.insertCell(2);
-    b3.innerHTML = "<textarea id='pro_descripcion" + pronum + "' name='pro_descripcion" + pronum + "' rows='2' cols='35' placeholder='Descripcion' style='margin-left: 0px; margin-right: 0px; width: 220px;'></textarea><div class='search_desc' id='search_desc" + pronum + "'></div>";
+    b3.innerHTML = "<textarea id='pro_descripcion" + pronum + "' name='pro_descripcion" + pronum + "' rows='2' cols='35' placeholder='Descripcion' style='margin-left: 0px; margin-right: 0px; width: 200px;'></textarea><div class='search_desc' id='search_desc" + pronum + "'></div>";
     var numero = pronum;
     $("#pro_descripcion" + pronum).keypress(function(e) {
        if(e.which == 32) {
@@ -93,7 +93,7 @@ function insertarServicio() {
     var b1 = x.insertCell(0);
     b1.innerHTML = "<input   type='hidden' name='pro_nombre" + pronum + "' id='pro_nombre" + pronum + "' maxlength='50' value='Servicio'><input type='hidden' name='producto_id" + pronum + "' id='producto_id" + pronum + "' size='20' maxlength='50' value='Servicio" + pronum + "'><input type='hidden' name='pro_codaio" + pronum + "' id='pro_codaio" + pronum + "' size='20' maxlength='50' value=''>";
     var b3 = x.insertCell(1);
-    b3.innerHTML = "<textarea class='requerido' id='pro_descripcion" + pronum + "' name='pro_descripcion" + pronum + "' rows='2' cols='60' placeholder='Nombre Servicio' style='margin-left: 0px; margin-right: 0px; width: 400px;'></textarea>";
+    b3.innerHTML = "<textarea class='requerido' id='pro_descripcion" + pronum + "' name='pro_descripcion" + pronum + "' rows='2' cols='50' placeholder='Nombre Servicio' style='margin-left: 0px; margin-right: 0px; width: 300px;'></textarea>";
     var b = x.insertCell(2);
     b.innerHTML = "<input class='requerido' style='width:100px;' autocomplete='off' type='text' name='pro_unidad" + pronum + "' id='pro_unidad" + pronum + "' maxlength='50' tabindex='116' value='' placeholder='Unidad'>";
     var c = x.insertCell(3);

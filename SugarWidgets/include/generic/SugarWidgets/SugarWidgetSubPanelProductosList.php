@@ -81,7 +81,7 @@ class SugarWidgetSubPanelProductosList extends SugarWidgetField
 
       while($row_cantidades_p = $GLOBALS['db']->fetchByAssoc($obj_cantidades_p)){
         array_push($arr_nombre, $row_cantidades_p['pro_nombre']);
-        array_push($arr_nombre, $row_cantidades_p['pro_codaio']);
+        array_push($arr_pro_codaio, $row_cantidades_p['pro_codaio']);
         array_push($arr_descripcion, $row_cantidades_p['pro_descripcion']);
         array_push($arr_unidad, $row_cantidades_p['pro_unidad']);        
         array_push($arr_cantidadProducto, $row_cantidades_p['pro_cantidad']);

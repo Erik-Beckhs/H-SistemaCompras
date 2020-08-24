@@ -60,15 +60,16 @@ class SugarWidgetSubPanelDespachos extends SugarWidgetField {
           box-shadow: 0px 10px 10px -10px rgba(0,0,0,0.5);
           margin-top: 14px;
           margin-left: 18px;}
-      .cuadrado{width: 30px;
-          height: 30px;
+      .cuadrado{
+          width: 25px;
+          height: 25px;
           background:#FFFFFF;
           float: left;
           margin-right: 0px;
           padding: 8px 4px;
           border-radius:30%;
           text-align:center;
-          font-size:8px;
+          font-size:10px;
           box-shadow: 0 0 1px transparent;
           -webkit-transition-duration: 0.4s;
           transition-duration: 0.4s;
@@ -282,19 +283,19 @@ class SugarWidgetSubPanelDespachos extends SugarWidgetField {
               }
               //color amarillo
             } elseif ($arr_fr[$cont] == '' && $arr_fn[$cont] == '' && $arr_fr[$cont+1] == '' && $arr_fn[$cont+1] == '' && $arr_fp[$cont-1] == '' && $fecha_ac == $arr_fp[$cont]) {
-              $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#FFF; background:#f0ad4e!important; cursor: pointer"><span style="margin-left: 9px;margin-top: 12px;font-size: 17px;position: absolute;"> &#9875;</span>';
+              $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#FFF; background:#f0ad4e!important; cursor: pointer"><span style="margin-left: 9px;margin-top: 12px;font-size: 12px;position: absolute;"> &#9875;</span>';
             } elseif ($arr_fr[$cont] == '' && $arr_fr[$cont+1] == '' && $arr_fr[$cont-1] != '' && $fecha_ac == $arr_fn[$cont]) {
-              $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#FFF; background:#f0ad4e!important; cursor: pointer"><span style="margin-left: 9px;margin-top: 12px;font-size: 17px;position: absolute;"> &#9875;</span>';
+              $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#FFF; background:#f0ad4e!important; cursor: pointer"><span style="margin-left: 9px;margin-top: 12px;font-size: 12px;position: absolute;"> &#9875;</span>';
               //Color Verder
             } elseif ($arr_fr[$cont] == '' && $arr_fr[$cont+1] == '' && $arr_fr[$cont-1] != '' && $fecha_ac < $arr_fn[$cont]) {
-              $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#FFF; background:rgba(92,173,92,1); cursor: pointer"><span style="margin-left: 9px;margin-top: 12px;font-size: 17px;position: absolute;"> &#9875;</span>';
+              $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#FFF; background:rgba(92,173,92,1); cursor: pointer"><span style="margin-left: 9px;margin-top: 12px;font-size: 12px;position: absolute;"> &#9875;</span>';
             } elseif ($arr_fp[$cont] > $fecha_ac && $arr_fn[$cont] == '' && $arr_fr[$cont] == '' && $arr_fp[$cont-1] == '') {
-              $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#FFF; background:rgba(92,173,92,1); cursor: pointer"><span style="margin-left: 9px;margin-top: 12px;font-size: 17px;position: absolute;"> &#9875;</span>';
+              $html .= '<div id="hito-'.$i.'" class="cuadrado" style="color:#FFF; background:rgba(92,173,92,1); cursor: pointer"><span style="margin-left: 9px;margin-top: 12px;font-size: 12px;position: absolute;"> &#9875;</span>';
               //Color Rojo
             } elseif ($arr_fr[$cont] == '' && $arr_fr[$cont-1] != '' && $arr_fr[$cont+1] == '') {
               $html .= '<div id="actual" class="cuadrado" style="background:#DD4D2C; cursor: pointer; color:#FFF;" ><span style="margin-left: 9px;margin-top: 12px;font-size: 16px;position: absolute;color:red;"> &#9202;</span>';
             } elseif ($arr_fr[$cont] == '' && $arr_fn[$cont] == '' && $arr_fr[$cont+1] == '' && $arr_fn[$cont+1] == '' && $arr_fp[$cont-1] == '' && $fecha_ac > $arr_fp[$cont]) {
-              $html .= '<div id="actual" class="cuadrado" style="background: #DD4D2C; cursor: pointer; color:#FFF;"><span style="margin-left: 9px;margin-top: 12px;font-size: 17px;position: absolute;color:red;"> &#9202;</span>';
+              $html .= '<div id="actual" class="cuadrado" style="background: #DD4D2C; cursor: pointer; color:#FFF;"><span style="margin-left: 9px;margin-top: 12px;font-size: 12px;position: absolute;color:red;"> &#9202;</span>';
               //Color Blanco
             } elseif ($arr_fr[$cont] == '' && $arr_fr[$cont+1] == '' && $arr_fr[$cont-1] == '' && $arr_fn[$cont-1] != '') {
               $html .= '<div id="actual" class="cuadrado" style="background:#FFF; cursor: pointer; color:#000;" >';
