@@ -145,7 +145,7 @@
                 $('#productosDespacho1').jexcel({
                     data:data,
                     onchange:update,
-                    colHeaders: ['#','Producto','Descripcion', 'Observacion','Cantidad', 'Prec / U','Sub toal','idProductoCotizadoVenta', 'idProDes','Cod SAP', ''],
+                    colHeaders: ['#','Producto','Descripcion', 'Observacion','Cantidad', 'Prec / U','Sub toal','idProductoCotizadoVenta', 'idProDes','Cod SAP', 'Validado'],
                     colWidths: [20, 50, 170, 80, 40, 60, 60, 50, 50, 50, 30],
                     columns: [
                         {type: 'text', readOnly:false},
@@ -188,7 +188,7 @@
 
         $('#productosDespacho2').jexcel({
             data:data2,
-            colHeaders: ['Producto','Descripcion', 'Observacion','Cantidad', 'Prec Uni','Sub toal','validado'],
+            colHeaders: ['Producto','Descripcion', 'Observacion','Cantidad', 'Prec Uni','Sub toal','Validado'],
             colWidths: [ 50, 170, 60, 50, 80, 80],
             columns: [
                 {type: 'text'},

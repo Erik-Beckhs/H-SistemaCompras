@@ -551,7 +551,7 @@ function validarSelectProveedor() {
   if (idProv == '') {
     validar = false;
     $('#tituloMensaje').html('Proveedor no seleccionado');
-    var html = '<h2> Es necesario seleccionar un proveedor</h2>';
+    var html = '<p><strong>Alerta!</strong> Debe seleccionar un proveedor para continuar con su consolidación.</p>';
     $('#mensajeModal').html(html);
     $('#modalMensaje').modal("show");
   }

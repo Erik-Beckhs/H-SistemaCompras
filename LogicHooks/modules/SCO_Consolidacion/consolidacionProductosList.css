@@ -21,12 +21,18 @@
 .tableCotizacion thead tr th{
     font-weight: 400;
     font-size: 11px;
+    text-align: center;
 }
 .filtro{		
     padding: 7px;
     margin: 0;
     margin: -15px;
     margin-bottom: 10px;
+}
+.filtro select, 
+.filtro span,
+.filtro input {
+    font-size: 12px;
 }
 .totales{
 	margin-bottom: 10px;

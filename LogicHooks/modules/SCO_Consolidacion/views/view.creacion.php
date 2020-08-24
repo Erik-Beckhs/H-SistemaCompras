@@ -104,15 +104,15 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 									<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="modalMensaje">
 										<div class="modal-dialog modal-md" role="document">
 											<div class="modal-content">
-												<div class="modal-header">
+												<div class="modal-header" style="background:#a94442 !important;">
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 													<span aria-hidden="true">×</span></button>
 												<h4 class="modal-title" id="tituloMensaje"></h4>
 												</div>
 												<div class="modal-body">
-												<div id="mensajeModal">
-												</div>
-												<center><button class="btn btn-primary" data-dismiss="modal" autofocus>Aceptar</button></center>
+													<div class="alert alert-danger">
+													    <div id="mensajeModal"></div>
+													</div>		
 												</div>
 											</div>
 										</div>

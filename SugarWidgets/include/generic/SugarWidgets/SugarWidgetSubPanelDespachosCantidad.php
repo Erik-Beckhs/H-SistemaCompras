@@ -40,10 +40,13 @@ class SugarWidgetSubPanelDespachosCantidad extends SugarWidgetField
         $obj_pc_des = $GLOBALS['db']->query($pc_des, true);
         $row_pc_des = $GLOBALS['db']->fetchByAssoc($obj_pc_des);
 
-        $pc_items = "SELECT COUNT(*) cantidadItems
-        FROM suitecrm.sco_despachos_sco_productosdespachos_c
-        WHERE sco_despachos_sco_productosdespachossco_despachos_ida = '$id_des'
-        AND deleted = 0; ";
+        $pc_items = "SELECT COUNT(*) as cantidadItems
+                    FROM suitecrm.sco_despachos_sco_productosdespachos_c dp
+                    INNER JOIN suitecrm.sco_productosdespachos pd
+                    ON dp.sco_despachos_sco_productosdespachossco_productosdespachos_idb = pd.id
+                    WHERE sco_despachos_sco_productosdespachossco_despachos_ida = '$id_des'
+                    AND dp.deleted = 0
+                    AND pd.deleted = 0; ";
         $obj_pc_items = $GLOBALS['db']->query($pc_items, true);
         $row_pc_items = $GLOBALS['db']->fetchByAssoc($obj_pc_items);
 
