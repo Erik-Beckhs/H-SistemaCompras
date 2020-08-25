@@ -267,6 +267,7 @@ $installdefs = array(
       ),
 
       //VISTAS
+
       //SCO_Aprobadores
       array(
         'from' => '<basepath>/modules/SCO_Aprobadores/views/view.edit.php',
@@ -278,24 +279,40 @@ $installdefs = array(
         'to'   => 'modules/SCO_Consolidacion/views/view.creacion.php',
       ),
       array(
-        'from' => '<basepath>/modules/SCO_Consolidacion/.php',
-        'to'   => 'modules/SCO_Consolidacion/.php',
+        'from' => '<basepath>/modules/SCO_Consolidacion/consolidacion.css',
+        'to'   => 'modules/SCO_Consolidacion/consolidacion.css',
       ),
       array(
-        'from' => '<basepath>/modules/SCO_Consolidacion/.php',
-        'to'   => 'modules/SCO_Consolidacion/.php',
+        'from' => '<basepath>/modules/SCO_Consolidacion/consolidacion.js',
+        'to'   => 'modules/SCO_Consolidacion/consolidacion.js',
       ),
       array(
-        'from' => '<basepath>/modules/SCO_Consolidacion/.php',
-        'to'   => 'modules/SCO_Consolidacion/.php',
+        'from' => '<basepath>/modules/SCO_Consolidacion/consolidacionDatos.php',
+        'to'   => 'modules/SCO_Consolidacion/consolidacionDatos.php',
       ),
       array(
-        'from' => '<basepath>/modules/SCO_Consolidacion/.php',
-        'to'   => 'modules/SCO_Consolidacion/.php',
+        'from' => '<basepath>/modules/SCO_Consolidacion/consolidacionProductosList.css',
+        'to'   => 'modules/SCO_Consolidacion/consolidacionProductosList.css',
       ),
       array(
-        'from' => '<basepath>/modules/SCO_Consolidacion/.php',
-        'to'   => 'modules/SCO_Consolidacion/.php',
+        'from' => '<basepath>/modules/SCO_Consolidacion/consolidacionProductosList.js',
+        'to'   => 'modules/SCO_Consolidacion/consolidacionProductosList.js',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_Consolidacion/css-loader.css',
+        'to'   => 'modules/SCO_Consolidacion/css-loader.css',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_Consolidacion/jquery.smartWizard.js',
+        'to'   => 'modules/SCO_Consolidacion/jquery.smartWizard.js',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_Consolidacion/jquery.validate.js',
+        'to'   => 'modules/SCO_Consolidacion/jquery.validate.js',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_Consolidacion/smart_wizard_all.css',
+        'to'   => 'modules/SCO_Consolidacion/smart_wizard_all.css',
       ),
 
       //SCO_Despachos
@@ -306,6 +323,10 @@ $installdefs = array(
       array(
         'from' => '<basepath>/modules/SCO_Despachos/views/view.edit.php',
         'to'   => 'modules/SCO_Despachos/views/view.edit.php',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_Despachos/buscaProducto.php',
+        'to'   => 'modules/SCO_Despachos/buscaProducto.php',
       ),
       array(
         'from' => '<basepath>/modules/SCO_Despachos/crearNuevoDespachoDividido.php',
@@ -339,6 +360,11 @@ $installdefs = array(
         'from' => '<basepath>/modules/SCO_Despachos/paginado.js',
         'to'   => 'modules/SCO_Despachos/paginado.js',
       ),
+      array(
+        'from' => '<basepath>/modules/SCO_Despachos/validacionesItems.php',
+        'to'   => 'modules/SCO_Despachos/validacionesItems.php',
+      ),
+
       //SCO_documentos
       array(
         'from' => '<basepath>/modules/SCO_documentos/views/view.edit.php',
@@ -381,9 +407,10 @@ $installdefs = array(
         'to'   => 'modules/SCO_documentos/theme.js',
       ),
       array(
-        'from' => '<basepath>/modules/SCO_documentos/theme.js',
+        'from' => '<basepath>/modules/SCO_documentos/theme.min.js',
         'to'   => 'modules/SCO_documentos/theme.min.js',
       ),
+
       //SCO_Embarque
       array(
         'from' => '<basepath>/modules/SCO_Embarque/views/view.detail.php',
@@ -397,6 +424,7 @@ $installdefs = array(
         'from' => '<basepath>/modules/SCO_Embarque/javajs.js',
         'to'   => 'modules/SCO_Embarque/javajs.js',
       ),
+
       //SCO_Eventos
       array(
         'from' => '<basepath>/modules/SCO_Eventos/views/view.detail.php',
@@ -408,6 +436,26 @@ $installdefs = array(
       ),
       //SCO_OrdenCompra
       array(
+        'from' => '<basepath>/modules/SCO_OrdenCompra/BackOrder/BackOrder.css',
+        'to'   => 'modules/SCO_OrdenCompra/BackOrder/BackOrder.css',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_OrdenCompra/BackOrder/BackOrder.js',
+        'to'   => 'modules/SCO_OrdenCompra/BackOrder/BackOrder.js',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_OrdenCompra/BackOrder/bootstrap-datetimepicker.min.css',
+        'to'   => 'modules/SCO_OrdenCompra/BackOrder/bootstrap-datetimepicker.min.css',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_OrdenCompra/BackOrder/bootstrap-datetimepicker.min.js',
+        'to'   => 'modules/SCO_OrdenCompra/BackOrder/bootstrap-datetimepicker.min.js',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_OrdenCompra/views/view.backorder.php',
+        'to'   => 'modules/SCO_OrdenCompra/views/view.backorder.php',
+      ),
+      array(
         'from' => '<basepath>/modules/SCO_OrdenCompra/views/view.detail.php',
         'to'   => 'modules/SCO_OrdenCompra/views/view.detail.php',
       ),
@@ -416,22 +464,30 @@ $installdefs = array(
         'to'   => 'modules/SCO_OrdenCompra/views/view.edit.php',
       ),
       array(
+        'from' => '<basepath>/modules/SCO_OrdenCompra/views/view.reporte.php',
+        'to'   => 'modules/SCO_OrdenCompra/views/view.reporte.php',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_OrdenCompra/views/backorderdata.php',
+        'to'   => 'modules/SCO_OrdenCompra/views/backorderdata.php',
+      ),
+      array(
         'from' => '<basepath>/modules/SCO_OrdenCompra/calculodesc.php',
         'to'   => 'modules/SCO_OrdenCompra/calculodesc.php',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_OrdenCompra/ordencompra.php',
+        'to'   => 'modules/SCO_OrdenCompra/ordencompra.php',
       ),
       array(
         'from' => '<basepath>/modules/SCO_OrdenCompra/verificarEstado.php',
         'to'   => 'modules/SCO_OrdenCompra/verificarEstado.php',
       ),
       array(
-        'from' => '<basepath>/modules/SCO_OrdenCompra/ordencompra.php',
-        'to'   => 'modules/SCO_OrdenCompra/ordencompra.php',
+        'from' => '<basepath>/modules/SCO_OrdenCompra/viewdetail.js',
+        'to'   => 'modules/SCO_OrdenCompra/viewdetail.js',
       ),
-      //Aprobadores
-      array(
-        'from' => '<basepath>/modules/SCO_Aprobadores/views/view.edit.php',
-        'to'   => 'modules/SCO_Aprobadores/views/view.edit.php',
-      ),
+      
       //Plan de Pagos
       array(
         'from' => '<basepath>/modules/SCO_PlandePagos/views/view.edit.php',
@@ -456,10 +512,6 @@ $installdefs = array(
         'to'   => 'modules/SCO_Productos/buscap.php',
       ),
       array(
-        'from' => '<basepath>/modules/SCO_ProductosCotizadosVenta/CotizacionesList.php',
-        'to'   => 'modules/SCO_ProductosCotizadosVenta/CotizacionesList.php',
-      ),
-      array(
         'from' => '<basepath>/modules/SCO_Productos/buscaproy.php',
         'to'   => 'modules/SCO_Productos/buscaproy.php',
       ),
@@ -480,6 +532,11 @@ $installdefs = array(
       array(
         'from' => '<basepath>/modules/SCO_ProductosCompras/views/view.edit.php',
         'to'   => 'modules/SCO_ProductosCompras/views/view.edit.php',
+      ),
+      //SCO_ProductosCotizadosVenta
+      array(
+        'from' => '<basepath>/modules/SCO_ProductosCotizadosVenta/CotizacionesLista.php',
+        'to'   => 'modules/SCO_ProductosCotizadosVenta/CotizacionesLista.php',
       ),
       //SCO_ProductosDespachos
       array(
@@ -535,6 +592,17 @@ $installdefs = array(
        'class'   => 'ClcorrelativoDel',
        'function'  => 'FncorrelativoDel',
       ),
+
+      array(
+       'module'  => 'SCO_Consolidacion',
+       'hook'    => 'after_relationship_delete',
+       'order'   => 1,
+       'description' => 'Eliminar_relacion_de_Consolidacion_y_ProductosCotizadosDeVenta',
+       'file'   => 'custom/modules/SCO_Consolidacion/eliminaRelacionPcv.php',
+       'class'   => 'Celiminarelacion',
+       'function'  => 'Felimina',
+      ),
+
       array(
        'module'  => 'SCO_Contactos',
        'hook'    => 'after_save',
@@ -738,6 +806,15 @@ $installdefs = array(
        'file'   => 'custom/modules/SCO_OrdenCompra/deselimina.php',
        'class'   => 'Cldeselimina',
        'function'  => 'Fndeselimina',
+      ),
+      array(
+       'module'  => 'SCO_OrdenCompra',
+       'hook'    => 'before_delete',
+       'order'   => 1,
+       'description' => 'EliminaOrdenDeCompra',
+       'file'   => 'custom/modules/SCO_OrdenCompra/elimnaOrdenCompra.php',
+       'class'   => 'ClelimanOrdenCompra',
+       'function'  => 'Fnelimina',
       ),
 
       array(
