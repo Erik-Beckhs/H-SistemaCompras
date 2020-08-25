@@ -30,8 +30,8 @@ $manifest = array(
  'description'  => 'Logic Hook Compras installation package.',
  'is_uninstallable' => true,
  'author'   => 'lalcon',
- 'published_date' => 'May 18 , 2018',
- 'version'   => '2.0.0',
+ 'published_date' => 'Agostos 25 , 2020',
+ 'version'   => '3.0.0',
  'type'    => 'module',
  );
 
@@ -40,6 +40,8 @@ $installdefs = array(
  'mkdir' => array(
      //SCO_Aprobadores
      array('path' => 'custom/modules/SCO_Aprobadores'),
+     //SCO_Consolidacion
+     array('path' => 'custom/modules/SCO_Consolidacion'),
      //SCO_Contactos
      array('path' => 'custom/modules/SCO_Contactos'),
      //SCO_Despachos
@@ -81,6 +83,15 @@ $installdefs = array(
       array(
         'from' => '<basepath>/custom/modules/SCO_Aprobadores/datosAprobadores.php',
         'to'   => 'custom/modules/SCO_Aprobadores/datosAprobadores.php',
+      ),
+      //SCO_Consolidacion
+      array(
+        'from' => '<basepath>/custom/modules/SCO_Consolidacion/controller.php',
+        'to'   => 'custom/modules/SCO_Consolidacion/controller.php',
+      ),
+      array(
+        'from' => '<basepath>/custom/modules/SCO_Consolidacion/eliminaRelacionPcv.php',
+        'to'   => 'custom/modules/SCO_Consolidacion/eliminaRelacionPcv.php',
       ),
       //SCO_Contactos
       array(
@@ -170,10 +181,6 @@ $installdefs = array(
         'to'   => 'custom/modules/SCO_OrdenCompra/contap.php',
       ),
       array(
-        'from' => '<basepath>/custom/modules/SCO_OrdenCompra/datospm.php',
-        'to'   => 'custom/modules/SCO_OrdenCompra/datospm.php',
-      ),
-      array(
         'from' => '<basepath>/custom/modules/SCO_OrdenCompra/controller.php',
         'to'   => 'custom/modules/SCO_OrdenCompra/controller.php',
       ),
@@ -194,6 +201,10 @@ $installdefs = array(
         'to'   => 'custom/modules/SCO_OrdenCompra/deselimina.php',
       ),
       array(
+        'from' => '<basepath>/custom/modules/SCO_OrdenCompra/elimnaOrdenCompra.php',
+        'to'   => 'custom/modules/SCO_OrdenCompra/elimnaOrdenCompra.php',
+      ),
+      array(
         'from' => '<basepath>/custom/modules/SCO_OrdenCompra/jquery.jexcel.css',
         'to'   => 'custom/modules/SCO_OrdenCompra/jquery.jexcel.css',
       ),
@@ -204,6 +215,10 @@ $installdefs = array(
       array(
         'from' => '<basepath>/custom/modules/SCO_OrdenCompra/Notifica.php',
         'to'   => 'custom/modules/SCO_OrdenCompra/Notifica.php',
+      ),
+      array(
+        'from' => '<basepath>/custom/modules/SCO_OrdenCompra/relProClonados.php',
+        'to'   => 'custom/modules/SCO_OrdenCompra/relProClonados.php',
       ),
       array(
         'from' => '<basepath>/custom/modules/SCO_OrdenCompra/viewoc.php',
@@ -252,6 +267,36 @@ $installdefs = array(
       ),
 
       //VISTAS
+      //SCO_Aprobadores
+      array(
+        'from' => '<basepath>/modules/SCO_Aprobadores/views/view.edit.php',
+        'to'   => 'modules/SCO_Aprobadores/views/view.edit.php',
+      ),
+      //SCO_Consolidacion
+      array(
+        'from' => '<basepath>/modules/SCO_Consolidacion/views/view.creacion.php',
+        'to'   => 'modules/SCO_Consolidacion/views/view.creacion.php',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_Consolidacion/.php',
+        'to'   => 'modules/SCO_Consolidacion/.php',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_Consolidacion/.php',
+        'to'   => 'modules/SCO_Consolidacion/.php',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_Consolidacion/.php',
+        'to'   => 'modules/SCO_Consolidacion/.php',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_Consolidacion/.php',
+        'to'   => 'modules/SCO_Consolidacion/.php',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_Consolidacion/.php',
+        'to'   => 'modules/SCO_Consolidacion/.php',
+      ),
 
       //SCO_Despachos
       array(
