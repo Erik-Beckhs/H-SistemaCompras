@@ -10,6 +10,8 @@ The contents of this file are governed by the GNU General Public License (GPL).
 A copy of said license is available here: http://www.gnu.org/copyleft/gpl.html
 This code is provided AS IS and WITHOUT WARRANTY OF ANY KIND.
 necesita actualizacion...
+user: root
+pass: S3guridadN2.356HA
 *************************************/
 
 global $sugar_config;
@@ -436,12 +438,12 @@ $installdefs = array(
       ),
       //SCO_OrdenCompra
       array(
-        'from' => '<basepath>/modules/SCO_OrdenCompra/BackOrder/BackOrder.css',
-        'to'   => 'modules/SCO_OrdenCompra/BackOrder/BackOrder.css',
+        'from' => '<basepath>/modules/SCO_OrdenCompra/BackOrder/backorder.css',
+        'to'   => 'modules/SCO_OrdenCompra/BackOrder/backorder.css',
       ),
       array(
-        'from' => '<basepath>/modules/SCO_OrdenCompra/BackOrder/BackOrder.js',
-        'to'   => 'modules/SCO_OrdenCompra/BackOrder/BackOrder.js',
+        'from' => '<basepath>/modules/SCO_OrdenCompra/BackOrder/backorder.js',
+        'to'   => 'modules/SCO_OrdenCompra/BackOrder/backorder.js',
       ),
       array(
         'from' => '<basepath>/modules/SCO_OrdenCompra/BackOrder/bootstrap-datetimepicker.min.css',
@@ -468,8 +470,8 @@ $installdefs = array(
         'to'   => 'modules/SCO_OrdenCompra/views/view.reporte.php',
       ),
       array(
-        'from' => '<basepath>/modules/SCO_OrdenCompra/views/backorderdata.php',
-        'to'   => 'modules/SCO_OrdenCompra/views/backorderdata.php',
+        'from' => '<basepath>/modules/SCO_OrdenCompra/backorderdata.php',
+        'to'   => 'modules/SCO_OrdenCompra/backorderdata.php',
       ),
       array(
         'from' => '<basepath>/modules/SCO_OrdenCompra/calculodesc.php',
