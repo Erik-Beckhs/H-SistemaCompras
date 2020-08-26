@@ -169,10 +169,7 @@ $installdefs = array(
         'from' => '<basepath>/custom/modules/SCO_OrdenCompra/contap.php',
         'to'   => 'custom/modules/SCO_OrdenCompra/contap.php',
       ),
-      array(
-        'from' => '<basepath>/custom/modules/SCO_OrdenCompra/datospm.php',
-        'to'   => 'custom/modules/SCO_OrdenCompra/datospm.php',
-      ),
+      
       array(
         'from' => '<basepath>/custom/modules/SCO_OrdenCompra/controller.php',
         'to'   => 'custom/modules/SCO_OrdenCompra/controller.php',

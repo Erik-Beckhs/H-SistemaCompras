@@ -152,6 +152,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
             $('#btn-estados').css('background','#CCC');
           },
           success: function(data) {
+            //debugger;
             data = data.replace('$','');
             var desctot = $.parseJSON(data);
                 desctot = desctot.split('~');
@@ -159,7 +160,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                     if(desctot[1] == 0){
                         if(desctot[2] == desctot[3]){
                             console.log('conexion exitosa, num = ' + desctot);
-                            location.reload(true);
+                            //location.reload(true);
                         }else{
                             $('#alertapp').append('<div class=\"alert alert-danger\"><button type=\"button\" style=\" background: transparent !important; color: #000000!important; padding-left: 10px; \" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Verifique los precios totales de <strong>Productos</strong> '+ desctot[3] + ' y <strong>Plan de Pagos</strong> '+ desctot[2] + '</div>');
                             $('#btn-estados').css('pointer-events','visible');
