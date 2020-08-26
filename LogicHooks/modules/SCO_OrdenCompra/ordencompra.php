@@ -6,10 +6,13 @@
 *@copyright 2018
 *@license /var/www/html/modules/SCO_OrdenCompra
 */
+
 if(!defined('sugarEntry'))define('sugarEntry', true);
 require_once('data/BeanFactory.php');
 require_once('include/entryPoint.php');
 
+  //$datosAprobador = '';
+  $DatosItem ='';
   $id = $_GET['id'];
   $beanoc = BeanFactory::getBean('SCO_OrdenCompra', $id);
   $desctotal = $beanoc->orc_aux1;
@@ -48,6 +51,7 @@ require_once('include/entryPoint.php');
       $proyecto = 0;
     }
   }
+  //$datosAprobador = '';
   if($desctotal == 100){
     if($proyecto == 0){
      if($importe_total == $total_pp){
@@ -59,7 +63,43 @@ require_once('include/entryPoint.php');
           $beanoc->orc_estado = 2;
           break;
         case "3":
-          $beanoc->orc_estado = 3;
+        //inicio de codigo ychm
+
+        include ('aprobacionpm.php');
+
+        $aprobacionpm = new Aprobadores();
+        $DatosItem = $aprobacionpm->getAprobador($id);
+        $beanoc->orc_obs =$DatosItem;
+        /*$datosAprobador = $aprobacionpm->getAprobador($id);
+        $beanoc->orc_obs = $datosAprobador;
+        $DatosPlanPagos = $aprobacionpm->getPlanPagos($id);
+        $beanoc->orc_obs =$DatosPlanPagos;
+        $DatosOrdenCompra =$aprobacionpm->getOrdenCompra($id);
+        $beanoc->orc_obs =$DatosOrdenCompra;*/
+        //$resultado_final = [];
+        /*$resultado_final['Aprobador'] = $results;
+        $resultado2 = $aprobacionpm->getPlanPagos();
+        $resultado_final['Plan_pagos'] = $results2;
+        $resultado3 = $aprobacionpm->getOrdenCompra();
+        $resultado_final['Ordencompra'] = $results3;
+        print_r($resultado_final)
+        $curl = curl_init('http://localhost:8000');
+                $data =  json_encode($resultado_final);
+                try
+                {
+                curl_setopt($curl,CURLOPT_HTTPHEADER,array("Content-type:application/json"));
+                curl_setopt($curl,CURLOPT_POST,true);
+                curl_setopt($curl,CURLOPT_POSTFIELDS,$data);
+                curl_exec($curl);
+                curl_close($curl);
+                }
+                catch(exception $e)
+                {
+                echo "Error";
+                }*/
+        //$beanoc->orc_obs=$resultado; 
+        //fin del codigo ychm
+          //$beanoc->orc_estado = 3;
           $GLOBALS['db'];
             $db = DBManagerFactory::getInstance();
           $query = "
@@ -111,16 +151,18 @@ require_once('include/entryPoint.php');
         $proyecto = trim($proyecto);
         $total_pp = trim($total_pp);
         $importe_total = trim($importe_total);
-        echo json_encode($desctotal."~".$proyecto."~".$total_pp."~".$importe_total);
+         //echo json_encode($desctotal."~".$proyecto."~".$total_pp."~".$importe_total."~".$datosAprobador);
+        echo json_encode($DatosItem);
       }
       else{
-        echo json_encode($desctotal."~".$proyecto."~".$total_pp."~".$importe_total);
+        echo json_encode($desctotal."~".$proyecto."~".$total_pp."~".$importe_total."~".$DatosItem."exitoso");
       }
     }else{
-      echo json_encode($desctotal."~".$proyecto."~".$total_pp."~".$importe_total);
+      echo json_encode($desctotal."~".$proyecto."~".$total_pp."~".$importe_total."~".$DatosItem."exitoso");
     }
   }else{
-    echo json_encode($desctotal."~".$proyecto."~".$total_pp."~".$importe_total);
+    echo json_encode($desctotal."~".$proyecto."~".$total_pp."~".$importe_total."~".$DatosItem."exitoso");
   }
 
+   
 ?>
