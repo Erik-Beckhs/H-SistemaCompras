@@ -22,6 +22,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
     }
 
   function display(){
+    global $current_user;
     echo '<link href="modules/SCO_Consolidacion/css-loader.css?'.time().'" rel="stylesheet" type="text/css" />';
     echo '<script src="modules/SCO_OrdenCompra/viewdetail.js?'.time().'"></script>';
 	$sty = "<style>
@@ -134,6 +135,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
               .footable-last-visible{display:none}
         	</style>';
 	#script para cambio Reporte
+   if($current_user->iddivision_c == '03'){
     $reporteGerencial = '
       <div class="col-xs-12 col-sm-6 detail-view-row-item">
           <div class="col-xs-12 col-sm-4 label col-1-label">
@@ -145,6 +147,9 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
           </div>          
       </div>
     ';
+  }else{
+    $reporteGerencial = '';
+  }
 
    	#script para cambio de estados
 	echo "
