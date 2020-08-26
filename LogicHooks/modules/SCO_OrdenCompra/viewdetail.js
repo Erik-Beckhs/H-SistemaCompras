@@ -33,7 +33,8 @@ function estado(est,id){
 			$('#btn-estados').css('background','#CCC');
 			$('.loader').addClass('is-active');
 		},
-		success: function(data) {			
+		success: function(data) {	
+			debugger;		
 			$('.loader').removeClass('is-active');
 			data = data.replace('$','');
 			var desctot = $.parseJSON(data);
@@ -41,8 +42,18 @@ function estado(est,id){
 			if(desctot[0] == 100){
 				if(desctot[1] == 0){
 	        		if(desctot[2] == desctot[3]){
-	        	    	console.log('conexion exitosa, num = ' + desctot);
-	    	        	location.reload(true);
+	        			if(desctot[4] == '200'){
+	        				console.log('conexion exitosa, num = ' + desctot);
+	    	        		location.reload(true);
+	        			}else{
+	        				$('#btn-estados').css('pointer-events','visible');
+		     				var titulo = "Aprobadores";				
+							var mensaje = "Alerta!!! No se pudo enviar la informacion.";
+							var cuerpo = "<br><center > <p class='text-info'><strong>No se realizo el envio de la Orden de compra a ProccessMaker.</strong></p>";
+							cuerpo += "<br><p >Consulte con su Administrador</p> </center>";
+							ventanaModal(data,titulo,cuerpo,mensaje);
+			      			$('#modalOrdenCompra').modal('show');
+	        			}	    
 	  				}else{
 	     				//$('#alertapp').append('<div class="alert alert-danger"><button type="button" style=" background: transparent !important; color: #000000!important; padding-left: 10px; " class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Verifique los precios totales de <strong>Productos</strong> '+ desctot[3] + ' y <strong>Plan de Pagos</strong> '+ desctot[2] + '</div>');
 	     				$('#btn-estados').css('pointer-events','visible');

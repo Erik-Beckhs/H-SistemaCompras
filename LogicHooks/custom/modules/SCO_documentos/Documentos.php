@@ -28,32 +28,32 @@ class Documentos
       WHERE ocap.deleted = 0 AND ocap.sco_ordencompra_sco_aprobadoressco_ordencompra_ida = '".$idoc."'";
       $obj = $bean->db->query($query, true);
       
-    if ($bean->doc_tipo == 1){        
+    if ($bean->doc_tipo == 1){
         $cotiza = explode(".", $bean->filename);
         /*$beanoc->orc_cotizacion = $cotiza[0];*/
-      $beanoc->save();
+        $beanoc->save();
       }
       if($bean->doc_tipo == 2){
-        if($beanoc->orc_estado == 6 || $beanoc->orc_estado == 1){
+        #if($beanoc->orc_estado == 6 || $beanoc->orc_estado == 1){
 
-        }else{
-          $cotiza = explode(".", $bean->filename);
+        #}else{
+          #$cotiza = explode(".", $bean->filename);
           /*$beanoc->orc_cotizacion = $cotiza[0];*/
-            if($beanoc->orc_tipoo == "1"){
-              $beanoc->orc_estado = 6;
-            }else{
-              $beanoc->orc_estado = 1;
-            }    
-            $fecha_act = date("y-d-m");
-            $beanap->apr_fecha = $fecha_act;
-          while($row = $bean->db->fetchByAssoc($obj))
-          {
-           $beanap = BeanFactory::getBean('SCO_Aprobadores', $row['id']);
-           $beanap->apr_aprueba = 1;
-           $beanap->save();
-          }
-          $beanoc->save();
-        }        
+            #if($beanoc->orc_tipoo == "1"){
+              #$beanoc->orc_estado = 6;
+            #}else{
+              #$beanoc->orc_estado = 1;
+            #}    
+            #$fecha_act = date("y-d-m");
+            #$beanap->apr_fecha = $fecha_act;
+          #while($row = $bean->db->fetchByAssoc($obj))
+          #{
+             #$beanap = BeanFactory::getBean('SCO_Aprobadores', $row['id']);
+             #$beanap->apr_aprueba = 1;
+             #$beanap->save();
+          #}
+          #$beanoc->save();
+        #}        
       }  
       $bean->ignore_update_c = true;  
       $bean->save();    

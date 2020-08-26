@@ -11,20 +11,29 @@ require_once('include/entryPoint.php');
 
 class Aprobadores{
     function getAprobador($id){
-        $var = 'soy el id'.$id;
-        $payload ='{"id":"'.$id.'"}';
-        $ch = curl_init();
-        //curl_setopt($ch, CURLOPT_URL, "http://192.168.101.64:8081");
-        curl_setopt($ch, CURLOPT_URL, "http://Localhost:8081");
-        curl_setopt($ch, CURLOPT_HEADER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS,$payload);
-        curl_exec($ch);
-        curl_close($ch);
-        return $var;
-       
+        try {            
+            $payload ='{"id":"'.$id.'"}';
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, "http://docker-qas.hansa.com.bo:2202"); # QAS
+            #curl_setopt($ch, CURLOPT_URL, "docker-qas.hansa.com.bo:7506/api/consolidaciones"); #Desarrollo
+            curl_setopt($ch, CURLOPT_HEADER, 1);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_FAILONERROR, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS,$payload);
+            curl_exec($ch);
+            $intReturnCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close ($ch);
+            if ($intReturnCode != 200) {
+                $var = '404';
+            }else{
+                $var = '200';
+            }
+        } catch (Exception $e) {
+            $var = '404';   
+        }
+         return $var;       
     }
 }
 ?>

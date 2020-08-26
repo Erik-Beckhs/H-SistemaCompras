@@ -58,110 +58,105 @@ require_once('include/entryPoint.php');
         switch ($num) {
         case "1":
           $beanoc->orc_estado = 2;
+          #Guardamos los cambios de la orden de compra.
+          $beanoc->save(); 
           break;
         case "2":
           $beanoc->orc_estado = 2;
+          #Guardamos los cambios de la orden de compra.
+          $beanoc->save(); 
           break;
         case "3":
-        //inicio de codigo ychm
+          //Llamando a la clase Aprobadores y enverificando el envio de datos al serivicio
+          include ('aprobacionpm.php');
 
-        include ('aprobacionpm.php');
-
-        $aprobacionpm = new Aprobadores();
-        $DatosItem = $aprobacionpm->getAprobador($id);
-        $beanoc->orc_obs =$DatosItem;
-        /*$datosAprobador = $aprobacionpm->getAprobador($id);
-        $beanoc->orc_obs = $datosAprobador;
-        $DatosPlanPagos = $aprobacionpm->getPlanPagos($id);
-        $beanoc->orc_obs =$DatosPlanPagos;
-        $DatosOrdenCompra =$aprobacionpm->getOrdenCompra($id);
-        $beanoc->orc_obs =$DatosOrdenCompra;*/
-        //$resultado_final = [];
-        /*$resultado_final['Aprobador'] = $results;
-        $resultado2 = $aprobacionpm->getPlanPagos();
-        $resultado_final['Plan_pagos'] = $results2;
-        $resultado3 = $aprobacionpm->getOrdenCompra();
-        $resultado_final['Ordencompra'] = $results3;
-        print_r($resultado_final)
-        $curl = curl_init('http://localhost:8000');
-                $data =  json_encode($resultado_final);
-                try
-                {
-                curl_setopt($curl,CURLOPT_HTTPHEADER,array("Content-type:application/json"));
-                curl_setopt($curl,CURLOPT_POST,true);
-                curl_setopt($curl,CURLOPT_POSTFIELDS,$data);
-                curl_exec($curl);
-                curl_close($curl);
-                }
-                catch(exception $e)
-                {
-                echo "Error";
-                }*/
-        //$beanoc->orc_obs=$resultado; 
-        //fin del codigo ychm
-          //$beanoc->orc_estado = 3;
-          $GLOBALS['db'];
+          $aprobacionpm = new Aprobadores();
+          $DatosItem = $aprobacionpm->getAprobador($id);
+          $beanoc->orc_obs = $DatosItem;
+          $respuesta = $DatosItem;
+          if($respuesta == '200'){
+            $beanoc->orc_estado = 3;
+            #Cambia el nombre de la orden de compra de acuerdo a los proyectos registrados en el modulo de Productos.
+            $GLOBALS['db'];
             $db = DBManagerFactory::getInstance();
-          $query = "
-            SELECT DISTINCT(pro_nomproyco) as nombre, pro_idproy, pro_tipocotiza
-            FROM sco_productos_co pco
-            WHERE pro_idco = '$id' ";
-          $result = $GLOBALS['db']->query($query, true);
+            $query = "
+              SELECT 
+                  DISTINCT(pro_nomproyco) as nombre, 
+                  pro_idproy, 
+                  pro_tipocotiza
+              FROM sco_productos_co pco
+              WHERE pro_idco = '$id' ";
+            $result = $GLOBALS['db']->query($query, true);
             while($row = $GLOBALS['db']->fetchByAssoc($result))
-            {
+              {
+                #Actualizar los campos del modulo de Proyectos SCO_ProyectosCO sumando el correlativo.
                 $idproy = $row['pro_idproy'];
                 $beanproy = BeanFactory::getBean('SCO_ProyectosCO', $idproy);
                 $correl = $beanproy->proyc_correlativo + 1;
                 $beanproy->proyc_correlativo = $correl;
                 $beanproy->save();
+
                 $nombreoc .= $row['pro_tipocotiza'].$row['nombre'] . "_" . $correl . " - ";
+              }
+
+            $queryCnf = "SELECT 
+                          name,
+                          cnf_val_proyecto 
+                        FROM suitecrm.sco_cnfvalproyectos 
+                        where cnf_division = '".$iddv."' 
+                        and deleted =0;";
+            $cnf_valProy = $GLOBALS['db']->query($queryCnf, true);
+            $row_cnfVP = $GLOBALS['db']->fetchByAssoc($cnf_valProy);
+
+            $valProyecto = true;
+            if ($row_cnfVP != false) {
+              //En caso de existir una configuracion de no validar proyectos ponemos la cantidad de PY en 0
+              if ($row_cnfVP["cnf_val_proyecto"] == 0) {
+                //Dejamos el nombre de la orden de compra intacto
+                $valProyecto = false;
+              }
             }
-            $queryCnf = "SELECT name,cnf_val_proyecto FROM suitecrm.sco_cnfvalproyectos where cnf_division = '".$iddv."' and deleted =0;";
-      			$cnf_valProy = $GLOBALS['db']->query($queryCnf, true);
-      			$row_cnfVP = $GLOBALS['db']->fetchByAssoc($cnf_valProy);
-      			$valProyecto = true;
-      			if ($row_cnfVP != false) {
-      				//En caso de existir una configuracion de no validar proyectos ponemos la cantidad de PY en 0
-      				if ($row_cnfVP["cnf_val_proyecto"] == 0) {
-      					//Dejamos el nombre de la orden de compra intacto
-      					$valProyecto = false;
-      				}
-      			}
             if ($valProyecto == true) {
               $beanoc->name = $nombreoc;
               $beanoc->name = trim($beanoc->name, ' - ');
-  					}
-                //---------------------------
-              //------------------------------
+            }
+            #Guardamos los cambios de la orden de compra.
+            $beanoc->save();  
+          }
           break;
         case "4":
           $beanoc->orc_estado = 4;
+          #Guardamos los cambios de la orden de compra.
+          $beanoc->save(); 
           break;
         case "5":
           $beanoc->orc_estado = 5;
+          #Guardamos los cambios de la orden de compra.
+          $beanoc->save(); 
           break;
         case "6":
           $beanoc->orc_estado = 1;
+          #Guardamos los cambios de la orden de compra.
+          $beanoc->save(); 
           break;
         default:
           break;
         }
-        $beanoc->save();
         $desctotal =  trim($desctotal);
         $proyecto = trim($proyecto);
         $total_pp = trim($total_pp);
         $importe_total = trim($importe_total);
-         //echo json_encode($desctotal."~".$proyecto."~".$total_pp."~".$importe_total."~".$datosAprobador);
-        echo json_encode($DatosItem);
+        echo json_encode($desctotal."~".$proyecto."~".$total_pp."~".$importe_total."~".$respuesta);
+        #echo json_encode($DatosItem);
       }
       else{
-        echo json_encode($desctotal."~".$proyecto."~".$total_pp."~".$importe_total."~".$DatosItem."exitoso");
+        echo json_encode($desctotal."~".$proyecto."~".$total_pp."~".$importe_total."~");
       }
     }else{
-      echo json_encode($desctotal."~".$proyecto."~".$total_pp."~".$importe_total."~".$DatosItem."exitoso");
+      echo json_encode($desctotal."~".$proyecto."~".$total_pp."~".$importe_total."~");
     }
   }else{
-    echo json_encode($desctotal."~".$proyecto."~".$total_pp."~".$importe_total."~".$DatosItem."exitoso");
+    echo json_encode($desctotal."~".$proyecto."~".$total_pp."~".$importe_total."~");
   }
 
    
