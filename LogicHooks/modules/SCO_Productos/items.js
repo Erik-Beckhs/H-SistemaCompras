@@ -91,7 +91,7 @@ function insertarServicio() {
     var x = tablapr.insertRow(-1);
     x.id = 'servicio' + pronum;
     var b1 = x.insertCell(0);
-    b1.innerHTML = "<input   type='hidden' name='pro_nombre" + pronum + "' id='pro_nombre" + pronum + "' maxlength='50' value='Servicio'><input type='hidden' name='producto_id" + pronum + "' id='producto_id" + pronum + "' size='20' maxlength='50' value='Servicio" + pronum + "'><input type='hidden' name='pro_codaio" + pronum + "' id='pro_codaio" + pronum + "' size='20' maxlength='50' value=''>";
+    b1.innerHTML = "<input   type='hidden' name='pro_nombre" + pronum + "' id='pro_nombre" + pronum + "' maxlength='50' value='Servicio'><input type='hidden' name='producto_id" + pronum + "' id='producto_id" + pronum + "' size='20' maxlength='50' value='Servicio" + pronum + "'><input type='hidden' name='pro_codaio" + pronum + "' id='pro_codaio" + pronum + "' size='20' maxlength='50' value=''><input type='hidden' name='pro_idproductocotizado" + pronum + "' id='pro_idproductocotizado" + pronum + "' size='20' maxlength='50' value=''>";
     var b3 = x.insertCell(1);
     b3.innerHTML = "<textarea class='requerido' id='pro_descripcion" + pronum + "' name='pro_descripcion" + pronum + "' rows='2' cols='50' placeholder='Nombre Servicio' style='margin-left: 0px; margin-right: 0px; width: 300px;'></textarea>";
     var b = x.insertCell(2);
