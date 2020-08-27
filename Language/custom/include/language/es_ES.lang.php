@@ -115,7 +115,10 @@ $GLOBALS['app_list_strings']['scoprvestado_list']=array (
   1 => 'Activo',
   2 => 'Inactivo',
 );
-$GLOBALS['app_list_strings'][' scoprvidioma_list']=array (
+$GLOBALS['app_list_strings']['scoprvidioma_list']=array (
+  'BO' => 'Spanish (BO) / EspaÃ±ol (BO)',
+);
+$GLOBALS['scoprvidioma_list']['scoprvidioma_list']=array (
   'BO' => 'Spanish (BO) / EspaÃ±ol (BO)',
 );
 $GLOBALS['app_list_strings']['scoprvtipobanco_list']=array (
@@ -123,6 +126,7 @@ $GLOBALS['app_list_strings']['scoprvtipobanco_list']=array (
   2 => 'Extrangero',
 );
 $GLOBALS['app_list_strings']['scoprvcondpago_list']=array (
+  ''   => '',
   'ZP01' => 'Pago adelantado sin DPP',
   'ZP02' => 'Pago al Contado',
   'ZP03' => 'Pago a 30 dias',
@@ -134,6 +138,7 @@ $GLOBALS['app_list_strings']['scoprvcondpago_list']=array (
   'ZP22' => 'Pago a 75 dias',
 );
 $GLOBALS['app_list_strings']['scoprvdprubro_list']=array (
+  ''   => '',
   'A0' => 'AGRIC-PECUA-Y-AGROIN',
   'B0' => 'ARTESANIA, MYPES',
   'C0' => 'COMERCIO E IMPORTAC',
@@ -152,6 +157,7 @@ $GLOBALS['app_list_strings']['scoprvdprubro_list']=array (
   'P0' => 'TURIS-HOTEL,GASTRON',
 );
 $GLOBALS['app_list_strings']['scoprvdpclasepov_list']=array (
+  ''   => '',
   'Z001' => 'EXTRANJEROS',
   'Z002' => 'LOCALES',
   'Z003' => 'ESPECIALES',
