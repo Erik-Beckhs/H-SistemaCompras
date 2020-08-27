@@ -470,6 +470,10 @@ $installdefs = array(
         'to'   => 'modules/SCO_OrdenCompra/views/view.reporte.php',
       ),
       array(
+        'from' => '<basepath>/modules/SCO_OrdenCompra/aprobacionpm.php',
+        'to'   => 'modules/SCO_OrdenCompra/aprobacionpm.php',
+      ),
+      array(
         'from' => '<basepath>/modules/SCO_OrdenCompra/backorderdata.php',
         'to'   => 'modules/SCO_OrdenCompra/backorderdata.php',
       ),
