@@ -33,7 +33,7 @@ $manifest = array(
  'is_uninstallable' => true,
  'author'   => 'lalcon',
  'published_date' => 'Agostos 25 , 2020',
- 'version'   => '3.0.0',
+ 'version'   => '4.0.0',
  'type'    => 'module',
  );
 
