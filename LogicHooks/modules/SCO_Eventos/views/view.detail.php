@@ -20,7 +20,9 @@ class SCO_EventosViewDetail extends ViewDetail {
  		$id_ev = $this->bean->id;
  		$arr_estados =  array(1 => 'Borrador',2 =>'Solicitud de embarque',3 =>'En Transito',4 =>'Concluido');
 		$estado = $this->bean->eve_estado;
-
+		echo '<link href="modules/SCO_Consolidacion/css-loader.css?'.time().'" rel="stylesheet" type="text/css" />  ';
+		echo '<script src="modules/SCO_Eventos/viewdetail.js?'.time().'"></script>';
+		echo '<div id="modalEmbarque"></div><div class="loader loader-default" data-text="Enviando datos"></div>';
 		$st ='<style>
 			.cantidad{pointer-events:none;}
 			.precio{pointer-events:none;}
@@ -61,25 +63,7 @@ class SCO_EventosViewDetail extends ViewDetail {
 			</div></div></div>';
 			echo '<script>
 				var id_ev = "'.$id_ev.'";
-				function solicitar(est){
-
-          est = "Concluido";
-					$.ajax({
-					type: "get",
-					url: "index.php?to_pdf=true&module=SCO_Eventos&action=fecha_eventos&id="+id_ev,
-					data: {est},
-					beforeSend: function(){
-					//alert("Procesando los datos");
-						$("#btn-estados").css("pointer-events","none");
-						$("#btn-estados").css("background","#CCC !important");
-					},
-					success: function(data) {
-
-						var estado = $.parseJSON(data);
-		    		}
-		    	});
-					// location.reload();
-				}
+				
 			</script>';
  				break;
  			case 'Pendiente':
@@ -106,35 +90,7 @@ class SCO_EventosViewDetail extends ViewDetail {
 			</div></div></div>';
 			echo '<script>
 				var id_ev = "'.$id_ev.'";
-
-				function solicitar(est){
-				if($("#list_subpanel_activities .list tbody .oddListRowS1").length == 0){
-          //console.log($("#list_subpanel_activities .list tbody .oddListRowS1").length);
-          est = "Concluido";
-					$.ajax({
-						type: "get",
-						url: "index.php?to_pdf=true&module=SCO_Eventos&action=fecha_eventos&id="+id_ev,
-						data: {est},
-						beforeSend: function(){
-						//alert("Procesando los datos");
-							$("#btn-estados").css("pointer-events","none");
-							$("#btn-estados").css("background","#CCC !important");
-						},
-						success: function(data) {
-							var estado = $.parseJSON(data);
-              console.log(estado);
-                if(estado != "error"){
-                    location.reload();
-                }
-                else {
-                  alert("No se puede concluir el evento si no coloco una fecha real o un transportista")
-                }
-			    		}
-			    	});
-				}else{
-						alert("Aun tiene Actividades pendientes");
-				}
-				}
+				
 			</script>';
  				break;
  			case 'Concluido':
@@ -142,25 +98,7 @@ class SCO_EventosViewDetail extends ViewDetail {
  			parent::display();
 			echo '<script>
 			var id_ev = "'.$id_ev.'";
-			function solicitar(est){
-				debugger;
-        est = "Concluido";
-				$.ajax({
-					type: "get",
-					url: "index.php?to_pdf=true&module=SCO_Eventos&action=fecha_eventos&id="+id_ev,
-					data: {est},
-					beforeSend: function(){
-					//alert("Procesando los datos");
-						$("#btn-estados").css("pointer-events","none");
-						$("#btn-estados").css("background","#CCC !important");
-					},
-					success: function(data) {
-						debugger;
-						var estado = $.parseJSON(data);
-		    			}
-					// location.reload();
-				});
-			}
+			
 			</script>';
  				break;
  			default:

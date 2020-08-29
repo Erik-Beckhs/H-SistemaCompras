@@ -16,8 +16,22 @@ require_once('include/entryPoint.php');
     #$despachos = "UPDATE sco_despachos SET des_est = '".$est."' WHERE id = '".$id."';";
     #$obj_des = $GLOBALS['db']->query($despachos, true);
 	#echo json_encode($est);
-	$bean_eventos = BeanFactory::getBean('SCO_Eventos', $id);
 
+    $bean_eventos = BeanFactory::getBean('SCO_Eventos', $id);
+    #Obteniendo id del Embarque
+    $bean_eventos->load_relationship('sco_embarque_sco_eventos');
+	$relatedBeans = $bean_eventos->sco_embarque_sco_eventos->getBeans();
+	reset($relatedBeans);
+	$parentBean   = current($relatedBeans);
+	#id del Embarque relacionado con el evento
+	$idEmbarque   = $parentBean->id;
+
+	#Conexion con servicio Rest para el evnio de datos
+	include ('enviaDatosCrmVentas.php');
+	$envioDatosCrm= new EnviaDatosCRM();
+	$respuesta = $envioDatosCrm->enviarInformacion($idEmbarque,$id,$bean_eventos->name);
+	#Verificando si la conexion fue 200
+    if($respuesta == '200'){
 		if ($bean_eventos->eve_fechare != null && $bean_eventos->transportistaotros) {
 				echo json_encode($bean_eventos->eve_fechare);
 				$bean_eventos->eve_estado = $est;
@@ -26,6 +40,8 @@ require_once('include/entryPoint.php');
 		else {
 			echo json_encode("error");
 		}
-
-
+    }else{
+    	echo json_encode($respuesta);
+    }
+	
 ?>

@@ -68,11 +68,11 @@ require_once('include/entryPoint.php');
           break;
         case "3":
           //Llamando a la clase Aprobadores y enverificando el envio de datos al serivicio
+          /*
           include ('aprobacionpm.php');
 
           $aprobacionpm = new Aprobadores();
           $DatosItem = $aprobacionpm->getAprobador($id);
-          $beanoc->orc_obs = $DatosItem;
           $respuesta = $DatosItem;
           if($respuesta == '200'){
             $beanoc->orc_estado = 3;
@@ -122,7 +122,59 @@ require_once('include/entryPoint.php');
             }
             #Guardamos los cambios de la orden de compra.
             $beanoc->save();  
-          }
+          }*/
+          ######################################################################
+          ######################################################################
+          #USAR SOLO EN PRUEBAS DE DESARROLLO
+          $beanoc->orc_estado = 3;
+            #Cambia el nombre de la orden de compra de acuerdo a los proyectos registrados en el modulo de Productos.
+            $GLOBALS['db'];
+            $db = DBManagerFactory::getInstance();
+            $query = "
+              SELECT 
+                  DISTINCT(pro_nomproyco) as nombre, 
+                  pro_idproy, 
+                  pro_tipocotiza
+              FROM sco_productos_co pco
+              WHERE pro_idco = '$id' ";
+            $result = $GLOBALS['db']->query($query, true);
+            while($row = $GLOBALS['db']->fetchByAssoc($result))
+              {
+                #Actualizar los campos del modulo de Proyectos SCO_ProyectosCO sumando el correlativo.
+                $idproy = $row['pro_idproy'];
+                $beanproy = BeanFactory::getBean('SCO_ProyectosCO', $idproy);
+                $correl = $beanproy->proyc_correlativo + 1;
+                $beanproy->proyc_correlativo = $correl;
+                $beanproy->save();
+
+                $nombreoc .= $row['pro_tipocotiza'].$row['nombre'] . "_" . $correl . " - ";
+              }
+
+            $queryCnf = "SELECT 
+                          name,
+                          cnf_val_proyecto 
+                        FROM suitecrm.sco_cnfvalproyectos 
+                        where cnf_division = '".$iddv."' 
+                        and deleted =0;";
+            $cnf_valProy = $GLOBALS['db']->query($queryCnf, true);
+            $row_cnfVP = $GLOBALS['db']->fetchByAssoc($cnf_valProy);
+
+            $valProyecto = true;
+            if ($row_cnfVP != false) {
+              //En caso de existir una configuracion de no validar proyectos ponemos la cantidad de PY en 0
+              if ($row_cnfVP["cnf_val_proyecto"] == 0) {
+                //Dejamos el nombre de la orden de compra intacto
+                $valProyecto = false;
+              }
+            }
+            if ($valProyecto == true) {
+              $beanoc->name = $nombreoc;
+              $beanoc->name = trim($beanoc->name, ' - ');
+            }
+            #Guardamos los cambios de la orden de compra.
+            $beanoc->save();  
+            ######################################################################
+            ######################################################################
           break;
         case "4":
           $beanoc->orc_estado = 4;

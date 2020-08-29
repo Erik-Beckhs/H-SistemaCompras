@@ -380,27 +380,14 @@
             },
             success: function(data) {                
                 //debugger;
-                var sqlprod = $.parseJSON(data);                  
+                var sqlprod = $.parseJSON(data);   
+                console.log(sqlprod); 
+                console.log('devuelve datos'+sqlprod.respuesra_servicio);                 
                 console.log(sqlprod);              
-                if (Object.keys(sqlprod) != '') {
-                    if (sqlprod.length == 1) {
-                      if(sqlprod[0] == null){
-                        $('#9-' + row).css( "background-color", "#ffc7c7" );
-                      }else{
-                        //modalUpdateItemAio(sqlprod);
-                        //$('#modalUpdateItemAio').modal('show');
-                        console.log('DATOS ' + sqlprod);
-                        console.log('El item se registro exitosamente : Cod Provedor : '+ sqlprod[0]['name'] +' Descripcion:' +sqlprod[0]['proge_nompro']);
-                        $('#9-' + row).css( "background-color", "#CBFFC7" );
-                      }                                          
-                    }
-                    
+                if (sqlprod.respuesra_servicio == '200') {
+                    $('#9-' + row).css( "background-color", "#CBFFC7" );                                      
                 } else {
-                    alert('El Codigo de SAP no existe');
-                    $('#0-' + row).css({
-                        'background': '#ffc7c7',
-                        'color': '#FFF'
-                    });
+                    $('#9-' + row).css( "background-color", "#ffc7c7" );
                 }
             }
         });
