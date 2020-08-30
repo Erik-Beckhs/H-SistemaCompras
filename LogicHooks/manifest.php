@@ -343,6 +343,10 @@ $installdefs = array(
         'to'   => 'modules/SCO_Despachos/dividirdespacho.php',
       ),
       array(
+        'from' => '<basepath>/modules/SCO_Despachos/enviodatoscrmventas.php',
+        'to'   => 'modules/SCO_Despachos/enviodatoscrmventas.php',
+      ),
+      array(
         'from' => '<basepath>/modules/SCO_Despachos/estado.php',
         'to'   => 'modules/SCO_Despachos/estado.php',
       ),
@@ -435,6 +439,14 @@ $installdefs = array(
       array(
         'from' => '<basepath>/modules/SCO_Eventos/fecha_eventos.php',
         'to'   => 'modules/SCO_Eventos/fecha_eventos.php',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_Eventos/enviaDatosCrmVentas.php',
+        'to'   => 'modules/SCO_Eventos/enviaDatosCrmVentas.php',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_Eventos/viewdetail.js',
+        'to'   => 'modules/SCO_Eventos/viewdetail.js',
       ),
       //SCO_OrdenCompra
       array(
