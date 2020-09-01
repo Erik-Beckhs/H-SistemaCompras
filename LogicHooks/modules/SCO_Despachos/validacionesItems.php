@@ -7,7 +7,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Ordenar productos Despacho</h4>
+                <h4 class="modal-title">Validar productos contra factura</h4>
             </div>
             <div class="modal-body">
                 <div id="ventanaModal"></div> 
@@ -27,7 +27,7 @@
                     <div class="col-lg-6 table-responsive">
                         <div class="panel panel-info">
                             <div class="panel-heading">
-                                Factura
+                                Productos Factura
                             </div>
                             <div class="panel-body">
                                 <div class="detail view  detail508 expanded">
@@ -148,13 +148,13 @@
                     colHeaders: ['#','Producto','Descripcion', 'Observacion','Cantidad', 'Prec / U','Sub toal','idProductoCotizadoVenta', 'idProDes','Cod SAP', 'Validado'],
                     colWidths: [20, 50, 170, 80, 40, 60, 60, 50, 50, 50, 30],
                     columns: [
-                        {type: 'text', readOnly:false},
+                        {type: 'text', readOnly:true},
                         {type: 'text'},
-                        {type: 'text', readOnly:false},
-                        {type: 'text', readOnly:false},
-                        {type: 'text', readOnly:false},
-                        {type: 'text', readOnly:false},
-                        {type: 'text', readOnly:false},
+                        {type: 'text', readOnly:true},
+                        {type: 'text', readOnly:true},
+                        {type: 'text', readOnly:true},
+                        {type: 'text', readOnly:true},
+                        {type: 'text', readOnly:true},
                         {type: 'hidden', readOnly:false},
                         {type: 'hidden', readOnly:false},
                         {type: 'text', readOnly:false},
@@ -167,17 +167,19 @@
                 var b, c = 0;
                 for(var a = 0; a < data.length ; a++){
                   b = data[a][4];              
-                  c = parseInt(b) + parseInt(c);
+                  c = parseInt(b) + parseInt(c);                         
                 }
                 $('#totalCantidadDes1').text(c);
 
                 //total precio de subtotales del listado de productos despachos
+                var w, x = 0;
                 for(var a = 0; a < data.length ; a++){
-                  b = data[a][6];
-                  c = parseFloat(b) + parseFloat(c);
+                  w = data[a][6];
+                  x = parseFloat(w) + parseFloat(x);
+                  console.log("SUMA" + parseInt(w) +" + "+ parseInt(x));
                 }
                 //console.log($('#my tbody tr').length);                
-                $('#totalPrecioDes1').text(c.toFixed(2));                
+                $('#totalPrecioDes1').text(x.toFixed(2));                
             },
             error: function (data) {
               alert('ERROR, No se pudo conectar', data);
@@ -234,8 +236,8 @@
                     oDiferentesDes2.push(oitem2);
 
                     $('#productosDespacho1 #row-'+filaDes1).css( "background-color", "#CBFFC7" ); 
-                    $('#productosDespacho1 #9-'+filaDes1).text("Existe");
-                    $('#productosDespacho1 #9-'+filaDes1).css( "background-color", "#CBFFC7" );
+                    $('#productosDespacho1 #10-'+filaDes1).text("Existe");
+                    $('#productosDespacho1 #10-'+filaDes1).css( "background-color", "#CBFFC7" );
                     $('#productosDespacho1 #6-'+filaDes1).css( "background-color", "#CBFFC7" );
                     $('#productosDespacho1 #5-'+filaDes1).css( "background-color", "#CBFFC7" );
                     $('#productosDespacho1 #4-'+filaDes1).css( "background-color", "#CBFFC7" );

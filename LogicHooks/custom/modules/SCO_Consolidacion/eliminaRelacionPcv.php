@@ -25,7 +25,7 @@ class Celiminarelacion {
 		#$beanPcv->save();
 
 		$bean->retrieve($row['sco_consol4725osventa_idb']);
-		$bean->db->query("UPDATE sco_productoscotizadosventa SET pcv_cantidadsaldo ='".$pcv_cantidadsaldo."', pcv_cantidadconsolidado = 0 WHERE id='".$idPcv."'");
+		$bean->db->query("UPDATE sco_productoscotizadosventa SET pcv_cantidadsaldo ='".$pcv_cantidadsaldo."', pcv_cantidadconsolidado = 0, pcv_consolidado = 0 WHERE id='".$idPcv."'");
 
 
 	}

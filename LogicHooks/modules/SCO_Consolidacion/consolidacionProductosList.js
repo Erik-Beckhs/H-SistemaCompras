@@ -179,7 +179,7 @@ function buscarPlazoEntrega() {
 $('#idFabricante').on('change', function () {
   var pcv_proveedoraio = $("#idFabricante").val();
   var nroCotizacion = $('#nroCotizacion').val();
-  if (nroCotizacion != '') {
+  if (nroCotizacion != null) {
     $.ajax({
       type: 'POST',
       url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesLista',

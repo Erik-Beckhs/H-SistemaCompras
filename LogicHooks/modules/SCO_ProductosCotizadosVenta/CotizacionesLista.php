@@ -16,8 +16,10 @@ global $current_user;
     $idDiv = $current_user->iddivision_c;
     
     if($filtro == 'cotizacionList'){
-        $query = "SELECT pcv_numerocotizacion FROM suitecrm.sco_productoscotizadosventa WHERE deleted = 0
-        group by pcv_numerocotizacion;
+        $query = "SELECT pcv_numerocotizacion 
+                  FROM suitecrm.sco_productoscotizadosventa 
+                  WHERE deleted = 0
+                  group by pcv_numerocotizacion;
         ";
         $results = $GLOBALS['db']->query($query, true);
         $object= array();
@@ -30,10 +32,10 @@ global $current_user;
     if($filtro == 'fabricante'){
         $pcv_numerocotizacion = $_POST['pcv_numerocotizacion'];
         $query = "SELECT sco_proveedor_id_c,pcv_nombreproveedor,pcv_proveedoraio
-        FROM suitecrm.sco_productoscotizadosventa
-        WHERE 
-        deleted = 0
-        group by pcv_proveedoraio;
+                FROM suitecrm.sco_productoscotizadosventa
+                WHERE deleted = 0
+                AND pcv_cantidadconsolidado = 0
+                group by pcv_proveedoraio;
         ";
         $results = $GLOBALS['db']->query($query, true);
         $object= array();
