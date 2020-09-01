@@ -1,5 +1,5 @@
 <?php //require_once("../../../JavaBridge/java/Java.inc");
-require_once("http://compras.hansa.com.bo:8080/JavaBridge/java/Java.inc");
+require_once("http://compras.hansa.com.bo:8080/JavaBridge/java/Java.inc");z
 ?>
 <?php
 	$driver = java ("java.lang.Class");

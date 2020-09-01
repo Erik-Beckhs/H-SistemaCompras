@@ -1,12 +1,13 @@
 <?php //require_once("../../../JavaBridge/java/Java.inc");
-require_once("http://localhost:8080/JavaBridgeTemplate721/java/Java.inc");
+#require_once("http://localhost:8080/JavaBridgeTemplate721/java/Java.inc"); #DEV
+require_once("http://compras-qas.hansa.com.bo:8080/JavaBridge/java/Java.inc"); #QAS
 ?>
 <?php
   $driver = java ("java.lang.Class");
   $driver->forName("com.mysql.jdbc.Driver");
 
   $manager = java ("java.sql.DriverManager");
-  $conn = $manager->getConnection("jdbc:mysql://localhost/suitecrm", "suitecrmuser", "suitecrmuser");
+  $conn = $manager->getConnection("jdbc:mysql://192.168.1.81/suitecrm", "suitecrmuser", "suitecrmuser");
   
   $id = $_GET['id'] ? $_GET['id'] : "";
   $name = "Reporte";

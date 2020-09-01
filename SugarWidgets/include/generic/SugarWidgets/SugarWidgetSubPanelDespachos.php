@@ -132,11 +132,11 @@ class SugarWidgetSubPanelDespachos extends SugarWidgetField {
           margin-left: 10px;}
        .navegacion{
           background:#FFF;
-          text-align:left;
+          text-align:center;
           position:absolute;
           display:none;
-          padding:5px;
-          margin-top: 15px;
+          padding:2px 5px 10px 5px;;
+          margin-top: -130px;
           z-index:1000;
           width:250px;
           -webkit-transform: perspective(1px) translateZ(0);
@@ -147,6 +147,12 @@ class SugarWidgetSubPanelDespachos extends SugarWidgetField {
           -webkit-transition-property: transform;
           transition-property: transform;
           z-index:1000;}
+       .navegacion h4{
+          font-size:16px;
+          background: #000;}
+       .cuadrado p{
+          font-size:11.5px;
+          background: #000000d6;}
        .cuadrado:hover .navegacion{
           background:rgba(0,0,0,0.6);
           display: block;
@@ -160,8 +166,6 @@ class SugarWidgetSubPanelDespachos extends SugarWidgetField {
           transform: translateY(5px);}
        .navegacion {
           transition: color 0.8s linear 0.2s;}
-       .cuadrado p{
-          font-size:12px;}
        .riesg{
           width:250px;
           text-align:left;
