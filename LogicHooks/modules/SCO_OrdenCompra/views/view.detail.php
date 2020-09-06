@@ -58,6 +58,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
    	</style>";
 		$htmlpp ='<div id="alertapp"></div> 
               <div id="ventanaModal"></div>
+              <div id="ventanaModalPM"></div>
               ';
   	echo $sty.$htmlpp;
     #Consultas SQL para obtecion de informacion de productos
@@ -204,7 +205,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                 <b>Reporte Compra:</b>
               </div>        
               <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
-                  <a class="btn btn-sm" style="padding: 2px 5px;background: #ffc107!important;color:#fff;"onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descarga pdf</a>
+                  <a class="btn btn-sm" style="padding: 2px 5px;background: #ffc107!important;color:#fff;"onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar pdf</a>
                   <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showreport("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
               </div>          
         </div>
@@ -234,7 +235,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                 <b>Reportes:</b>
               </div>        
               <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
-                  <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar</a>
+                  <a class="btn btn-sm" style="padding: 2px 5px;background: #ffc107!important;color:#fff;"onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar pdf</a>
                   <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showreport("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
               </div>          
         </div>
@@ -276,7 +277,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                   <b>Reportes:</b>
                 </div>        
                 <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
-                    <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar</a>
+                    <a class="btn btn-sm" style="padding: 2px 5px;background: #ffc107!important;color:#fff;" onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar pdf</a>
                     <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showreport("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
                 </div>          
           </div>
@@ -305,7 +306,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                 <b>Reportes:</b>
               </div>        
               <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
-                  <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar</a>
+                  <a class="btn btn-sm" style="padding: 2px 5px;background: #ffc107!important;color:#fff;" onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar pdf</a>
                   <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showreport("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
               </div>          
         </div>
@@ -341,7 +342,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
               <b>Reportes:</b>
             </div>        
             <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
-                <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar</a>
+                <a class="btn btn-sm" style="padding: 2px 5px;background: #ffc107!important;color:#fff;"onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar</a>
                 <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showreport("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
             </div>          
       </div>
@@ -386,7 +387,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                 <b>Reportes:</b>
               </div>        
               <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
-                  <a class="btn btn-success btn-sm" style="padding: 2px 5px;" onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar</a>
+                  <a class="btn btn-sm" style="padding: 2px 5px;background: #ffc107!important;color:#fff;" onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar</a>
                   <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showreport("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
               </div>          
         </div>

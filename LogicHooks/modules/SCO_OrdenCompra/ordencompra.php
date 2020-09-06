@@ -67,6 +67,7 @@ require_once('include/entryPoint.php');
           $beanoc->save(); 
           break;
         case "3":
+          /*
           //Llamando a la clase Aprobadores y enverificando el envio de datos al serivicio
           include ('aprobacionpm.php');
 
@@ -122,10 +123,11 @@ require_once('include/entryPoint.php');
             #Guardamos los cambios de la orden de compra.
             $beanoc->save();  
           }
+          */
           ######################################################################
           ######################################################################
-          #USAR SOLO EN PRUEBAS DE DESARROLLO
-          /*
+          #USAR SOLO EN PROCESO MANUAL DE DESARROLLO
+        
           $beanoc->orc_estado = 3;
             #Cambia el nombre de la orden de compra de acuerdo a los proyectos registrados en el modulo de Productos.
             $GLOBALS['db'];
@@ -173,7 +175,7 @@ require_once('include/entryPoint.php');
             }
             #Guardamos los cambios de la orden de compra.
             $beanoc->save();  
-            */
+            
             ######################################################################
             ######################################################################
           break;

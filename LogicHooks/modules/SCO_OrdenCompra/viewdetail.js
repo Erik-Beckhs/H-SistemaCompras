@@ -17,11 +17,40 @@ function descargaReporteGerencialDiv03(id,nombre,orc_nomcorto){
 	var url2 = "/modules/reportes/descargaReporteGerencialDiv03.php?id="+id+"&name="+nombre+"&nameprov="+orc_nomcorto+"&ejec="+n;
 	window.open(url2,"","");
 }
+
 function estado(est,id){
+	if(est == 3){
+		var titulo = "Aprobación Orden de Compra";				
+		var mensaje = "Envío de Orden de Compra a ProcessMaker";
+		var cuerpo = "<br><center > <p class='text-info'><strong>Desea enviar la orden de compra a todos sus aprobadores?</strong></p>";
+		cuerpo += "<br><p > Esto realiara el envio de Email y casos ProcessMaker </p> </center>";
+		ventanaModalPM(titulo,cuerpo,mensaje,est,id);
+		$('#modalOrdenCompraPM').modal('show');
+	}else{
+		envioDeAprobadores(est,id);
+	}
+}
+
+function verificarObs(id,estado){
+	//var estado = false;
+	var Resp = true;
+	$.ajax({
+		url: 'index.php?to_pdf=true&module=SCO_OrdenCompra&action=verificarEstado&id='+id,
+		type: 'GET',
+		data: {estado},
+		dataType: 'json',
+		success:function(data) {
+			Resp = data['r'];
+		}
+	});
+	return Resp;
+}
+
+function envioDeAprobadores(est,id){
+	$('#modalOrdenCompraPM').modal('hide');
 	console.log("estado :" +est + ", Id:" + id);
 	var num = est;
-	var respuesta = verificarObs(id,num);
-
+	var respuesta = verificarObs(id,num);	
 	if ( respuesta == true) {
 		$.ajax({
 		type: 'get',
@@ -44,6 +73,7 @@ function estado(est,id){
 	        		if(desctot[2] == desctot[3]){
 	        			if(desctot[4] == '200'){
 	        				console.log('conexion exitosa, num = ' + desctot);
+	        				alert("Su informacion de Orden de Compra se envio exitosamente.");
 	    	        		location.reload(true);
 	        			}else{
 	        				$('#btn-estados').css('pointer-events','visible');
@@ -91,7 +121,7 @@ function estado(est,id){
 				//$('#alertapp').append('<div class="alert alert-danger"><button type="button" style=" background: transparent !important; color: #000000!important; padding-left: 10px; " class="close" data-dismiss="alert" aria-hidden="true">&times;</button>');
 				$('#btn-estados').css('pointer-events','visible');
 				var titulo = "Plan de Pagos";				
-				var mensaje = " La suma de los porcetajes de su <b>plan de pagos</b>, no coincide con el 100% = " + desctot['3'] + " del momnto toal de <b>Productos</b>";
+				var mensaje = " La suma de los porcetajes de su <b>plan de pagos</b>, no coincide con el 100% = " + desctot['3'] + " del momnto total de <b>Productos</b>";
 				var cuerpo = "<br><center > <p class='text-info'><strong>Complete el 100 % del Plan de Pagos</strong></p>";
 				cuerpo += "<br><p >  Suma de % de plan de pagos = " + desctot['0'] + " %, equivalente a un monto de " + desctot['2'] + " </p> </center>";
 				ventanaModal(data,titulo,cuerpo,mensaje);
@@ -105,23 +135,8 @@ function estado(est,id){
 	}
 }
 
-function verificarObs(id,estado){
-	//var estado = false;
-	var Resp = true;
-	$.ajax({
-		url: 'index.php?to_pdf=true&module=SCO_OrdenCompra&action=verificarEstado&id='+id,
-		type: 'GET',
-		data: {estado},
-		dataType: 'json',
-		success:function(data) {
-			Resp = data['r'];
-		}
-	});
-	return Resp;
-}
-
 //Estructura de la vista de la venta modal
-function ventanaModal(datos,titulo,cuerpo,mensaje){
+function ventanaModal(datos,titulo,cuerpo,mensaje){	
     console.log(datos);
 	    var htmlm = '';
 	    htmlm += '<div class="modal fade" id="modalOrdenCompra" style="display: block;margin-top: 5%;">';
@@ -141,8 +156,43 @@ function ventanaModal(datos,titulo,cuerpo,mensaje){
 	    htmlm += '            </div>';
 	    htmlm += '        </div>';
 	    htmlm += '    </div>';
-	    htmlm += '</div>';    
+	    htmlm += '</div>';  
     $("#ventanaModal").html(htmlm);
+}
+
+//Estructura de la vista de la venta modal Solicitud de Aprobacion
+function ventanaModalPM(titulo,cuerpo,mensaje,est,id){
+    
+	    var htmlm = '';
+	    htmlm += '<div class="modal fade" id="modalOrdenCompraPM" style="display: block;margin-top: 5%;">';
+	    htmlm += '    <div class="modal-dialog">';
+	    htmlm += '        <div class="modal-content">';
+	    htmlm += '            <div class="modal-header" style="background:#0e2741 !important;">';
+	    htmlm += '                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
+	    htmlm += '                <h4 class="modal-title">'+titulo+'</h4>';
+	    htmlm += '            </div>';
+	    htmlm += '            <div class="modal-body" >';
+	    htmlm += '                <div class="panel panel-success">';
+    	htmlm += '                    <div class="panel-heading">' + mensaje+ '</div>';
+    	htmlm += '                    <div class="panel-body"style="padding: 10px;">';
+    	htmlm += '						<div id="datosModal">' + cuerpo + '</div>';
+		htmlm += '					  </div>';
+		htmlm += '				   </div><hr>';
+
+		htmlm += '            <div class="row">';
+		htmlm += '               <div class="col-sm-6">';
+		htmlm += '                   <button type="button" class="btn btn-sm btn-danger" style="width: 100%;background: #dc3545;color:#fff;border:solid 1px#dc3545;" data-dismiss="modal">Cancelar</button>';
+		htmlm += '               </div>';
+		htmlm += '               <div class="col-sm-6">';
+		htmlm += '                   <button type="button" class="btn btn-sm btn-verde" style="width: 100%;background: #31708f;color:#fff;" onclick=envioDeAprobadores("'+est+'","'+id+'");>Confirmar y Enviar</button>';
+		htmlm += '               </div>';
+		htmlm += '            </div>';
+
+	    htmlm += '            </div>';
+	    htmlm += '        </div>';
+	    htmlm += '    </div>';
+	    htmlm += '</div>';    
+    $("#ventanaModalPM").html(htmlm);
 }
 
 

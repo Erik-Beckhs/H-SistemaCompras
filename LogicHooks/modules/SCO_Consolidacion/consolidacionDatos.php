@@ -156,6 +156,7 @@ foreach ($items as $key => $value) {
 	$beanPcv->retrieve($idItem);
 	$beanPcv->pcv_cantidadconsolidado = $value['pcv_cantidadconsolidado'];
 	$beanPcv->pcv_cantidadsaldo       = $value['pcv_cantidadsaldo'];
+	$beanPcv->pcv_consolidado         = 1;
 	;
 
 	$beanPcv->sco_consolf10bidacion_ida = $idConsolidacion;
