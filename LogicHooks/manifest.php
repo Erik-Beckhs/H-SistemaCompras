@@ -327,6 +327,10 @@ $installdefs = array(
         'to'   => 'modules/SCO_Despachos/views/view.edit.php',
       ),
       array(
+        'from' => '<basepath>/modules/SCO_Despachos/actualizaProductosDespachos.php',
+        'to'   => 'modules/SCO_Despachos/actualizaProductosDespachos.php',
+      ),
+      array(
         'from' => '<basepath>/modules/SCO_Despachos/buscaProducto.php',
         'to'   => 'modules/SCO_Despachos/buscaProducto.php',
       ),

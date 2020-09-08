@@ -23,6 +23,9 @@ for ($i=0; $i <count($idPro) ; $i++) {
 }
 echo json_encode($data);
 */
+global $current_user;
+$idUser = $current_user->id;
+$dateFC = date_create(date("Y-m-d H:i:s"));
 if(isset($_POST["idPro"]))
 {
   $saldo = $_POST["saldo"];
@@ -44,11 +47,13 @@ if(isset($_POST["idPro"]))
   $rowProductosDespachos = $GLOBALS['db']->fetchByAssoc($productos_despachos);
   //creamos una copia del despacho
   $insertarDespacho = "INSERT INTO sco_despachos
-    (id,name,des_origen,des_modtrans,des_diastrans,des_diasllegada,des_orig,des_modtra,assigned_user_id,iddivision_c,idregional_c,idamercado_c,des_fechaprev,des_prioridad)
+    (id,name,date_entered,created_by,des_origen,des_modtrans,des_diastrans,des_diasllegada,des_orig,des_modtra,assigned_user_id,iddivision_c,idregional_c,idamercado_c,des_fechacrea,des_fechaprev,des_prioridad)
     VALUES
     (
       '".$id_despacho."',
       '".$rowProductosDespachos["name"]."_1"."',
+      '".date_format($dateFC, 'Y-m-d H:m:s')."',
+      '".$idUser."',
       '".$origen."',
       '".$mod_trans."',
       '".$dias_trans."',
@@ -59,6 +64,7 @@ if(isset($_POST["idPro"]))
       '".$rowProductosDespachos["iddivision_c"]."',
       '".$rowProductosDespachos["idregional_c"]."',
       '".$rowProductosDespachos["idamercado_c"]."',
+      '".date_format($dateFC, 'Y-m-d H:m:s')."',
       '".$rowProductosDespachos["des_fechaprev"]."',
       '".$rowProductosDespachos["des_prioridad"]."'
     )";

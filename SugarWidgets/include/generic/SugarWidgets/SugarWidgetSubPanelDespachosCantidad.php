@@ -51,7 +51,7 @@ class SugarWidgetSubPanelDespachosCantidad extends SugarWidgetField
         $row_pc_items = $GLOBALS['db']->fetchByAssoc($obj_pc_items);
 
         if($row_pc_des['cantidad'] != 0){
-            return "items ".$row_pc_items['cantidadItems']." <span style='box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.4); background: #fff;color:#000;' class='' class='text-info'>Cantidad".$row_pc_des['cantidad']."</span>";
+            return "<p style='font-size: 12px;'>items ".$row_pc_items['cantidadItems']."</p> <p style='font-size: 12px; background: #fff;color:#000;' class='' class='text-info'>Cantidad".$row_pc_des['cantidad']."</p>";
         }else{
             //Query para obtener cantidades de productos en despachos de acuerdo al Id de Despacho ($id_des)
             $despacho = "SELECT SUM(pd.prdes_cantidad) as cantidad
@@ -65,7 +65,7 @@ class SugarWidgetSubPanelDespachosCantidad extends SugarWidgetField
             AND d_pd.sco_despachos_sco_productosdespachossco_despachos_ida = '$id_des';";
             $obj_despacho = $GLOBALS['db']->query($despacho, true);
             $row_despacho = $GLOBALS['db']->fetchByAssoc($obj_despacho);
-            return "<span class='text-info'>items ".$row_pc_items['cantidadItems']." </span><span style='box-shadow: 0 10px 15px -8px rgba(0, 0, 0, 0.4); background: #fff;color:#000;' class=''>Cantidad ".$row_despacho['cantidad']."</span>";
+            return "<p class='text-info'style='font-size: 12px;'>items ".$row_pc_items['cantidadItems']." </p><p style='font-size: 12px;background: #fff;color:#000;' class=''>Cantidad ".$row_despacho['cantidad']."</p>";
         }
     }
 }

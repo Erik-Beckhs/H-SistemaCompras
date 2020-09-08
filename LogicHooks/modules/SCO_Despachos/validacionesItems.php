@@ -80,6 +80,7 @@
                 </div>  
                 <div class="col-lg-6 ">   
                   <button type="button" class="btn btn-sm btn-verde" onclick="validarItems()">Validar</button>
+                  <button type="button" class="btn btn-sm btn-info btnGuardar" onclick="guardarItems()">Guardar nuevo ordern de items</button>
                 </div>
               </div>                             
             </div>            
@@ -100,6 +101,7 @@
     .jexcel>tbody>tr>td.readonly {color: rgb(7 76 41 / 80%);}
     #modalValProd p{font-size: 12px;}
     #modalValProd button.btn.btn-sm.btn-verde {background: #28a745; color: #fff;width: 100%;}
+    #modalValProd button.btn.btn-sm.btn-info {background: #244668; color: #fff;width: 100%;}
     #modalValProd .btn-danger{background: #dc3545;width: 100%;border: 1px solid #dc3545;}
 </style>
 <script>
@@ -110,6 +112,7 @@
     });
 
     function modalValidar() {
+          $('.btnGuardar').hide("swing");
         $("#modalValProd").modal("show");
           $.ajax({
             type: "POST",
@@ -117,10 +120,10 @@
             data: {despacho},
             dataType:"json",
             beforeSend:function(){
-                $(".loader").addClass("is-active");
+                //$(".loader").addClass("is-active");
             },
             success: function(productos) {
-                $(".loader").removeClass("is-active");
+                //$(".loader").removeClass("is-active");
                 console.log(productos);
                 var data = [];
                 var numeracion = 0;
@@ -151,7 +154,7 @@
                         {type: 'text', readOnly:true},
                         {type: 'text'},
                         {type: 'text', readOnly:true},
-                        {type: 'text', readOnly:true},
+                        {type: 'text'},
                         {type: 'text', readOnly:true},
                         {type: 'text', readOnly:true},
                         {type: 'text', readOnly:true},
@@ -190,11 +193,10 @@
 
         $('#productosDespacho2').jexcel({
             data:data2,
-            colHeaders: ['Producto','Descripcion', 'Observacion','Cantidad', 'Prec Uni','Sub toal','Validado'],
-            colWidths: [ 50, 170, 60, 50, 80, 80],
+            colHeaders: ['Producto','Descripcion','Cantidad', 'Prec Uni','Sub toal','Validado'],
+            colWidths: [ 50, 170, 50, 80, 80],
             columns: [
-                {type: 'text'},
-                {type: 'text'},
+                {type: 'text'},                
                 {type: 'text'},
                 {type: 'text'},
                 {type: 'text'},
@@ -204,11 +206,7 @@
         });
     }
 
-    function validarItems() {        
-        $(document).ready(function () {
-            $(".loader").addClass("is-active")
-        });
-
+    function validarItems() {   
         var data1 = $('#productosDespacho1').jexcel('getData');
         var data2 = $('#productosDespacho2').jexcel('getData');
         $('#productosDespacho1 td').css( "background-color", "#fff" );
@@ -230,8 +228,8 @@
                     console.log("TRUE");
                     console.log(data1[filaDes1][1].trim() + " - " + filaDes1 + " == " + data2[filaDes2][0].trim() + " - " + filaDes2);
 
-                    oitem2.nombre = data1[filaDes2][1].trim();
-                    oitem2.descripcion = data1[filaDes2][2].trim();
+                    oitem2.nombre = data2[filaDes2][1];
+                    oitem2.descripcion = data2[filaDes2][2];
                     oitem2.posicion = parseInt(filaDes2) + 1;
                     oDiferentesDes2.push(oitem2);
 
@@ -248,18 +246,18 @@
                     $('#productosDespacho2 #row-'+filaDes2).css( "background-color", "#CBFFC7" );
                     $('#productosDespacho2 #0-'+filaDes2).css( "background-color", "#CBFFC7" );
                     $('#productosDespacho2 #1-'+filaDes2).css( "background-color", "#CBFFC7" );
+                    $('#productosDespacho2 #2-'+filaDes2).css( "background-color", "#CBFFC7" );
                     $('#productosDespacho2 #3-'+filaDes2).css( "background-color", "#CBFFC7" );
-                    $('#productosDespacho2 #4-'+filaDes2).css( "background-color", "#CBFFC7" );
-                    $('#productosDespacho2 #5-'+filaDes2).css( "background-color", "#CBFFC7" ); 
-                    $('#productosDespacho2 #6-'+filaDes2).text('Encontrado'); 
-                    $('#productosDespacho2 #6-'+filaDes2).css( "background-color", "#CBFFC7" );                
+                    $('#productosDespacho2 #4-'+filaDes2).css( "background-color", "#CBFFC7" ); 
+                    $('#productosDespacho2 #5-'+filaDes2).text('Encontrado'); 
+                    $('#productosDespacho2 #5-'+filaDes2).css( "background-color", "#CBFFC7" );                
                     break;
                 }else{
                     //$('#productosDespacho1 #row-'+filaDes1).css( "background-color", "red" );
                     //$('#productosDespacho2 #row-'+filaDes2).css( "background-color", "red" );
 
-                    oitem.nombre = data1[filaDes1][1].trim();
-                    oitem.descripcion = data1[filaDes1][2].trim();
+                    oitem.nombre = data1[filaDes1][1];
+                    oitem.descripcion = data1[filaDes1][2];
                     oitem.posicion = parseInt(filaDes1) + 1;
                     oDiferentesDes1.push(oitem);                    
 
@@ -284,11 +282,15 @@
         if(oDiferentesDes2.length == data1.length){
             $('#pTotalValidacion2').text(oDiferentesDes2.length + ' / ' + data1.length + ' encontrados');
             $('.pTotalValidacion2').css( "color", "green" );
+
+            $('.btnGuardar').show("swing");          
         }else{
             $('#pTotalValidacion2').text(oDiferentesDes2.length + ' / ' + data1.length + ' encontrados');
             $('.pTotalValidacion2').css( "color", "red" );
+
+            $('.btnGuardar').hide("swing"); 
         }
-        $(".loader").removeClass("is-active");
+
         $('#totalRegistroDes2').text(data2.length); 
         if(data2.length == data1.length){
           $('.pTotalRegistro').html("Total Registros: <b> &#10004;</b>");
@@ -300,7 +302,7 @@
         //total cantidad de items del listado de productos despachos
         var b, c = 0;
         for(var a = 0; a < data2.length ; a++){
-          b = data2[a][3];                
+          b = data2[a][2];                
           c = parseInt(b) + parseInt(c);                  
         }
 
@@ -314,7 +316,7 @@
         //total precio de subtotales del listado de productos despachos
         var x, y = 0;
         for(var a = 0; a < data2.length ; a++){
-          x = data2[a][5];
+          x = data2[a][4];
           y = parseFloat(x) + parseFloat(y);
         }
         //console.log($('#my tbody tr').length);                
@@ -394,6 +396,43 @@
             }
         });
         return (false);
+    }
+
+    function guardarItems(){
+        if(confirm("Seguro que quiere actualizar los registros?"))
+        {
+            var data1 = $('#productosDespacho1').jexcel('getData');
+            console.log(data1);
+            var arrItem = [];
+            
+            for (let filaDes1 = 0; filaDes1 < data1.length; filaDes1++) { 
+                if(data1[filaDes1][8].trim() != ""){
+                    var objItem = {};  
+                    objItem.numeracion = data1[filaDes1][0].trim();
+                    objItem.observacion = data1[filaDes1][3].trim();
+                    objItem.idProductoDespacho = data1[filaDes1][8].trim();
+
+                    arrItem.push(objItem);
+                }                
+            }
+            console.log(arrItem);
+            $.ajax({
+                type: 'post',
+                url: 'index.php?to_pdf=true&module=SCO_Despachos&action=actualizaProductosDespachos',
+                data: {arrItem},
+                success: function(data) {                
+                    debugger;
+                    var resp = $.parseJSON(data);
+                    if(resp == 200){
+                        alert("La informacion se actualizo correctamente");
+                        window.location.reload(); 
+                    }
+                }
+            });
+        }else{
+        
+        };
+        
     }
 
     function modalUpdateItemAio(sqlprod){

@@ -1400,7 +1400,7 @@ body {
 	font-size: 14px;
 	line-height: 1.428571429;
 	color: #333;
-	background-color: #fff
+	background-color: #e6e6e6
 }
 
 input,
@@ -8880,7 +8880,7 @@ html {
 body {
 	font-family: Arial, sans-serif;
 	font-size: 13px;
-	background: #fafafa;
+	background: #e6e6e6;
 	color: #333;
 	margin: 0;
 	overflow: auto;
@@ -8947,12 +8947,12 @@ a:hover {
 }
 
 .bootstrap-container.col-sm-offset-3 {
-	background-color: #fafafa;
+	background-color: #e6e6e6;
 	margin-top: 80px
 }
 
 .bootstrap-container {
-	background-color: #fafafa;
+	background-color: #e6e6e6;
 	margin-top: 80px
 }
 
