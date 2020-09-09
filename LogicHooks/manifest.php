@@ -92,6 +92,10 @@ $installdefs = array(
         'to'   => 'custom/modules/SCO_Consolidacion/controller.php',
       ),
       array(
+        'from' => '<basepath>/custom/modules/SCO_Consolidacion/eliminaConolidacion.php',
+        'to'   => 'custom/modules/SCO_Consolidacion/eliminaConolidacion.php',
+      ),
+      array(
         'from' => '<basepath>/custom/modules/SCO_Consolidacion/eliminaRelacionPcv.php',
         'to'   => 'custom/modules/SCO_Consolidacion/eliminaRelacionPcv.php',
       ),
@@ -615,6 +619,15 @@ $installdefs = array(
        'function'  => 'FncorrelativoDel',
       ),
 
+      array(
+       'module'  => 'SCO_Consolidacion',
+       'hook'    => 'before_delete',
+       'order'   => 1,
+       'description' => 'EliminaConsolidacion',
+       'file'   => 'custom/modules/SCO_Consolidacion/eliminaConolidacion.php',
+       'class'   => 'Celiminaconsolidacion',
+       'function'  => 'Feliminaconsolidacion',
+      ),
       array(
        'module'  => 'SCO_Consolidacion',
        'hook'    => 'after_relationship_delete',

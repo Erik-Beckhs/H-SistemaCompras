@@ -22,7 +22,8 @@ pc.pcv_vendedor,
 pc.pcv_cantidad,
 pc.pcv_cliente,
 pc.pcv_clienteaio,
-pc.pcv_proveedoraio
+pc.pcv_proveedoraio,
+pc.sco_productoscompras_id_c
 FROM suitecrm.sco_productoscotizadosventa pc
 WHERE
 (sco_proveedor_id_c = '' OR sco_proveedor_id_c = pc.sco_proveedor_id_c) AND

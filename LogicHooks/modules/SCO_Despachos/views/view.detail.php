@@ -24,7 +24,7 @@ class SCO_DespachosViewDetail extends ViewDetail {
     <style>.campopersonalizado{margin-top:10px;}</style>
     <div class="row detail-view-row" style="background:#FFF;">
       <div class="col-xs-12 col-sm-6 detail-view-row-item">
-        <div class="col-xs-12 col-sm-4 label col-1-label">
+        <div class="col-xs-12 col-sm-4 label col-1-label"style="margin-left: -15px;">
           Total precio productos:
         </div>        
         <div class="col-sm-2 campopersonalizado " type="varchar" >
@@ -33,7 +33,7 @@ class SCO_DespachosViewDetail extends ViewDetail {
       </div>
       
       <div class="col-xs-12 col-sm-6 detail-view-row-item">
-        <div class="col-xs-12 col-sm-4 label col-1-label">
+        <div class="col-xs-12 col-sm-4 label col-1-label"style="margin-left: -13px;">
           Total cantidad productos:
         </div>      
         <div class="col-sm-2 campopersonalizado " type="varchar">
@@ -93,7 +93,7 @@ class SCO_DespachosViewDetail extends ViewDetail {
  			echo '
       <div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
                <div class="col-xs-12 col-sm-6 detail-view-row-item">
-              <div class="col-xs-12 col-sm-4 label col-1-label">
+              <div class="col-xs-12 col-sm-4 label col-1-label" style="margin-left: -28px;">
               Anular Despacho:
               </div>          
               <div class="col-sm-4 campopersonalizado " type="varchar" >
@@ -108,7 +108,7 @@ class SCO_DespachosViewDetail extends ViewDetail {
               </div>        
         </div>      
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
-              <div class="col-xs-12 col-sm-4 label col-1-label">
+              <div class="col-xs-12 col-sm-4 label col-1-label"style="margin-left: -26px;">
               Solicitud de Embarque:
               </div>        
               <div class="col-sm-7 campopersonalizado " type="varchar">
@@ -178,7 +178,7 @@ class SCO_DespachosViewDetail extends ViewDetail {
               </div>               
         </div>      
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
-              <div class="col-xs-12 col-sm-4 label col-1-label">
+              <div class="col-xs-12 col-sm-4 label col-1-label" style="margin-left: -26px;">
               Cancelar:
               </div>        
               <div class="col-sm-2 campopersonalizado " type="varchar">

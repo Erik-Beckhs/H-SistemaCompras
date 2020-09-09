@@ -37,6 +37,11 @@ $GLOBALS['app_list_strings']['scomoneda_list']=array (
   'BOB' => 'BOB',
   'EUR' => 'EUR',
 );
+$GLOBALS['app_list_strings']['sco_consolidacion_list']=array (
+  0 => 'No consolidado',
+  1 => 'Consolidado con OC',
+  2 => 'Consolidado SIN OC',
+);
 $GLOBALS['app_list_strings']['scotipodes_list']=array (
   1 => 'Pagar',
   2 => 'Compesar',

@@ -22,7 +22,8 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
     }
 
   function display(){
-    global $current_user;
+    global $current_user;    
+
     echo '<link href="modules/SCO_Consolidacion/css-loader.css?'.time().'" rel="stylesheet" type="text/css" />';
     echo '<script src="modules/SCO_OrdenCompra/viewdetail.js?'.time().'"></script>';
 	$sty = "<style>
@@ -135,18 +136,33 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
               .footable-first-visible{display:none}
               .footable-last-visible{display:none}
         	</style>';
+  #Obteniendo la relacion del la Orden de compra con Consolidacion de Cotizaciones
+  $beanOC = BeanFactory::getBean('SCO_OrdenCompra', $this->bean->id);
+  $beanOC->load_relationship('sco_consolidacion_sco_ordencompra');
+  $relatedBeans = $beanOC->sco_consolidacion_sco_ordencompra->getBeans();
+  reset($relatedBeans);
+  $parentBean   = current($relatedBeans);
+  #id Consolidacion Cotizaciones
+  $idConsolidacion = $parentBean->id;
+  $beanCons = BeanFactory::getBean('SCO_Consolidacion', $idConsolidacion);
+  $consolidacion   = '<a class="suitepicon suitepicon-action-view"href="index.php?module=SCO_Consolidacion&action=DetailView&record='.$idConsolidacion.'"> '.$beanCons->name.'</a>';          
 	#script para cambio Reporte
    if($current_user->iddivision_c == '03'){
     $reporteGerencial = '
       <div class="col-xs-12 col-sm-6 detail-view-row-item">
-          <div class="col-xs-12 col-sm-4 label col-1-label">
+          <div class="col-xs-12 col-sm-4 label col-1-label" style="margin-left: -20px;">
             <b>Reporte Gerencial:</b>
           </div>        
-          <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
+          <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar"style="margin-left: 40px;">
               <a class="btn btn-success btn-sm" style="padding: 2px 5px;background: #42c5b4 !important;" onClick=descargaReporteGerencialDiv03("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descarga Excel</a>
               <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showReporteGerencialDiv03("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
-          </div>          
+          </div>                 
       </div>
+      <div class="col-xs-12 col-sm-6 detail-view-row-item">     
+          <div class="col-sm-4 col-sm-7 campopersonalizado" style="margin-left: 25px;">
+             '.$consolidacion.'
+          </div> 
+      </div>    
     ';
   }else{
     $reporteGerencial = '';
@@ -191,20 +207,20 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
     				$('#desc_val').prop('disabled', true);</script>";
 			parent::display();
 			echo '
-      <div class="row detail-view-row" style="background:#FFF;margin-top:-15px;">
+      <div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
-              <div class="col-xs-12 col-sm-4 label col-1-label">
+              <div class="col-xs-12 col-sm-4 label col-1-label" style="margin-left: -35px;">
                 Estado Actual:
               </div>          
-              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar" >
+              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar" style="margin-left: 55px;">
                 <span style="color:blue"><b>'.$arr_estado[1].'</b></span>
               </div>                          
         </div>
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
-              <div class="col-xs-12 col-sm-4 label col-1-label">
+              <div class="col-xs-12 col-sm-4 label col-1-label"style="margin-left: -35px;">
                 <b>Reporte Compra:</b>
               </div>        
-              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
+              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar"style="margin-left: 55px;">
                   <a class="btn btn-sm" style="padding: 2px 5px;background: #ffc107!important;color:#fff;"onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar pdf</a>
                   <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showreport("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
               </div>          
@@ -218,12 +234,12 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
       	echo "<style>#whole_subpanel_sco_despachos_sco_ordencompra{display:none;}</style>";
 			parent::display();
 			echo '
-      <div class="row detail-view-row" style="background:#FFF;margin-top:-15px;">
+      <div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
-              <div class="col-xs-12 col-sm-4 label col-1-label">
+              <div class="col-xs-12 col-sm-4 label col-1-label" style="margin-left: -35px;">
                 <b>Estado Actual:</b>
               </div>          
-              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar" >
+              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar" style="margin-left: 55px;">
                 <span style="color:#333">
                   <b>'.$arr_estado[2].' </b>                  
                 </span>
@@ -231,10 +247,10 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
               </div>                          
         </div>
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
-              <div class="col-xs-12 col-sm-4 label col-1-label">
+              <div class="col-xs-12 col-sm-4 label col-1-label"style="margin-left: -35px;">
                 <b>Reportes:</b>
               </div>        
-              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
+              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar"style="margin-left: 55px;">
                   <a class="btn btn-sm" style="padding: 2px 5px;background: #ffc107!important;color:#fff;"onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar pdf</a>
                   <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showreport("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
               </div>          
@@ -254,12 +270,12 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
               	 </style>";
 				parent::display();
 				echo '
-        <div class="row detail-view-row" style="background:#FFF;margin-top:-15px;">
+        <div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
           <div class="col-xs-12 col-sm-6 detail-view-row-item">
-                <div class="col-xs-12 col-sm-4 label col-1-label">
+                <div class="col-xs-12 col-sm-4 label col-1-label" style="margin-left: -35px;">
                   <b>Estado Actual:</b>
                 </div>          
-                <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar" >
+                <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar" style="margin-left: 55px;">
                   <span style="color:blue">
                     <b>'.$arr_estado[3].' </b>                  
                   </span>
@@ -273,10 +289,10 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
                 </div>                          
           </div>
           <div class="col-xs-12 col-sm-6 detail-view-row-item">
-                <div class="col-xs-12 col-sm-4 label col-1-label">
+                <div class="col-xs-12 col-sm-4 label col-1-label"style="margin-left: -35px;">
                   <b>Reportes:</b>
                 </div>        
-                <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
+                <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar"style="margin-left: 55px;">
                     <a class="btn btn-sm" style="padding: 2px 5px;background: #ffc107!important;color:#fff;" onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar pdf</a>
                     <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showreport("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
                 </div>          
@@ -289,12 +305,12 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
 		case '4':
 			parent::display();
 			echo '
-      <div class="row detail-view-row" style="background:#FFF;margin-top:-15px;">
+      <div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
-              <div class="col-xs-12 col-sm-4 label col-1-label">
+              <div class="col-xs-12 col-sm-4 label col-1-label" style="margin-left: -35px;">
                 <b>Estado Actual:</b>
               </div>          
-              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar" >
+              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar" style="margin-left: 55px;">
                 <span style="color:#ff0000">
                   <b>'.$arr_estado[4].' </b>                  
                 </span>
@@ -302,10 +318,10 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
               </div>                          
         </div>
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
-              <div class="col-xs-12 col-sm-4 label col-1-label">
+              <div class="col-xs-12 col-sm-4 label col-1-label"style="margin-left: -35px;">
                 <b>Reportes:</b>
               </div>        
-              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
+              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar"style="margin-left: 55px;">
                   <a class="btn btn-sm" style="padding: 2px 5px;background: #ffc107!important;color:#fff;" onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar pdf</a>
                   <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showreport("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
               </div>          
@@ -326,22 +342,22 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
 			$('#desc_val').prop('disabled', true);</script>";
 		parent::display();
 		echo '
-    <div class="row detail-view-row" style="background:#FFF;margin-top:-15px;">
+    <div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
       <div class="col-xs-12 col-sm-6 detail-view-row-item">
-            <div class="col-xs-12 col-sm-4 label col-1-label">
+            <div class="col-xs-12 col-sm-4 label col-1-label" style="margin-left: -35px;">
               <b>Estado Actual:</b>
             </div>          
-            <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar" >
+            <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar" style="margin-left: 55px;">
               <span style="color:#ff0000">
                 <b>'.$arr_estado[5].' </b>                  
               </span>
             </div>                          
       </div>
       <div class="col-xs-12 col-sm-6 detail-view-row-item">
-            <div class="col-xs-12 col-sm-4 label col-1-label">
+            <div class="col-xs-12 col-sm-4 label col-1-label"style="margin-left: -35px;">
               <b>Reportes:</b>
             </div>        
-            <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
+            <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar"style="margin-left: 55px;">
                 <a class="btn btn-sm" style="padding: 2px 5px;background: #ffc107!important;color:#fff;"onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar</a>
                 <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showreport("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
             </div>          
@@ -371,22 +387,22 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
 				$('#desc_val').prop('disabled', true);</script>";
 			parent::display();
 			echo '
-      <div class="row detail-view-row" style="background:#FFF;margin-top:-15px;">
+      <div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
-              <div class="col-xs-12 col-sm-4 label col-1-label">
+              <div class="col-xs-12 col-sm-4 label col-1-label" style="margin-left: -35px;">
                 <b>Estado Actual:</b>
               </div>          
-              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar" >
+              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar" style="margin-left: 55px;">
                 <span style="color:green">
                   <b>'.$arr_estado[6].' </b>                  
                 </span>
               </div>                          
         </div>
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
-              <div class="col-xs-12 col-sm-4 label col-1-label">
+              <div class="col-xs-12 col-sm-4 label col-1-label"style="margin-left: -35px;">
                 <b>Reportes:</b>
               </div>        
-              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar">
+              <div class="col-sm-4 col-sm-7 campopersonalizado" type="varchar" style="margin-left: 55px;">
                   <a class="btn btn-sm" style="padding: 2px 5px;background: #ffc107!important;color:#fff;" onClick=imprimir("'.$this->bean->id.'",nombreOC,nombreCortoOC);>Descargar</a>
                   <a class="btn btn-sm btn-success" style="padding: 2px 5px;" onClick=showreport("'.$this->bean->id.'"); value="Ver Reporte">Ver Reporte</a>
               </div>          

@@ -14,14 +14,9 @@ class Celiminaconsolidacion {
 		#Id de Consolidacion
 		$idConsolidacion = $bean->id;
 		#Obteniendo id de la Orden de compra
-	    $bean->load_relationship('sco_consolidacion_sco_ordencompra');
-		$relatedBeans = $bean->sco_consolidacion_sco_ordencompra->getBeans();
-		reset($relatedBeans);
-		$parentBean   = current($relatedBeans);
-		#id de Orden de compra
-		$idOC   	  = $parentBean->id;
+	 
 
-		if($idOC != '' || $idOC != null){
+		if($bean->con_estado != 1){
 			echo "<script>alert('Eliminacion Exitosa".$bean->name.");</script>";
 		}else{
 			echo "<script>alert('No se pudo eliminar la Orden de Compra".$bean->name.");</script>";

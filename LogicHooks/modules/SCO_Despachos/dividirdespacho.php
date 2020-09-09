@@ -23,7 +23,7 @@
     <div class="col-xs-12 col-sm-6 detail-view-row-item">     
     </div>      
     <div class="col-xs-12 col-sm-6 detail-view-row-item">
-          <div class="col-xs-12 col-sm-4 label col-1-label">
+          <div class="col-xs-12 col-sm-4 label col-1-label"style="margin-left: -12px;">
           Dividir despacho
           </div>        
           <div class="col-sm-7 detail-view-field " type="varchar">

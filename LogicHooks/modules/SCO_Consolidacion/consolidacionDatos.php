@@ -49,9 +49,12 @@ $nombreConsolidacion  = $_POST['nombreConsolidacion']?$_POST['nombreConsolidacio
 $nombreOc             = $_POST['nombreOc']?$_POST['nombreOc']:"";
 $proyecto             = $_POST['proyecto']?$_POST['proyecto']:"";
 $proyecto_id          = $_POST['proyecto_id']?$_POST['proyecto_id']:"";
-$proyecto_tipo          = $_POST['proyecto_tipo']?$_POST['proyecto_tipo']:"";
+$proyecto_tipo        = $_POST['proyecto_tipo']?$_POST['proyecto_tipo']:"";
 $items                = $_POST['items']?$_POST['items']:"";
 
+if($proyecto_tipo == ''){
+	$proyecto_tipo = 0;
+}
 $dateFC = date_create(date("Y-m-d H:i:s"));
 #Extrayendo el Proveedor por su codigo AIO
 /*
@@ -131,7 +134,7 @@ $obj1 = $GLOBALS['db']->fetchByAssoc($obj);
 $beanConsolidacion                                                       = BeanFactory::newBean('SCO_Consolidacion');
 $beanConsolidacion->name                                                 = $nombre;
 $beanConsolidacion->con_descripcion                                      = $desc;
-$beanConsolidacion->con_estado                                           = 0;
+$beanConsolidacion->con_estado                                           = 1;
 $beanConsolidacion->date_entered                                         = date_format($dateFC, 'Y-m-d H:i:s');
 $beanConsolidacion->con_cantitems                                        = $cantidadTotal;
 $beanConsolidacion->sco_consolidacion_sco_proveedorsco_proveedor_ida     = $proveedor_id;

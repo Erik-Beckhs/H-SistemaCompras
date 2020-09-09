@@ -109,6 +109,15 @@ class SCO_ProductosViewEdit extends ViewEdit {
         margin-left: 5px;
         float:left;
       }
+      #formPro input, #formPro textarea {
+          font-size: 12px;
+          margin: 0px;
+          margin-left: -5px;
+      }
+      .jexcel>thead>tr>td, .jexcel>tbody>tr>td {
+          font-size: 12px;
+          padding: 2px;
+      }
       #SCO_Productos_subpanel_full_form_button{display:none;}
       #detailpanel_-1{display:none;}
       #form_SubpanelQuickCreate_SCO_Productos #Default_SCO_Productos_Subpanel{display:none;}

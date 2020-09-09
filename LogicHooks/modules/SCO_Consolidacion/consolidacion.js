@@ -118,11 +118,12 @@ function validaCampos(){
             box: "required",
             pais: "required",
             telefono: "required",
-            direccion: "required"
+            direccion: "required",
+            proyecto: "required"
         },
         messages: {
             nombre: "Campo requerido",
-            solicitante: "Campo requerido",
+            solicitante: "Campo Solicitante requerido",
             solicitante_id: "Campo requerido",
             desc: "Campo requerido",
             contactoProveedor: "Campo requerido",
@@ -144,7 +145,8 @@ function validaCampos(){
             box: "Campo requerido",
             pais: "Campo requerido",
             telefono: "Campo requerido",
-            direccion: "Campo requerido"
+            direccion: "Campo requerido",
+            proyecto: "Campo requerido, si no existe crea el proyecto."
         },
         submitHandler: function(form) {
           form.submit();
@@ -191,7 +193,7 @@ function vista(){
     html += '                            </div>';
     html += '                            <div class="col-sm-6">';
     html += '                                <div class="form-group">';
-    html += '                                    <div class="col-sm-4 " >Solicitante:<span class="required">*</span></div>';
+    html += '                                    <div class="col-sm-4 " >Solicitante de OC:<span class="required">*</span></div>';
     html += '                                    <div class="col-sm-6 " >                                        ';
     html += '                                        <input type="text"   autocomplete="off" type="text" name="solicitante" id="solicitante" class="desabilidato">';
     html += '                                        <input type="hidden" name="solicitante_id" id="solicitante_id" size="20" maxlength="50" value="">';
