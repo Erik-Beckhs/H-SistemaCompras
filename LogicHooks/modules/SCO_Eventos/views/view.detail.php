@@ -20,9 +20,17 @@ class SCO_EventosViewDetail extends ViewDetail {
  		$id_ev = $this->bean->id;
  		$arr_estados =  array(1 => 'Borrador',2 =>'Solicitud de embarque',3 =>'En Transito',4 =>'Concluido');
 		$estado = $this->bean->eve_estado;
-		echo '<link href="modules/SCO_Consolidacion/css-loader.css?'.time().'" rel="stylesheet" type="text/css" />  ';
-		echo '<script src="modules/SCO_Eventos/viewdetail.js?'.time().'"></script>';
-		echo '<div id="modalEmbarque"></div><div class="loader loader-default" data-text="Enviando datos"></div>';
+
+		echo '<link href="modules/SCO_Consolidacion/css-loader.css?'.time().'" rel="stylesheet" type="text/css" />  
+			  <link rel="stylesheet" href="modules/SCO_OrdenCompra/BackOrder/bootstrap-datetimepicker.min.css?'.time().'">';
+
+		echo '<script src="modules/SCO_Eventos/viewdetail.js?'.time().'"></script>
+			  <script src="modules/SCO_OrdenCompra/BackOrder/bootstrap-datetimepicker.min.js?'.time().'"></script>';
+
+		echo '<div id="modalEmbarque"></div>
+			  <div id="modalFecha"></div>
+			  <div class="loader loader-default" data-text="Enviando datos"></div>';
+			  
 		$st ='<style>
 			.cantidad{pointer-events:none;}
 			.precio{pointer-events:none;}
@@ -76,6 +84,7 @@ class SCO_EventosViewDetail extends ViewDetail {
  				</td>
  				<td>
  					<a class="btn btn-sm btn-success" style="padding: 2px 5px;background: #5cb85c !important;" onClick="solicitar(2);" value="Ver Reporte">Concluir Evento</a>
+ 					<a class="btn btn-sm btn-success" style="padding: 2px 5px;background: #5cb85c !important;" onClick="ventanaModalFecha();" value="Ver Reporte">Registrar Fecha Real</a>
  				</td>
  				<td width="28%" >
 				</td>
@@ -97,8 +106,7 @@ class SCO_EventosViewDetail extends ViewDetail {
  			//echo $st;
  			parent::display();
 			echo '<script>
-			var id_ev = "'.$id_ev.'";
-			
+			var id_ev = "'.$id_ev.'";			
 			</script>';
  				break;
  			default:

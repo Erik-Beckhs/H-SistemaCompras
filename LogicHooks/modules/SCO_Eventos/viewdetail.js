@@ -1,3 +1,9 @@
+//Filtro, filtra el rango de fechas
+$(document).ready(function(){
+	$('#datepicker').datepicker();
+});
+
+
 function solicitar(est){
 	if($("#list_subpanel_activities .list tbody .oddListRowS1").length == 0){
 	//console.log($("#list_subpanel_activities .list tbody .oddListRowS1").length);
@@ -45,6 +51,65 @@ function solicitar(est){
 	}
 }
 
+function ventanaModalFecha(){
+	    var htmlf = '';
+	    htmlf += '<div class="modal fade" id="modalEventoFecha" style="display: block;margin-top: 5%;">';
+	    htmlf += '    <div class="modal-dialog">';
+	    htmlf += '        <div class="modal-content">';
+	    htmlf += '            <div class="modal-header">';
+	    htmlf += '                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
+	    htmlf += '                <h4 class="modal-title">Registro de fecha</h4>';
+	    htmlf += '            </div>';
+	    htmlf += '            <div class="modal-body" >';
+	    htmlf += '                <div class="panel panel-info">';
+    	htmlf += '                    <div class="panel-heading">Mensaje</div>';
+    	htmlf += '                    <div class="panel-body"style="padding: 10px;">';
+	    htmlf += '                        <div class="row">';
+	    htmlf += '                            <div class="col-sm-12">  ';
+	    htmlf += '                                <div class="form-group">                                    ';
+	    htmlf += '                                    <div class="col-sm-4 " >Fecha real:<span class="required">*</span></div>';
+	    htmlf += '                                    <div class="col-sm-8 " >';
+    	htmlf += '                                        <input type="text" class="custom-input" id="datepicker" name="fechaReal">';
+	    htmlf += '                                    </div>';
+	    htmlf += '                                </div>  ';
+	    htmlf += '';
+	    htmlf += '                            </div>';
+	    htmlf += '                        </div>';
+	    htmlf += '                        <div class="row">';
+	    htmlf += '                            <div class="col-sm-12">';
+	    htmlf += '                                <div class="form-group">';
+	    htmlf += '                                    <div class="col-sm-4 " >Contacto de Proveedor:<span class="required">*</span></div>';
+	    htmlf += '                                    <div class="col-sm-6 " >';
+	    htmlf += '                                        <input type="text" id="contactoProveedor" name="contactoProveedor" class="desabilidato">';
+	    htmlf += '                                        <input type="hidden" name="contactoProveedor_id" id="contactoProveedor_id" size="20" maxlength="50" >';
+	    htmlf += '                                        <button class="btn-success btn-sm cons-btn"  title="Seleccionar" accesskey="T" type="button" tabindex="116"  onclick="openContactsPopup();"><img src="themes/default/images/id-ff-select.png" alt="Seleccionar"></button>';
+	    htmlf += '                                    </div>';
+	    htmlf += '                                </div>';
+	    htmlf += '                            </div>';
+	    htmlf += '                        </div>';
+	    htmlf += '                        <br>';
+	    htmlf += '                    </div>';
+
+
+    	htmlf += '            <div class="row">';
+		htmlf += '               <div class="col-sm-6">';
+		htmlf += '                   <button type="button" class="btn btn-sm btn-danger" style="width: 100%;background: #dc3545;color:#fff;border:solid 1px#dc3545;" data-dismiss="modal">Cancelar</button>';
+		htmlf += '               </div>';
+		htmlf += '               <div class="col-sm-6">';
+		htmlf += '                   <button type="button" class="btn btn-sm btn-verde" style="width: 100%;background: #31708f;color:#fff;" onclick=envioDeformulario();>Confirmar y Enviar</button>';
+		htmlf += '               </div>';
+		htmlf += '            </div>';
+
+		htmlf += '					  </div>';
+		htmlf += '				   </div>';
+	    htmlf += '            </div>';
+	    htmlf += '        </div>';
+	    htmlf += '    </div>';
+	    htmlf += '</div>';    
+    $("#modalFecha").html(htmlf);
+    $('#datepicker').datepicker();
+    $('#modalEventoFecha').modal('show');
+}
 
 //Estructura de la vista de la venta modal
 function ventanaModal(datos,titulo,cuerpo,mensaje){
