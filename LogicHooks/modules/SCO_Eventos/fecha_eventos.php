@@ -12,6 +12,10 @@ require_once('include/entryPoint.php');
 
 	$id = $_GET['id'];
 	$est = $_GET['est'];
+	$operacion = $_GET['operacion'];
+	$fechaReal =  $_GET['fechaReal'];
+	$agenciaId = $_GET['agenciaId'];
+	$agenciaNombre =$_GET['agenciaNombre'];
 	#utilizar update de sql y no el bean del sugarcrm para no crear conflictos de bean
     #$despachos = "UPDATE sco_despachos SET des_est = '".$est."' WHERE id = '".$id."';";
     #$obj_des = $GLOBALS['db']->query($despachos, true);
@@ -25,23 +29,43 @@ require_once('include/entryPoint.php');
 	$parentBean   = current($relatedBeans);
 	#id del Embarque relacionado con el evento
 	$idEmbarque   = $parentBean->id;
+	switch ($operacion) {
+		case '1':
+			#Conexion con servicio Rest para el evnio de datos
+			include ('enviaDatosCrmVentas.php');
+			$envioDatosCrm= new EnviaDatosCRM();
+			$respuesta = $envioDatosCrm->enviarInformacion($idEmbarque,$id,$bean_eventos->name);
+			#Verificando si la conexion fue 200
+		    if($respuesta == '200'){
+				if ($bean_eventos->eve_fechare != null && $bean_eventos->transportistaotros) {
+						echo json_encode($bean_eventos->eve_fechare);
+						$bean_eventos->eve_estado = $est;
+						$bean_eventos->save();
+				}
+				else {
+					echo json_encode("error");
+				}
+		    }else{
+		    	echo json_encode($respuesta);
+		    }
 
-	#Conexion con servicio Rest para el evnio de datos
-	include ('enviaDatosCrmVentas.php');
-	$envioDatosCrm= new EnviaDatosCRM();
-	$respuesta = $envioDatosCrm->enviarInformacion($idEmbarque,$id,$bean_eventos->name);
-	#Verificando si la conexion fue 200
-    if($respuesta == '200'){
-		if ($bean_eventos->eve_fechare != null && $bean_eventos->transportistaotros) {
-				echo json_encode($bean_eventos->eve_fechare);
-				$bean_eventos->eve_estado = $est;
-				$bean_eventos->save();
-		}
-		else {
-			echo json_encode("error");
-		}
-    }else{
-    	echo json_encode($respuesta);
-    }
+			break;
+		case '2':
+			#Conexion con servicio Rest para el evnio de datos
+			include ('enviaDatosNuevos.php');
+			$fechas = new Fechas();
+			$respuesta = $fechas->functionFechas($id,$fechaReal,$agenciaId,$agenciaNombre);			
+			#Verificando si la conexion fue 200
+			if($respuesta != '404'){
+				echo json_encode($respuesta);	
+			}else{
+				echo json_encode($respuesta);
+			}		   
+			break;			
+		default:
+			echo json_encode("Error");
+			break;
+	}
 	
+    
 ?>

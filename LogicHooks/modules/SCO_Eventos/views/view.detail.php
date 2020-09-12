@@ -18,6 +18,9 @@ class SCO_EventosViewDetail extends ViewDetail {
 
  	function display(){
  		$id_ev = $this->bean->id;
+ 		$fechaReal = $this->bean->eve_fechare;
+ 		$aduana = $this->bean->sco_cnf_eventos_list_id_c;
+
  		$arr_estados =  array(1 => 'Borrador',2 =>'Solicitud de embarque',3 =>'En Transito',4 =>'Concluido');
 		$estado = $this->bean->eve_estado;
 
@@ -71,6 +74,9 @@ class SCO_EventosViewDetail extends ViewDetail {
 			</div></div></div>';
 			echo '<script>
 				var id_ev = "'.$id_ev.'";
+				var fechaReal = "'.$fechaReal.'";
+				var fechaReal2 = fechaReal.split("/");
+				var fechaReal3 = fechaReal2[1] + "/"+fechaReal2[0]+ "/"+fechaReal2[2]
 				
 			</script>';
  				break;
@@ -99,7 +105,14 @@ class SCO_EventosViewDetail extends ViewDetail {
 			</div></div></div>';
 			echo '<script>
 				var id_ev = "'.$id_ev.'";
-				
+				var aduana = "'.$aduana.'";
+				var fechaReal = "'.$fechaReal.'";
+				if(fechaReal != ""){
+					var fechaReal2 = fechaReal.split("/");
+					var fechaReal3 = fechaReal2[1] + "/"+fechaReal2[0]+ "/"+fechaReal2[2]
+				}else{
+					var fechaReal3 = "";
+				}
 			</script>';
  				break;
  			case 'Concluido':

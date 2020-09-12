@@ -1,6 +1,6 @@
 <?php
 /**
-*Esta clase realiza operaciones matemáticas.
+*Esta clase realiza operaciones matemÃ¡ticas.
 *
 *@author Limberg Alcon <lalcon@hansa.com.bo>
 *@copyright 2018
@@ -9,9 +9,9 @@
 class Clfechas
 {
     static $ult_rid = false;
-	function Fnfechas($bean, $event, $arguments)
-	{
-        //Obteniendo el id del modulo de EMBARQUE
+    function Fnfechas($bean, $event, $arguments)
+    {
+         //Obteniendo el id del modulo de EMBARQUE
         $bean->load_relationship('sco_embarque_sco_eventos');
         $relatedBeans = $bean->sco_embarque_sco_eventos->getBeans();
         reset($relatedBeans);
@@ -20,6 +20,7 @@ class Clfechas
         //Beans Embarque
         $bean_embarque = BeanFactory::getBean('SCO_Embarque', $id_emb);
         #$bean->eve_fechare = date('Y-m-d');
+        /*
         $fecha_plan = strtotime($bean->eve_fechaplan);
         $fecha_real = strtotime($bean->eve_fechare);
         //verificando la fecha real
@@ -68,7 +69,7 @@ class Clfechas
         $bean->eve_fechanuevo = '';
         //$bean->eve_estado = 'Concluido';
         //$bean->eve_fechare = date('Y-m-d');
-
+       
         //Consulta a la relacion de EMBARQUE con EVENTOS, obtencion de id
         $evento = "SELECT *
         FROM sco_embarque_sco_eventos_c as emb_ev
@@ -87,7 +88,7 @@ class Clfechas
         }else{
             $fecha = $fp;
         }
-
+        */
         //Cambio de estado del EMBARQUE, comparando los eventos concluidos vs cantida de eventos
         $ev_concluido ="
             SELECT COUNT(*) as concluido
@@ -148,7 +149,9 @@ class Clfechas
                 $id_prdes = $row_desp_pd['id'];
 
                 //Query, obteniendo la cantidad de la tabla sco_productos_co
-                $prod_co = "SELECT pro_canttrans, pro_cantresivida FROM sco_productos_co WHERE id = '$id_idproductos_co';";
+                $prod_co = "SELECT pro_canttrans, pro_cantresivida 
+                            FROM sco_productos_co 
+                            WHERE id = '$id_idproductos_co';";
                 $obj_prod_co = $GLOBALS['db']->query($prod_co, true);
                 $row_prod_co = $GLOBALS['db']->fetchByAssoc($obj_prod_co);
                 //Operacion, resta de cantidad en transito con cantidad entregada
@@ -158,8 +161,8 @@ class Clfechas
                 $cantidad_newres = $cantidad_prdes + $row_prod_co['pro_cantresivida'];
                 //**Query, actualizando la tabla de sco_productos_co, campo cantidad transito y cantidad resivida
                 $productos_co = "UPDATE sco_productos_co
-                SET pro_canttrans = '".$cantidad_newtr."', pro_cantresivida = '".$cantidad_newres."'
-                WHERE id = '$id_idproductos_co'; ";
+                                SET pro_canttrans = '".$cantidad_newtr."', pro_cantresivida = '".$cantidad_newres."'
+                                WHERE id = '$id_idproductos_co'; ";
                 $obj_productos_co = $GLOBALS['db']->query($productos_co, true);
                 //**Query, actualizando el modulo PRODUCTOS COTIZADOS, campo cantidad transito y cantidad resivida
                 $bean_prodcot = BeanFactory::getBean('SCO_ProductosCotizados',$id_idproductos_co);
@@ -199,7 +202,7 @@ class Clfechas
                     $bean_oc->save();
                 }
             }
-        }else{
+        }/*else{
         while($fila = $GLOBALS['db']->fetchByAssoc($r_emabarque_des)){
             $id_desp = $fila['id_desp'];
             if(!empty($id_desp)){
@@ -227,6 +230,7 @@ class Clfechas
         // $idEve = $bean->id;
         // $bean_evento = BeanFactory::getBean('SCO_Eventos', $idEve);
         // $notificacion->Fnnotifica($bean_evento);
-	}
+        */
+    }
 }
 ?>
