@@ -146,7 +146,7 @@ if($idcotizacion != '' || $idcotizacion !=  null){
 		}
 	echo json_encode($producto);
 }else{
-	$producto = array("respuesra_servicio"=>"200");
+	$producto = array("respuesra_servicio"=>"404");
 	echo json_encode($producto);
 }
 	

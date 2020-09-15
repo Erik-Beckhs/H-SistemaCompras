@@ -53,7 +53,7 @@ function insertarProductos() {
     var b1 = x.insertCell(0);
     b1.innerHTML = "<input class='sqsEnabled product_part_number yui-ac-input ' style='width:150px;' onblur='buscaind(" + pronum + "); 'autocomplete='off' type='text' name='pro_nombre" + pronum + "' id='pro_nombre" + pronum + "' maxlength='50' value='' tabindex='116' placeholder='Cod Prov / Cod SAP'><input type='hidden' name='producto_id" + pronum + "' id='producto_id" + pronum + "' size='20' maxlength='50' value=''><input type='text' style='border: none;pointer-events: none; height:10px;' name='pro_codaio" + pronum + "' id='pro_codaio" + pronum + "' size='20' maxlength='50' value=''><input type='hidden' name='pro_idproductocotizado" + pronum + "' id='pro_idproductocotizado" + pronum + "' size='20' maxlength='50' value=''>";
     var b2 = x.insertCell(1);
-    b2.innerHTML = "<button  title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='btn-success btn-sm cons-btn' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openProductPopup(" + pronum + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>";
+    b2.innerHTML = "<button  id='seleccion" + pronum + "' title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='btn-success btn-xs cons-btn' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openProductPopup(" + pronum + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>";
     var b3 = x.insertCell(2);
     b3.innerHTML = "<textarea id='pro_descripcion" + pronum + "' name='pro_descripcion" + pronum + "' rows='2' cols='35' placeholder='Descripcion' style='margin-left: 0px; margin-right: 0px; width: 200px;'></textarea><div class='search_desc' id='search_desc" + pronum + "'></div>";
     var numero = pronum;
@@ -79,9 +79,9 @@ function insertarProductos() {
     var i = x.insertCell(10);
     i.innerHTML = "<input type='text' name='tipo_proy" + pronum + "' id='tipo_proy" + pronum + "' size='50' style='background: #EEE; width:46px; text-align: center;' maxlength='50' value='' placeholder='T/Proy' readonly='readonly'>";
     var i2 = x.insertCell(11);
-    i2.innerHTML = "<button  title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='btn-success btn-sm cons-btn' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openProyPopup(" + pronum + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>";
+    i2.innerHTML = "<button  title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='btn-success btn-xs cons-btn' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openProyPopup(" + pronum + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>";
     var h = x.insertCell(12);
-    h.innerHTML = "<button type='button' style='border-radius:10%;background-color: #d9534f !important; border-color: #ac2925 !important'id='product_delete_line" + pronum + "' class='btn-success btn-sm cons-btn'  tabindex='116' onclick='elimiarfilapro(" + pronum + ")'><b>x</></button><br>";
+    h.innerHTML = "<button type='button' style='border-radius:10%;background-color: #d9534f !important; border-color: #ac2925 !important'id='product_delete_line" + pronum + "' class='btn-success btn-xs cons-btn'  tabindex='116' onclick='elimiarfilapro(" + pronum + ")'><b>x</></button><br>";
     pronum++;
     return pronum - 1;
 }
@@ -111,9 +111,9 @@ function insertarServicio() {
     var i = x.insertCell(9);
     i.innerHTML = "<input type='text' name='tipo_proy" + pronum + "' id='tipo_proy" + pronum + "' size='50' style='background: #EEE; width:46px; text-align: center;' maxlength='50' value='' placeholder='T/Proy'readonly='readonly' >";
     var i2 = x.insertCell(10);
-    i2.innerHTML = "<button  title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='btn-success btn-sm cons-btn' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openProyPopup(" + pronum + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>";
+    i2.innerHTML = "<button  title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='btn-success btn-xs cons-btn' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openProyPopup(" + pronum + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>";
     var h = x.insertCell(11);
-    h.innerHTML = "<button type='button' style='border-radius:10%;background-color: #d9534f;border-color: #ac2925'id='product_delete_line" + pronum + "' class='btn-success btn-sm cons-btn'  tabindex='116' onclick='elimiarfilaser(" + pronum + ")'><b>x</></button><br>";
+    h.innerHTML = "<button type='button' style='border-radius:10%;background-color: #d9534f;border-color: #ac2925'id='product_delete_line" + pronum + "' class='btn-success btn-xs cons-btn'  tabindex='116' onclick='elimiarfilaser(" + pronum + ")'><b>x</></button><br>";
     pronum++;
     return pronum - 1;
 }
@@ -139,9 +139,9 @@ function insertarNuevoProd() {
     var i = x.insertCell(7);
     i.innerHTML = "<input style='width:100px;' autocomplete='off' type='text' name='pory_cod" + pronum + "' id='pory_cod" + pronum + "' maxlength='50' value='' tabindex='116' value=''><input type='hidden' name='proy_id" + pronum + "' id='proy_id" + pronum + "' size='20' maxlength='50' value=''>";
     var i2 = x.insertCell(8);
-    i2.innerHTML = "<button  title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='btn-success btn-sm cons-btn' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openProyPopup(" + pronum + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>";
+    i2.innerHTML = "<button  title='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_TITLE') + "' accessKey='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_KEY') + "' type='button' tabindex='116' class='btn-success btn-xs cons-btn' value='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "' name='btn1' onclick='openProyPopup(" + pronum + ");'><img src='themes/default/images/id-ff-select.png' alt='" + SUGAR.language.get('app_strings', 'LBL_SELECT_BUTTON_LABEL') + "'></button>";
     var h = x.insertCell(9);
-    h.innerHTML = "<button type='button' style='border-radius:10%;background-color: #d9534f;border-color: #ac2925'id='product_delete_line" + pronum + "' class='btn-success btn-sm cons-btn'  tabindex='116' onclick='elimiarNuevProd(" + pronum + ")'><b>x</></button><br>";
+    h.innerHTML = "<button type='button' style='border-radius:10%;background-color: #d9534f;border-color: #ac2925'id='product_delete_line" + pronum + "' class='btn-success btn-xs cons-btn'  tabindex='116' onclick='elimiarNuevProd(" + pronum + ")'><b>x</></button><br>";
     pronum++;
     return pronum - 1;
 }

@@ -511,7 +511,26 @@ class SCO_ProductosViewEdit extends ViewEdit {
         $('#idpro').fadeIn();
       });
 
+      for(var i = 0; i < $('#idprod tbody tr').length ; i++){
+          if($('#pro_idproductocotizado'+[i]).val() !=''){
+              console.log($('#pro_idproductocotizado'+[i]).val());
+              $('#product_delete_line'+[i]).hide();
+              $('#pro_nombre'+[i]).css({'pointer-events':'none','background':'#eee'});
+              $('#seleccion'+[i]).hide();
+              $('#seleccion'+[i]).after('<a class=\'btn-xs btn-info\'>cotizado</a>');
+          }else{
+              console.log('sin valor');
+          }
+      }
 
+      for(var i = 0; i < $('.jexcel tbody tr').length ; i++){
+          if($('#13-'+[i]).text() !=''){                
+              $('#0-'+[i]).css({'pointer-events':'none','background':'#eee'});  
+              console.log($('#13-'+[i]).text());
+          }else{
+              console.log('sin valor');
+          }
+      }
       </script>
     ";
   }
