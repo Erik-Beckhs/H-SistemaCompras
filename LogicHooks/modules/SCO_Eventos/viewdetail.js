@@ -29,9 +29,9 @@ function solicitar(est){
 				    }
 			    	else {
 				      	//alert("No se puede concluir el evento si no coloco una fecha real o un transportista");
-						var titulo = "Eventos / hito";
-						var mensaje = "ERROR! No se puede concluir el evento.";
-						var cuerpo = "<center><p>Verifique que los campos esten registrados adecuadamente.</p>";
+						var titulo = "Eventos";
+						var mensaje = "Alerta!!! Informacion no valida.";
+						var cuerpo = "<center><p>Verifique los camos obligatorios.</p>";
 							cuerpo += "<p>\"<strong>Fecha Real</strong>\" o \"<strong>Transportista / Agencia Aduanera / Otros:</strong>\"</p></center>"
 						ventanaModal(data,titulo,cuerpo,mensaje);
 						$('#modalEvento').modal('show');
@@ -39,7 +39,7 @@ function solicitar(est){
   				}else{
 					var titulo = "Eventos / hito";
 					var mensaje = "Error de conexion!!!... No se puede concluir el evento";
-					var cuerpo = "<br>Consulte con su administrador de sistemas de compras.</p>";
+					var cuerpo = "<br><center>Consulte con su administrador de sistemas.</p></center>";
 					ventanaModal(data,titulo,cuerpo,mensaje);
 					$('#modalEvento').modal('show');
   				}
@@ -120,7 +120,7 @@ function ventanaModalFecha(){
 	    htmlf += '        <div class="modal-content">';
 	    htmlf += '            <div class="modal-header">';
 	    htmlf += '                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
-	    htmlf += '                <h4 class="modal-title">Concluir Evento</h4>';
+	    htmlf += '                <h4 class="modal-title">Evento</h4>';
 	    htmlf += '            </div>';
 	    htmlf += '            <div class="modal-body" >';
 	    htmlf += '                <div class="panel panel-info">';

@@ -14,7 +14,7 @@ class Aprobadores{
         try {            
             $payload ='{"id":"'.$id.'"}';
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, "http://docker-qas.hansa.com.bo:22002/mhes"); # QAS
+            curl_setopt($ch, CURLOPT_URL, "http://docker.hansa.com.bo:22002/mhes"); # QAS
             #curl_setopt($ch, CURLOPT_URL, "http://localhost:8081"); #Desarrollo
             curl_setopt($ch, CURLOPT_HEADER, 1);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));

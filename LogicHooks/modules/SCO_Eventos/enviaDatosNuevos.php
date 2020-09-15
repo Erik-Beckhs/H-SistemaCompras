@@ -45,7 +45,7 @@ class Fechas{
                 FROM sco_embarque_sco_eventos_c as em_ev
                 INNER JOIN sco_eventos as ev
                 ON em_ev.sco_embarque_sco_eventossco_eventos_idb = ev.id
-                WHERE em_ev.sco_embarque_sco_eventossco_embarque_ida = '$id_embarque'
+                WHERE em_ev.sco_embarque_sco_eventossco_embarque_ida = '".$id_embarque."'
                 AND em_ev.deleted = 0
                 ORDER BY eve_fechaplan asc;";
             $res_emb_ev = $GLOBALS['db']->query($emb_des, true);
@@ -53,25 +53,27 @@ class Fechas{
             $fecha = explode('-', $fecha);;;
             $fecha_ac = $fecha[0]."-".$fecha[1]."-".$fecha[2];
             #Actualziacion de las Fecha Nueva y Fecha Real
+            $fechasArr = '';
             while($row_fila = $GLOBALS['db']->fetchByAssoc($res_emb_ev)){
-                if($row_fila['fechaplan'] >= $fecha_ac){
+                #if($row_fila['fechaplan'] >= $fecha_ac){
                     $feha_actual = date_create($row_fila['fechaplan']);
                     date_add($feha_actual, date_interval_create_from_date_string(''.$tiempo.' days'));
                     $fecha_nuevo = date_format($feha_actual, 'Y-m-d');
-                        if(empty($row_fila['fechareal']) || $row_fila['fechareal'] == ''){
+                        if(empty($row_fila['fechareal']) || $row_fila['fechareal'] == '0000-00-00' || $row_fila['fechareal'] == null || $row_fila['fechareal'] == 'null'){
                             //Query, Actualiza el campo fecha nuevo del modulo EVENTOS
                             $update_eventos = "UPDATE sco_eventos
                                                 SET eve_fechanuevo = '".$fecha_nuevo."'
                                                 WHERE id = '".$row_fila['id_ev']."';";
                             $obj_eventos = $GLOBALS['db']->query($update_eventos, true);
+                            $fechasArr .= $fecha_nuevo;
                         }else{
                             //Query, Actualiza el campo fecha nuevo del modulo EVENTOS
                             $update_eventos = "UPDATE sco_eventos
                                                 SET eve_fechanuevo = ''
                                                 WHERE id = '".$row_fila['id_ev']."';";
                             $obj_eventos = $GLOBALS['db']->query($update_eventos, true);
-                        }
-                }
+                        }                        
+                #}
             }
 
             #Cambio de estado del EMBARQUE, comparando los eventos concluidos vs cantida de eventos
@@ -113,12 +115,12 @@ class Fechas{
             $fp = $row_ev['eve_fechaplan'];
             $fn = $row_ev['eve_fechanuevo'];
             $fr = $row_ev['eve_fechare'];
-            if($fn != ''){
-                if($row_ev_concluidoFecha['concluidoFecha'] == ($row_ev_concluido['concluido'] + 1)){
-                    $fecha = $fr;
+            if($fn != '' && $fn != null){
+                if($fn == '0000-00-00'){
+                  $fecha = $fr; 
                 }else{
-                    $fecha = $fn;
-                }                
+                  $fecha = $fn;
+                }                 
             }else{
                 $fecha = $fp;
             }
@@ -148,19 +150,23 @@ class Fechas{
             if($row_ev_concluido['concluido'] == $row_ev_count['cantidad'] && $bean_embarque->emb_estado != 3){
                 
             }else{
-            while($fila = $GLOBALS['db']->fetchByAssoc($r_emabarque_des)){
-                $id_desp = $fila['id_desp'];
-                if(!empty($id_desp)){
-                    //Query, actualiza la fecha del modulo de DESPACHOS
-                    $despacho_update = "UPDATE sco_despachos
-                        SET des_fechaprev = '".$fecha."'
-                        WHERE id = '".$id_desp."'; ";
-                    $obj_update = $GLOBALS['db']->query($despacho_update, true);
-                    }
-                }
+              while($fila = $GLOBALS['db']->fetchByAssoc($r_emabarque_des)){
+                  $id_desp = $fila['id_desp'];
+                  if($fecha == null || $fecha == ''){
+                    $var = "La fecha es null o vacio";
+                  }else{
+                      if(!empty($id_desp)){
+                      //Query, actualiza la fecha del modulo de DESPACHOS
+                      $despacho_update = "UPDATE sco_despachos
+                          SET des_fechaprev = '".$fecha."'
+                          WHERE id = '".$id_desp."'; ";
+                      $obj_update = $GLOBALS['db']->query($despacho_update, true);
+                      $var .= "idDesoacho: ".$id_desp." feha:".$fecha;
+                      }
+                  }
+              }                
             }
             
-            $var =  $fecha_real2."-".$bean_evento->eve_fechaplan . " = ". $tiempo;  
         } catch (Exception $e) {
             $var = '404';   
         }

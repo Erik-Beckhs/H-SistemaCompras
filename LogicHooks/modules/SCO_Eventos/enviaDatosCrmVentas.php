@@ -15,7 +15,8 @@ class EnviaDatosCRM{
             $payload = '{"idEmbarque": "'.$idEmbarque.'","idEvento": "'.$idEvento.'","nombreEvento":"'.$nombreEvento.'"}';
             $ch = curl_init();
             #curl_setopt($ch, CURLOPT_URL, "http://localhost:7507/api/embarqueestado"); # DEV
-            curl_setopt($ch, CURLOPT_URL, "http://docker-qas.hansa.com.bo:7508"); #QAS
+            #curl_setopt($ch, CURLOPT_URL, "http://docker-qas.hansa.com.bo:7508"); #QAS
+            curl_setopt($ch, CURLOPT_URL, "http://docker.hansa.com.bo:7508"); #QPRD
             curl_setopt($ch, CURLOPT_HEADER, 1);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

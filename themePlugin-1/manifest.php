@@ -3,9 +3,7 @@
  *
  * SugarCRM Community Edition is a customer relationship management program developed by
  * SugarCRM, Inc. Copyright (C) 2004-2013 SugarCRM Inc.
- *
- * SuiteCRM is an extension to SugarCRM Community Edition developed by SalesAgility Ltd.
- * Copyright (C) 2011 - 2017 SalesAgility Ltd.
+ * Create by: Limberg Alcon 09 2020
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -55,8 +53,8 @@ $manifest = array (
   ),
   'readme' => 'Here we allow Administrators to create business logic for field calculations without needing to write PHP code. You can select calculated field and create the formula that is automatically updated based on calculation you provide.',
   'key' => 'tac',
-  'author' => 'TechEsperto Solutions LLC',
-  'description' => 'New theme for SuiteCRM',
+  'author' => 'TechEsperto Solutions LLC, Limberg Alcon',
+  'description' => 'New theme for Limberg Alcon',
   'is_uninstallable' => true,
   'name' => 'TechBlue',
   'published_date' => '2018-02-2 13:15:25',

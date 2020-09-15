@@ -31,24 +31,24 @@ require_once('include/entryPoint.php');
 	$idEmbarque   = $parentBean->id;
 	switch ($operacion) {
 		case '1':
-			#Conexion con servicio Rest para el evnio de datos
-			include ('enviaDatosCrmVentas.php');
-			$envioDatosCrm= new EnviaDatosCRM();
-			$respuesta = $envioDatosCrm->enviarInformacion($idEmbarque,$id,$bean_eventos->name);
-			#Verificando si la conexion fue 200
-		    if($respuesta == '200'){
-				if ($bean_eventos->eve_fechare != null && $bean_eventos->transportistaotros) {
-						echo json_encode($bean_eventos->eve_fechare);
-						$bean_eventos->eve_estado = $est;
-						$bean_eventos->save();
-				}
-				else {
-					echo json_encode("error");
-				}
-		    }else{
-		    	echo json_encode($respuesta);
-		    }
-
+			if ($bean_eventos->eve_fechare != null && $bean_eventos->transportistaotros) {
+				#Conexion con servicio Rest para el evnio de datos
+				include ('enviaDatosCrmVentas.php');
+				$envioDatosCrm= new EnviaDatosCRM();
+				$respuesta = $envioDatosCrm->enviarInformacion($idEmbarque,$id,$bean_eventos->name);
+				#Verificando si la conexion fue 200
+			    if($respuesta == '200'){
+					echo json_encode($bean_eventos->eve_fechare);
+					$bean_eventos->eve_estado = $est;
+					$bean_eventos->save();
+			    }else{
+			    	echo json_encode($respuesta);
+			    }
+			}
+			else {
+				echo json_encode("error");
+			}
+			
 			break;
 		case '2':
 			#Conexion con servicio Rest para el evnio de datos

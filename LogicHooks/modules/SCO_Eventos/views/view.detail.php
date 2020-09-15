@@ -82,27 +82,26 @@ class SCO_EventosViewDetail extends ViewDetail {
  				break;
  			case 'Pendiente':
  				parent::display();
- 			echo '<div style="margin-top: 10px;"><div class="yui-content"><div class="detail view  detail508 expanded">
-				<table class="panelContainer" cellspacing="1">
-				<tbody>
-				<tr>
-				<td width="12.5%" scope="col">
- 				</td>
- 				<td>
- 					<a class="btn btn-sm btn-success" style="padding: 2px 5px;background: #5cb85c !important;" onClick="solicitar(2);" value="Ver Reporte">Concluir Evento</a>
- 					<a class="btn btn-sm btn-success" style="padding: 2px 5px;background: #5cb85c !important;" onClick="ventanaModalFecha();" value="Ver Reporte">Registrar Fecha Real</a>
- 				</td>
- 				<td width="28%" >
-				</td>
-            	<td width="12.5%" scope="col">
-
-		 		</td>
-             	<td width="37.5%">
-
- 				</td>
-	 			</tr>
-	 			</tbody></table>
-			</div></div></div>';
+ 			echo '
+			 <div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
+		        <div class="col-xs-12 col-sm-6 detail-view-row-item">
+		              <div class="col-xs-12 col-sm-5 label col-1-label" style="margin-left: -35px;">
+		                <b>Actualizar registros</b>
+		              </div>          
+		              <div class="col-sm-4 col-sm-5 campopersonalizado" type="varchar" style="margin-left: 15px;">
+		                <a class="btn btn-sm btn-info" style="padding: 2px 5px;background: #244668 !important;" onClick="ventanaModalFecha();" >Registrar Fecha Real</a>
+		              </div>                          
+		        </div>
+		        <div class="col-xs-12 col-sm-6 detail-view-row-item">
+		              <div class="col-xs-12 col-sm-5 label col-1-label"style="margin-left: -35px;">
+		                <b>Finalizar el evento</b>
+		              </div>        
+		              <div class="col-sm-4 col-sm-5 campopersonalizado" type="varchar"style="margin-left: 15px;">
+		               		<a class="btn btn-sm btn-info" style="padding: 2px 5px;background: #3c763d !important;" onClick="solicitar(2);" value="Ver Reporte">Concluir Evento</a>
+		              </div>          
+		        </div>
+		      </div>
+			';
 			echo '<script>
 				var id_ev = "'.$id_ev.'";
 				var aduana = "'.$aduana.'";

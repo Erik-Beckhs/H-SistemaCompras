@@ -3,7 +3,7 @@
 Project: Logic Hooks Manifest
 Original Dev: Juan Jose Silva, 07 2017
 Modificado Dev: Limberg Alon Espejo, 05 2018
-
+Modificado Dev: Limberg Alon Espejo, 09 2020
 Desc: Manifest file for installing logic hook
 
 The contents of this file are governed by the GNU General Public License (GPL).
@@ -32,8 +32,8 @@ $manifest = array(
  'description'  => 'Logic Hook Compras installation package.',
  'is_uninstallable' => true,
  'author'   => 'lalcon',
- 'published_date' => 'Agostos 25 , 2020',
- 'version'   => '4.0.0',
+ 'published_date' => 'Septiembre 12 , 2020',
+ 'version'   => '4.5.0',
  'type'    => 'module',
  );
 
@@ -443,6 +443,10 @@ $installdefs = array(
       array(
         'from' => '<basepath>/modules/SCO_Eventos/views/view.detail.php',
         'to'   => 'modules/SCO_Eventos/views/view.detail.php',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_Eventos/enviaDatosNuevos.php',
+        'to'   => 'modules/SCO_Eventos/enviaDatosNuevos.php',
       ),
       array(
         'from' => '<basepath>/modules/SCO_Eventos/fecha_eventos.php',
