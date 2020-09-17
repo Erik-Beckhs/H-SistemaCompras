@@ -62,6 +62,11 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
               <div id="ventanaModalPM"></div>
               ';
   	echo $sty.$htmlpp;
+    if($this->bean->orc_tipoo == '1'){
+        echo "<style>
+             #whole_subpanel_sco_despachos_sco_ordencompra {display:none;}
+           </style>";
+      }
     #Consultas SQL para obtecion de informacion de productos
     $cantidad_prd = "SELECT SUM(pro_cantidad) as total_cantidad FROM sco_productos_co WHERE pro_idco = '".$this->bean->id."'; ";
     $obj_pro = $GLOBALS['db']->query($cantidad_prd, true);
@@ -201,6 +206,11 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
     				<style>
     					#whole_subpanel_sco_ordencompra_sco_documentos tbody td a {pointer-events: none; cursor: default;}
     				</style>";*/
+            if($divisionUser != '06'){
+              echo "<style>
+                   #whole_subpanel_sco_ordencompra_sco_documentos table .clickMenu{display:inline;}
+                 </style>";
+            }
             echo "
     				<script>//$('#btn-estados').hide();
     				$('#desc_por').prop('disabled', true);
@@ -301,6 +311,11 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
         </div>
        ';
  			echo "<style>#list_subpanel_sco_ordencompra_sco_documentos .sugar_action_button{display:block;}</style>";
+      if($divisionUser != '06'){
+        echo "<style>
+             #whole_subpanel_sco_ordencompra_sco_documentos table .clickMenu{display:inline;}
+           </style>";
+      }
 				break;
 		case '4':
 			parent::display();
@@ -411,6 +426,11 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
       </div>
       ';
 			#echo $js.$st;
+      if($divisionUser != '06'){
+        echo "<style>
+             #whole_subpanel_sco_ordencompra_sco_documentos table .clickMenu{display:inline;}
+           </style>";
+      }
 			break;
 		default:
 			parent::display();
