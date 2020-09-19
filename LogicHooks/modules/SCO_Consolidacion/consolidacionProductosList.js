@@ -131,6 +131,7 @@ function buscarClientes() {
 }
 // Detector de datos del fabricante en formulario envio de consolidacion
 $('#idFabricante').on('change', function () {
+  alert("algo");
   var pcv_proveedoraio = $("#idFabricante").val();
   for (let index = 0; index < proveedores.length; index++) {
     if (proveedores[index]["sco_proveedor_id_c"] == pcv_proveedoraio) {
