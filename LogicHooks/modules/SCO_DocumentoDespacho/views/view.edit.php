@@ -30,29 +30,34 @@ class SCO_DocumentoDespachoViewEdit extends ViewEdit {
     echo '<link href="/modules/SCO_documentos/fileinput.css" media="all" rel="stylesheet" type="text/css"/>';
     echo '<link href="/modules/SCO_documentos/all.css" media="all" rel="stylesheet" type="text/css"/>';
     echo '<link href="/modules/SCO_documentos/theme.css" media="all" rel="stylesheet" type="text/css"/>';
-    echo '<script src="/modules/SCO_documentos/sortable.js" type="text/javascript"></script>';
-    echo '<script src="/modules/SCO_documentos/fileinput.js" type="text/javascript"></script>';
-    echo '<script src="/modules/SCO_documentos/es.js" type="text/javascript"></script>';
-    echo '<script src="/modules/SCO_documentos/theme.js" type="text/javascript"></script>';
+    echo '<script src="/modules/SCO_documentos/sortable.js?'.time().'" type="text/javascript"></script>';
+    echo '<script src="/modules/SCO_documentos/fileinput.js?'.time().'" type="text/javascript"></script>';
+    echo '<script src="/modules/SCO_documentos/es.js?'.time().'" type="text/javascript"></script>';
+    echo '<script src="/modules/SCO_documentos/theme.js?'.time().'" type="text/javascript"></script>';
     $html = '<button type="button" name="button" class="button" onclick="mostrarModal()">Carga masiva</button>';
     echo '<div class="modal fade" id="modalFile" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id=""></h4>
+            <h4 class="modal-title" id="">Carga masiva de Archivos</h4>
           </div>
           <div class="modal-body">
             <form enctype="multipart/form-data" id="formArchivos">
-                <hr>
                 <div class="form-group">
                 <input id="file-5" class="file" name="filename_file" type="file" multiple data-preview-file-type="any" data-upload-url="index.php?to_pdf=true&module=SCO_DocumentoDespacho&action=cargaArchivos&idoc='.$idoc.'" data-theme="fas">
                 </div>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-            <button type="button" title="Guardar" class="button" onclick="location.reload();" value="Guardar">Aceptar</button>
+            <div class="row">
+              <div class="col-xs-6">
+                <button type="button" style="width: 100%;background: #dc3545;color:#fff;border:solid 1px#dc3545;" class="btn btn-sm " data-dismiss="modal">Cancelar</button>
+              </div>
+              <div class="col-xs-6">
+                <button type="button" title="Guardar" style="width: 100%; background:#0e2741;" class="btn btn-sm btn-info" onclick="location.reload();" value="Guardar">Aceptar</button>
+              </div>
+            </div>            
           </div>
         </div>
       </div>
