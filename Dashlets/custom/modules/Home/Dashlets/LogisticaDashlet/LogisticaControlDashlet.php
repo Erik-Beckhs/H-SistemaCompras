@@ -360,7 +360,7 @@ class LogisticaControlDashlet extends Dashlet {
       <script type="text/javascript" src="custom/modules/Home/Dashlets/LogisticaDashlet/LogisticaControlDashlet.js?' . time () . '"></script>                    
       <script> </script>
        ';
-       if (in_array("ROL_GERENTE_GENERAL", $roles ) || in_array("ROL_REPORTE_LOGISTICA_DIVISION", $roles ) || in_array("ROL_GERENTE_DIVISION", $roles ) || in_array("ROL_TOTAL_REPORTE", $roles ) ||  $current_user->is_admin) {
+       if (in_array("ROL_GERENTE_GENERAL", $roles ) || in_array("ROL_REPORTE_LOGISTICA_DIVISION", $roles ) || in_array("ROL_GERENTE_DIVISION", $roles ) || in_array("ROL_TOTAL_REPORTE", $roles ) || in_array("ROL_REPORTE_AMERCADO", $roles )||  $current_user->is_admin) {
          echo $header.$html.$modal;
        }else{
          echo $error;

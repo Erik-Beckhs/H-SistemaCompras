@@ -15,6 +15,10 @@ class SCO_OrdenCompraController extends SugarController {
 	function action_backorder() {
 		$this-> view = 'backorder';
 	}
+
+	function action_reporteindustria() {
+		$this-> view = 'reporteindustria';
+	}
   
 	function action_SubPanelViewer() {          
 		require_once 'include/SubPanel/SubPanelViewer.php';
