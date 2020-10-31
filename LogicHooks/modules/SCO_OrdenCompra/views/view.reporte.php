@@ -198,6 +198,9 @@ class SCO_OrdenCompraViewReporte extends ViewHtml
         }
        echo '
        <div class="row">
+          <ul class="pager">
+            <li class="next"><a href="?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3DSCO_OrdenCompra%26action%3Dreporteindustria">Reporte Gerencial</a></li>
+          </ul>
          <div class="col-sm-8">
              <h2 class="titulo">Reporte</h2>
          </div>       

@@ -7,31 +7,24 @@
 *@license ruta: /var/www/html/modules/SCO_Productos
 */
 if(!defined('sugarEntry'))define('sugarEntry', true);
-require_once('data/BeanFactory.php');
-require_once('include/entryPoint.php');
-//pobla usuario actual logeado
-global $current_user;
+include ('../../../../../config.php');
+//include ('../../../../../custom/application/Ext/Utils/custom_utils.ext.php');
+include ('../../../../../custom/include/language/es_ES.lang.php');
+
+global $sugar_config;
+
     
-$fecha_desde = $_POST['fecha_desde'];
-$fecha_hasta = $_POST['fecha_hasta'];
-$division = $_POST['division'];
-$aMercado = $_POST['aMercado'];
-$idco = $_POST['idco'];
-$filtro = $_POST['filtro'];
+$aMercado = $_GET['aMercado'];
+$filtro = $_GET['filtro'];
 
 if ($aMercado == '00') {
 	$aMercado = '';
 }
-if ($division == '00') {
-	$division = '';
-}
-
-$idDiv = $current_user->iddivision_c;
 
 switch ($filtro) {
 	case 1:
 		try {
-		    $query = "call suitecrm.sp_consolidacion_backorder('$fecha_desde','$fecha_hasta','$division','$aMercado');";
+		    $query = "call suitecrm.sp_ordencompra_rep01('01 HERRAMIENTAS');";
 		    $results = $GLOBALS['db']->query($query, true);
 		    $object= array();
 		    while($row = $GLOBALS['db']->fetchByAssoc($results))
@@ -39,31 +32,6 @@ switch ($filtro) {
 		            $object[] = $row;
 		        }
 		    echo json_encode($object);
-		} catch (Exception $e) {
-			echo "Error, no se pudo realizar la peticion";
-		}
-		break;
-	case 2:
-		try {
-		    $query = "SELECT 
-						pro_nombre,
-						pro_descripcion,
-						pro_unidad,
-						pro_cantidad,
-						pro_preciounid,
-						pro_descval,
-						pro_descpor,
-						pro_saldos
-						FROM suitecrm.sco_productos_co
-						WHERE pro_idco = '".$idco."'
-						AND pro_saldos > 0;";
-		    $results = $GLOBALS['db']->query($query, true);
-		    $objectPro= array();
-		    while($row = $GLOBALS['db']->fetchByAssoc($results))
-		        {
-		            $objectPro[] = $row;
-		        }
-		    echo json_encode($objectPro);
 		} catch (Exception $e) {
 			echo "Error, no se pudo realizar la peticion";
 		}
