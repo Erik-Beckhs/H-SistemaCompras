@@ -34,11 +34,11 @@ class SCO_OrdenCompraViewReporteindustria extends ViewHtml
             $amercado .= '<option class="'.$row['iddivision_c'].' am" value="'.$row['idamercado_c'].'">'.$row['idamercado_c_name'].'</option>';
         }
        
-
 		$cabecera='       		
 			<link rel="stylesheet" href="modules/SCO_OrdenCompra/ReporteDiv01/JexcelV4/jsuites.css" type="text/css" />
 			<link rel="stylesheet" href="modules/SCO_OrdenCompra/ReporteDiv01/JexcelV4/jexcel.css" type="text/css" />
 			<link rel="stylesheet" href="modules/SCO_OrdenCompra/ReporteDiv01/JexcelV4/style.css" type="text/css" />
+			<link rel="stylesheet" href="modules/SCO_OrdenCompra/ReporteDiv01/ReporteGerencial.css" type="text/css" />
        	';
 		$js = '
        		<script src="modules/SCO_OrdenCompra/ReporteDiv01/JexcelV4/jexcel.js"></script>
@@ -105,18 +105,21 @@ class SCO_OrdenCompraViewReporteindustria extends ViewHtml
 						</div>
 					</div>						
 					<div class="col-sm-1">
+						<input type="text" name="crecimiento" id="crecimiento" class="form-control" value="10"  placeholder="Crecimiento">						
+					</div>				
+					<div class="col-sm-1">
 						<button type="button" class="btn btn-sm btn-info" id="buscar">
 							<i class="glyphicon glyphicon-search"></i>
 						</button>
-					</div>					
-					<div class="col-sm-2">
-						<input type="button" value="Export to XLS" id="btnExportar">
+					</div>	
+					<div class="col-sm-1">
+						<input type="button" class="btn btn-sm btn-info" value="Excel" id="btnExportar">
 					</div>
 				</div>
 			</div>
 			';
 		$html = '
-       		<!--input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title=""-->
+       		
 			
 			<div id="mostrarDatos"></div>
 

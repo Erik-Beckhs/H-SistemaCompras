@@ -178,10 +178,11 @@ $("#mostrarDatos").html("<div id='cargando' class='loader'></div> ");
                     productos[i]["VentaCantidad2AnioAtras"],
                     productos[i]["VentaCantidad1AnioAtras"],
                     (Math.round(productos[i]["VentaCantidad1AnioAtras"] / 12)),
-                    productos[i]["VentaCantidad0AnioAtras"]
+                    productos[i]["VentaCantidad0AnioAtras"],
+                    ''
                     ]
         }
-
+        var mes = 'Ingre. Pedido JUN 20';
         jexcel(document.getElementById('mostrarDatos'), {
             data:data,
             tableOverflow:true,
@@ -200,22 +201,22 @@ $("#mostrarDatos").html("<div id='cargando' class='loader'></div> ");
                 { 
                     type: 'text', 
                     title:'AreaMercado', 
-                    width:100 
+                    width:20
                 },
                 { 
                     type: 'text', 
                     title:'Familia', 
-                    width:100 
+                    width:20
                 },
                 { 
                     type: 'text', 
                     title:'Grupo', 
-                    width:100 
+                    width:20 
                 },
                 { 
                     type: 'text', 
                     title:'SubGrupo', 
-                    width:100 
+                    width:20 
                 },
                 { 
                     type: 'text', 
@@ -254,7 +255,7 @@ $("#mostrarDatos").html("<div id='cargando' class='loader'></div> ");
                 },
                 { 
                     type: 'text',
-                    title:'Ingre. Pedido JUN 20',
+                    title:mes,
                     width:60 
                 },
                 { 
@@ -300,6 +301,11 @@ $("#mostrarDatos").html("<div id='cargando' class='loader'></div> ");
                 { 
                     type: 'text',
                     title:'Venta Total 2020',
+                    width:80 
+                },
+                { 
+                    type: 'text',
+                    title:'Pedido Sugerido',
                     width:80 
                 },
              ],
@@ -365,6 +371,26 @@ jexcel(document.getElementById('mostrarDatos'), {
     pagination: 50,
     freezeColumns: 5,
     columns: [
+        { 
+            type: 'text', 
+            title:'AreaMercado', 
+            width:20
+        },
+        { 
+            type: 'text', 
+            title:'Familia', 
+            width:20
+        },
+        { 
+            type: 'text', 
+            title:'Grupo', 
+            width:20 
+        },
+        { 
+            type: 'text', 
+            title:'SubGrupo', 
+            width:20 
+        },
         { 
             type: 'text', 
             title:'CodigoSpa', 
@@ -448,6 +474,11 @@ jexcel(document.getElementById('mostrarDatos'), {
         { 
             type: 'text',
             title:'Venta Total 2020',
+            width:80 
+        },
+        { 
+            type: 'text',
+            title:'Pedido Sugerido',
             width:80 
         },
      ],

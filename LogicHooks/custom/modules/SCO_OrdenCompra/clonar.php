@@ -103,7 +103,7 @@ class Clclonar
 	    #Declaramos la cantidad de
 	    $valSalto = 0;
 	    $incremento = 0;
-	    // La función intval nos extrae solo los numeros enteros de un numero decimal
+	    // La funciÃ³n intval nos extrae solo los numeros enteros de un numero decimal
 	    $saldos = $decimales - (intval($decimales));
 	    $saldoFirmas = $saldos * 10;
 	    if (intval($saldoFirmas) > 1){
@@ -116,7 +116,7 @@ class Clclonar
 	      $valSalto = 8;
 	      $incremento = 4;
 	    }
-	    #Generando la numeración correlativa
+	    #Generando la numeraciÃ³n correlativa
 	    $Numeracion = array();
 	    if ($rowApro["total"] == 0) {
 	      $Numeracion[1] = 11;
@@ -231,7 +231,12 @@ class Clclonar
 					pro_subtotal,
 					pro_canttrans,
 					pro_cantresivida,
-					pro_saldos
+					pro_saldos,
+					pro_codaio,
+					iddivision_c,
+					idregional_c,
+					idgrupocliente_c,
+					pro_idproductocotizado
 				)
 			VALUES
 			(
@@ -253,35 +258,72 @@ class Clclonar
 				'".$row12['pro_subtotal']."',
 				'0',
 				'0',
-				'".$row12['pro_cantidad']."'
+				'".$row12['pro_cantidad']."',
+				'".$row12['pro_codaio']."',
+				'".$row12['iddivision_c']."',
+				'".$row12['idregional_c']."',
+				'".$row12['idgrupocliente_c']."',
+				'".$row12['pro_idproductocotizado']."'
 			);
 			";
 			$obj11 = $bean->db->query($query11, true);
 			//Insertando los datos de productos cotizados
 			//Insertado al modulo PRODUCTOS COTIZADOS los datos del array del modulo
 			$productoscotizados ="INSERT INTO sco_productoscotizados
-																	 (id, name, deleted, pro_descripcion, pro_unidad, pro_cantidad, pro_preciounid, pro_descval, pro_descpor, pro_fecha, pro_nomproyco, pro_idco, pro_idproy, pro_idpro, pro_tipocotiza, pro_subtotal, pro_canttrans, pro_cantresivida, pro_saldos)
-														VALUES (
-																			'".$new_idprod."',
-																			'".$row12['pro_nombre']."',
-																			'0',
-																			'".$row12['pro_descripcion']."',
-																			'".$row12['pro_unidad']."',
-																			'".$row12['pro_cantidad']."',
-																			'".$row12['pro_preciounid']."',
-																			'".$row12['pro_descval']."',
-																			'".$row12['pro_descpor']."',
-																			'".$row12['pro_fecha']."',
-																			'".$row12['pro_nomproyco']."',
-																			'".$idoc."',
-																			'".$row12['pro_idproy']."',
-																			'".$row12['pro_idpro']."',
-																			'".$row12['pro_tipocotiza']."',
-																			'".$row12['pro_subtotal']."',
-																			'0',
-																			'0',
-																			'".$row12['pro_cantidad']."'
-																		);";
+					 (
+					 id, 
+					 name, 
+					 deleted,
+					 pro_descripcion,
+					 pro_unidad,
+					 pro_cantidad,
+					 pro_preciounid,
+					 pro_descval,
+					 pro_descpor,
+					 pro_fecha,
+					 pro_nomproyco,
+					 pro_idco,
+					 pro_idproy,
+					 pro_idpro,
+					 pro_tipocotiza,
+					 pro_subtotal,
+					 pro_canttrans,
+					 pro_cantresivida,
+					 pro_saldos,
+					 iddivision_c,
+					 idamercado_c,
+					 idregional_c,
+					 idgrupocliente_c,
+					 pro_codaio,
+					 pro_idproductocotizado
+					 )
+					VALUES (
+							'".$new_idprod."',
+							'".$row12['pro_nombre']."',
+							'0',
+							'".$row12['pro_descripcion']."',
+							'".$row12['pro_unidad']."',
+							'".$row12['pro_cantidad']."',
+							'".$row12['pro_preciounid']."',
+							'".$row12['pro_descval']."',
+							'".$row12['pro_descpor']."',
+							'".$row12['pro_fecha']."',
+							'".$row12['pro_nomproyco']."',
+							'".$idoc."',
+							'".$row12['pro_idproy']."',
+							'".$row12['pro_idpro']."',
+							'".$row12['pro_tipocotiza']."',
+							'".$row12['pro_subtotal']."',
+							'0',
+							'0',
+							'".$row12['pro_cantidad']."',
+							'".$row12['iddivision_c']."',
+							'".$row12['idamercado_c']."',
+							'".$row12['idregional_c']."',
+							'".$row12['idgrupocliente_c']."',
+							'".$row12['pro_codaio']."',
+							'".$row12['pro_idproductocotizado']."'
+						);";
 			$obj_productoscotizados = $bean->db->query($productoscotizados, true);
 
 			//Agregando la relacion con PRODUCTOS COTIZADOS Y PROYECTOS

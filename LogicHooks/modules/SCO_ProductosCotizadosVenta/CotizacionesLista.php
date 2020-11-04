@@ -1,6 +1,6 @@
 <?php
 /**
-*Esta clase realiza operaciones matemáticas.
+*Esta clase realiza operaciones matemÃ¡ticas.
 *
 *@author Limberg Alcon <lalcon@hansa.com.bo>
 *@copyright 2018
@@ -48,12 +48,30 @@ global $current_user;
     if($filtro == 'cotizacion'){
         $nroCotizacion = $_POST['nroCotizacion'];
         $pcv_proveedoraio = $_POST['pcv_proveedoraio'];
-        $query = "SELECT pcv_codigoproveedor,name 
-        FROM suitecrm.sco_productoscotizadosventa
-        WHERE pcv_numerocotizacion = '$nroCotizacion' AND
-        deleted = 0
-        AND sco_proveedor_id_c = '$pcv_proveedoraio';
-        ";
+        if($nroCotizacion != '' && $pcv_proveedoraio != ''){
+            $query = "SELECT pcv_codigoproveedor,name 
+            FROM suitecrm.sco_productoscotizadosventa
+            WHERE pcv_numerocotizacion = '$nroCotizacion' AND
+            deleted = 0
+            AND sco_proveedor_id_c = '$pcv_proveedoraio'
+            AND pcv_cantidadconsolidado = 0
+            ";
+        }elseif($pcv_proveedoraio != ''){
+            $query = "SELECT pcv_codigoproveedor,name 
+            FROM suitecrm.sco_productoscotizadosventa
+            WHERE deleted = 0
+            AND sco_proveedor_id_c = '$pcv_proveedoraio'
+            AND pcv_cantidadconsolidado = 0
+            ";
+        }else{
+            $query = "SELECT pcv_codigoproveedor,name 
+            FROM suitecrm.sco_productoscotizadosventa
+            WHERE pcv_numerocotizacion = '$nroCotizacion' AND
+            deleted = 0
+            AND pcv_cantidadconsolidado = 0
+            ";
+        }
+        
         $results = $GLOBALS['db']->query($query, true);
         $object= array();
         while($row = $GLOBALS['db']->fetchByAssoc($results))
@@ -65,13 +83,35 @@ global $current_user;
     if($filtro == 'cliente'){
         $nroCotizacion = $_POST['nroCotizacion'];
         $pcv_proveedoraio = $_POST['pcv_proveedoraio'];
-        $query = "SELECT pcv_clienteaio, pcv_cliente 
-        FROM suitecrm.sco_productoscotizadosventa
-        WHERE pcv_numerocotizacion = '$nroCotizacion'
-        AND sco_proveedor_id_c = '$pcv_proveedoraio' AND
-        deleted = 0
-        group by pcv_clienteaio;
-        ";
+        if($nroCotizacion != '' && $pcv_proveedoraio != ''){
+            $query = "SELECT pcv_clienteaio, pcv_cliente 
+            FROM suitecrm.sco_productoscotizadosventa
+            WHERE pcv_numerocotizacion = '$nroCotizacion'
+            AND sco_proveedor_id_c = '$pcv_proveedoraio' AND
+            deleted = 0
+            AND pcv_cantidadconsolidado = 0
+            group by pcv_clienteaio
+            ORDER BY pcv_cliente asc
+            ";
+        }elseif($pcv_proveedoraio != ''){
+            $query = "SELECT pcv_clienteaio, pcv_cliente 
+            FROM suitecrm.sco_productoscotizadosventa
+            WHERE sco_proveedor_id_c = '$pcv_proveedoraio' AND
+            deleted = 0
+            AND pcv_cantidadconsolidado = 0
+            group by pcv_clienteaio
+            ORDER BY pcv_cliente asc
+            ";
+        }else{
+            $query = "SELECT pcv_clienteaio, pcv_cliente 
+            FROM suitecrm.sco_productoscotizadosventa
+            WHERE pcv_numerocotizacion = '$nroCotizacion'AND
+            deleted = 0
+            AND pcv_cantidadconsolidado = 0
+            group by pcv_clienteaio
+            ORDER BY pcv_cliente asc
+            ";
+        }
         $results = $GLOBALS['db']->query($query, true);
         $object= array();
         while($row = $GLOBALS['db']->fetchByAssoc($results))
@@ -83,13 +123,32 @@ global $current_user;
     if($filtro == 'plazo'){
         $nroCotizacion = $_POST['nroCotizacion'];
         $pcv_proveedoraio = $_POST['pcv_proveedoraio'];
-        $query = "SELECT pcv_plzentrega 
-        FROM suitecrm.sco_productoscotizadosventa
-        WHERE pcv_numerocotizacion = '$nroCotizacion'
-        AND sco_proveedor_id_c = '$pcv_proveedoraio' AND
-        deleted = 0
-        group by pcv_plzentrega;
-        ";
+        if($nroCotizacion != '' && $pcv_proveedoraio = ''){
+            $query = "SELECT pcv_plzentrega 
+            FROM suitecrm.sco_productoscotizadosventa
+            WHERE pcv_numerocotizacion = '$nroCotizacion'
+            AND sco_proveedor_id_c = '$pcv_proveedoraio' AND
+            deleted = 0
+            AND pcv_cantidadconsolidado = 0
+            group by pcv_plzentrega;
+            ";
+        }elseif($pcv_proveedoraio != ''){
+            $query = "SELECT pcv_plzentrega 
+            FROM suitecrm.sco_productoscotizadosventa
+            WHERE sco_proveedor_id_c = '$pcv_proveedoraio' AND
+            deleted = 0
+            AND pcv_cantidadconsolidado = 0
+            group by pcv_plzentrega;
+            ";
+        }else{
+            $query = "SELECT pcv_plzentrega 
+            FROM suitecrm.sco_productoscotizadosventa
+            WHERE pcv_numerocotizacion = '$nroCotizacion' AND
+            deleted = 0
+            AND pcv_cantidadconsolidado = 0
+            group by pcv_plzentrega;
+            ";
+        }           
         $results = $GLOBALS['db']->query($query, true);
         $object= array();
         while($row = $GLOBALS['db']->fetchByAssoc($results))
@@ -101,13 +160,32 @@ global $current_user;
     if($filtro == 'familia'){
         $nroCotizacion = $_POST['nroCotizacion'];
         $pcv_proveedoraio = $_POST['pcv_proveedoraio'];
-        $query = "SELECT pcv_familia 
-        FROM suitecrm.sco_productoscotizadosventa
-        WHERE pcv_numerocotizacion = '$nroCotizacion'
-        AND sco_proveedor_id_c = '$pcv_proveedoraio' AND
-        deleted = 0
-        group by pcv_familia;
-        ";
+        if($nroCotizacion != '' && $pcv_proveedoraio != ''){
+            $query = "SELECT * 
+            FROM suitecrm.sco_productoscotizadosventa
+            WHERE pcv_numerocotizacion = '$nroCotizacion'
+            AND sco_proveedor_id_c = '$pcv_proveedoraio' AND
+            deleted = 0 AND
+            pcv_cantidadconsolidado = 0
+            group by pcv_plzentrega;
+            ";
+        }elseif($pcv_proveedoraio != ''){
+            $query = "SELECT * 
+            FROM suitecrm.sco_productoscotizadosventa
+            WHERE sco_proveedor_id_c = '$pcv_proveedoraio' AND
+            deleted = 0 AND
+            pcv_cantidadconsolidado = 0
+            group by pcv_plzentrega;
+            ";
+        }else{
+            $query = "SELECT * 
+            FROM suitecrm.sco_productoscotizadosventa
+            WHERE 
+            deleted = 0 AND
+            pcv_cantidadconsolidado = 0
+            group by pcv_plzentrega;
+            ";
+        }
         $results = $GLOBALS['db']->query($query, true);
         $object= array();
         while($row = $GLOBALS['db']->fetchByAssoc($results))

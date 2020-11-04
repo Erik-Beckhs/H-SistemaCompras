@@ -67,7 +67,16 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 												</button>
 											</div>											
 										</div>										
-										
+										<div class="col-sm-2">
+											<div class="input-group">
+												<div class="input-group">
+													<span class="input-group-addon">Plazo entrega</span>
+													<select class="form-control filter" id="plazoEntrega" name="plazoEntrega">
+														<option value="" selected="selected">Todo</option>
+													</select>
+												</div>
+											</div>
+										</div>
 										<div class="col-sm-3">
 											<div class="input-group">
 												<div class="input-group">
@@ -88,17 +97,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 													</select>
 												</div>
 											</div>
-										</div>
-										<div class="col-sm-2">
-											<div class="input-group">
-												<div class="input-group">
-													<span class="input-group-addon">Plazo entrega</span>
-													<select class="form-control filter" id="plazoEntrega" name="plazoEntrega">
-														<option value="" selected="selected">Todo</option>
-													</select>
-												</div>
-											</div>
-										</div>
+										</div>										
 									</div>
 											
 									<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="modalMensaje">
@@ -106,7 +105,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 											<div class="modal-content">
 												<div class="modal-header" style="background:#a94442 !important;">
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-													<span aria-hidden="true">×</span></button>
+													<span aria-hidden="true">Ã—</span></button>
 												<h4 class="modal-title" id="tituloMensaje"></h4>
 												</div>
 												<div class="modal-body">
@@ -131,7 +130,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 														</div>
 														<button class="btn derecha" onclick="enviarTodo()">>></button>
 													</div>
-													<table class="list view table-responsive tableCotizacion table-striped">
+													<table class="table view table-responsive tableCotizacion table-striped table-bordered">
 														<thead>
 															<tr>
 																<th>Nro. Cont</th>
@@ -141,7 +140,8 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 																<th>Descipci&oacute;n</th>
 																<th>Vendedor</th>
 																<th>Cliente</th>
-																<th>Cantidad</th>
+																<th>Fecha confirmacion</th>
+																<th>Cant.</th>
 																<th>FOB</th>
 																
 																<th>Sub Total</th>
@@ -168,7 +168,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 														<label>Cant. Total</label> <input type="number" id="cantidadTabla2" value="0">
 														</div>	
 													</div>
-													<table class="list view table-responsive tableCotizacion table-striped">
+													<table class="table view table-responsive tableCotizacion table-striped table-bordered">
 														<thead>
 															<tr>
 															<th>Nro. Cont</th>
@@ -178,8 +178,9 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 															<th>Descipci&oacute;n</th>
 															<th>Vendedor</th>
 															<th>Cliente</th>
+															<th>Fecha confirmacion</th>
 															<th>FOB</th>
-															<th>Cant. Consolidado</th>
+															<th>Cant.</th>
 															<th>Sub Total</th>
 															<th></th>
 															</tr>
