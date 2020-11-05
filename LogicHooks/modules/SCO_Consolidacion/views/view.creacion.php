@@ -17,7 +17,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 	   	$head .= '<div class="moduleTitle">
 				<h2 class="module-title-text"> Crear </h2>
 				<span class="utils"></span><div class="clear"></div></div>
-				<div class="loader loader-default" data-text="Enviando datos"></div>
+				<div class="loader loader-default" data-text="Creando su Consolidacion y su Orden de compra"></div>
 				';		
 
 		$steps = '
