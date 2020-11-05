@@ -263,6 +263,7 @@ var mostrarTabla1 = function () {
       
       var jres = [];
       var html = '';
+      var cantRegistro = 0;
       for (var i = 0; i < res.length; i++) {
         var idItem = String(res[i]["id"]).trim().replace(/-/g, "");
         if (buscarItem(idItem, consProducto2) == false) {
@@ -305,13 +306,14 @@ var mostrarTabla1 = function () {
           fob1 = (fob1 * 1) + (item["pcv_preciofob"] * 1 * item["pcv_cantidadsaldo"]);
           jres.push(item);
         }
-
+        cantRegistro++;
       }
       consProducto1 = jres;
       $('#tabla1').empty();
       $('#tabla1').html(html);
       $('#totalFob1').val(Number.parseFloat(fob1).toFixed(2));
       $('#cantidadTabla1').val(total1);
+      $('#cantRegistro').text(cantRegistro);
     },
     error: function (data) {
       console.log('ERROR, No se pudo conectar', data);
@@ -386,7 +388,10 @@ function enviarProducto(idProducto) {
     var totalFob1 = $('#totalFob1').val();
     totalFob1 = (totalFob1 * 1) - (dataProducto["pcv_preciofob"] * 1 * cantidadItem);
     $('#totalFob1').val(Number.parseFloat(totalFob1).toFixed(2));
-    
+    //Cantidad de registros
+    var cantRegistro = $('#cantRegistro').text();
+    cantRegistro =(cantRegistro * 1) - 1;
+    $('#cantRegistro').text(cantRegistro);
     // Cantidad
     var cantTotal1 = $('#cantidadTabla1').val();
     cantTotal1 = (cantTotal1 * 1) - (cantidadItem * 1);
@@ -398,6 +403,10 @@ function enviarProducto(idProducto) {
     $('#totalFob2').val(Number.parseFloat(totalFob2).toFixed(2));
     $('#precioTotalFob').val(Number.parseFloat(totalFob2).toFixed(2));
     fobTotal = totalFob2;
+    //Cantidad de registros2
+    var cantRegistro2 = $('#cantRegistro2').text();
+    cantRegistro2 =(cantRegistro2 * 1) + 1;
+    $('#cantRegistro2').text(cantRegistro2);
     // Cantidad
     var cantTotal2 = $('#cantidadTabla2').val();
     cantTotal2 = (cantTotal2 * 1) + (cantidadItem * 1);
@@ -464,6 +473,10 @@ function regresarProducto(idProducto) {
   var totalFob1 = $('#totalFob1').val();
   totalFob1 = (totalFob1 * 1) + (cantConsolidado * 1 * dataProducto["pcv_preciofob"]);
   $('#totalFob1').val(Number.parseFloat(totalFob1).toFixed(2));
+  //Cantidad de registros
+  var cantRegistro = $('#cantRegistro').text();
+  cantRegistro =(cantRegistro * 1) + 1;
+  $('#cantRegistro').text(cantRegistro);
   // Cantidad
   var cantTotal1 = $('#cantidadTabla1').val();
   cantTotal1 = (cantTotal1 * 1) + (cantConsolidado * 1);
@@ -475,6 +488,10 @@ function regresarProducto(idProducto) {
   $('#totalFob2').val(Number.parseFloat(totalFob2).toFixed(2));
   $('#precioTotalFob').val(Number.parseFloat(totalFob2).toFixed(2));
   fobTotal = totalFob2;
+  //Cantidad de registros2
+  var cantRegistro2 = $('#cantRegistro2').text();
+  cantRegistro2 =(cantRegistro2 * 1) - 1;
+  $('#cantRegistro2').text(cantRegistro2);
   // Cantidad
   var cantTotal2 = $('#cantidadTabla2').val();
   cantTotal2 = (cantTotal2 * 1) - (cantConsolidado * 1);

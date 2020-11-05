@@ -24,7 +24,7 @@ class Clclonar
     $bean->assigned_user_id = $current_user->id;
     $bean->iddivision_c = $current_user->iddivision_c;
     $bean->idregional_c = $current_user->idregional_c;
-    $bean->idamercado_c = $current_user->idamercado_c;
+    $bean->idamercado_c = $current_user->idamercado_c;	
 
     if(!empty($idoc_cl)){
     	//Consulta para obtener los campos de la OC
@@ -60,18 +60,43 @@ class Clclonar
 		    $bean->orc_importet = $row["orc_importet"];
 		    // adicion del campo tiempo en el proceso de clonacion
 		    $bean->orc_tiempo = $row["orc_tiempo"];
-				$bean->orc_tototal = $row["orc_tototal"];
-				$bean->orc_descvalor = $row["orc_descvalor"];
-				$bean->orc_descpor = $row["orc_descpor"];
-				$bean->orc_division = $row["orc_division"];
-				$bean->orc_observaciones = $row["orc_observaciones"];
-				$dateFC = date_create(date("Y-m-d H:i:s"));
-				$bean->date_entered = date_format($dateFC, 'Y-m-d H:i:s');
+			$bean->orc_tototal = $row["orc_tototal"];
+			$bean->orc_descvalor = $row["orc_descvalor"];
+			$bean->orc_descpor = $row["orc_descpor"];
+			$bean->orc_division = $row["orc_division"];
+			$bean->orc_observaciones = $row["orc_observaciones"];
+			$dateFC = date_create(date("Y-m-d H:i:s"));
+			$bean->date_entered = date_format($dateFC, 'Y-m-d H:i:s');
 		    $bean->sco_ordencompra_id_c = '';
 	    	$bean->orc_occ = '';
 	    	$bean->orc_verco = 0;
 		 	$bean->save();
 		 	$idoc = $bean->id;
+
+		#Relacion con una Consolidaion de cotizaciones si existe
+	 	$beanOC = BeanFactory::getBean('SCO_OrdenCompra', $idoc_cl);
+		$beanOC->load_relationship('sco_consolidacion_sco_ordencompra');
+		$relatedBeans = $beanOC->sco_consolidacion_sco_ordencompra->getBeans();
+		reset($relatedBeans);
+		$parentBean   = current($relatedBeans);
+		#id Consolidacion Cotizaciones
+		$idConsolidacion = $parentBean->id;
+		if(!empty($idConsolidacion)){
+			#Eliminamos las relaciones de Consolidacion con Orden de compra original
+			$consolidacionOrdenCompraDelete ="UPDATE suitecrm.sco_consolidacion_sco_ordencompra_c
+											SET
+											deleted = 1
+											WHERE sco_consolidacion_sco_ordencomprasco_consolidacion_ida = '".$idConsolidacion."'";
+			$obj_consolidacionOrdenCompraDelete = $bean->db->query($consolidacionOrdenCompraDelete, true);
+			#Creamos la nueva relacion Consolidacion con Orden de Compra
+	        $consolidacionOrdenCompra ="INSERT INTO sco_consolidacion_sco_ordencompra_c
+	        						(id,date_modified,deleted,sco_consolidacion_sco_ordencomprasco_consolidacion_ida,sco_consolidacion_sco_ordencomprasco_ordencompra_idb)
+										 VALUES 
+										 (UUid(),'".$row12['pro_fecha']."','0','".$idConsolidacion."','".$idoc."')";
+			$obj_consolidacionOrdenCompra = $bean->db->query($consolidacionOrdenCompra, true);
+		}
+
+
 	  	//Relacion OC con SCO_Contactos
 	    $query2 = "SELECT *
 			FROM sco_contactos as co

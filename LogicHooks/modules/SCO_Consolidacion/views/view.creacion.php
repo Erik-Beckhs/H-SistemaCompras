@@ -127,6 +127,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 														<div class="cantidades1">						
 															<label>Total FOB</label> <input type="number" id="totalFob1" value="0"> 
 															<label>Cant. Total</label> <input type="number" id="cantidadTabla1" value="0">
+                              <label>Cant. items</label> <span id="cantRegistro"></span>
 														</div>
 														<button class="btn derecha" onclick="enviarTodo()">>></button>
 													</div>
@@ -166,6 +167,7 @@ class SCO_ConsolidacionViewCreacion extends ViewHtml
 														<div class="cantidades2">
 														<label>Total FOB</label> <input type="number" id="totalFob2" value="0"> 
 														<label>Cant. Total</label> <input type="number" id="cantidadTabla2" value="0">
+                            <label>Cant. items</label> <span id="cantRegistro2"></span>
 														</div>	
 													</div>
 													<table class="table view table-responsive tableCotizacion table-striped table-bordered">
