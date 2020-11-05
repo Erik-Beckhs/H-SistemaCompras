@@ -87,12 +87,12 @@ class SCO_documentosViewEdit extends ViewEdit {
     
     var estadoOc = '".$estadoOc."';
     $('#doc_tipo').on('change', function(){
-      if($('#doc_tipo').val() == 2){
+      if($('#doc_tipo').val() == 2 && estadoOc == 2){
         alert('Debe \"Solicitar Aprobacion\" antes de subir una orden de compra firmanda');
         $('input[name*=\"filename_file\"]').css('display','none')
       }else{
         $('input[name*=\"filename_file\"]').css('display','block')
-      }
+      }  
     });
 
     </script>";
