@@ -5,7 +5,7 @@ var usuarioRol = $("#usuarioRol").val();
 $("#division").val(usuarioDivision);
 $("#aMercado").val(usuarioAmercado);
 
-if(usuarioDivision != 00){      
+if(usuarioDivision != ''){      
     $('.am').hide();
     $('.'+usuarioDivision+'').show();
 }
@@ -17,10 +17,39 @@ $("#division").change(function() {
     var id = $(this).val();  
     var options = $(this).data('options').filter('.'+id+'');      
     $('#aMercado').html(options);
-    $('#aMercado').append('<option value="00" selected="selected">Todo</option>');    
+    $('#aMercado').append('<option value="" selected="selected">Todo</option>');    
 });
 
+$('#division').on('change', function () {
+  var division = $('#division').val();
+  console.log(division);
+  if (division != null) {
+    $.ajax({
+      type: 'GET',
+      url: 'index.php?to_pdf=true&module=SCO_OrdenCompra&action=ReporteGerencial',
+      datatype: 'json',
+      data: {
+        division: division,
+        filtro: "aMercado"
+      },
+      async: false,
+      success: function (e) {
+        console.log(e);
+        var res = JSON.parse(e);
 
+        var html = '<option value="">Todo</option>';
+        for (var i = 0; i < res.length; i++) {
+          html += '<option value="' + res[i]["idfmilia_c"] + '">' + res[i]["idfamilia_c_name"] + '</option>';
+        }
+        $('#familia').html(html); 
+        $('#grupo').html('<option value="">Todo</option>');        
+      },
+      error: function (data) {
+        console.log('ERROR, No se pudo conectar', data);
+      }
+    });
+  }
+});
 $('#aMercado').on('change', function () {
   var aMercado = $("#aMercado").val();
   var division = $('#division').val();
@@ -133,7 +162,10 @@ $("#btnExportar").on("click",function(){
     alert("Se exportara en excel");
     //downloadExcel($("#aMercado").val());
     var aMercado = $("#aMercado").val();
-    window.open('index.php?to_pdf=true&module=SCO_OrdenCompra&action=ReporteGerencial&'+aMercado+'=&filtro=2','','');
+    var division = $('#division').val();
+    var familia = $('#familia').val();
+    var grupo = $('#grupo').val();
+    window.open('index.php?to_pdf=true&module=SCO_OrdenCompra&action=ReporteGerencial&aMercado='+aMercado+'&familia='+familia+'&grupo='+grupo+'&filtro=2','','');
 });
 
 function obtenerInformacion(division,aMercado,familia,grupo){
@@ -177,7 +209,7 @@ $("#mostrarDatos").html("<div id='cargando' class='loader'></div> ");
                     productos[i]["VentaCantidad3AnioAtras"],
                     productos[i]["VentaCantidad2AnioAtras"],
                     productos[i]["VentaCantidad1AnioAtras"],
-                    (Math.round(productos[i]["VentaCantidad1AnioAtras"] / 12)),
+                    productos[i]["Promedio1AtrasAnio"],
                     productos[i]["VentaCantidad0AnioAtras"],
                     ''
                     ]
@@ -363,13 +395,13 @@ jexcel(document.getElementById('mostrarDatos'), {
     csvHeaders:true,
     search:true,
     tableWidth: '100%',
-    //tableHeight: '500px',
+    tableHeight: '700px',
     //lazyLoading:true,
     //loadingSpin:true,
     //filters: true,
     allowComments:true,
     pagination: 50,
-    freezeColumns: 5,
+    freezeColumns: 6,
     columns: [
         { 
             type: 'text', 
@@ -428,7 +460,7 @@ jexcel(document.getElementById('mostrarDatos'), {
         },
         { 
             type: 'text',
-            title:'Ingre. Pedido JUN 20',
+            title:mes,
             width:60 
         },
         { 
@@ -482,11 +514,37 @@ jexcel(document.getElementById('mostrarDatos'), {
             width:80 
         },
      ],
-      text:{
-                noRecordsFound: 'No se encontraron resultados',
-                showingPage: 'Pagina {0} de {1}',
-                show: 'Mostrar ',
-                search: 'Buscar',
-                entries: ' Entradas',
-            },
- })
+     text:{
+        noRecordsFound: 'No se encontraron resultados',
+        showingPage: 'Pagina {0} de {1}',
+        show: 'Mostrar ',
+        search: 'Buscar',
+        entries: ' Entradas',
+        columnName: 'Nombre Columna',
+        insertANewColumnBefore: 'Insertar una nueva columna antes',
+        insertANewColumnAfter: 'Insert a new column after',
+        deleteSelectedColumns: 'Delete selected columns',
+        renameThisColumn: 'Rename this column',
+        orderAscending: 'Order ascending',
+        orderDescending: 'Order descending',
+        insertANewRowBefore: 'Insert a new row before',
+        insertANewRowAfter: 'Insert a new row after',
+        deleteSelectedRows: 'Delete selected rows',
+        editComments: 'Edit comments',
+        addComments: 'Add comments',
+        comments: 'Comments',
+        clearComments: 'Clear comments',
+        copy: 'Copy...',
+        paste: 'Paste...',
+        saveAs: 'Save as...',
+        about: 'About',
+        areYouSureToDeleteTheSelectedRows: 'Are you sure to delete the selected rows?',
+        areYouSureToDeleteTheSelectedColumns: 'Are you sure to delete the selected columns?',
+        thisActionWillDestroyAnyExistingMergedCellsAreYouSure: 'This action will destroy any existing merged cells. Are you sure?',
+        thisActionWillClearYourSearchResultsAreYouSure: 'This action will clear your search results. Are you sure?',
+        thereIsAConflictWithAnotherMergedCell: 'There is a conflict with another merged cell',
+        invalidMergeProperties: 'Invalid merged properties',
+        cellAlreadyMerged: 'Cell already merged',
+        noCellsSelected: 'No cells selected',
+    },
+})

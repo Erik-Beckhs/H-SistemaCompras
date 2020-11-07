@@ -29,12 +29,13 @@
 .jexcel_pagination > div > div {
 	border-radius: 50%;
 	border:0px;	
-    width: 32px;
-    height: 32px;
+  width: 32px;
+  height: 32px;
 }
 .jexcel_pagination {
 	width: 100%;
 	background: #FFF;
+  padding-right: 40%;
 }
 
 .jexcel_page_selected {

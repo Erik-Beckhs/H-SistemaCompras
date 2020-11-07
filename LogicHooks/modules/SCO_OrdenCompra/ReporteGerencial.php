@@ -22,7 +22,7 @@ $filtro = $_GET['filtro'];
 switch ($filtro) {
 	case 1:
 		try {
-		    $query = "call suitecrm.sp_ordencompra_rep01('');";
+		    $query = "call suitecrm.sp_ordencompra_rep01('".$division."','".$aMercado."','".$familia."','".$grupo."');";
 		    $results = $GLOBALS['db']->query($query, true);
 		    $object= array();
 		    while($row = $GLOBALS['db']->fetchByAssoc($results))
@@ -44,27 +44,56 @@ switch ($filtro) {
 			header("Content-Type: application/vnd.ms-excel");
 			header("Content-Disposition: attachment; filename=".$filename);
 
-			$query = "call suitecrm.sp_ordencompra_rep01('');";
+			$query = "call suitecrm.sp_ordencompra_rep01('".$division."','".$aMercado."','".$familia."','".$grupo."');";
 		    $results = $GLOBALS['db']->query($query, true);
 		    $object= array();
+		    $arreglo = array();
 		    while($row = $GLOBALS['db']->fetchByAssoc($results))
 		        {
-		            $object[] = $row;
+		            $object['IdProducto'] = $row['IdProducto'];
+		            $object['CodigoProveedor'] = $row['CodigoProveedor'];
+		            $object['Producto'] = $row['Producto'];
+		            $object['PrecioVta'] = $row['PrecioVta'];
+		            $object['SaldoStock'] = $row['SaldoStock'];
+		            $object['StockRango>180'] = $row['StockRango180'];
+		            $object['SalidaAutorizada'] = $row['SalidaAutorizada'];
+		            $object['AreaMercado'] = $row['AreaMercado'];
+		            $object['SubGrupo'] = $row['SubGrupo'];
+		            $object['Familia'] = $row['Familia'];
+		            $object['Grupo'] = $row['Grupo'];
+		            $object['Venta Total 2017'] = $row['VentaCantidad3AnioAtras'];
+		            $object['Venta Total 2018'] = $row['VentaCantidad2AnioAtras'];
+		            $object['Venta Total 2019'] = $row['VentaCantidad1AnioAtras'];
+		            $object['Venta Total 2020'] = $row['VentaCantidad0AnioAtras'];
+		            $object['Pedido Sugerido'] = '0';
+		            $arreglo[] = $object;
 		        }
 			$mostrar_columnas = false;
-			foreach($object as $obj) {
+			foreach($arreglo as $arr) {
 				if(!$mostrar_columnas) {
-					echo implode("\t", array_keys($obj)) . "\n";
+					echo implode("\t", array_keys($arr)) . "\n";
 					$mostrar_columnas = true;
 				}
-					echo implode("\t", array_values($obj)) . "\n";
+					echo implode("\t", array_values($arr)) . "\n";
 			}
-
 		    //echo json_encode($object);
 		} catch (Exception $e) {
 			echo "Error, no se pudo realizar la peticion";
 		}
 		break;
+	case 'aMercado':
+		$object= array();
+		$query2 = "SELECT DISTINCT(idamercado_c) as idamercado_c, idamercado_c_name
+		         FROM suitecrm.sco_viewdar
+		         WHERE iddivision_c = '".$division."'
+		         ORDER BY idfmilia_c asc;";
+		$results2 = $GLOBALS['db']->query($query2, true);
+        while($row = $GLOBALS['db']->fetchByAssoc($results2))
+        {
+            $object[] = $row;
+        }
+        echo json_encode($object);			
+		break;			
 	case 'familia':
 		$object= array();
 		$query2 = "SELECT DISTINCT(idfmilia_c) as idfmilia_c, idfamilia_c_name
