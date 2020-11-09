@@ -104,8 +104,8 @@ class SCO_OrdenCompraViewReporteindustria extends ViewHtml
                             </div>
 						</div>
 					</div>						
-					<div class="col-sm-1">
-						<input type="text" name="crecimiento" id="crecimiento" class="form-control" value="10"  placeholder="Crecimiento">						
+					<div class="col-sm-1">						
+						<input type="text" name="crecimiento" id="crecimiento" class="form-control" value="10"  placeholder="Crecimiento">		
 					</div>				
 					<div class="col-sm-1">
 						<button type="button" class="btn btn-sm btn-info" id="buscar">

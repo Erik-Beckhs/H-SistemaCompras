@@ -64,6 +64,7 @@ switch ($filtro) {
 		            $object['Venta Total 2017'] = $row['VentaCantidad3AnioAtras'];
 		            $object['Venta Total 2018'] = $row['VentaCantidad2AnioAtras'];
 		            $object['Venta Total 2019'] = $row['VentaCantidad1AnioAtras'];
+		            $object['Venta mensual promedio 2019'] = $row['Promedio1AtrasAnio'];
 		            $object['Venta Total 2020'] = $row['VentaCantidad0AnioAtras'];
 		            $object['Pedido Sugerido'] = '0';
 		            $arreglo[] = $object;
