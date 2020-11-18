@@ -25,6 +25,8 @@ class SCO_documentosViewEdit extends ViewEdit {
     $idoc = $this->bean->id;
 
     $idoc = $_REQUEST['sco_ordencompra_id'];
+    $beanOc = BeanFactory::getBean('SCO_OrdenCompra', $idoc);
+    $estadoOc = $beanOc->orc_estado;
   //CSS, oculta el boton de formulario completo
     //echo '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" crossorigin="anonymous">';
     echo '<link href="/modules/SCO_documentos/fileinput.css" media="all" rel="stylesheet" type="text/css"/>';
@@ -82,6 +84,16 @@ class SCO_documentosViewEdit extends ViewEdit {
       //
       // }
     }
+    
+    var estadoOc = '".$estadoOc."';
+    $('#doc_tipo').on('change', function(){
+      if($('#doc_tipo').val() == 2 && estadoOc == 2){
+        alert('Debe \"Solicitar Aprobacion\" antes de subir una orden de compra firmanda');
+        $('input[name*=\"filename_file\"]').css('display','none')
+      }else{
+        $('input[name*=\"filename_file\"]').css('display','block')
+      }  
+    });
 
     </script>";
     echo "<style>#SCO_documentos_subpanel_full_form_button{display:none;}</style>";

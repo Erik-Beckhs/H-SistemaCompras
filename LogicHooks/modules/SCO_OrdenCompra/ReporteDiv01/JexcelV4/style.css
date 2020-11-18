@@ -1,0 +1,86 @@
+.jexcel_content {
+	/*box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);*/
+}
+.jexcel > tbody > tr > td:first-child, .jexcel > thead > tr > td {
+    background: #eeeeee;
+}
+.jexcel {
+
+}
+.jexcel > thead > tr > td {
+  background: #e1ffda;
+}
+.jexcel > tbody > tr > td:first-child{
+  background: #d9fffb;
+}
+.jexcel > thead > tr > td {
+	color:#000;
+	font-size: 12px
+}
+.jexcel > thead > tr > td.selected,
+.jexcel > tbody > tr.selected > td:first-child{
+  background: #fff82a;
+}
+
+.jexcel > tbody > tr > td {
+	font-size: 11px;
+	color:#1b1b1b;
+}
+.jexcel {
+	 white-space: normal;
+}
+.jexcel_container {
+	width: 100%;
+}
+.jexcel_filter {
+	    width: 100%;
+}
+.jexcel_pagination > div > div {
+	border-radius: 50%;
+	border:0px;	
+  width: 32px;
+  height: 32px;
+}
+.jexcel_pagination {
+	width: 100%;
+	background: #FFF;
+  padding-right: 33%;
+}
+
+.jexcel_page_selected {
+    color: #fff;
+    background-color: #76c1b7;
+}
+.jexcel_page {
+    font-size: 1em; 
+}
+.jexcel thead .jexcel_freezed {
+	background: #d1f1e8;
+    color: #000;
+}
+.jexcel tbody .jexcel_freezed {
+	background: #eff;
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 35px;
+  height: 35px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+   display: flex;
+  justify-content: center;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
