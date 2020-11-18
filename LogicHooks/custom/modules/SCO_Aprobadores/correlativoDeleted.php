@@ -27,7 +27,7 @@ class ClcorrelativoDel
     #Declaramos la cantidad de
     $valSalto = 0;
     $incremento = 0;
-    // La función intval nos extrae solo los numeros enteros de un numero decimal
+    // La funciÃ³n intval nos extrae solo los numeros enteros de un numero decimal
     $saldos = $decimales - (intval($decimales));
     $saldoFirmas = $saldos * 10;
     if (intval($saldoFirmas) > 1){
@@ -40,7 +40,7 @@ class ClcorrelativoDel
       $valSalto = 8;
       $incremento = 4;
     }
-    //Generando la numeración correlativa
+    //Generando la numeraciÃ³n correlativa
     $Numeracion = array();
     if ($rowApro["total"] == 0) {
       $Numeracion[1] = 11;

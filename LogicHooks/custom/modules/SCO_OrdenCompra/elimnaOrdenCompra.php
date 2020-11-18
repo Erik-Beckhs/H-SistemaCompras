@@ -9,9 +9,9 @@
 
 class ClelimanOrdenCompra
 {
-  	function Fnelimina($bean, $event, $arguments)
-  	{
-  		$idOC = $bean->id;
+    function Fnelimina($bean, $event, $arguments)
+    {
+      $idOC = $bean->id;
 
       $beanOC = BeanFactory::getBean('SCO_OrdenCompra', $idOC);
       $beanOC->load_relationship('sco_consolidacion_sco_ordencompra');
@@ -26,7 +26,7 @@ class ClelimanOrdenCompra
         $beanCons->save();
       }
       
-	    $beanoc = BeanFactory::getBean('SCO_OrdenCompra', $idOC);
+      $beanoc = BeanFactory::getBean('SCO_OrdenCompra', $idOC);
       if($beanoc->orc_estado == '2'){
         echo "<script>alert('Eliminacion Exitosa".$bean->name.");</script>";
         #$beanoc->deleted = 1;
@@ -36,7 +36,7 @@ class ClelimanOrdenCompra
         #die(SugarApplication::redirect('index.php?module=SCO_Despachos&action=DetailView&record='.$bean->id));
         exit();
       }
-  	}
+    }
 
 
 }

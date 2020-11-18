@@ -55,14 +55,14 @@ class Clnotifica
 			$subject = $row2 ['subject'];
 			$template = $row2 ['body_html'];
 		}
-		$accion = "La orden de compra <strong>OC</strong> creada en fecha FH se encuentra en <strong>SOLICITUD DE APROBACIÓN</strong>";
+		$accion = "La orden de compra <strong>OC</strong> creada en fecha FH se encuentra en <strong>SOLICITUD DE APROBACIÃ“N</strong>";
 		//Enviamos Notificacion al PM
 		$this->notificacionesPM( $template, $subject, $bean, $row, $accion ,$idOrdenCompra);
 		//llamamos a la funcion de query_aprovadores
 		/*$resultAprobadores = $this->query_aprovadores($idOrdenCompra);
 		while ( $row = $GLOBALS['db']->fetchByAssoc($resultAprobadores) )
 		{
-			$accion = "Se le solicita la <strong>aprobación</strong> de la orden de compra<strong>OC</strong>:";
+			$accion = "Se le solicita la <strong>aprobaciÃ³n</strong> de la orden de compra<strong>OC</strong>:";
 			$contenidoBody = $this->correogeneral ( $template, $subject, $bean, $row, $accion ,$idOrdenCompra);
 			$emailObj = new Email();
 			$defaults = $emailObj->getSystemDefaultEmail();
@@ -82,7 +82,7 @@ class Clnotifica
 		/*$resultSolicitante = $this->query_solicitante($idOrdenCompra);
 		while ( $row = $GLOBALS['db']->fetchByAssoc($resultSolicitante) )
 		{
-			$accion = "La orden de compra <strong>OC</strong> creada en fecha FH se encuentra en <strong>SOLICITUD DE APROBACIÓN</strong>";
+			$accion = "La orden de compra <strong>OC</strong> creada en fecha FH se encuentra en <strong>SOLICITUD DE APROBACIÃ“N</strong>";
 			$contenidoBody = $this->correogeneral ( $template, $subject, $bean, $row, $accion ,$idOrdenCompra);
 			$emailObj = new Email();
 			$defaults = $emailObj->getSystemDefaultEmail();

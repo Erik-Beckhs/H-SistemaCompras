@@ -24,7 +24,7 @@ class Clclonar
     $bean->assigned_user_id = $current_user->id;
     $bean->iddivision_c = $current_user->iddivision_c;
     $bean->idregional_c = $current_user->idregional_c;
-    $bean->idamercado_c = $current_user->idamercado_c;
+    $bean->idamercado_c = $current_user->idamercado_c;	
 
     if(!empty($idoc_cl)){
     	//Consulta para obtener los campos de la OC
@@ -60,18 +60,43 @@ class Clclonar
 		    $bean->orc_importet = $row["orc_importet"];
 		    // adicion del campo tiempo en el proceso de clonacion
 		    $bean->orc_tiempo = $row["orc_tiempo"];
-				$bean->orc_tototal = $row["orc_tototal"];
-				$bean->orc_descvalor = $row["orc_descvalor"];
-				$bean->orc_descpor = $row["orc_descpor"];
-				$bean->orc_division = $row["orc_division"];
-				$bean->orc_observaciones = $row["orc_observaciones"];
-				$dateFC = date_create(date("Y-m-d H:i:s"));
-				$bean->date_entered = date_format($dateFC, 'Y-m-d H:i:s');
+			$bean->orc_tototal = $row["orc_tototal"];
+			$bean->orc_descvalor = $row["orc_descvalor"];
+			$bean->orc_descpor = $row["orc_descpor"];
+			$bean->orc_division = $row["orc_division"];
+			$bean->orc_observaciones = $row["orc_observaciones"];
+			$dateFC = date_create(date("Y-m-d H:i:s"));
+			$bean->date_entered = date_format($dateFC, 'Y-m-d H:i:s');
 		    $bean->sco_ordencompra_id_c = '';
 	    	$bean->orc_occ = '';
 	    	$bean->orc_verco = 0;
 		 	$bean->save();
 		 	$idoc = $bean->id;
+
+		#Relacion con una Consolidaion de cotizaciones si existe
+	 	$beanOC = BeanFactory::getBean('SCO_OrdenCompra', $idoc_cl);
+		$beanOC->load_relationship('sco_consolidacion_sco_ordencompra');
+		$relatedBeans = $beanOC->sco_consolidacion_sco_ordencompra->getBeans();
+		reset($relatedBeans);
+		$parentBean   = current($relatedBeans);
+		#id Consolidacion Cotizaciones
+		$idConsolidacion = $parentBean->id;
+		if(!empty($idConsolidacion)){
+			#Eliminamos las relaciones de Consolidacion con Orden de compra original
+			$consolidacionOrdenCompraDelete ="UPDATE suitecrm.sco_consolidacion_sco_ordencompra_c
+											SET
+											deleted = 1
+											WHERE sco_consolidacion_sco_ordencomprasco_consolidacion_ida = '".$idConsolidacion."'";
+			$obj_consolidacionOrdenCompraDelete = $bean->db->query($consolidacionOrdenCompraDelete, true);
+			#Creamos la nueva relacion Consolidacion con Orden de Compra
+	        $consolidacionOrdenCompra ="INSERT INTO sco_consolidacion_sco_ordencompra_c
+	        						(id,date_modified,deleted,sco_consolidacion_sco_ordencomprasco_consolidacion_ida,sco_consolidacion_sco_ordencomprasco_ordencompra_idb)
+										 VALUES 
+										 (UUid(),'".$row12['pro_fecha']."','0','".$idConsolidacion."','".$idoc."')";
+			$obj_consolidacionOrdenCompra = $bean->db->query($consolidacionOrdenCompra, true);
+		}
+
+
 	  	//Relacion OC con SCO_Contactos
 	    $query2 = "SELECT *
 			FROM sco_contactos as co
@@ -103,7 +128,7 @@ class Clclonar
 	    #Declaramos la cantidad de
 	    $valSalto = 0;
 	    $incremento = 0;
-	    // La función intval nos extrae solo los numeros enteros de un numero decimal
+	    // La funciÃ³n intval nos extrae solo los numeros enteros de un numero decimal
 	    $saldos = $decimales - (intval($decimales));
 	    $saldoFirmas = $saldos * 10;
 	    if (intval($saldoFirmas) > 1){
@@ -116,7 +141,7 @@ class Clclonar
 	      $valSalto = 8;
 	      $incremento = 4;
 	    }
-	    #Generando la numeración correlativa
+	    #Generando la numeraciÃ³n correlativa
 	    $Numeracion = array();
 	    if ($rowApro["total"] == 0) {
 	      $Numeracion[1] = 11;
@@ -231,7 +256,12 @@ class Clclonar
 					pro_subtotal,
 					pro_canttrans,
 					pro_cantresivida,
-					pro_saldos
+					pro_saldos,
+					pro_codaio,
+					iddivision_c,
+					idregional_c,
+					idgrupocliente_c,
+					pro_idproductocotizado
 				)
 			VALUES
 			(
@@ -253,35 +283,72 @@ class Clclonar
 				'".$row12['pro_subtotal']."',
 				'0',
 				'0',
-				'".$row12['pro_cantidad']."'
+				'".$row12['pro_cantidad']."',
+				'".$row12['pro_codaio']."',
+				'".$row12['iddivision_c']."',
+				'".$row12['idregional_c']."',
+				'".$row12['idgrupocliente_c']."',
+				'".$row12['pro_idproductocotizado']."'
 			);
 			";
 			$obj11 = $bean->db->query($query11, true);
 			//Insertando los datos de productos cotizados
 			//Insertado al modulo PRODUCTOS COTIZADOS los datos del array del modulo
 			$productoscotizados ="INSERT INTO sco_productoscotizados
-																	 (id, name, deleted, pro_descripcion, pro_unidad, pro_cantidad, pro_preciounid, pro_descval, pro_descpor, pro_fecha, pro_nomproyco, pro_idco, pro_idproy, pro_idpro, pro_tipocotiza, pro_subtotal, pro_canttrans, pro_cantresivida, pro_saldos)
-														VALUES (
-																			'".$new_idprod."',
-																			'".$row12['pro_nombre']."',
-																			'0',
-																			'".$row12['pro_descripcion']."',
-																			'".$row12['pro_unidad']."',
-																			'".$row12['pro_cantidad']."',
-																			'".$row12['pro_preciounid']."',
-																			'".$row12['pro_descval']."',
-																			'".$row12['pro_descpor']."',
-																			'".$row12['pro_fecha']."',
-																			'".$row12['pro_nomproyco']."',
-																			'".$idoc."',
-																			'".$row12['pro_idproy']."',
-																			'".$row12['pro_idpro']."',
-																			'".$row12['pro_tipocotiza']."',
-																			'".$row12['pro_subtotal']."',
-																			'0',
-																			'0',
-																			'".$row12['pro_cantidad']."'
-																		);";
+					 (
+					 id, 
+					 name, 
+					 deleted,
+					 pro_descripcion,
+					 pro_unidad,
+					 pro_cantidad,
+					 pro_preciounid,
+					 pro_descval,
+					 pro_descpor,
+					 pro_fecha,
+					 pro_nomproyco,
+					 pro_idco,
+					 pro_idproy,
+					 pro_idpro,
+					 pro_tipocotiza,
+					 pro_subtotal,
+					 pro_canttrans,
+					 pro_cantresivida,
+					 pro_saldos,
+					 iddivision_c,
+					 idamercado_c,
+					 idregional_c,
+					 idgrupocliente_c,
+					 pro_codaio,
+					 pro_idproductocotizado
+					 )
+					VALUES (
+							'".$new_idprod."',
+							'".$row12['pro_nombre']."',
+							'0',
+							'".$row12['pro_descripcion']."',
+							'".$row12['pro_unidad']."',
+							'".$row12['pro_cantidad']."',
+							'".$row12['pro_preciounid']."',
+							'".$row12['pro_descval']."',
+							'".$row12['pro_descpor']."',
+							'".$row12['pro_fecha']."',
+							'".$row12['pro_nomproyco']."',
+							'".$idoc."',
+							'".$row12['pro_idproy']."',
+							'".$row12['pro_idpro']."',
+							'".$row12['pro_tipocotiza']."',
+							'".$row12['pro_subtotal']."',
+							'0',
+							'0',
+							'".$row12['pro_cantidad']."',
+							'".$row12['iddivision_c']."',
+							'".$row12['idamercado_c']."',
+							'".$row12['idregional_c']."',
+							'".$row12['idgrupocliente_c']."',
+							'".$row12['pro_codaio']."',
+							'".$row12['pro_idproductocotizado']."'
+						);";
 			$obj_productoscotizados = $bean->db->query($productoscotizados, true);
 
 			//Agregando la relacion con PRODUCTOS COTIZADOS Y PROYECTOS

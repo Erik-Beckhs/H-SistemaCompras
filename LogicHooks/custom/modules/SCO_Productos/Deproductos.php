@@ -118,19 +118,19 @@ class ClDeproductos {
 			$textfila = $arr2[$i];
 			$fila     = explode("~", $textfila);
 			$idpc     = str_replace("&gt;", ">", str_replace("&lt;", "<", str_replace("**", "\"", $fila[0])));
-			$descr    = str_replace("&aacute;", "á",
-				str_replace("&eacute;", "é",
-					str_replace("&iacute;", "í",
-						str_replace("&oacute;", "ó",
-							str_replace("&uacute;", "ú",
-								str_replace("&Aacute;", "Á",
-									str_replace("&Eacute;", "É",
-										str_replace("&Oacute;", "Ó",
-											str_replace("&Iacute;", "Í",
-												str_replace("&Uacute;", "Ú",
-													str_replace("&ntilde;", "ñ",
-														str_replace("&Ntilde;", "Ñ",
-															str_replace("&acute;", "´",
+			$descr    = str_replace("&aacute;", "Ã¡",
+				str_replace("&eacute;", "Ã©",
+					str_replace("&iacute;", "Ã­",
+						str_replace("&oacute;", "Ã³",
+							str_replace("&uacute;", "Ãº",
+								str_replace("&Aacute;", "Ã",
+									str_replace("&Eacute;", "Ã‰",
+										str_replace("&Oacute;", "Ã“",
+											str_replace("&Iacute;", "Ã",
+												str_replace("&Uacute;", "Ãš",
+													str_replace("&ntilde;", "Ã±",
+														str_replace("&Ntilde;", "Ã‘",
+															str_replace("&acute;", "Â´",
 																str_replace("&gt;", ">",
 																	str_replace("&lt;", "<",
 																		str_replace("**", "\"", $fila[1])))))))))))))
@@ -215,7 +215,7 @@ class ClDeproductos {
 		}
 		//Bean ORDENCOMPRA, guardando la ronde de compra desde el modulo SCO_PRODUCTOS
 		//Adicional a ver si el proyecto existe tambien verificamos si existe la excepcion para no agregar un proyecto
-		//Verificamos la configuración de los Cnf_Valida_proyecto para la orden de compra
+		//Verificamos la configuraciÃ³n de los Cnf_Valida_proyecto para la orden de compra
 		$beanoc   = BeanFactory::getBean('SCO_OrdenCompra', $idoc);
 		$queryCnf = "SELECT name,cnf_val_proyecto FROM suitecrm.sco_cnfvalproyectos where cnf_division = '".$beanoc->iddivision_c."' and deleted =0;";
 

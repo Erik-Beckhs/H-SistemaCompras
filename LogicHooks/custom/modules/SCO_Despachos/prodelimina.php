@@ -1,6 +1,6 @@
 <?php
 /**
-*Esta clase realiza operaciones matemáticas.
+*Esta clase realiza operaciones matemÃ¡ticas.
 *
 *@author Limberg Alcon <lalcon@hansa.com.bo>
 *@copyright 2018
@@ -9,8 +9,8 @@
 class Clprodelimina
 {
 
-  	function Fnprodelimina($bean, $event, $arguments)
-  	{      
+    function Fnprodelimina($bean, $event, $arguments)
+    {      
       //Obteniendo el Id del modulo de PRODUCTOS DESPACHOS
       $id_proddes = $arguments['related_id'];
       //Obteniendo los datos (bean) del modulo de PRODUCTOS DESPACHOS
@@ -55,6 +55,6 @@ class Clprodelimina
         WHERE id_productodespacho = '".$id_proddes."' " ;
         $obj_d_pd = $GLOBALS['db']->query($d_pd, true);
       }      
-  	}
+    }
 }
 ?>

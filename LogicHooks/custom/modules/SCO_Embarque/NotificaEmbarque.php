@@ -9,7 +9,7 @@
 */
 class Notificaciones
 {
-	function FnnotificaDespacho($bean,$cantidadItem)
+    function FnnotificaDespacho($bean,$cantidadItem)
     {
         require_once('include/SugarPHPMailer.php');
         //Se obtinen el estado de la orden de compra
@@ -32,7 +32,7 @@ class Notificaciones
                     $template = $row2 ['body_html'];
                 }
         // Consulta que obtiene la lista de lo aprobadores
-        		$query = "SELECT u.user_name,em.email_address, u.first_name,u.last_name,u.title,
+                $query = "SELECT u.user_name,em.email_address, u.first_name,u.last_name,u.title,
                         oc.name as ordenCompra, oc.orc_division as division, oc.orc_pronomemp as proveedor,
                         oc.orc_tcinco, oc.id as idOrdenCompra
                         from suitecrm.users u
@@ -46,7 +46,7 @@ class Notificaciones
                         where des.id = '$idDespacho' and occo.deleted = 0 and con.con_rol = 'Logistico' ";
 
             $resultAprobadores = $GLOBALS['db']->query($query, true);
-						//enviamos el correo a la lista de contactos
+                        //enviamos el correo a la lista de contactos
             while ( $row = $GLOBALS['db']->fetchByAssoc($resultAprobadores) )
             {
                 $contenidoBody = $this->correogeneral ( $template, $subject, $bean, $row, $accion, $idDespacho , $cantidad );
@@ -64,7 +64,7 @@ class Notificaciones
                 //$mail->AddAddress ( 'rkantuta@hansa.com.bo' );
                 $mail->Send ();
             }
-						// envio de correo al solicitante
+                        // envio de correo al solicitante
             $bean->load_relationship('sco_despachos_sco_ordencompra');
             $relatedBeans = $bean->sco_despachos_sco_ordencompra->getBeans();
             $parentBean = current($relatedBeans);
@@ -95,76 +95,76 @@ class Notificaciones
                 //$mail->AddAddress ( 'rkantuta@hansa.com.bo' );
                 $mail->Send ();
             }
-						// envio de correo al PM
-						//consulta de PM
-						$consultaPM ="SELECT u.user_name,em.email_address, u.first_name,u.last_name,u.title,oc.id as idOrdenCompra,
-																	oc.name as ordenCompra, oc.orc_division as division, oc.orc_pronomemp as proveedor,
-																	oc.orc_tcinco
-													from users u
-													inner join suitecrm.email_addr_bean_rel rel on u.id = rel.bean_id
-													inner join suitecrm.email_addresses em on em.id = rel.email_address_id
-													inner join sco_proyectosco_users_c prus on prus.sco_proyectosco_usersusers_idb = u.id
-													inner join sco_proyectosco proy on proy.id = prus.sco_proyectosco_userssco_proyectosco_ida
-													inner join sco_productoscompras_sco_proyectosco_c pcproy on pcproy.sco_productoscompras_sco_proyectoscosco_proyectosco_idb = proy.id
-													inner join sco_productoscompras pcom on pcom.id = pcproy.sco_productoscompras_sco_proyectoscosco_productoscompras_ida
-													inner join sco_productoscompras_sco_despachos_c prodes on prodes.sco_productoscompras_sco_despachossco_productoscompras_ida = pcom.id
-													inner join sco_despachos des on des.id = prodes.sco_productoscompras_sco_despachossco_despachos_idb
-													inner join sco_despachos_sco_ordencompra_c deor on deor.sco_despachos_sco_ordencomprasco_despachos_idb = des.id
-													inner join sco_ordencompra oc on oc.id = deor.sco_despachos_sco_ordencomprasco_ordencompra_ida
-													where des.id = '$idDespacho' and des.deleted = 0
-													group by u.user_name";
-							$resultSolicitante = $GLOBALS['db']->query($consultaPM, true);
-							if ($GLOBALS['db']->fetchByAssoc($resultSolicitante) != null) {
-								while ( $row = $GLOBALS['db']->fetchByAssoc($resultSolicitante) )
-								{
-									$contenidoBody = $this->correogeneral ( $template, $subject, $bean, $row, $accion,$idDespacho ,$cantidad);
-									$emailObj = new Email();
-									$defaults = $emailObj->getSystemDefaultEmail();
-									$mail = new SugarPHPMailer ();
-									$mail->setMailerForSystem ();
-									$mail->From = $defaults['email'];
-									$mail->FromName = 'Hansa CRM ';
-									$mail->Subject = $contenidoBody ['subject'];
-									$mail->isHTML ( true );
-									$mail->Body = $contenidoBody ['template'];//"<h1>hola reynaldo</h1> tu id es $id";//$contenidoBody ['template'];
-									$mail->prepForOutbound ();
-									$mail->AddAddress ( $row['email_address'] );
-									//$mail->AddAddress ( 'rkantuta@hansa.com.bo' );
-									$mail->Send ();
-								}
-							}
-							else {
-								$queryGerenteProyectos = "SELECT u.user_name,em.email_address, u.first_name,u.last_name,u.title,oc.id as idOrdenCompra,
-																	oc.name as ordenCompra, oc.orc_division as division, oc.orc_pronomemp as proveedor,
-																	oc.orc_tcinco
-													from users u
-													inner join suitecrm.email_addr_bean_rel rel on u.id = rel.bean_id
-													inner join suitecrm.email_addresses em on em.id = rel.email_address_id
-													inner join sco_despachos des
-													inner join sco_despachos_sco_ordencompra_c deor on deor.sco_despachos_sco_ordencomprasco_despachos_idb = des.id
-													inner join sco_ordencompra oc on oc.id = deor.sco_despachos_sco_ordencomprasco_ordencompra_ida
-													where des.id = '$idDespacho' and des.deleted = 0 and
-													u.address_city = 'la paz' and u.title = 'Gerente de Proyectos'";
-								$resultSolicitante = $GLOBALS['db']->query($queryGerenteProyectos, true);
-								while ( $row = $GLOBALS['db']->fetchByAssoc($resultSolicitante) )
-								{
-									$contenidoBody = $this->correogeneral ( $template, $subject, $bean, $row, $accion,$idDespacho ,$cantidad);
-									$emailObj = new Email();
-									$defaults = $emailObj->getSystemDefaultEmail();
-									$mail = new SugarPHPMailer ();
-									$mail->setMailerForSystem ();
-									$mail->From = $defaults['email'];
-									$mail->FromName = 'Hansa CRM ';
-									$mail->Subject = $contenidoBody ['subject'];
-									$mail->isHTML ( true );
-									$mail->Body = $contenidoBody ['template'];//"<h1>hola reynaldo</h1> tu id es $id";//$contenidoBody ['template'];
-									$mail->prepForOutbound ();
-									$mail->AddAddress ( $row['email_address'] );
-									//$mail->AddAddress ( 'rkantuta@hansa.com.bo' );
-									$mail->Send ();
-								}
+                        // envio de correo al PM
+                        //consulta de PM
+                        $consultaPM ="SELECT u.user_name,em.email_address, u.first_name,u.last_name,u.title,oc.id as idOrdenCompra,
+                                                                    oc.name as ordenCompra, oc.orc_division as division, oc.orc_pronomemp as proveedor,
+                                                                    oc.orc_tcinco
+                                                    from users u
+                                                    inner join suitecrm.email_addr_bean_rel rel on u.id = rel.bean_id
+                                                    inner join suitecrm.email_addresses em on em.id = rel.email_address_id
+                                                    inner join sco_proyectosco_users_c prus on prus.sco_proyectosco_usersusers_idb = u.id
+                                                    inner join sco_proyectosco proy on proy.id = prus.sco_proyectosco_userssco_proyectosco_ida
+                                                    inner join sco_productoscompras_sco_proyectosco_c pcproy on pcproy.sco_productoscompras_sco_proyectoscosco_proyectosco_idb = proy.id
+                                                    inner join sco_productoscompras pcom on pcom.id = pcproy.sco_productoscompras_sco_proyectoscosco_productoscompras_ida
+                                                    inner join sco_productoscompras_sco_despachos_c prodes on prodes.sco_productoscompras_sco_despachossco_productoscompras_ida = pcom.id
+                                                    inner join sco_despachos des on des.id = prodes.sco_productoscompras_sco_despachossco_despachos_idb
+                                                    inner join sco_despachos_sco_ordencompra_c deor on deor.sco_despachos_sco_ordencomprasco_despachos_idb = des.id
+                                                    inner join sco_ordencompra oc on oc.id = deor.sco_despachos_sco_ordencomprasco_ordencompra_ida
+                                                    where des.id = '$idDespacho' and des.deleted = 0
+                                                    group by u.user_name";
+                            $resultSolicitante = $GLOBALS['db']->query($consultaPM, true);
+                            if ($GLOBALS['db']->fetchByAssoc($resultSolicitante) != null) {
+                                while ( $row = $GLOBALS['db']->fetchByAssoc($resultSolicitante) )
+                                {
+                                    $contenidoBody = $this->correogeneral ( $template, $subject, $bean, $row, $accion,$idDespacho ,$cantidad);
+                                    $emailObj = new Email();
+                                    $defaults = $emailObj->getSystemDefaultEmail();
+                                    $mail = new SugarPHPMailer ();
+                                    $mail->setMailerForSystem ();
+                                    $mail->From = $defaults['email'];
+                                    $mail->FromName = 'Hansa CRM ';
+                                    $mail->Subject = $contenidoBody ['subject'];
+                                    $mail->isHTML ( true );
+                                    $mail->Body = $contenidoBody ['template'];//"<h1>hola reynaldo</h1> tu id es $id";//$contenidoBody ['template'];
+                                    $mail->prepForOutbound ();
+                                    $mail->AddAddress ( $row['email_address'] );
+                                    //$mail->AddAddress ( 'rkantuta@hansa.com.bo' );
+                                    $mail->Send ();
+                                }
+                            }
+                            else {
+                                $queryGerenteProyectos = "SELECT u.user_name,em.email_address, u.first_name,u.last_name,u.title,oc.id as idOrdenCompra,
+                                                                    oc.name as ordenCompra, oc.orc_division as division, oc.orc_pronomemp as proveedor,
+                                                                    oc.orc_tcinco
+                                                    from users u
+                                                    inner join suitecrm.email_addr_bean_rel rel on u.id = rel.bean_id
+                                                    inner join suitecrm.email_addresses em on em.id = rel.email_address_id
+                                                    inner join sco_despachos des
+                                                    inner join sco_despachos_sco_ordencompra_c deor on deor.sco_despachos_sco_ordencomprasco_despachos_idb = des.id
+                                                    inner join sco_ordencompra oc on oc.id = deor.sco_despachos_sco_ordencomprasco_ordencompra_ida
+                                                    where des.id = '$idDespacho' and des.deleted = 0 and
+                                                    u.address_city = 'la paz' and u.title = 'Gerente de Proyectos'";
+                                $resultSolicitante = $GLOBALS['db']->query($queryGerenteProyectos, true);
+                                while ( $row = $GLOBALS['db']->fetchByAssoc($resultSolicitante) )
+                                {
+                                    $contenidoBody = $this->correogeneral ( $template, $subject, $bean, $row, $accion,$idDespacho ,$cantidad);
+                                    $emailObj = new Email();
+                                    $defaults = $emailObj->getSystemDefaultEmail();
+                                    $mail = new SugarPHPMailer ();
+                                    $mail->setMailerForSystem ();
+                                    $mail->From = $defaults['email'];
+                                    $mail->FromName = 'Hansa CRM ';
+                                    $mail->Subject = $contenidoBody ['subject'];
+                                    $mail->isHTML ( true );
+                                    $mail->Body = $contenidoBody ['template'];//"<h1>hola reynaldo</h1> tu id es $id";//$contenidoBody ['template'];
+                                    $mail->prepForOutbound ();
+                                    $mail->AddAddress ( $row['email_address'] );
+                                    //$mail->AddAddress ( 'rkantuta@hansa.com.bo' );
+                                    $mail->Send ();
+                                }
 
-							}
+                            }
 
     }
     function correogeneral($template, $subject, $bean, $aprobador, $accion, $id,$cantidad) {
@@ -263,7 +263,7 @@ class Notificaciones
             {
                 $trackOrder.= "<tr style='background-color: #c2ddff'>
                                     <td><strong>".$row["name"]."</strong></td>
-                                    <td>".$row["eve_tiempoest"]." días</td>
+                                    <td>".$row["eve_tiempoest"]." dÃ­as</td>
                                     <td>".$row["eve_fechaplan"]."</td>
                                     <td><strong>".$row["eve_fechare"]."</strong></td>
                                     <td>".$row["eve_estado"]."</td>

@@ -9,10 +9,10 @@
 */
 class Cldeselimina
 {
-	function Fndeselimina($bean, $event, $arguments)
-	{
+    function Fndeselimina($bean, $event, $arguments)
+    {
     //Id de la Orden de Compra
-  	$id_oc = $bean->id;  
+    $id_oc = $bean->id;  
     //Id del subpanel despacho
     $id_des = $id_desp = $arguments['related_id'];
     if(!empty($id_des)){
@@ -75,6 +75,6 @@ class Cldeselimina
         WHERE sco_despachos_sco_productosdespachossco_despachos_ida = '".$id_des."' " ;
         $onj_productos_despacho = $GLOBALS['db']->query($productos_despacho, true);
         }
-	}
+    }
 }
 ?>

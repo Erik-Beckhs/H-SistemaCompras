@@ -9,7 +9,7 @@
 */
 class Notificaciones
 {
-	function FnnotificaDespacho($bean)
+    function FnnotificaDespacho($bean)
     {
         require_once('include/SugarPHPMailer.php');
         //Se obtinen el estado de la orden de compra
@@ -43,7 +43,7 @@ class Notificaciones
                         inner join suitecrm.sco_despachos_sco_ordencompra_c desor on desor.sco_despachos_sco_ordencomprasco_ordencompra_ida = oc.id
                         inner join suitecrm.sco_despachos des on des.id = desor.sco_despachos_sco_ordencomprasco_despachos_idb
                         where des.id = '$idDespacho' and con.con_rol = 'Logistico' and des.deleted = 0 and oc.deleted = 0
-												group by u.user_name ";
+                                                group by u.user_name ";
             $resultAprobadores = $GLOBALS['db']->query($query, true);
             while ( $row = $GLOBALS['db']->fetchByAssoc($resultAprobadores) )
             {
@@ -68,15 +68,15 @@ class Notificaciones
             $idoc = $parentBean->id;
             $query = "SELECT u.user_name,em.email_address, u.first_name,u.last_name,u.title,
                         oc.name as ordenCompra, oc.orc_division as division, oc.orc_pronomemp as proveedor,oc.id as idOC
-											from users u
-											inner join suitecrm.email_addr_bean_rel rel on u.id = rel.bean_id
-											inner join suitecrm.email_addresses em on em.id = rel.email_address_id
-											inner join sco_proyectosco_users_c pyu on pyu.sco_proyectosco_usersusers_idb = u.id
-											inner join sco_productos_co pro on pro.pro_idproy = pyu.sco_proyectosco_userssco_proyectosco_ida
-											inner join sco_ordencompra oc on oc.id = pro.pro_idco
-											inner join sco_despachos_sco_ordencompra_c deoc on deoc.sco_despachos_sco_ordencomprasco_ordencompra_ida = pro.pro_idco
-											where deoc.sco_despachos_sco_ordencomprasco_despachos_idb = '$idDespacho'
-											group by u.user_name";
+                                            from users u
+                                            inner join suitecrm.email_addr_bean_rel rel on u.id = rel.bean_id
+                                            inner join suitecrm.email_addresses em on em.id = rel.email_address_id
+                                            inner join sco_proyectosco_users_c pyu on pyu.sco_proyectosco_usersusers_idb = u.id
+                                            inner join sco_productos_co pro on pro.pro_idproy = pyu.sco_proyectosco_userssco_proyectosco_ida
+                                            inner join sco_ordencompra oc on oc.id = pro.pro_idco
+                                            inner join sco_despachos_sco_ordencompra_c deoc on deoc.sco_despachos_sco_ordencomprasco_ordencompra_ida = pro.pro_idco
+                                            where deoc.sco_despachos_sco_ordencomprasco_despachos_idb = '$idDespacho'
+                                            group by u.user_name";
             $resultSolicitante = $GLOBALS['db']->query($query, true);
             while ( $row = $GLOBALS['db']->fetchByAssoc($resultSolicitante) )
             {
@@ -142,7 +142,7 @@ class Notificaciones
         if (strpos ( $template, '$ordenConpra' ) !== true) {
             $template = str_ireplace ( '$ordenConpra', $ordenCompra->name, $template );
         }
-				if (strpos ( $template, '$observaciones' ) !== true) {
+                if (strpos ( $template, '$observaciones' ) !== true) {
             $template = str_ireplace ( '$observaciones', '', $template );
         }
         if (strpos ( $template, '$link' ) !== true) {
@@ -150,7 +150,7 @@ class Notificaciones
             $link = $host.'index.php?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3DSCO_Despachos%26action%3DDetailView%26record%3D'.$id;
             $template = str_ireplace ( '$link', $link , $template );
         }
-				if (strpos ( $template, '$lnkOC' ) !== true) {
+                if (strpos ( $template, '$lnkOC' ) !== true) {
             $host= 'http://'.$_SERVER['HTTP_HOST'].'/';
             $link = $host.'index.php?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3DSCO_OrdenCompra%26action%3DDetailView%26record%3D'.$aprobador['idOC'];
             $template = str_ireplace ( '$lnkOC', $link , $template );

@@ -1,6 +1,6 @@
 <?php 
 /**
-*Esta clase realiza operaciones matemÃ¡ticas.
+*Esta clase realiza operaciones matemÃƒÂ¡ticas.
 *
 *@author Limberg Alcon <lalcon@hansa.com.bo>
 *@copyright 2018
@@ -33,28 +33,37 @@ class Documentos
         /*$beanoc->orc_cotizacion = $cotiza[0];*/
         $beanoc->save();
       }
-      if($bean->doc_tipo == 2){
-        #if($beanoc->orc_estado == 6 || $beanoc->orc_estado == 1){
+      
+    
+    global $current_user;
+    if($current_user->iddivision_c == '06'){
+    
+    }else{
+    #Descomentar en caso de Aprobacion Manual.
+        if($bean->doc_tipo == 2){
+          if($beanoc->orc_estado == 6 || $beanoc->orc_estado == 1){
+  
+          }else{
+            $cotiza = explode(".", $bean->filename);
+            #$beanoc->orc_cotizacion = $cotiza[0];
+              if($beanoc->orc_tipoo == "1"){
+                $beanoc->orc_estado = 6;
+              }else{
+                $beanoc->orc_estado = 1;
+              }    
+              $fecha_act = date("y-d-m");
+              $beanap->apr_fecha = $fecha_act;
+            while($row = $bean->db->fetchByAssoc($obj))
+            {
+               $beanap = BeanFactory::getBean('SCO_Aprobadores', $row['id']);
+               $beanap->apr_aprueba = 1;
+               $beanap->save();
+            }
+            $beanoc->save();
+          }        
+        }
+    }
 
-        #}else{
-          #$cotiza = explode(".", $bean->filename);
-          /*$beanoc->orc_cotizacion = $cotiza[0];*/
-            #if($beanoc->orc_tipoo == "1"){
-              #$beanoc->orc_estado = 6;
-            #}else{
-              #$beanoc->orc_estado = 1;
-            #}    
-            #$fecha_act = date("y-d-m");
-            #$beanap->apr_fecha = $fecha_act;
-          #while($row = $bean->db->fetchByAssoc($obj))
-          #{
-             #$beanap = BeanFactory::getBean('SCO_Aprobadores', $row['id']);
-             #$beanap->apr_aprueba = 1;
-             #$beanap->save();
-          #}
-          #$beanoc->save();
-        #}        
-      }  
       $bean->ignore_update_c = true;  
       $bean->save();    
         }

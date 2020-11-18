@@ -1,6 +1,6 @@
 <?php
 /**
-*Esta clase realiza operaciones matemÃ¡ticas.
+*Esta clase realiza operaciones matemÃƒÂ¡ticas.
 *
 *@author Limberg Alcon <lalcon@hansa.com.bo>
 *@copyright 2018
@@ -52,13 +52,13 @@ class Clevento
           VALUES
             ('".$id_rel."','".$row['deleted']."','".$id_emb."','".$id_emb_ev."');";
         $obj1 = $bean->db->query($query1, true);
-        //Generamos la fecha actual de creaciÃ³n
+        //Generamos la fecha actual de creaciÃƒÂ³n
         $fecha_actual = date('Y-m-d');
-        //incrementamos la cantodad de dÃ­as para asignar una nueva fecha plan
+        //incrementamos la cantodad de dÃƒÂ­as para asignar una nueva fecha plan
         $diasTrans = $row['cnfev_diastrans'];
         $dias += $diasTrans;
         #$fecha_plan = date('Y-m-d', strtotime('+'.$dias.' day'));
-        //Operacion, las fechas del modulo de EVENTOS## Incrementamos la cantidad de dias a la fecha de creaciÃ³n para tener la fecha plan del evento
+        //Operacion, las fechas del modulo de EVENTOS## Incrementamos la cantidad de dias a la fecha de creaciÃƒÂ³n para tener la fecha plan del evento
         $fecha_plan = date('Y-m-d', strtotime($fecha."+ ".$dias." day"));
         //Verificamos si la fecha plan del evento es dias Sabado o Domingo
         $fplan=date("w", strtotime($fecha_plan));
@@ -66,17 +66,17 @@ class Clevento
         // {
         //   // Si es 0 o 6 el evento cae en fin de semana
         //   if($fplan=="6"){
-        //     // es Sabado e incrementamos 2 dÃ­as a la fecha plan
+        //     // es Sabado e incrementamos 2 dÃƒÂ­as a la fecha plan
         //     $dias += 2;
         //     $diasTrans += 2;
-        //     //Operacion, las fechas del modulo de EVENTOS## Incrementamos la cantidad de dias a la fecha de creaciÃ³n para tener la fecha plan del evento
+        //     //Operacion, las fechas del modulo de EVENTOS## Incrementamos la cantidad de dias a la fecha de creaciÃƒÂ³n para tener la fecha plan del evento
         //     $fecha_plan = date('Y-m-d', strtotime($fecha."+ ".$dias." day"));
         //   }
         //   if($fplan=="0"){
-        //     // es Domingo e incrementamos 1 dÃ­a a la fecha plan
+        //     // es Domingo e incrementamos 1 dÃƒÂ­a a la fecha plan
         //     $dias += 1;
         //     $diasTrans += 1;
-        //     //Operacion, las fechas del modulo de EVENTOS## Incrementamos la cantidad de dias a la fecha de creaciÃ³n para tener la fecha plan del evento
+        //     //Operacion, las fechas del modulo de EVENTOS## Incrementamos la cantidad de dias a la fecha de creaciÃƒÂ³n para tener la fecha plan del evento
         //     $fecha_plan = date('Y-m-d', strtotime($fecha."+ ".$dias." day"));
         //   }
         // }

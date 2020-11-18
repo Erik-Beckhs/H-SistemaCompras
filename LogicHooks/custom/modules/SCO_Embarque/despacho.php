@@ -1,6 +1,6 @@
 <?php
 /**
-*Esta clase realiza operaciones matemáticas.
+*Esta clase realiza operaciones matemÃ¡ticas.
 *
 *@author Limberg Alcon <lalcon@hansa.com.bo>
 *@copyright 2018
@@ -35,10 +35,10 @@ class Cldespacho
             $fecha = $fp;
         }
         //Quey, actualizando el estado des_est y la fecha des_fechaprev del modulo de DESPACHOS
-    	$despacho_update = "UPDATE sco_despachos 
-        	SET des_est = '2', des_fechaprev = '".$fecha."'
-        	WHERE id = '".$id_desp."'; ";
-		$obj_update = $GLOBALS['db']->query($despacho_update, true);
+        $despacho_update = "UPDATE sco_despachos 
+            SET des_est = '2', des_fechaprev = '".$fecha."'
+            WHERE id = '".$id_desp."'; ";
+        $obj_update = $GLOBALS['db']->query($despacho_update, true);
         //se obtiene el despacho 
         //Obtenemos la cantidad de productos del despacho
         $queryProDespachos = "select sum(pro.prdes_cantidad) as cantidad
