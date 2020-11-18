@@ -198,23 +198,35 @@ $("#mostrarDatos").html("<div id='cargando' class='loader'></div> ");
                     productos[i]["CodigoProveedor"],
                     productos[i]["Producto"],
                     productos[i]["PrecioVta"],
+                    '00',
                     productos[i]["SaldoStock"],
                     productos[i]["StockRango180"],
                     productos[i]["SalidaAutorizada"],
+                    productos[i]["IngresoPedMesActual"],
                     '0',
-                    '0',
-                    '0',
+                    productos[i]["IngresoPedMesActualMasUno"],
+                    productos[i]["IngresoPedMesActualMasDos"],
                     '0',
                     '0',
                     productos[i]["VentaCantidad3AnioAtras"],
                     productos[i]["VentaCantidad2AnioAtras"],
-                    productos[i]["VentaCantidad1AnioAtras"],
-                    productos[i]["Promedio1AtrasAnio"],
+                    productos[i]["VentaCantidad1AnioAtras"],                    
                     productos[i]["VentaCantidad0AnioAtras"],
+                    productos[i]["Promedio1AtrasAnio"],
+                    productos[i]["Promedio0AtrasAnio"],
+                    'i',
                     ''
                     ]
         }
-        var mes = 'Ingre. Pedido JUN 20';
+        var fecha = new Date();
+        var options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+        var masUnMes_fecha = new Date(fecha.getFullYear(), (fecha.getMonth()+1), fecha.getDate());
+        var masDoMes_fecha = new Date(fecha.getFullYear(), (fecha.getMonth()+2), fecha.getDate());
+
+        var mesActual = fecha.toLocaleDateString("es-ES", options)
+        var sumaUnMes = masUnMes_fecha.toLocaleDateString("es-ES", options)
+        var sumaDosMes = masDoMes_fecha.toLocaleDateString("es-ES", options)
         jexcel(document.getElementById('mostrarDatos'), {
             data:data,
             tableOverflow:true,
@@ -222,13 +234,13 @@ $("#mostrarDatos").html("<div id='cargando' class='loader'></div> ");
             csvHeaders:true,
             search:true,
             tableWidth: '100%',
-            tableHeight: '700px',
+            tableHeight: '500px',
             //lazyLoading:true,
             //loadingSpin:true,
             //filters: true,
             allowComments:true,
             pagination: 50,
-            freezeColumns: 6,
+            freezeColumns: 7,
             columns: [
                 { 
                     type: 'text', 
@@ -272,6 +284,11 @@ $("#mostrarDatos").html("<div id='cargando' class='loader'></div> ");
                 },
                 { 
                     type: 'text',
+                    title:'Precio FOB',
+                    width:70 
+                },
+                { 
+                    type: 'text',
                     title:'Saldo Stock Disp',
                     width:80 
                 },
@@ -287,17 +304,22 @@ $("#mostrarDatos").html("<div id='cargando' class='loader'></div> ");
                 },
                 { 
                     type: 'text',
-                    title:mes,
+                    title:'Ingre. Pedido' + mesActual,
                     width:60 
                 },
                 { 
                     type: 'text',
-                    title:'Total Disp JUN 20',
+                    title:'Total disp. '+mesActual,
                     width:60 
                 },
                 { 
                     type: 'text',
-                    title:'Ingre. Pedido JUL 20',
+                    title: 'Ingre. Pedido '+ sumaUnMes,
+                    width:60 
+                },
+                { 
+                    type: 'text',
+                    title:'Ingre. Pedido' + sumaDosMes,
                     width:60 
                 },
                 { 
@@ -327,15 +349,25 @@ $("#mostrarDatos").html("<div id='cargando' class='loader'></div> ");
                 },
                 { 
                     type: 'text',
+                    title:'Venta Total 2020',
+                    width:80 
+                },
+                { 
+                    type: 'text',
                     title:'Venta Mensual Promed 2019',
                     width:80 
                 },
                 { 
                     type: 'text',
-                    title:'Venta Total 2020',
+                    title:'Venta Mensual Promed 2020',
                     width:80 
                 },
                 { 
+                    type: 'text',
+                    title:'Meses Stock',
+                    width:80 
+                },                
+                {
                     type: 'text',
                     title:'Pedido Sugerido',
                     width:80 
@@ -385,7 +417,7 @@ var options = {
     tableOverflow:true,
 }
 
-var data = [];
+var data = ['','','','','','','','','','','','','','','',''];
 //dataJexcel(data);
 //$('#spreadsheet').jexcel(options); 
 jexcel(document.getElementById('mostrarDatos'), {

@@ -1,5 +1,5 @@
 .jexcel_content {
-	box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+	/*box-shadow: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);*/
 }
 .jexcel > tbody > tr > td:first-child, .jexcel > thead > tr > td {
     background: #eeeeee;
@@ -7,15 +7,24 @@
 .jexcel {
 
 }
-
+.jexcel > thead > tr > td {
+  background: #e1ffda;
+}
+.jexcel > tbody > tr > td:first-child{
+  background: #d9fffb;
+}
 .jexcel > thead > tr > td {
 	color:#000;
 	font-size: 12px
 }
+.jexcel > thead > tr > td.selected,
+.jexcel > tbody > tr.selected > td:first-child{
+  background: #fff82a;
+}
 
 .jexcel > tbody > tr > td {
 	font-size: 11px;
-	color:#666;
+	color:#1b1b1b;
 }
 .jexcel {
 	 white-space: normal;

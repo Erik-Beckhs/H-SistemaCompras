@@ -64,7 +64,7 @@ class SCO_OrdenCompraViewReporteindustria extends ViewHtml
 						<div class="input-group">
 							<div class="input-group">
                               <span class="input-group-addon">Division</span>               
-                              <select class="form-control" id="division" name="division">
+                              <select class="form-control" id="division" name="division" disabled>
                                 <option value="" selected="selected">Todo</option>
                                 '.$division.'                           
                               </select>  

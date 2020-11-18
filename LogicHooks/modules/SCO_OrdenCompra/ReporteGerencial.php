@@ -50,17 +50,17 @@ switch ($filtro) {
 		    $arreglo = array();
 		    while($row = $GLOBALS['db']->fetchByAssoc($results))
 		        {
+		            $object['AreaMercado'] = $row['AreaMercado'];
+		            $object['SubGrupo'] = $row['SubGrupo'];
+		            $object['Familia'] = $row['Familia'];
+		            $object['Grupo'] = $row['Grupo'];
 		            $object['IdProducto'] = $row['IdProducto'];
 		            $object['CodigoProveedor'] = $row['CodigoProveedor'];
 		            $object['Producto'] = $row['Producto'];
 		            $object['PrecioVta'] = $row['PrecioVta'];
 		            $object['SaldoStock'] = $row['SaldoStock'];
 		            $object['StockRango>180'] = $row['StockRango180'];
-		            $object['SalidaAutorizada'] = $row['SalidaAutorizada'];
-		            $object['AreaMercado'] = $row['AreaMercado'];
-		            $object['SubGrupo'] = $row['SubGrupo'];
-		            $object['Familia'] = $row['Familia'];
-		            $object['Grupo'] = $row['Grupo'];
+		            $object['SalidaAutorizada'] = $row['SalidaAutorizada'];		            
 		            $object['Venta Total 2017'] = $row['VentaCantidad3AnioAtras'];
 		            $object['Venta Total 2018'] = $row['VentaCantidad2AnioAtras'];
 		            $object['Venta Total 2019'] = $row['VentaCantidad1AnioAtras'];
