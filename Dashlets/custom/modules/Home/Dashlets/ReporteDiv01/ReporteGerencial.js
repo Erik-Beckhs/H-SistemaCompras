@@ -1,68 +1,37 @@
-var usuarioNombre = $("#usuarioNombre").val();
-var usuarioDivision = $("#usuarioDivision").val();
-var usuarioAmercado = $("#usuarioAmercado").val();
-var usuarioRol = $("#usuarioRol").val();
-$("#division").val(usuarioDivision);
-$("#aMercado").val(usuarioAmercado);
-
-if(usuarioDivision != 00){      
-    $('.am').hide();
-    $('.'+usuarioDivision+'').show();
-}
-$("#division").change(function() {  
-    $('.am').show();   
-    if ($(this).data('options') === undefined) {    
-      $(this).data('options', $('#aMercado option').clone());
-    }
-    var id = $(this).val();  
-    var options = $(this).data('options').filter('.'+id+'');      
-    $('#aMercado').html(options);
-    $('#aMercado').append('<option value="00" selected="selected">Todo</option>');    
-});
-$("#aMercado").on("change", function(){
+$("#AreaMercado").on("change", function(){
     console.log($("#divCompra").val(),$("#estadoDiv").val(),$("#estadoEmbarque").val(),$("#rol").val(),$("#aMercado").val());
 });
 
-$("#division").on("change", function(){              
+$("#Division").on("change", function(){              
     console.log($("#divCompra").val(),$("#estadoDiv").val(),$("#estadoEmbarque").val(),$("#rol").val(),'00');
 });
-$("#buscar").on("click", function(event){
-    console.log($("#aMercado").val());
-    obtenerInformacion($("#aMercado").val());
-});
 
-function obtenerInformacion(aMercado){
-  debugger;
+function getInformacion(){
+  alert('Peticion de getInformacion');
   $.ajax({
   type: 'get',
   url: '/custom/modules/Home/Dashlets/ReporteDiv01/ReporteGerencial.php',
   data: {
-      aMercado: aMercado,
-      filtro:1,
+      Division: Division,
+      AreaMercado: AreaMercado,
+      Familia: Familia,
+      Grupo:Grupo
   },
   success: function(data) {
-      debugger;
-      var productos = $.parseJSON(data);
-      console.log(productos);
-      var data = [];
-      for (var i = 0; i < productos.length; i++) {
-            if (productos[i]["prdes_numeracion"] == null) {
-                numeracion = i * 1 + 1;
-            }else{numeracion = productos[i]["prdes_numeracion"];}
-            data[i] = [
-                    numeracion,
-                    productos[i]["name"],
-                    productos[i]["prdes_descripcion"],
-                    '',
-                    productos[i]["prdes_cantidad"],
-                    productos[i]["punitario"],
-                    (productos[i]["prdes_cantidad"] * 1 * productos[i]["punitario"]).toFixed(2),
-                    productos[i]["prdes_idproductocotiazdo"],
-                    productos[i]["idPro"],
-                    productos[i]["prdes_codaio"]
-                    ]
-        }
-     }
+  var modtrans = $.parseJSON(data);
+  modtrans = modtrans.split('|');
+  $('#des_modtra').find('option').remove().end();
+        //$("#des_modtra").append("<option value='0'>Selecione MT</option>");
+            if(modtrans){
+              var mod = $("#des_modtra").val();
+              $("#des_modtra").append("<option value='0'>Seleccione MT</option>");
+              for(var i = 0; i < modtrans.length-1; i++){
+                if (mod != modtrans[i]) {
+                  $("#des_modtra").append("<option value='"+modtrans[i]+"'>"+modtrans[i]+"</option>");
+                }
+              }
+          }
+      }
     });
 }
 

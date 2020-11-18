@@ -65,7 +65,7 @@ function openProyectoPopup(){
 
 //Serializa los datos del formulario
 $("#formPro").submit(function(e) {
-    jsonDatos.items = JSON.stringify(consProducto2);
+    jsonDatos.items = consProducto2;
     e.preventDefault();        
     var datos = $(this).serializeArray();
     $(datos).each(function(index, obj){        
@@ -73,8 +73,8 @@ $("#formPro").submit(function(e) {
     });
     //console.log(jsonDatos);  
     
-    console.log(consProducto2.length);
-    if(consProducto2.length != 0){
+    console.log(jsonDatos.items.length);
+    if(jsonDatos.items.length != 0){
         $.validator.setDefaults({
           debug: true,
           success: "valid"
@@ -205,7 +205,7 @@ function vista(){
     html += '                        <div class="row">                           ';
     html += '                            <div class="col-sm-6">  ';
     html += '                                <div class="form-group">                                    ';
-    html += '                                    <div class="col-sm-4 " >DescripciÃ³n:<span class="required">*</span></div>';
+    html += '                                    <div class="col-sm-4 " >Descripción:<span class="required">*</span></div>';
     html += '                                    <div class="col-sm-8 " >';
     html += '                                        <textarea  rows="4" cols="5" id="desc"  maxlength="255" name="desc"></textarea>';
     html += '                                    </div>';
@@ -370,7 +370,7 @@ function vista(){
     html += '                    <br>';
     html += '                </div>';
     html += '                <div class="panel panel-success">';
-    html += '                    <div class="panel-heading">Datos de facturaciÃ³n</div>';
+    html += '                    <div class="panel-heading">Datos de facturación</div>';
     html += '                    <div class="panel-body">';
     html += '                        <div class="row">                           ';
     html += '                            <div class="form-group">';
@@ -495,8 +495,8 @@ function ventanaModal(jsonDatos){
 //Envio de datos al archivo consolidacionDatos.php
 function envioDeDatos(jsonDatos){        
     //alert(jsonDatos);
-    console.log("Envio de datos");  
-    console.log(jsonDatos);   
+    console.log("Envio de datos" + jsonDatos);  
+    console.log("items" + jsonDatos.items);   
     $.ajax({
         type: "POST",
         url: "index.php?to_pdf=true&module=SCO_Consolidacion&action=consolidacionDatos",        
@@ -509,7 +509,7 @@ function envioDeDatos(jsonDatos){
             var id = e;
             $(".loader").removeClass("is-active");
             $("#modalConfirmacion").modal("hide"); 
-            //alert("Se redireccionara a su ConsolidaciÃ³n");
+            alert("Se redireccionara a su Consolidación");
             $(location).attr("href","index.php?module=SCO_Consolidacion&action=DetailView&record="+id);
         },
         error: function(data) {

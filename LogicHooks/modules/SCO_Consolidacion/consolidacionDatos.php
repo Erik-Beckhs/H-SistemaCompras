@@ -50,8 +50,8 @@ $nombreOc             = $_POST['nombreOc']?$_POST['nombreOc']:"";
 $proyecto             = $_POST['proyecto']?$_POST['proyecto']:"";
 $proyecto_id          = $_POST['proyecto_id']?$_POST['proyecto_id']:"";
 $proyecto_tipo        = $_POST['proyecto_tipo']?$_POST['proyecto_tipo']:"";
-$items2                = $_POST['items']?$_POST['items']:"";
-$items = json_decode(str_replace("&quot;", "\"", $items2), true);
+$items                = $_POST['items']?$_POST['items']:"";
+
 if($proyecto_tipo == ''){
 	$proyecto_tipo = 0;
 }
@@ -63,7 +63,7 @@ $proveedorObj  = $GLOBALS['db']->query($queryProveedor, true);
 $proveedorDato = $GLOBALS['db']->fetchByAssoc($proveedorObj);
 $proveedorDato["id"];
 */
-#CreaciÃ³n de la Orden de compra
+#Creación de la Orden de compra
 $beanOc                                                 = BeanFactory::newBean('SCO_OrdenCompra');
 $beanOc->name                                           = "OC_".$nombre;
 $beanOc->orc_tipo                                       = 1;
@@ -109,14 +109,14 @@ foreach ($items as $key => $value) {
 	$idItem     = $value['id'];
 	$subtotal   = $value['pcv_cantidadconsolidado'] * $value['pcv_preciofob'];
 	if($cantidadItems < count($items)){
-		$arrayItems .= '["'.preg_replace('/\s/','-',$value['pcv_codigoproveedor']).'","'.preg_replace('/\s/','-',$value['pcv_descripcion']).'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","'.$proyecto.'","'.$value['sco_productoscompras_id_c'].'","'.$proyecto_id.'","'.$proyecto_tipo.'","'.$value['name'].'","'.$idItem.'"],';	
+		$arrayItems .= '["'.$value['pcv_codigoproveedor'].'","'.$value['pcv_descripcion'].'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","'.$proyecto.'","'.$value['sco_productoscompras_id_c'].'","'.$proyecto_id.'","'.$proyecto_tipo.'","'.$value['name'].'","'.$idItem.'"],';	
 	}else{
-		$arrayItems .= '["'.preg_replace('/\s/','-',$value['pcv_codigoproveedor']).'","'.preg_replace('/\s/','-',$value['pcv_descripcion']).'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","'.$proyecto.'","'.$value['sco_productoscompras_id_c'].'","'.$proyecto_id.'","'.$proyecto_tipo.'","'.$value['name'].'","'.$idItem.'"]';	
+		$arrayItems .= '["'.$value['pcv_codigoproveedor'].'","'.$value['pcv_descripcion'].'","PZA","'.$value['pcv_cantidadconsolidado'].'","'.$value['pcv_preciofob'].'","0.00","0.00","'.$subtotal.'","'.$proyecto.'","'.$value['sco_productoscompras_id_c'].'","'.$proyecto_id.'","'.$proyecto_tipo.'","'.$value['name'].'","'.$idItem.'"]';	
 	}		
 }
 $arrayItemsTotal = '['.$arrayItems.']|'.$precioTotalFob.',0,0,'.$precioTotalFob.'|'.$idOc;
 
-#CreaciÃ³n del modulo de productos. realcionados a la Orden de compra
+#Creación del modulo de productos. realcionados a la Orden de compra
 $beanProductos              = BeanFactory::newBean('SCO_Productos');
 $beanProductos->description = $arrayItemsTotal;
 $beanProductos->save();

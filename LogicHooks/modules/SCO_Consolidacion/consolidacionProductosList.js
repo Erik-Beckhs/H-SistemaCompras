@@ -71,11 +71,11 @@ function buscarPorCotizacion() {
     });
   }
 }
-// Detector de filtro de nro cotizaciÃ³n 
+// Detector de filtro de nro cotización 
 function buscarcodaio() {
   var pcv_proveedoraio = $("#idFabricante").val();
   var nroCotizacion = $('#nroCotizacion').val();
-  //if (nroCotizacion != '') {
+  if (nroCotizacion != '') {
     $.ajax({
       type: 'POST',
       url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesLista',
@@ -90,7 +90,7 @@ function buscarcodaio() {
         var res = JSON.parse(e);
         var html = '<option value="">Todo</option>';
         for (var i = 0; i < res.length; i++) {
-          html += '<option value="' + res[i]["pcv_codigoproveedor"] + '">' + res[i]["pcv_codigoproveedor"] + '</option>';
+          html += '<option value="' + res[i]["name"] + '">' + res[i]["pcv_codigoproveedor"] + '</option>';
         }
         $('#codAioProduct').html(html);
       },
@@ -98,13 +98,13 @@ function buscarcodaio() {
         console.log('ERROR, No se pudo conectar', data);
       }
     });
-  //}
+  }
 }
-// Detector de filtro de nro cotizaciÃ³n a Cliente
+// Detector de filtro de nro cotización a Cliente
 function buscarClientes() {
   var pcv_proveedoraio = $("#idFabricante").val();
   var nroCotizacion = $('#nroCotizacion').val();
-  //if (nroCotizacion != '') {
+  if (nroCotizacion != '') {
     $.ajax({
       type: 'POST',
       url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesLista',
@@ -117,7 +117,6 @@ function buscarClientes() {
       async: false,
       success: function (e) {
         var res = JSON.parse(e);
-        console.log('DATOS'+res);
         var html = '<option value="">Todo</option>';
         for (var i = 0; i < res.length; i++) {
           html += '<option value="' + res[i]["pcv_clienteaio"] + '">' + res[i]["pcv_cliente"] + '</option>';
@@ -128,10 +127,11 @@ function buscarClientes() {
         console.log('ERROR, No se pudo conectar', data);
       }
     });
-  //}
+  }
 }
 // Detector de datos del fabricante en formulario envio de consolidacion
 $('#idFabricante').on('change', function () {
+  alert("algo");
   var pcv_proveedoraio = $("#idFabricante").val();
   for (let index = 0; index < proveedores.length; index++) {
     if (proveedores[index]["sco_proveedor_id_c"] == pcv_proveedoraio) {
@@ -147,11 +147,11 @@ $('#idFabricante').on('change', function () {
   }
 
 });
-// Detector de filtro de nro cotizaciÃ³n a plazo entrega
+// Detector de filtro de nro cotización a plazo entrega
 function buscarPlazoEntrega() {
   var pcv_proveedoraio = $("#idFabricante").val();
   var nroCotizacion = $('#nroCotizacion').val();
-  //if (nroCotizacion != '') {
+  if (nroCotizacion != '') {
     $.ajax({
       type: 'POST',
       url: 'index.php?to_pdf=true&module=SCO_ProductosCotizadosVenta&action=CotizacionesLista',
@@ -174,9 +174,9 @@ function buscarPlazoEntrega() {
         console.log('ERROR, No se pudo conectar', data);
       }
     });
-  //}
+  }
 }
-// Detector de filtro de nro cotizaciÃ³n a familia
+// Detector de filtro de nro cotización a familia
 $('#idFabricante').on('change', function () {
   var pcv_proveedoraio = $("#idFabricante").val();
   var nroCotizacion = $('#nroCotizacion').val();
@@ -193,24 +193,11 @@ $('#idFabricante').on('change', function () {
       async: false,
       success: function (e) {
         var res = JSON.parse(e);
-        console.log(res);
         var html = '<option value="">Todo</option>';
-        var htmlplz = '<option value="">Todo</option>';
-        var htmlpro = '<option value="">Todo</option>';
-        var htmlcli = '<option value="">Todo</option>';
         for (var i = 0; i < res.length; i++) {
-          htmlplz += '<option value="' + res[i]["pcv_plzentrega"] + '">' + res[i]["pcv_plzentrega"] + '</option>';
-          htmlpro += '<option value="' + res[i]["pcv_codigoproveedor"] + '">' + res[i]["pcv_codigoproveedor"] + '</option>';
-          htmlcli += '<option value="' + res[i]["pcv_clienteaio"] + '">' + res[i]["pcv_cliente"] + '</option>';
           html += '<option value="' + res[i]["pcv_familia"] + '">' + res[i]["pcv_familia"] + '</option>';
         }
         $('#idFamilia').html(html);
-        $('#plazoEntrega').html(htmlplz);
-        //$('#codAioProduct').html(htmlpro);
-        //$('#idCliente').html(htmlcli);
-        buscarClientes();
-        buscarcodaio();
-        //buscarPlazoEntrega();
         mostrarTabla1();
       },
       error: function (data) {
@@ -240,7 +227,7 @@ var mostrarTabla1 = function () {
   var pcv_proveedoraio = $("#idFabricante").val();
   var nroCotizacion = $('#nroCotizacion').val();
   var name = $('#codAioProduct').val();
-  var pcv_clienteaio = $('#idCliente').val();
+  var pcv_clienteaio = $('#pcv_clienteaio').val();
   var plazoEntrega = $('#plazoEntrega').val();
   var total1 = 0;
   var fob1 = 0;
@@ -263,7 +250,6 @@ var mostrarTabla1 = function () {
       
       var jres = [];
       var html = '';
-      var cantRegistro = 0;
       for (var i = 0; i < res.length; i++) {
         var idItem = String(res[i]["id"]).trim().replace(/-/g, "");
         if (buscarItem(idItem, consProducto2) == false) {
@@ -275,11 +261,10 @@ var mostrarTabla1 = function () {
           html += '<td>' + res[i]["pcv_descripcion"] + '</td>';
           html += '<td>' + res[i]["pcv_vendedor"] + '</td>';
           html += '<td>' + res[i]["pcv_cliente"] + '</td>';
-          html += '<td>' + res[i]["pcv_fechaconfirmacion"] + '</td>';
           html += '<td>' + res[i]["pcv_cantidad"] + '</td>';
           html += '<td>' + Number.parseFloat(res[i]["pcv_preciofob"]).toFixed(2) + '</td>';
           html += '<input type="hidden" id="cantidad_' + idItem + '" value="' + res[i]["pcv_cantidadsaldo"] + '" max="' + res[i]["pcv_cantidadsaldo"] + '" min="0" onkeyup="validaSaldoEnlinea(' + res[i]["name"] + ',' + res[i]["pcv_cantidadsaldo"] + ')">';
-          html += '<td id="subtotal1_' + idItem + '">' + (res[i]["pcv_cantidadsaldo"] * 1 * res[i]["pcv_preciofob"]).toFixed(2) + '</td>';
+          html += '<td id="subtotal1_' + idItem + '">' + (res[i]["pcv_cantidadsaldo"] * 1 * res[i]["pcv_preciofob"]) + '</td>';
           html += '<td><button class="btn btn-primary btn-xs" onclick="enviarProducto(' + "'" + idItem + "'" + ')">+</button></td>';
           html += '</tr>';
           total1 = (total1 * 1) + (res[i]["pcv_cantidad"] * 1);
@@ -295,7 +280,6 @@ var mostrarTabla1 = function () {
           html += '<td>' + item["pcv_descripcion"] + '</td>';
           html += '<td>' + item["pcv_vendedor"] + '</td>';
           html += '<td>' + item["pcv_cliente"] + '</td>';
-          html += '<td>' + item["pcv_fechaconfirmacion"] + '</td>';
           html += '<td>' + item["pcv_cantidad"] + '</td>';
           html += '<td>' + Number.parseFloat(item["pcv_preciofob"]).toFixed(2) + '</td>';
           html += '<input type="hidden" id="cantidad_' + idItem + '" value="' + item["pcv_cantidadsaldo"] + '" max="' + item["pcv_cantidadsaldo"] + '" min="0" onkeyup="validaSaldoEnlinea(' + res[i]["name"] + ',' + res[i]["pcv_cantidadsaldo"] + ')">';
@@ -306,14 +290,13 @@ var mostrarTabla1 = function () {
           fob1 = (fob1 * 1) + (item["pcv_preciofob"] * 1 * item["pcv_cantidadsaldo"]);
           jres.push(item);
         }
-        cantRegistro++;
+
       }
       consProducto1 = jres;
       $('#tabla1').empty();
       $('#tabla1').html(html);
       $('#totalFob1').val(Number.parseFloat(fob1).toFixed(2));
       $('#cantidadTabla1').val(total1);
-      $('#cantRegistro').text(cantRegistro);
     },
     error: function (data) {
       console.log('ERROR, No se pudo conectar', data);
@@ -359,7 +342,7 @@ function enviarProducto(idProducto) {
         }
       }
     }
-    // ConstruciÃ³n del td de tabla 2
+    // Construción del td de tabla 2
     var html = '';
     if (buscarT2 == false) {
       html += '<tr id="item2_' + dataProducto["id"].replace(/-/g, "") + '">';
@@ -371,7 +354,6 @@ function enviarProducto(idProducto) {
     html += '<td>' + dataProducto["pcv_descripcion"] + '</td>';
     html += '<td>' + dataProducto["pcv_vendedor"] + '</td>';
     html += '<td>' + dataProducto["pcv_cliente"] + '</td>';
-    html += '<td>' + dataProducto["pcv_fechaconfirmacion"] + '</td>';
     html += '<td>' + Number.parseFloat(dataProducto["pcv_preciofob"]).toFixed(2) + '</td>';
     html += '<td>' + dataProducto["pcv_cantidadconsolidado"] + '</td>';
     html += '<td>' + (dataProducto["pcv_cantidadconsolidado"] * 1 * dataProducto["pcv_preciofob"]).toFixed(2) + '</td>';// sub total
@@ -388,10 +370,7 @@ function enviarProducto(idProducto) {
     var totalFob1 = $('#totalFob1').val();
     totalFob1 = (totalFob1 * 1) - (dataProducto["pcv_preciofob"] * 1 * cantidadItem);
     $('#totalFob1').val(Number.parseFloat(totalFob1).toFixed(2));
-    //Cantidad de registros
-    var cantRegistro = $('#cantRegistro').text();
-    cantRegistro =(cantRegistro * 1) - 1;
-    $('#cantRegistro').text(cantRegistro);
+    
     // Cantidad
     var cantTotal1 = $('#cantidadTabla1').val();
     cantTotal1 = (cantTotal1 * 1) - (cantidadItem * 1);
@@ -403,10 +382,6 @@ function enviarProducto(idProducto) {
     $('#totalFob2').val(Number.parseFloat(totalFob2).toFixed(2));
     $('#precioTotalFob').val(Number.parseFloat(totalFob2).toFixed(2));
     fobTotal = totalFob2;
-    //Cantidad de registros2
-    var cantRegistro2 = $('#cantRegistro2').text();
-    cantRegistro2 =(cantRegistro2 * 1) + 1;
-    $('#cantRegistro2').text(cantRegistro2);
     // Cantidad
     var cantTotal2 = $('#cantidadTabla2').val();
     cantTotal2 = (cantTotal2 * 1) + (cantidadItem * 1);
@@ -441,7 +416,7 @@ function regresarProducto(idProducto) {
       }
     }
   }
-  // ConstruciÃ³n del td de tabla 2
+  // Construción del td de tabla 2
   var html = '';
   if (buscarT1 == false) {
     html += '<tr id="item1_' + dataProducto["id"].replace(/-/g, "") + '">';
@@ -453,11 +428,10 @@ function regresarProducto(idProducto) {
   html += '<td>' + dataProducto["pcv_descripcion"] + '</td>';
   html += '<td>' + dataProducto["pcv_vendedor"] + '</td>';
   html += '<td>' + dataProducto["pcv_cliente"] + '</td>';
-  html += '<td>' + dataProducto["pcv_fechaconfirmacion"] + '</td>';
   html += '<td>' + dataProducto["pcv_cantidad"] + '</td>';
   html += '<td>' + Number.parseFloat(dataProducto["pcv_preciofob"]).toFixed(2) + '</td>';
   html += '<input type="hidden" id="cantidad_' + dataProducto["id"].replace(/-/g, "") + '" max="' + dataProducto["pcv_cantidadsaldo"] + '" value="' + dataProducto["pcv_cantidadsaldo"] + '" onkeyup="validaSaldoEnlinea(' + dataProducto["name"] + ',' + dataProducto["pcv_cantidadsaldo"] + ')">';
-  html += '<td id="subtotal1_' + dataProducto["id"].replace(/-/g, "") + '" >' + (dataProducto["pcv_cantidadsaldo"] * 1 * dataProducto["pcv_preciofob"]).toFixed(2)  + '</td>';
+  html += '<td id="subtotal1_' + dataProducto["id"].replace(/-/g, "") + '" >' + (dataProducto["pcv_cantidadsaldo"] * 1 * dataProducto["pcv_preciofob"]) + '</td>';
   html += '<td><button class="btn btn-primary btn-xs" onclick="enviarProducto(' + "'" + String(dataProducto["id"]).trim().replace(/-/g, "") + "'" + ')">+</button></td>';
   if (buscarT1 == false) {
     html += '</tr>';
@@ -473,10 +447,6 @@ function regresarProducto(idProducto) {
   var totalFob1 = $('#totalFob1').val();
   totalFob1 = (totalFob1 * 1) + (cantConsolidado * 1 * dataProducto["pcv_preciofob"]);
   $('#totalFob1').val(Number.parseFloat(totalFob1).toFixed(2));
-  //Cantidad de registros
-  var cantRegistro = $('#cantRegistro').text();
-  cantRegistro =(cantRegistro * 1) + 1;
-  $('#cantRegistro').text(cantRegistro);
   // Cantidad
   var cantTotal1 = $('#cantidadTabla1').val();
   cantTotal1 = (cantTotal1 * 1) + (cantConsolidado * 1);
@@ -488,10 +458,6 @@ function regresarProducto(idProducto) {
   $('#totalFob2').val(Number.parseFloat(totalFob2).toFixed(2));
   $('#precioTotalFob').val(Number.parseFloat(totalFob2).toFixed(2));
   fobTotal = totalFob2;
-  //Cantidad de registros2
-  var cantRegistro2 = $('#cantRegistro2').text();
-  cantRegistro2 =(cantRegistro2 * 1) - 1;
-  $('#cantRegistro2').text(cantRegistro2);
   // Cantidad
   var cantTotal2 = $('#cantidadTabla2').val();
   cantTotal2 = (cantTotal2 * 1) - (cantConsolidado * 1);
@@ -521,7 +487,7 @@ function regresarTodo() {
 
   }
 }
-// FunciÃ³n para buscar item en el json de las tablas 1 y 2
+// Función para buscar item en el json de las tablas 1 y 2
 function buscarItem(idItem, tabla) {
   var encontrado = false;
   for (let index = 0; index < tabla.length; index++) {
@@ -586,7 +552,7 @@ function validarSelectProveedor() {
   if (idProv == '') {
     validar = false;
     $('#tituloMensaje').html('Proveedor no seleccionado');
-    var html = '<p><strong>Alerta!</strong> Debe seleccionar un proveedor para continuar con su consolidaciÃ³n.</p>';
+    var html = '<p><strong>Alerta!</strong> Debe seleccionar un proveedor para continuar con su consolidación.</p>';
     $('#mensajeModal').html(html);
     $('#modalMensaje').modal("show");
   }

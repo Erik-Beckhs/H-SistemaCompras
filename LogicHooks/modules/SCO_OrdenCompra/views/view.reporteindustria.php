@@ -24,34 +24,17 @@ class SCO_OrdenCompraViewReporteindustria extends ViewHtml
         {
             $division .= '<option value="'.$row['iddivision_c'].'">'.$row['iddivision_c_name'].'</option>';
         }
-        #Consulta trae datos de Area de mercado
-       	$query = "SELECT DISTINCT(idamercado_c) as idamercado_c, idamercado_c_name, iddivision_c
-                 FROM suitecrm.sco_viewdar
-                 ORDER BY idamercado_c asc;";
-       	$results = $GLOBALS['db']->query($query, true);
-        while($row = $GLOBALS['db']->fetchByAssoc($results))
-        {
-            $amercado .= '<option class="'.$row['iddivision_c'].' am" value="'.$row['idamercado_c'].'">'.$row['idamercado_c_name'].'</option>';
-        }
-       
+
 		$cabecera='       		
-			<link rel="stylesheet" href="modules/SCO_OrdenCompra/ReporteDiv01/JexcelV4/jsuites.css" type="text/css" />
-			<link rel="stylesheet" href="modules/SCO_OrdenCompra/ReporteDiv01/JexcelV4/jexcel.css" type="text/css" />
-			<link rel="stylesheet" href="modules/SCO_OrdenCompra/ReporteDiv01/JexcelV4/style.css" type="text/css" />
-			<link rel="stylesheet" href="modules/SCO_OrdenCompra/ReporteDiv01/ReporteGerencial.css" type="text/css" />
+			<link rel="stylesheet" href="custom/modules/Home/Dashlets/ReporteDiv01/JexcelV4/jsuites.css" type="text/css" />
+			<link rel="stylesheet" href="custom/modules/Home/Dashlets/ReporteDiv01/JexcelV4/jexcel.css" type="text/css" />
+			<link rel="stylesheet" href="custom/modules/Home/Dashlets/ReporteDiv01/JexcelV4/style.css" type="text/css" />
        	';
 		$js = '
-       		<script src="modules/SCO_OrdenCompra/ReporteDiv01/JexcelV4/jexcel.js"></script>
-			<script src="modules/SCO_OrdenCompra/ReporteDiv01/JexcelV4/jsuites.js"></script>
-			<script src="modules/SCO_OrdenCompra/ReporteDiv01/JexcelV4/jsuites.js"></script>
-			<script src="modules/SCO_OrdenCompra/ReporteDiv01/JexcelV4/table2excel.min.js"></script>
-			<script src="modules/SCO_OrdenCompra/ReporteDiv01/ReporteGerencial.js"></script>			
+       		<script src="custom/modules/Home/Dashlets/ReporteDiv01/JexcelV4/jexcel.js"></script>
+			<script src="custom/modules/Home/Dashlets/ReporteDiv01/JexcelV4/jsuites.js"></script>
+			<script src="custom/modules/Home/Dashlets/ReporteDiv01/ReporteGerencial.js"></script>
        	';
-       	$titulo .= '
-				<div class="moduleTitle">
-				<h2 class="module-title-text"> Reporte Gerencial </h2>
-				<span class="utils"></span><div class="clear"></div></div>
-				<!--div class="loader loader-default" data-text="Cargando"></div-->';
 		$filtro = '					
 			<input id="usuarioNombre" type="hidden" value="'.$usuarioNombre.'" disabled>
 			<input id="usuarioDivision" type="hidden" value="'.$usuarioDivision.'" disabled>
@@ -60,12 +43,12 @@ class SCO_OrdenCompraViewReporteindustria extends ViewHtml
 				
 			<div class="container-fluid">
 				<div class="row filtro">													
-					<div class="col-sm-2">
+					<div class="col-sm-3">
 						<div class="input-group">
 							<div class="input-group">
                               <span class="input-group-addon">Division</span>               
-                              <select class="form-control" id="division" name="division" disabled>
-                                <option value="" selected="selected">Todo</option>
+                              <select class="form-control" id="division" name="division">
+                                <option value="00" selected="selected">Todo</option>
                                 '.$division.'                           
                               </select>  
                             </div>
@@ -76,56 +59,43 @@ class SCO_OrdenCompraViewReporteindustria extends ViewHtml
 							<div class="input-group">
                               	<span class="input-group-addon">Area de mercado </span>
                               	<select class="form-control" id="aMercado" name="aMercado">
-                                	<option value=""selected="selected">Todo</option>
+                                	<option value="00"selected="selected">Todo</option>
                                 	'.$amercado.'                     
                               	</select>  
                             </div>
 						</div>
 					</div>
-					<div class="col-sm-2">
-						<div class="input-group">
-							<div class="input-group">
-                              	<span class="input-group-addon">Familia </span>
-                              	<select class="form-control" id="familia" name="familia">
-                                	<option value=""selected="selected">Todo</option>
-                                	'.$familia.'                     
-                              	</select>  
-                            </div>
-						</div>
+					<div class="col-sm-1">
 					</div>
 					<div class="col-sm-2">
-						 <div class="input-group">
-							<div class="input-group">
-                              	<span class="input-group-addon">Grupo </span>
-                              	<select class="form-control" id="grupo" name="grupo">
-                                	<option value=""selected="selected">Todo</option>
-                                	'.$grupo.'                     
-                              	</select>  
-                            </div>
+						<div class="input-group">	
+							<span class="input-group-addon">Fecha de: </span>				
+					 		<input type="text" class="form-control custom-input" id="datepicker">
 						</div>
-					</div>						
-					<div class="col-sm-1">						
-						<input type="text" name="crecimiento" id="crecimiento" class="form-control" value="10"  placeholder="Crecimiento">		
-					</div>				
+					</div>	
+					<div class="col-sm-2">
+						<div class="input-group">	
+							<span class="input-group-addon">Hasta: </span>				
+					 		<input type="text" class="form-control custom-input" id="datepicker2">
+						</div>
+					</div>
 					<div class="col-sm-1">
-						<button type="button" class="btn btn-sm btn-info" id="buscar">
+						<button type="button" class="btn btn-sm btn-info" id="buscarBackOrder">
 							<i class="glyphicon glyphicon-search"></i>
 						</button>
-					</div>	
-					<div class="col-sm-1">
-						<input type="button" class="btn btn-sm btn-info" value="Excel" id="btnExportar">
-					</div>
+					</div>					
 				</div>
+				</br>
 			</div>
 			';
 		$html = '
-       		
+       		<!--input type="text" name="" id="input" class="form-control" value="" required="required" pattern="" title=""-->
 			
-			<div id="mostrarDatos"></div>
+			<div id="spreadsheet"></div>
 
-			<!--textarea id="log" style="width:100%;height:100px;"></textarea>
-			<input type="button" onclick="document.getElementById(\'log\').value =JSON.stringify(document.getElementById(\'mostrarDatos\').jexcel.getJson())" value="Get JSON" -->
+			<textarea id="log" style="width:100%;height:100px;"></textarea>
+			<input type="button" onclick="document.getElementById(\'log\').value =JSON.stringify(document.getElementById(\'spreadsheet\').jexcel.getJson())" value="Get JSON">
        ';
-       	echo $cabecera.$titulo.$filtro.$html.$js;
+       	echo $cabecera.$filtro.$html.$js;
     }
 }

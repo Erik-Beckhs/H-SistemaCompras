@@ -71,7 +71,7 @@ class SCO_OrdenCompraViewReporte extends ViewHtml
                             <div class="input-group">
                               <span class="input-group-addon">Division pedido</span>                                                             
                               <select class="form-control" id="divCompra" name="divCompra">
-                                <option value="" selected="selected">Todo</option>
+                                <option value="00" selected="selected">Todo</option>
                                 '.$fdivision.'                           
                               </select>  
                             </div>                         
@@ -80,7 +80,7 @@ class SCO_OrdenCompraViewReporte extends ViewHtml
                             <div class="input-group">
                               <span class="input-group-addon">Area de mercado </span>                                                 
                               <select class="form-control" id="aMercado" name="aMercado">
-                                <option value=""selected="selected">Todo</option>
+                                <option value="00"selected="selected">Todo</option>
                                 '.$famercado.'                     
                               </select>  
                             </div>                         
@@ -198,9 +198,6 @@ class SCO_OrdenCompraViewReporte extends ViewHtml
         }
        echo '
        <div class="row">
-          <ul class="pager">
-            <li class="next"><a href="?action=ajaxui#ajaxUILoc=index.php%3Fmodule%3DSCO_OrdenCompra%26action%3Dreporteindustria">Reporte Gerencial</a></li>
-          </ul>
          <div class="col-sm-8">
              <h2 class="titulo">Reporte</h2>
          </div>       

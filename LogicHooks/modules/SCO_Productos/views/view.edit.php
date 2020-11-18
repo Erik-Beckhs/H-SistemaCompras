@@ -128,7 +128,7 @@ class SCO_ProductosViewEdit extends ViewEdit {
      echo '
     <script>
       var datosProductos = $("#idOrdeCompra").text();
-      
+      alert(asd);
       $("#SCO_Productos_subpanel_cancel_button").hide();
       $("#SCO_Productos_subpanel_save_button").hide();
       function convRes() {
@@ -155,7 +155,7 @@ class SCO_ProductosViewEdit extends ViewEdit {
       <script src=\"modules/SCO_Productos/items.js?".time()."\"></script>
       <link rel=\"stylesheet\" href=\"custom/modules/SCO_OrdenCompra/jquery.jexcel.css?".time()."\" type=\"text/css\" />
       <script>
-      /*Agregando a la vista las tablas de carga masiva y carga individual*/
+      //Agregando a la vista las tablas de carga masiva y carga individual
       $('#form_SubpanelQuickCreate_SCO_Productos').append(\"<div role='tabpanel' class= 'tabpanel'><ul class='nav nav-tabs' role='tablist'><li role='presentation' class='active'><a href='#home' aria-controls='home' role='tab' data-toggle='tab'> Carga Individual </a></li><li role='presentation'><a href='#tab' aria-controls='tab' role='tab' data-toggle='tab'> Carga Masiva </a></li><li><a href='#' aria-controls='home' role='tab' data-toggle='tab' onClick='convRes()'>Crear nuevo Producto</a></li></ul><div class='tab-content'><div role='tabpanel' class='tab-pane active' id='home'><div class='yui-navset detailview_tabs yui-navset-top'><div class='yui-content'><div class='detail view  detail508 expanded'><form id='formPro'><table class='panelContainer' cellspacing='1'><table id='idprod' ></table><table id='idser'></table><table id='idnewpro' ></table><div id='findiv'></div></table></form></div></div></div></div><div role='tabpanel' class='tab-pane' id='tab'><div class='yui-navset detailview_tabs yui-navset-top'><div class='yui-content'><div class='detail view  detail508 expanded'><table class='panelContainer' cellspacing='1'><div id='my'></div><div id='tabmy'></div></table></div></div></div></div></div></div>\");
       $('#findiv').append(htmljs);
       //////////////////////////////////////////////
@@ -513,11 +513,11 @@ class SCO_ProductosViewEdit extends ViewEdit {
 
       for(var i = 0; i < $('#idprod tbody tr').length ; i++){
           if($('#pro_idproductocotizado'+[i]).val() !=''){
-              //console.log($('#pro_idproductocotizado'+[i]).val());
+              console.log($('#pro_idproductocotizado'+[i]).val());
               $('#product_delete_line'+[i]).hide();
               $('#pro_nombre'+[i]).css({'pointer-events':'none','background':'#eee'});
               $('#seleccion'+[i]).hide();
-              $('#seleccion'+[i]).after('<a class=\'btn-xs btn-info\'>consolidado</a>');
+              $('#seleccion'+[i]).after('<a class=\'btn-xs btn-info\'>cotizado</a>');
           }else{
               console.log('sin valor');
           }
@@ -526,7 +526,7 @@ class SCO_ProductosViewEdit extends ViewEdit {
       for(var i = 0; i < $('.jexcel tbody tr').length ; i++){
           if($('#13-'+[i]).text() !=''){                
               $('#0-'+[i]).css({'pointer-events':'none','background':'#eee'});  
-              //console.log($('#13-'+[i]).text());
+              console.log($('#13-'+[i]).text());
           }else{
               console.log('sin valor');
           }
