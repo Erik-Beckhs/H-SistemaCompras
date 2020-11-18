@@ -86,6 +86,11 @@ $installdefs = array(
         'from' => '<basepath>/custom/modules/SCO_Aprobadores/datosAprobadores.php',
         'to'   => 'custom/modules/SCO_Aprobadores/datosAprobadores.php',
       ),
+      //SCO_Autorizaciones
+      array(
+        'from' => '<basepath>/custom/modules/SCO_Autorizaciones/autorizacion.php',
+        'to'   => 'custom/modules/SCO_Autorizaciones/autorizacion.php',
+      ),
       //SCO_Consolidacion
       array(
         'from' => '<basepath>/custom/modules/SCO_Consolidacion/controller.php',
@@ -621,6 +626,16 @@ $installdefs = array(
        'file'   => 'custom/modules/SCO_Aprobadores/correlativoDeleted.php',
        'class'   => 'ClcorrelativoDel',
        'function'  => 'FncorrelativoDel',
+      ),
+
+      array(
+       'module'  => 'SCO_Autorizaciones',
+       'hook'    => 'after_save',
+       'order'   => 1,
+       'description' => 'Firmas Autorizadas',
+       'file'   => 'custom/modules/SCO_Autorizaciones/autorizacion.php',
+       'class'   => 'Clautoriza',
+       'function'  => 'Fnautoriza',
       ),
 
       array(
