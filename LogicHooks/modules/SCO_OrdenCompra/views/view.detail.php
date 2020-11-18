@@ -13,8 +13,8 @@ require_once('include/MVC/View/views/view.detail.php');
 class SCO_OrdenCompraViewDetail extends ViewDetail {
 
   function SCO_OrdenCompraViewDetail(){
-	  parent::ViewDetail();
-	  $this->useForSubpanel = true;
+    parent::ViewDetail();
+    $this->useForSubpanel = true;
   }
 
   public function preDisplay(){
@@ -26,42 +26,42 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
 
     echo '<link href="modules/SCO_Consolidacion/css-loader.css?'.time().'" rel="stylesheet" type="text/css" />';
     echo '<script src="modules/SCO_OrdenCompra/viewdetail.js?'.time().'"></script>';
-	$sty = "<style>
+  $sty = "<style>
      .btnCompra {
         /* padding: 10px !important; */
         padding: 0px 10px 0px 10px !important;
         /* font-size: 10px !important; */
     }
-  	#alertapp{
-  		position: fixed;
-  		float: left;
-  		margin-top: 10px;
-  		margin-left:35%;
-  		z-index:1;
-   	}
-   	#idpro tbody tr{
-  	 	border-bottom: 1px solid #ccc;
-  	 	background-color: #f2f2f2;
-  	}
-   	.search-form{
-   		display: none;
-   	}
-   	.label{
-   		font-size: 11.5px;
-   	}
+    #alertapp{
+      position: fixed;
+      float: left;
+      margin-top: 10px;
+      margin-left:35%;
+      z-index:1;
+    }
+    #idpro tbody tr{
+      border-bottom: 1px solid #ccc;
+      background-color: #f2f2f2;
+    }
+    .search-form{
+      display: none;
+    }
+    .label{
+      font-size: 11.5px;
+    }
     .campopersonalizado{
       margin-top:10px;
     }
     #list_subpanel_sco_ordencompra_sco_productos .oddListRowS1{background:red;}
-   	#whole_subpanel_sco_ordencompra_sco_productoscompras {display:none;}
-   	#whole_subpanel_sco_productoscotizados_sco_ordencompra {display:none;}
+    #whole_subpanel_sco_ordencompra_sco_productoscompras {display:none;}
+    #whole_subpanel_sco_productoscotizados_sco_ordencompra {display:none;}
 
-   	</style>";
-		$htmlpp ='<div id="alertapp"></div> 
+    </style>";
+    $htmlpp ='<div id="alertapp"></div> 
               <div id="ventanaModal"></div>
               <div id="ventanaModalPM"></div>
               ';
-  	echo $sty.$htmlpp;
+    echo $sty.$htmlpp;
     if($this->bean->orc_tipoo == '1'){
         echo "<style>
              #whole_subpanel_sco_despachos_sco_ordencompra {display:none;}
@@ -126,21 +126,21 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
 
     echo "<script>$(\"#subpanel_title_sco_despachos_sco_ordencompra tr \").append(\"<div style='background: #FFF; color:#000; padding:2px; margin-top:3px; width: 360px; border-radius:0px; margin-right: 600px; border: solid 2px #CCC;'>Productos en despacho = <span class='label label-success'>".$c."</span> / <span class='label label-primary'>".$row['total_cantidad']."</span>, Restantes = <span class='label label-danger'>".$disponible."</span> </div>\");</script>";
 
- 		$estado = $this->bean->orc_estado;
- 		$arr_estado = array(1 => 'En curso',2=>'Borrador ', 3 =>'Solicitar Aprobacion ', 4 => 'Aprobado ' ,5 => 'Anulado ', 6 =>'Cerrado ');
- 		$moneda = $this->bean->orc_tcmoneda;
-		$st ='<style>
-        			.gris{color: #ccc;}
-        			.gris:hover{color: #ccc;}
-        			.single{display: none;}
-        			#sugar_action_button, .sugar_action_button{display: none;}
-        			#whole_subpanel_sco_ordencompra_sco_productos tbody td a {pointer-events: none; cursor: default;}
-        			#whole_subpanel_sco_ordencompra_sco_contactos tbody td a {pointer-events: none; cursor: default;}
-        			#whole_subpanel_sco_ordencompra_sco_aprobadores	tbody td a {pointer-events: none; cursor: default;}
-        			#whole_subpanel_sco_ordencompra_sco_plandepagos	tbody td a {pointer-events: none; cursor: default;}
+    $estado = $this->bean->orc_estado;
+    $arr_estado = array(1 => 'En curso',2=>'Borrador ', 3 =>'Solicitar Aprobacion ', 4 => 'Aprobado ' ,5 => 'Anulado ', 6 =>'Cerrado ');
+    $moneda = $this->bean->orc_tcmoneda;
+    $st ='<style>
+              .gris{color: #ccc;}
+              .gris:hover{color: #ccc;}
+              .single{display: none;}
+              #sugar_action_button, .sugar_action_button{display: none;}
+              #whole_subpanel_sco_ordencompra_sco_productos tbody td a {pointer-events: none; cursor: default;}
+              #whole_subpanel_sco_ordencompra_sco_contactos tbody td a {pointer-events: none; cursor: default;}
+              #whole_subpanel_sco_ordencompra_sco_aprobadores tbody td a {pointer-events: none; cursor: default;}
+              #whole_subpanel_sco_ordencompra_sco_plandepagos tbody td a {pointer-events: none; cursor: default;}
               .footable-first-visible{display:none}
               .footable-last-visible{display:none}
-        	</style>';
+          </style>';
   #Obteniendo la relacion del la Orden de compra con Consolidacion de Cotizaciones
   $beanOC = BeanFactory::getBean('SCO_OrdenCompra', $this->bean->id);
   $beanOC->load_relationship('sco_consolidacion_sco_ordencompra');
@@ -151,7 +151,7 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
   $idConsolidacion = $parentBean->id;
   $beanCons = BeanFactory::getBean('SCO_Consolidacion', $idConsolidacion);
   $consolidacion   = '<a class="suitepicon suitepicon-action-view"href="index.php?module=SCO_Consolidacion&action=DetailView&record='.$idConsolidacion.'"> '.$beanCons->name.'</a>';          
-	#script para cambio Reporte
+  #script para cambio Reporte
    if($current_user->iddivision_c == '03'){
     $reporteGerencial = '
       <div class="col-xs-12 col-sm-6 detail-view-row-item">
@@ -173,50 +173,51 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
     $reporteGerencial = '';
   }
 
-   	#script para cambio de estados
-	echo "
-		<script>
+    #script para cambio de estados
+  echo "
+    <script>
     var nombreOC = '".$this->bean->name."';
     var nombreCortoOC = '".$this->bean->orc_nomcorto."';
-    var idOc = '".$this->bean->id."';		
-	</script>";
-	echo "
-	<script>
+    var idOc = '".$this->bean->id."';   
+    var divisionSolicitante = '".$this->bean->orc_division."';
+  </script>";
+  echo "
+  <script>
     $('#list_subpanel_sco_ordencompra_sco_productos #sco_ordencompra_sco_productos_nuevo_button').on('click',function(){
-		$('#idpro').fadeOut();
-		});
+    $('#idpro').fadeOut();
+    });
     //$('#list_subpanel_sco_ordencompra_sco_productos .list tbody .oddListRowS1').hide();
     $('#list_subpanel_sco_ordencompra_sco_productos').append(htmlpro);
-		</script>";
+    </script>";
 
         // echo "<script src=\"modules/SCO_Productos/jquery.bdt.min.js?".time()."\"></script>";
         // echo "<script>$('#idpro').bdt();</script>";
         echo "<style>#list_subpanel_sco_ordencompra_sco_productos .list{display:none;}</style>";
- 		switch ($estado) {
- 			case '1':
-      		echo "<style>#list_subpanel_sco_ordencompra_sco_productos table .clickMenu{display:none;}
-          		     #list_subpanel_sco_ordencompra_sco_plandepagos table .clickMenu{display:none;}
-          		     #list_subpanel_sco_ordencompra_sco_contactos table .clickMenu{display:none;}
-          		     #list_subpanel_sco_ordencompra_sco_aprobadores table .clickMenu{display:none;}
-          		     #whole_subpanel_sco_ordencompra_sco_plandepagos	tbody td a {pointer-events: none; cursor: default;}
-          		     #detail_header_action_menu {pointer-events: none; cursor: default;}
-          		     #whole_subpanel_sco_ordencompra_sco_documentos	table .clickMenu{display:none;}
-        		     </style>";
-    			/*echo "
-    				<style>
-    					#whole_subpanel_sco_ordencompra_sco_documentos tbody td a {pointer-events: none; cursor: default;}
-    				</style>";*/
+    switch ($estado) {
+      case '1':
+          echo "<style>#list_subpanel_sco_ordencompra_sco_productos table .clickMenu{display:none;}
+                   #list_subpanel_sco_ordencompra_sco_plandepagos table .clickMenu{display:none;}
+                   #list_subpanel_sco_ordencompra_sco_contactos table .clickMenu{display:none;}
+                   #list_subpanel_sco_ordencompra_sco_aprobadores table .clickMenu{display:none;}
+                   #whole_subpanel_sco_ordencompra_sco_plandepagos  tbody td a {pointer-events: none; cursor: default;}
+                   #detail_header_action_menu {pointer-events: none; cursor: default;}
+                   #whole_subpanel_sco_ordencompra_sco_documentos table .clickMenu{display:none;}
+                 </style>";
+          /*echo "
+            <style>
+              #whole_subpanel_sco_ordencompra_sco_documentos tbody td a {pointer-events: none; cursor: default;}
+            </style>";*/
             if($divisionUser != '06'){
               echo "<style>
                    #whole_subpanel_sco_ordencompra_sco_documentos table .clickMenu{display:inline;}
                  </style>";
             }
             echo "
-    				<script>//$('#btn-estados').hide();
-    				$('#desc_por').prop('disabled', true);
-    				$('#desc_val').prop('disabled', true);</script>";
-			parent::display();
-			echo '
+            <script>//$('#btn-estados').hide();
+            $('#desc_por').prop('disabled', true);
+            $('#desc_val').prop('disabled', true);</script>";
+      parent::display();
+      echo '
       <div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
               <div class="col-xs-12 col-sm-4 label col-1-label" style="margin-left: -35px;">
@@ -238,12 +239,12 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
         '.$reporteGerencial.'
       </div>
       ';
-			#echo $js.$st;
-			break;
-		case '2':
-      	echo "<style>#whole_subpanel_sco_despachos_sco_ordencompra{display:none;}</style>";
-			parent::display();
-			echo '
+      #echo $js.$st;
+      break;
+    case '2':
+        echo "<style>#whole_subpanel_sco_despachos_sco_ordencompra{display:none;}</style>";
+      parent::display();
+      echo '
       <div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
               <div class="col-xs-12 col-sm-4 label col-1-label" style="margin-left: -35px;">
@@ -268,18 +269,18 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
         '.$reporteGerencial.'
       </div>
       ';
-			break;
-		case '3':
-	         echo "<style>#list_subpanel_sco_ordencompra_sco_productos table .clickMenu{display:none;}
-              	         #list_subpanel_sco_ordencompra_sco_plandepagos table .clickMenu{display:none;}
-              	         #list_subpanel_sco_ordencompra_sco_contactos table .clickMenu{display:none;}
-              	         #list_subpanel_sco_ordencompra_sco_aprobadores table .clickMenu{display:none;}
-              	         #whole_subpanel_sco_ordencompra_sco_plandepagos	tbody td a {pointer-events: none; cursor: default;}
-              	         #detail_header_action_menu {pointer-events: none; cursor: default;}
-              	         #whole_subpanel_sco_despachos_sco_ordencompra{display:none;}
-              	 </style>";
-				parent::display();
-				echo '
+      break;
+    case '3':
+           echo "<style>#list_subpanel_sco_ordencompra_sco_productos table .clickMenu{display:none;}
+                         #list_subpanel_sco_ordencompra_sco_plandepagos table .clickMenu{display:none;}
+                         #list_subpanel_sco_ordencompra_sco_contactos table .clickMenu{display:none;}
+                         #list_subpanel_sco_ordencompra_sco_aprobadores table .clickMenu{display:none;}
+                         #whole_subpanel_sco_ordencompra_sco_plandepagos  tbody td a {pointer-events: none; cursor: default;}
+                         #detail_header_action_menu {pointer-events: none; cursor: default;}
+                         #whole_subpanel_sco_despachos_sco_ordencompra{display:none;}
+                 </style>";
+        parent::display();
+        echo '
         <div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
           <div class="col-xs-12 col-sm-6 detail-view-row-item">
                 <div class="col-xs-12 col-sm-4 label col-1-label" style="margin-left: -35px;">
@@ -310,16 +311,16 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
           '.$reporteGerencial.'
         </div>
        ';
- 			echo "<style>#list_subpanel_sco_ordencompra_sco_documentos .sugar_action_button{display:block;}</style>";
+      echo "<style>#list_subpanel_sco_ordencompra_sco_documentos .sugar_action_button{display:block;}</style>";
       if($divisionUser != '06'){
         echo "<style>
              #whole_subpanel_sco_ordencompra_sco_documentos table .clickMenu{display:inline;}
            </style>";
       }
-				break;
-		case '4':
-			parent::display();
-			echo '
+        break;
+    case '4':
+      parent::display();
+      echo '
       <div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
               <div class="col-xs-12 col-sm-4 label col-1-label" style="margin-left: -35px;">
@@ -344,19 +345,19 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
         '.$reporteGerencial.'
       </div>
      ';
-			 echo $js.$st."<script>$('#list_subpanel_sco_ordencompra_sco_documentos .sugar_action_button').show();</script>";
-			break;
-	case '5':
-		/*echo "
-			<style>
-				#whole_subpanel_sco_ordencompra_sco_documentos tbody td a {pointer-events: none; cursor: default;}
-			</style>";*/
+       echo $js.$st."<script>$('#list_subpanel_sco_ordencompra_sco_documentos .sugar_action_button').show();</script>";
+      break;
+  case '5':
+    /*echo "
+      <style>
+        #whole_subpanel_sco_ordencompra_sco_documentos tbody td a {pointer-events: none; cursor: default;}
+      </style>";*/
       echo "
-			<script>//$('#btn-estados').hide();
-			$('#desc_por').prop('disabled', true);
-			$('#desc_val').prop('disabled', true);</script>";
-		parent::display();
-		echo '
+      <script>//$('#btn-estados').hide();
+      $('#desc_por').prop('disabled', true);
+      $('#desc_val').prop('disabled', true);</script>";
+    parent::display();
+    echo '
     <div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
       <div class="col-xs-12 col-sm-6 detail-view-row-item">
             <div class="col-xs-12 col-sm-4 label col-1-label" style="margin-left: -35px;">
@@ -380,28 +381,28 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
       '.$reporteGerencial.'
     </div>
     ';
-		echo $js.$st;
-		break;
-		case '6':
-      		echo "<style>#list_subpanel_sco_ordencompra_sco_productos table .clickMenu{display:none;}
-		     #list_subpanel_sco_ordencompra_sco_plandepagos table .clickMenu{display:none;}
-		     #list_subpanel_sco_ordencompra_sco_contactos table .clickMenu{display:none;}
-		     #list_subpanel_sco_ordencompra_sco_aprobadores table .clickMenu{display:none;}
-		     #whole_subpanel_sco_ordencompra_sco_plandepagos	tbody td a {pointer-events: none; cursor: default;}
-      			#list_subpanel_sco_despachos_sco_ordencompra table .clickMenu{display:none;}
-		     #detail_header_action_menu {pointer-events: none; cursor: default;}
-		     #whole_subpanel_sco_ordencompra_sco_documentos	table .clickMenu{display:none;}
-		     </style>";
-			/*echo "
-				<style>
-					#whole_subpanel_sco_ordencompra_sco_documentos tbody td a {pointer-events: none; cursor: default;}
-				</style>";*/
+    echo $js.$st;
+    break;
+    case '6':
+          echo "<style>#list_subpanel_sco_ordencompra_sco_productos table .clickMenu{display:none;}
+         #list_subpanel_sco_ordencompra_sco_plandepagos table .clickMenu{display:none;}
+         #list_subpanel_sco_ordencompra_sco_contactos table .clickMenu{display:none;}
+         #list_subpanel_sco_ordencompra_sco_aprobadores table .clickMenu{display:none;}
+         #whole_subpanel_sco_ordencompra_sco_plandepagos  tbody td a {pointer-events: none; cursor: default;}
+            #list_subpanel_sco_despachos_sco_ordencompra table .clickMenu{display:none;}
+         #detail_header_action_menu {pointer-events: none; cursor: default;}
+         #whole_subpanel_sco_ordencompra_sco_documentos table .clickMenu{display:none;}
+         </style>";
+      /*echo "
+        <style>
+          #whole_subpanel_sco_ordencompra_sco_documentos tbody td a {pointer-events: none; cursor: default;}
+        </style>";*/
         echo "
-				<script>//$('#btn-estados').hide();
-				$('#desc_por').prop('disabled', true);
-				$('#desc_val').prop('disabled', true);</script>";
-			parent::display();
-			echo '
+        <script>//$('#btn-estados').hide();
+        $('#desc_por').prop('disabled', true);
+        $('#desc_val').prop('disabled', true);</script>";
+      parent::display();
+      echo '
       <div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
               <div class="col-xs-12 col-sm-4 label col-1-label" style="margin-left: -35px;">
@@ -425,17 +426,17 @@ class SCO_OrdenCompraViewDetail extends ViewDetail {
         '.$reporteGerencial.'
       </div>
       ';
-			#echo $js.$st;
+      #echo $js.$st;
       if($divisionUser != '06'){
         echo "<style>
              #whole_subpanel_sco_ordencompra_sco_documentos table .clickMenu{display:inline;}
            </style>";
       }
-			break;
-		default:
-			parent::display();
-			break;
- 		}
- 	}
+      break;
+    default:
+      parent::display();
+      break;
+    }
+  }
 }
 ?>

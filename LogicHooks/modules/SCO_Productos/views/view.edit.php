@@ -128,7 +128,6 @@ class SCO_ProductosViewEdit extends ViewEdit {
      echo '
     <script>
       var datosProductos = $("#idOrdeCompra").text();
-      alert(asd);
       $("#SCO_Productos_subpanel_cancel_button").hide();
       $("#SCO_Productos_subpanel_save_button").hide();
       function convRes() {
@@ -513,7 +512,7 @@ class SCO_ProductosViewEdit extends ViewEdit {
 
       for(var i = 0; i < $('#idprod tbody tr').length ; i++){
           if($('#pro_idproductocotizado'+[i]).val() !=''){
-              console.log($('#pro_idproductocotizado'+[i]).val());
+              //console.log($('#pro_idproductocotizado'+[i]).val());
               $('#product_delete_line'+[i]).hide();
               $('#pro_nombre'+[i]).css({'pointer-events':'none','background':'#eee'});
               $('#seleccion'+[i]).hide();
@@ -526,7 +525,7 @@ class SCO_ProductosViewEdit extends ViewEdit {
       for(var i = 0; i < $('.jexcel tbody tr').length ; i++){
           if($('#13-'+[i]).text() !=''){                
               $('#0-'+[i]).css({'pointer-events':'none','background':'#eee'});  
-              console.log($('#13-'+[i]).text());
+              //console.log($('#13-'+[i]).text());
           }else{
               console.log('sin valor');
           }

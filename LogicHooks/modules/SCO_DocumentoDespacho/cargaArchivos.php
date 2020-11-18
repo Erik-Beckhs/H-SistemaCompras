@@ -1,6 +1,6 @@
 <?php
 /**
-*Esta clase realiza operaciones matemáticas.
+*Esta clase realiza operaciones matemÃ¡ticas.
 *
 *@author Reynaldo Kantuta <rkantuta@hansa.com.bo>
 *@copyright 2018
@@ -10,9 +10,9 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
 require_once('data/BeanFactory.php');
 require_once('include/entryPoint.php');
 
-	$archivos = $_FILES['filename_file'];
-	$idoc = $_GET['idoc'];
-	//$tipo = 'corización';
+  $archivos = $_FILES['filename_file'];
+  $idoc = $_GET['idoc'];
+  //$tipo = 'corizaciÃ³n';
   $c = 0;
     $id_Documento = create_guid();
 
@@ -41,15 +41,15 @@ require_once('include/entryPoint.php');
         0
       );";
     $GLOBALS['db']->query($insertarDocumetos, true);
-		//Registramos la relación de los archivos con la orden de compra
-		$id_relacion = create_guid();
-		$insertarRel = "INSERT INTO sco_embarque_sco_documentodespacho_c
+    //Registramos la relaciÃ³n de los archivos con la orden de compra
+    $id_relacion = create_guid();
+    $insertarRel = "INSERT INTO sco_embarque_sco_documentodespacho_c
       (id,date_modified,deleted,sco_embarque_sco_documentodespachosco_embarque_ida,sco_embarque_sco_documentodespachosco_documentodespacho_idb)
       VALUES
       (
         '".$id_relacion."',
         '".date("Y-m-d hh:mm:ss")."',
-				'0',
+        '0',
         '".$idoc."',
         '".$id_Documento."'
       );";

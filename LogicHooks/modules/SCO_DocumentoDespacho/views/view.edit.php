@@ -25,7 +25,7 @@ class SCO_DocumentoDespachoViewEdit extends ViewEdit {
     $idoc = $this->bean->id;
 
     $idoc = $_REQUEST['sco_embarque_id'];
-    echo "ID PADRE".$idoc;
+    #echo "ID PADRE".$idoc;
     
     echo '<link href="/modules/SCO_documentos/fileinput.css" media="all" rel="stylesheet" type="text/css"/>';
     echo '<link href="/modules/SCO_documentos/all.css" media="all" rel="stylesheet" type="text/css"/>';
@@ -55,7 +55,7 @@ class SCO_DocumentoDespachoViewEdit extends ViewEdit {
                 <button type="button" style="width: 100%;background: #dc3545;color:#fff;border:solid 1px#dc3545;" class="btn btn-sm " data-dismiss="modal">Cancelar</button>
               </div>
               <div class="col-xs-6">
-                <button type="button" title="Guardar" style="width: 100%; background:#0e2741;" class="btn btn-sm btn-info" onclick="location.reload();" value="Guardar">Aceptar</button>
+                <button type="button" title="Guardar" style="width: 100%; background:#0e2741;" class="btn btn-sm btn-info" onclick="location.reload();" value="Guardar">Aceptar y refrescar</button>
               </div>
             </div>            
           </div>

@@ -106,7 +106,7 @@ class SCO_OrdenCompraViewReporte extends ViewHtml
                           </div>                          
                         </div>
                         <div class="col-sm-6"style="text-align: center;">
-                  		    <div class="input-group">
+                          <div class="input-group">
                             <span class="input-group-addon">Estado Embarque </span>
                             <select  class="form-control" id="estadoEmbarque" name="estadoEmbarque">
                               <option value="00"selected="selected">Todo</option>
@@ -147,7 +147,7 @@ class SCO_OrdenCompraViewReporte extends ViewHtml
                    </div>  
                    <div class="col-sm-3">
                       <div class="input-group">
-                        <span class="input-group-addon">Estado embarque </span>                		    
+                        <span class="input-group-addon">Estado embarque </span>                       
                         <select class="form-control" id="estadoEmbarque" name="estadoEmbarque">
                           <option value="0"selected="selected">Todo</option>
                           <option value="1">En curso</option>
@@ -185,7 +185,7 @@ class SCO_OrdenCompraViewReporte extends ViewHtml
                    </div>  
                    <div class="col-sm-3">
                      <div class="input-group">                           
-                       <span class="input-group-addon">Estado Embarque  </span>                		    
+                       <span class="input-group-addon">Estado Embarque  </span>                       
                         <select class="form-control" id="estadoEmbarque" name="estadoEmbarque">
                           <option value="0"selected="selected">Todo</option>
                           <option value="1">En curso</option>
@@ -203,21 +203,21 @@ class SCO_OrdenCompraViewReporte extends ViewHtml
          </div>       
          <div class="col-sm-4">
           <div class="input-group ">
-    			    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-    			    <input id="buscar" type="text" class="form-control" name="buscar" placeholder="Buscar......">
-    			</div>
+              <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+              <input id="buscar" type="text" class="form-control" name="buscar" placeholder="Buscar......">
+          </div>
          </div>                             
          <div class="col-sm-2">
            <div class="input-group" style="display:none;">
-             <div class="input-group">    		    
-              <input id="usuario" type="text" class="form-control" name="msg" placeholder="'.$nombre.'" disabled>    		    
-      		  </div>
-    		    <span class="input-group-addon">DivisiÃ³n</span>
-    		    <input id="division" type="text" class="form-control" name="msg"  value="'.$division.'"disabled>
+             <div class="input-group">            
+              <input id="usuario" type="text" class="form-control" name="msg" placeholder="'.$nombre.'" disabled>           
+            </div>
+            <span class="input-group-addon">DivisiÃƒÂ³n</span>
+            <input id="division" type="text" class="form-control" name="msg"  value="'.$division.'"disabled>
             <input id="logistico" type="text" class="form-control" name="msg"  value="'.$logistico.'"disabled>
             <input id="rol" type="text" class="form-control" name="rol"  value="'.$rol.'"disabled>
             <input id="idamercado_c" type="text" class="form-control" name="idamercado_c"  value="'.$idamercado_c.'"disabled>
-    		  </div>            
+          </div>            
          </div>
        </div>
        ';
@@ -231,10 +231,10 @@ class SCO_OrdenCompraViewReporte extends ViewHtml
                 </div>     
                 <div class="modal-body">                     
                   <div class="text-element content-element circles-list">
-        						<ol class="listHistorial">
-        							
-        						</ol>
-        					</div>
+                    <ol class="listHistorial">
+                      
+                    </ol>
+                  </div>
                 </div>      
               </div>
           </div>
@@ -244,7 +244,7 @@ class SCO_OrdenCompraViewReporte extends ViewHtml
        <input type="hidden" id="fecha_ac" value="'.$fecha_ac.'"/>       
        <div class="cabecera">
        <div class="row">         
-         '.$filtroDiv.'                       	                 
+         '.$filtroDiv.'                                          
        </div>
 <!--Vista de totales en la cabecera-->
        <div class="row cabecera2">
@@ -307,33 +307,33 @@ class SCO_OrdenCompraViewReporte extends ViewHtml
        </div>   
 <!--Vista de lista de registros tabla-->              
        <div class="" onload="bodyOnloadHandler()">
-      	<table style="width:100%;color: #555;" class="table table-striped table-responsive table-bordered table-sm " id="tabla">
+        <table style="width:100%;color: #555;" class="table table-striped table-responsive table-bordered table-sm " id="tabla">
             <thead id="myTable">
-      		  <tr>
+            <tr>
             <th class="tablesorter-header tablesorter-headerUnSorted " id="cellVendedor"><div > # </div></th>
-      		  <th class="tablesorter-header tablesorter-headerUnSorted " id="cellVendedor"><div > Nombre Compra (Div.) </div></th>
-      		  <th class="tbcabecera" ><div > Proveedor </div></th>
+            <th class="tablesorter-header tablesorter-headerUnSorted " id="cellVendedor"><div > Nombre Compra (Div.) </div></th>
+            <th class="tbcabecera" ><div > Proveedor </div></th>
             <th class="tbcabecera" ><div > Incoterm </div></th>
             <th class="tbcabecera" ><div > Pais de origen </div></th>
-      		  <th class="tbcabecera" ><div > Modalidad Transporte </div></th>	
-            <th class="tbcabecera" ><div > Solicitado por </div></th>	  
-      		  <th class="tbcabecera" style="width: 88px;"><div > Fecha Orden Compra </div></th>
+            <th class="tbcabecera" ><div > Modalidad Transporte </div></th> 
+            <th class="tbcabecera" ><div > Solicitado por </div></th>   
+            <th class="tbcabecera" style="width: 88px;"><div > Fecha Orden Compra </div></th>
             <th class="tbcabecera" style="width: 88px;"><div > Fecha Despacho </div></th>
             <th class="tbcabecera" style="width: 88px;"><div > Fecha Embarque </div></th>            
             <th class="tbcabecera" ><div > Importe Compra </div></th>
             <th class="tbcabecera" ><div > Despacho Parcial </div></th>
             <th class="tbcabecera" ><div > % Despacho Parcial </div></th>
             <th class="tbcabecera" ><div > Importe Embarque </div></th>
-      		  <th class="tbcabecera" ><div > Ultimo hito </div></th>
-      		  <th class="tbcabecera" style="width: 60px;"><div > Dias transito / Dias Plan. </div></th>
-      		  <th class="tbcabecera" style="width: 90px;"><div > Fecha prevista a entrega </div></th>
-      		  <th class="tbcabecera" ><div > Nombre del Embarque </div></th>            
-      		  <th class="tbcabecera" ><div > Estado del Embarque </div></th>
-      		  <th class="tbcabecera" style="width: 150px;"><div > Riesgo /  Problema / Notas </div></th>                        
-      		  </tr>
-      		</thead>
-              <tbody class="contenido">      			
-      		</tbody>
+            <th class="tbcabecera" ><div > Ultimo hito </div></th>
+            <th class="tbcabecera" style="width: 60px;"><div > Dias transito / Dias Plan. </div></th>
+            <th class="tbcabecera" style="width: 90px;"><div > Fecha prevista a entrega </div></th>
+            <th class="tbcabecera" ><div > Nombre del Embarque </div></th>            
+            <th class="tbcabecera" ><div > Estado del Embarque </div></th>
+            <th class="tbcabecera" style="width: 150px;"><div > Riesgo /  Problema / Notas </div></th>                        
+            </tr>
+          </thead>
+              <tbody class="contenido">           
+          </tbody>
             </table>
             
       </div>
@@ -353,16 +353,16 @@ $('.btn-toggle').click(function() {
     $(this).find('.btn').toggleClass('active');  
     
     if ($(this).find('.btn-primary').size()>0) {
-    	$(this).find('.btn').toggleClass('btn-primary');
+      $(this).find('.btn').toggleClass('btn-primary');
     }
     if ($(this).find('.btn-danger').size()>0) {
-    	$(this).find('.btn').toggleClass('btn-danger');
+      $(this).find('.btn').toggleClass('btn-danger');
     }
     if ($(this).find('.btn-success').size()>0) {
-    	$(this).find('.btn').toggleClass('btn-success');
+      $(this).find('.btn').toggleClass('btn-success');
     }
     if ($(this).find('.btn-info').size()>0) {
-    	$(this).find('.btn').toggleClass('btn-info');
+      $(this).find('.btn').toggleClass('btn-info');
     }
     
     $(this).find('.btn').toggleClass('btn-default');

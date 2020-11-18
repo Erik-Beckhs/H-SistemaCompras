@@ -238,7 +238,7 @@ div#paginacion {padding-left: 30%;}
                     <center>Productos</center>
                 </div>
                 <div class="panel-body">
-                    <div id="contenido">Paginación en local<br></div>
+                    <div id="contenido">PaginaciÃ³n en local<br></div>
                     <center><div id="paginacion"></div></center> 
                 </div>
             </div> 
@@ -255,7 +255,7 @@ div#paginacion {padding-left: 30%;}
                         <thead>
                           <tr>
                             <th>Productos</th>
-                            <th>Descripción</th>
+                            <th>DescripciÃ³n</th>
                             <th>Cantidades</th>
                             <th></th>
                           </tr>

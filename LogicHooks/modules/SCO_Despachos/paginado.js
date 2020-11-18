@@ -1,5 +1,5 @@
 var ProductosNuevos = new Array();
-function pinta(num,inicio){//funciï¿½n creada por Jorge Zazo de la Encarnaciï¿½n http://www.forosdelweb.com/1201706-post4.html
+function pinta(num,inicio){//funciÃ¯Â¿Â½n creada por Jorge Zazo de la EncarnaciÃ¯Â¿Â½n http://www.forosdelweb.com/1201706-post4.html
 	//Modificaciones Ariel Oliva codigosutiles.com
 	var pagNow = inicio;
 	var limSup;
@@ -9,27 +9,27 @@ function pinta(num,inicio){//funciï¿½n creada por Jorge Zazo de la Encarnaci�
 	var pagAnt;
 	var pagSig;
 	var rutaIma=""; //Ruta base de las imagenes
-	var numPaginas = misDatos.length /num; //Detecto el nï¿½mero "entero" de pï¿½ginas
+	var numPaginas = misDatos.length /num; //Detecto el nÃ¯Â¿Â½mero "entero" de pÃ¯Â¿Â½ginas
 	numPaginas = numPaginas.toString();
 	numPaginas = numPaginas.split(".");
 	numPaginasF = eval(numPaginas[0]);
 
-	if (misDatos.length % num != 0){ //Si el resultado de la divisiï¿½n anterior no es exacto le aï¿½ado manualmente una pï¿½gina mï¿½s
+	if (misDatos.length % num != 0){ //Si el resultado de la divisiÃ¯Â¿Â½n anterior no es exacto le aÃ¯Â¿Â½ado manualmente una pÃ¯Â¿Â½gina mÃ¯Â¿Â½s
 		numPaginasF ++;
 	}
 
 
-	if((pagNow + 1) != numPaginasF){//Establezco el nï¿½mero de datos a mostrar si la ï¿½ltima pï¿½gina no tiene el mismo nï¿½mero de datos
+	if((pagNow + 1) != numPaginasF){//Establezco el nÃ¯Â¿Â½mero de datos a mostrar si la Ã¯Â¿Â½ltima pÃ¯Â¿Â½gina no tiene el mismo nÃ¯Â¿Â½mero de datos
 		limSup = -1;
 	} else {
 		limSup = (misDatos.length - (numPaginasF * num))-1;
 	}
 
-	DatoI = pagNow * num;//Establezco el dato inicial y el dato final de la paginaciï¿½n
+	DatoI = pagNow * num;//Establezco el dato inicial y el dato final de la paginaciÃ¯Â¿Â½n
 	DatoF = DatoI + (num+limSup);
 
 
-	if (pagNow == 0){//Establezco cual es la pï¿½gina anterior y la siguiente
+	if (pagNow == 0){//Establezco cual es la pÃ¯Â¿Â½gina anterior y la siguiente
 		pagAnt = 0;
 	} else {
 		pagAnt = pagNow - 1;
@@ -40,7 +40,7 @@ function pinta(num,inicio){//funciï¿½n creada por Jorge Zazo de la Encarnaci�
 		pagSig = pagNow + 1;
 	}
 
-	for (i=0;i<numPaginasF;i++){//Pinto la cadena con el nï¿½mero de pï¿½ginas y sus correspondientes enlaces
+	for (i=0;i<numPaginasF;i++){//Pinto la cadena con el nÃ¯Â¿Â½mero de pÃ¯Â¿Â½ginas y sus correspondientes enlaces
 		//numPaginasFSt += "<li><a href='javascript:pinta("+ num +","+ i +");'>"+ (i+1) +"</a><li> ";
 		numPaginasFSt += "<li><a href='#' onClick='pinta("+ num +","+ i +");return false'>"+ (i+1) +"</a><li> ";
 	}
@@ -88,7 +88,7 @@ function pinta(num,inicio){//funciï¿½n creada por Jorge Zazo de la Encarnaci�
 			}
 			cadena = cadena + "</tbody></table>";
 			contenido.innerHTML = cadena;
-		var pagina = document.createElement("span");//... y la paginaciï¿½n.
+		var pagina = document.createElement("span");//... y la paginaciÃ¯Â¿Â½n.
 		document.getElementById("paginacion").appendChild( pagina);
 		paginacion.innerHTML += "<center><ul class='pagination'>"+
 				"<li><a href='#'  onClick='javascript:pinta("+ num +",0);return false'>&larr; Primero</a></li>"+
@@ -138,7 +138,7 @@ function pinta(num,inicio){//funciï¿½n creada por Jorge Zazo de la Encarnaci�
 			}
 			cadena = cadena + "</tbody></table>";
 			contenido.innerHTML = cadena;
-		var pagina = document.createElement("span");//... y la paginaciï¿½n.
+		var pagina = document.createElement("span");//... y la paginaciÃ¯Â¿Â½n.
 		document.getElementById("paginacion").appendChild( pagina);
 		paginacion.innerHTML += "<center><ul class='pagination'>"+
 				"<li><a href='#' onClick='javascript:pinta("+ num +",0);return false'>&larr; Primero</a></li>"+

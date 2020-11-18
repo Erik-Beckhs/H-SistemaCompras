@@ -1,6 +1,6 @@
 <?php
 /**
-*Esta clase realiza operaciones matemáticas.
+*Esta clase realiza operaciones matemÃ¡ticas.
 *
 *@author Limberg Alcon <lalcon@hansa.com.bo>
 *@copyright 2018
@@ -13,7 +13,7 @@ require_once('include/entryPoint.php');
 global $current_user;
 	$nomproy = $_GET['nomproy'];
 	$idDiv = $current_user->iddivision_c;
-	//Función que verifia si el proyecto existe
+	//FunciÃ³n que verifia si el proyecto existe
 	$query = "SELECT id, name, proyc_tipo
 						FROM sco_proyectosco
 						WHERE deleted = 0
@@ -22,7 +22,7 @@ global $current_user;
 	$results = $GLOBALS['db']->query($query, true);
 	$row = $GLOBALS['db']->fetchByAssoc($results);
 	//Adicional a ver si el proyecto existe tambien verificamos si existe la excepcion para no agregar un proyecto
-	//Verificamos la configuración de los Cnf_Valida_proyecto para la orden de compra
+	//Verificamos la configuraciÃ³n de los Cnf_Valida_proyecto para la orden de compra
   $queryCnf = "SELECT name,cnf_val_proyecto FROM suitecrm.sco_cnfvalproyectos where cnf_division = '$idDiv' and deleted =0;";
   $cnf_valProy = $GLOBALS['db']->query($queryCnf, true);
   $row_cnfVP = $GLOBALS['db']->fetchByAssoc($cnf_valProy);

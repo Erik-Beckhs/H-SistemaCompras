@@ -4493,7 +4493,7 @@
             uploadBatch: 'batch file upload',
             uploadExtra: 'form data upload'
         },
-        dropZoneTitle: 'Arrastre y suelte aquí los archivos &hellip;',
+        dropZoneTitle: 'Arrastre y suelte aquÃ­ los archivos &hellip;',
         dropZoneClickTitle: '<br>(or click to select {files})',
         previewZoomButtonTitles: {
             prev: 'View previous file',

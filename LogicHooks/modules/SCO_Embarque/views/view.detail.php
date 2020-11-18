@@ -1,6 +1,6 @@
 <?php
 /**
-*Esta clase realiza operaciones matemáticas.
+*Esta clase realiza operaciones matemÃ¡ticas.
 *
 *@author Limberg Alcon <lalcon@hansa.com.bo>
 *@copyright 2018
@@ -12,11 +12,11 @@ require_once('include/MVC/View/views/view.detail.php');
 
 class SCO_EmbarqueViewDetail extends ViewDetail {
 
- 	function SCO_EmbarqueViewDetail(){
- 		parent::ViewDetail();
- 	}
+    function SCO_EmbarqueViewDetail(){
+        parent::ViewDetail();
+    }
 
- 	function display(){
+    function display(){
     $html = '
     <div class="row detail-view-row" style="background:#fff;">
     <br>
@@ -63,55 +63,55 @@ class SCO_EmbarqueViewDetail extends ViewDetail {
     $('.mostrarTotalItems').append(valor);
     ";
     
- 		echo "<script>
+        echo "<script>
         ".$js."
-				var hrefReporte = '';
-  			function mostrarBtnRep()
-			 {
-			 	URLactual = window.location;
-	  	  	 	var href = $('.detail-view #reporte a').text();
-	  	  	 	var cadena = String(URLactual),
-				    separador = '/',
-				    arregloDeSubCadenas = cadena.split(separador);
-				hrefReporte = String(arregloDeSubCadenas[0])+'/'+String(arregloDeSubCadenas[1])+'/'+String(arregloDeSubCadenas[2])+href;
-	  			$('.detail-view  #reporte a').attr({
-												   'title': 'Ver reporte de embarque',
-												   'href': '#',
-												   'html': 'Reporte',
-												   'class': 'btn btn-xs btn-primary',
-												   'onClick':'mostrarReporte()'
-												});
-				 $('.detail-view  #reporte a').html('Reporte');
-			 }
-			 var mostrarReporte = function()
-				{
-					var url1 = hrefReporte;
-					window.open(url1,'','width=1220,height=650');
-				}
-			setTimeout('mostrarBtnRep()',500);
+                var hrefReporte = '';
+            function mostrarBtnRep()
+             {
+                URLactual = window.location;
+                var href = $('.detail-view #reporte a').text();
+                var cadena = String(URLactual),
+                    separador = '/',
+                    arregloDeSubCadenas = cadena.split(separador);
+                hrefReporte = String(arregloDeSubCadenas[0])+'/'+String(arregloDeSubCadenas[1])+'/'+String(arregloDeSubCadenas[2])+href;
+                $('.detail-view  #reporte a').attr({
+                                                   'title': 'Ver reporte de embarque',
+                                                   'href': '#',
+                                                   'html': 'Reporte',
+                                                   'class': 'btn btn-xs btn-primary',
+                                                   'onClick':'mostrarReporte()'
+                                                });
+                 $('.detail-view  #reporte a').html('Reporte');
+             }
+             var mostrarReporte = function()
+                {
+                    var url1 = hrefReporte;
+                    window.open(url1,'','width=1220,height=650');
+                }
+            setTimeout('mostrarBtnRep()',500);
       window.onload = function(){
       ".$js."
       }
       
-  		  </script>";
+          </script>";
 
- 		//estado del EMBARQUE
+        //estado del EMBARQUE
     
- 		$estado = $this->bean->emb_estado;
- 		switch ($estado) {
- 			case '3':
- 				//css. ocultando botones
- 				echo "<style>
- 					#whole_subpanel_sco_embarque_sco_despachos .clickMenu {display: none;}
- 					#whole_subpanel_sco_embarque_sco_facturasproveedor .clickMenu {display: none;}
- 					#whole_subpanel_sco_embarque_sco_documentodespacho .clickMenu {display: none;}
- 				</style>";
- 				break;
- 			default:
- 				break;
- 		}
- 		parent::display();
+        $estado = $this->bean->emb_estado;
+        switch ($estado) {
+            case '3':
+                //css. ocultando botones
+                echo "<style>
+                    #whole_subpanel_sco_embarque_sco_despachos .clickMenu {display: none;}
+                    #whole_subpanel_sco_embarque_sco_facturasproveedor .clickMenu {display: none;}
+                    /*#whole_subpanel_sco_embarque_sco_documentodespacho .clickMenu {display: none;}*/
+                </style>";
+                break;
+            default:
+                break;
+        }
+        parent::display();
     echo $html;
- 	}
+    }
  }
 ?>

@@ -1,6 +1,6 @@
 <?php
 /**
-*Esta clase cumple la función de concluir los despachos intangibles.
+*Esta clase cumple la funciÃ³n de concluir los despachos intangibles.
 *
 *@author Reynaldo Kantuta <rkantuta@hansa.com.bo>
 *@copyright 2018

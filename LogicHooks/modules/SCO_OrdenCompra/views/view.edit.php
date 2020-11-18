@@ -1,6 +1,6 @@
 <?php
 /**
-*Esta clase realiza operaciones matemáticas.
+*Esta clase realiza operaciones matemÃ¡ticas.
 *
 *@author Limberg Alcon <lalcon@hansa.com.bo>
 *@copyright 2018
@@ -20,7 +20,7 @@ class SCO_OrdenCompraViewEdit extends ViewEdit {
   }
 
   function display(){
-  	global $current_user;
+    global $current_user;
       $division = $current_user->iddivision_c;
         //QUery, ordenando los nombres del modulo de CNF_EVENTOS
         $query ="SELECT * FROM suitecrm.sco_cnf_comentarios where cnf_division = '$division' ";
@@ -33,7 +33,7 @@ class SCO_OrdenCompraViewEdit extends ViewEdit {
         }
       $com = base64_encode($Comentarios);
 
-  	echo "<script>
+    echo "<script>
         var comentario = '".$com."';
 
       if($('#orc_observaciones').val() == '')
@@ -50,8 +50,8 @@ class SCO_OrdenCompraViewEdit extends ViewEdit {
             $('#orc_verco').on('click',function()
             {
               if($('#orc_verco')[0].checked) {
-              	alert('Seguro que desea clonar esta Orden de Compra?');
-              	$('.panel-default').hide('swing');
+                alert('Seguro que desea clonar esta Orden de Compra?');
+                $('.panel-default').hide('swing');
                 //Desbloqueamos el campo de busqueda para clonar ordenes de compra
                 $('#btn_orc_occ').prop('disabled',false);
                 $('#orc_occ').prop('disabled', false);
@@ -74,7 +74,7 @@ class SCO_OrdenCompraViewEdit extends ViewEdit {
                 $('#orc_tcgarantia').prop('disabled', true);
               }
               else{
-              	$('.panel-default').show('swing');
+                $('.panel-default').show('swing');
                 //Bloqueamos el campo de busqueda para clonar ordenes de compra
                 $('#orc_occ').prop('disabled', true);
                 //Desbloqueamos los demas campos
@@ -100,7 +100,7 @@ class SCO_OrdenCompraViewEdit extends ViewEdit {
             {
               if($('#orc_decop')[0].checked)
               {
-              	alert('esto es check');
+                alert('esto es check');
                 $('#orc_denomemp_label').hide();
                 $('#orc_denomemp').hide();
                 $('#orc_defax_label').hide();
@@ -114,7 +114,7 @@ class SCO_OrdenCompraViewEdit extends ViewEdit {
                 $('#orc_dedireccion_label').hide();
                 $('#orc_dedireccion').hide();
               } else {
-              	alert('esto es no check');
+                alert('esto es no check');
                 $('#orc_denomemp_label').fadeIn();
                 $('#orc_denomemp').fadeIn();
                 $('#orc_defax_label').fadeIn();
@@ -171,7 +171,7 @@ class SCO_OrdenCompraViewEdit extends ViewEdit {
             </script>";
          echo "<style> :disabled{ backgorund:rgb(235, 235, 228); color:#aaa;} input[type='text']:disabled { background: rgb(235, 235, 228); color:#aaa;} select:disabled{ background: rgb(235, 235, 228); color:#aaa;} </style>";
         echo $js;
-  	parent::display();
+    parent::display();
   }
 
 }

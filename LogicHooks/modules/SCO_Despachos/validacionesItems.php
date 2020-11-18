@@ -107,12 +107,13 @@
 <script>
     var despacho = '<?php echo $this->bean->id; ?>';
     var dataProductosDespacho = [];
+    var datosNumeracion = {};
     $(document).ready(function () {
         $('#subpanel_title_sco_despachos_sco_productosdespachos').after('<div class="validar"><button class="btn btn-sm btn-success" style="position: absolute; right: 0;" onclick="modalValidar()"> Ordenar items </button></div>');
     });
 
     function modalValidar() {
-          $('.btnGuardar').hide("swing");
+        $('.btnGuardar').hide("swing");
         $("#modalValProd").modal("show");
           $.ajax({
             type: "POST",
@@ -228,8 +229,10 @@
                     console.log("TRUE");
                     console.log(data1[filaDes1][1].trim() + " - " + filaDes1 + " == " + data2[filaDes2][0].trim() + " - " + filaDes2);
 
-                    oitem2.nombre = data2[filaDes2][1];
-                    oitem2.descripcion = data2[filaDes2][2];
+                    oitem2.nombre = data1[filaDes1][1];
+                    oitem2.descripcion = data1[filaDes1][2];
+                    oitem2.id = data1[filaDes1][8];
+                    oitem2.observacion = data1[filaDes1][3];
                     oitem2.posicion = parseInt(filaDes2) + 1;
                     oDiferentesDes2.push(oitem2);
 
@@ -257,6 +260,7 @@
                     //$('#productosDespacho2 #row-'+filaDes2).css( "background-color", "red" );
 
                     oitem.nombre = data1[filaDes1][1];
+                    oitem.id = data1[filaDes1][8];
                     oitem.descripcion = data1[filaDes1][2];
                     oitem.posicion = parseInt(filaDes1) + 1;
                     oDiferentesDes1.push(oitem);                    
@@ -277,9 +281,10 @@
                 }
             }
         }
-        console.log(oDiferentesDes1);
+        //console.log(oDiferentesDes1);
         console.log(oDiferentesDes2);
-        if(oDiferentesDes2.length == data1.length){
+        datosNumeracion = oDiferentesDes2;
+        if(oDiferentesDes2.length <= data1.length){
             $('#pTotalValidacion2').text(oDiferentesDes2.length + ' / ' + data1.length + ' encontrados');
             $('.pTotalValidacion2').css( "color", "green" );
 
@@ -399,22 +404,36 @@
     }
 
     function guardarItems(){
+
         if(confirm("Seguro que quiere actualizar los registros?"))
         {
             var data1 = $('#productosDespacho1').jexcel('getData');
-            console.log(data1);
+            //console.log(data1);
             var arrItem = [];
-            
-            for (let filaDes1 = 0; filaDes1 < data1.length; filaDes1++) { 
-                if(data1[filaDes1][8].trim() != ""){
-                    var objItem = {};  
-                    objItem.numeracion = data1[filaDes1][0].trim();
-                    objItem.observacion = data1[filaDes1][3].trim();
-                    objItem.idProductoDespacho = data1[filaDes1][8].trim();
-
-                    arrItem.push(objItem);
-                }                
+            var contador = '';
+            if(datosNumeracion.length > 0){
+                for (let filaDes1 = 0; filaDes1 < datosNumeracion.length; filaDes1++) { 
+                  if(datosNumeracion.id != ""){
+                      var objItem = {};  
+                      objItem.numeracion = datosNumeracion[filaDes1].posicion;
+                      objItem.observacion = datosNumeracion[filaDes1].observacion;
+                      objItem.idProductoDespacho = datosNumeracion[filaDes1].id;
+                      arrItem.push(objItem);
+                  }                
+                }
+            }else{                  
+                for (let filaDes1 = 0; filaDes1 < data1.length; filaDes1++) { 
+                    if(data1[filaDes1][8].trim() != ""){
+                        var objItem = {};  
+                        objItem.numeracion = 0;
+                        objItem.observacion = data1[filaDes1][3].trim();
+                        objItem.idProductoDespacho = data1[filaDes1][8].trim();
+    
+                        arrItem.push(objItem);
+                    }                
+                }
             }
+            
             console.log(arrItem);
             $.ajax({
                 type: 'post',

@@ -1,6 +1,6 @@
 <?php
 /**
-*Esta clase realiza operaciones matemÃ¡ticas.
+*Esta clase realiza operaciones matemÃƒÂ¡ticas.
 *
 *@author Limberg Alcon <lalcon@hansa.com.bo>
 *@copyright 2018

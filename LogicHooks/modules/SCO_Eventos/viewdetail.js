@@ -84,7 +84,7 @@ function envioDeDatos(jsonDatos){
             $(".loader").removeClass("is-active");
             if(respuesta != '404'){
             	if(respuesta != 'Error'){
-            		alert("Registro exitoso!, se refrescara su pantalla.");	
+            		//alert("Registro exitoso!, se refrescara su pantalla.");	
             		location.reload();
             	}else{
             		alert("Error, su informacion no se registro correctamente, contactese con el admin.");

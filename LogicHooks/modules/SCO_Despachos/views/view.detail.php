@@ -1,6 +1,6 @@
 <?php
 /**
-*Esta clase realiza operaciones matemáticas.
+*Esta clase realiza operaciones matemÃ¡ticas.
 *
 *@author Limberg Alcon <lalcon@hansa.com.bo>
 *@copyright 2018
@@ -12,11 +12,11 @@ require_once('include/MVC/View/views/view.detail.php');
 
 class SCO_DespachosViewDetail extends ViewDetail {
 
- 	function SCO_DespachosViewDetail(){
- 		parent::ViewDetail();
- 	}
+  function SCO_DespachosViewDetail(){
+    parent::ViewDetail();
+  }
 
- 	function display(){
+  function display(){
     echo '
     <link href="modules/SCO_Consolidacion/css-loader.css" rel="stylesheet" type="text/css" />
     <div class="loader loader-default" data-text="Cargando"></div>';
@@ -65,32 +65,32 @@ class SCO_DespachosViewDetail extends ViewDetail {
     $(".mostrarTotalItems").append(valor);
     ';
 
- 		//$notificaciones = new Notifica();
- 		//ID del DESPACHOS
- 		$id_des = $this->bean->id;
- 		$arr_estados =  array(1 => 'Borrador',2 =>'Solicitud de embarque',3 =>'En Transito',4 =>'Concluido');
+    //$notificaciones = new Notifica();
+    //ID del DESPACHOS
+    $id_des = $this->bean->id;
+    $arr_estados =  array(1 => 'Borrador',2 =>'Solicitud de embarque',3 =>'En Transito',4 =>'Concluido');
 
-		$estado = $this->bean->des_est;
-		//CSS, para ocultar botones y Subpaneles
-		echo "<style>#whole_subpanel_sco_productoscompras_sco_despachos {display:none;}</style>";
-		$st ='<style>
-			.cantidad{pointer-events:none;}
-			.precio{pointer-events:none;}
-			.gris{color: #ccc;}
-			.gris:hover{color: #ccc;}
-			.single{display: none;}
-			.clickMenu {display: none;}
-			#edit_button{pointer-events: none; cursor: default;}
+    $estado = $this->bean->des_est;
+    //CSS, para ocultar botones y Subpaneles
+    echo "<style>#whole_subpanel_sco_productoscompras_sco_despachos {display:none;}</style>";
+    $st ='<style>
+      .cantidad{pointer-events:none;}
+      .precio{pointer-events:none;}
+      .gris{color: #ccc;}
+      .gris:hover{color: #ccc;}
+      .single{display: none;}
+      .clickMenu {display: none;}
+      #edit_button{pointer-events: none; cursor: default;}
 
-			#whole_subpanel_sco_despachos_sco_documentodespacho .clickMenu {display: none;}
-			#whole_subpanel_sco_despachos_sco_productosdespachos .clickMenu {display: none;}
-			</style>';
-		//agregando HTML en la vista de DESPACHOS de acuerdo a los estados del DESPACHO
- 		switch ($estado) {
- 			case '0':
- 			//$notificaciones->FnnotificaDespacho($this->bean);
- 			parent::display();
- 			echo '
+      #whole_subpanel_sco_despachos_sco_documentodespacho .clickMenu {display: none;}
+      //#whole_subpanel_sco_despachos_sco_productosdespachos .clickMenu {display: none;}
+      </style>';
+    //agregando HTML en la vista de DESPACHOS de acuerdo a los estados del DESPACHO
+    switch ($estado) {
+      case '0':
+      //$notificaciones->FnnotificaDespacho($this->bean);
+      parent::display();
+      echo '
       <div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
                <div class="col-xs-12 col-sm-6 detail-view-row-item">
               <div class="col-xs-12 col-sm-4 label col-1-label" style="margin-left: -28px;">
@@ -120,26 +120,26 @@ class SCO_DespachosViewDetail extends ViewDetail {
       </div>  
       '.$html.'
       ';
-			echo '<script>
+      echo '<script>
         '.$js.'
-				var id_des = "'.$id_des.'";
-				function solicitar(est){
-  					$.ajax({
-    					type: "get",
-    					url: "index.php?to_pdf=true&module=SCO_Despachos&action=estado&id="+id_des,
-    					data: {est},
-    					success: function(data) {
-      						data = data.replace("$","");
-      						var estado = $.parseJSON(data);
-      						if(estado != 9){
-      							location.reload();
-      						}
+        var id_des = "'.$id_des.'";
+        function solicitar(est){
+            $.ajax({
+              type: "get",
+              url: "index.php?to_pdf=true&module=SCO_Despachos&action=estado&id="+id_des,
+              data: {est},
+              success: function(data) {
+                  data = data.replace("$","");
+                  var estado = $.parseJSON(data);
+                  if(estado != 9){
+                    location.reload();
+                  }
                   else{
-      							alert("Debe escribir un comentario en el campo de observaciones");
-      						}
-    		    	}
-		    	  });
-				}
+                    alert("Debe escribir un comentario en el campo de observaciones");
+                  }
+              }
+            });
+        }
         function intangible(est){
           if (confirm("Esta seguro de convertir a intangible este despcho?")) {
             $.ajax({
@@ -157,14 +157,14 @@ class SCO_DespachosViewDetail extends ViewDetail {
               }
             });
           }
-				}        
-			</script>';
- 				break;
- 			case '1':
- 			echo $st;
- 			//$notificaciones->FnnotificaDespacho($this->bean);
- 			parent::display();
- 			echo '
+        }        
+      </script>';
+        break;
+      case '1':
+      echo $st;
+      //$notificaciones->FnnotificaDespacho($this->bean);
+      parent::display();
+      echo '
       <div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
         <br>
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
@@ -189,39 +189,39 @@ class SCO_DespachosViewDetail extends ViewDetail {
         </div>
       </div>       
       '.$html;
-			echo '<script>
-				var id_des = "'.$id_des.'";
-				function solicitar(est){
+      echo '<script>
+        var id_des = "'.$id_des.'";
+        function solicitar(est){
 
-					$.ajax({
-					type: "get",
-					url: "index.php?to_pdf=true&module=SCO_Despachos&action=estado&id="+id_des,
-					data: {est},
-					success: function(data) {
-						data = data.replace("$","");
+          $.ajax({
+          type: "get",
+          url: "index.php?to_pdf=true&module=SCO_Despachos&action=estado&id="+id_des,
+          data: {est},
+          success: function(data) {
+            data = data.replace("$","");
 
-						var estado = $.parseJSON(data);
-		    		}
-		    	});
-					location.reload();
-				}
+            var estado = $.parseJSON(data);
+            }
+          });
+          location.reload();
+        }
         '.$js.'
-			</script>';
+      </script>';
 
- 				break;
- 			case '2':
- 			echo $st;
- 			//$notificaciones->FnnotificaDespacho($this->bean);
+        break;
+      case '2':
+      echo $st;
+      //$notificaciones->FnnotificaDespacho($this->bean);
       
- 			parent::display();
+      parent::display();
       echo $html;
       echo '<script>'.$js.'</script>';
- 				break;
- 			case '3':
- 			//$notificaciones->FnnotificaDespacho($this->bean);
- 			echo $st;
- 			parent::display();
- 			echo '
+        break;
+      case '3':
+      //$notificaciones->FnnotificaDespacho($this->bean);
+      echo $st;
+      parent::display();
+      echo '
       <!--div class="row detail-view-row" style="background:#FFF;margin-top:-20px;">
         <br>
         <div class="col-xs-12 col-sm-6 detail-view-row-item">
@@ -244,28 +244,6 @@ class SCO_DespachosViewDetail extends ViewDetail {
         </div>
       </div-->       
       '.$html;        
-			echo '<script>
-				var id_des = "'.$id_des.'";
-				function solicitar(est){
-					//debugger;
-					$.ajax({
-					type: "get",
-					url: "index.php?to_pdf=true&module=SCO_Despachos&action=estado&id="+id_des,
-					data: {est},
-					success: function(data) {
-						data = data.replace("$","");
-
-						var estado = $.parseJSON(data);
-		    		}
-		    	});
-					location.reload();
-				}
-        '.$js.'
-			</script>';
- 				break;
-
- 			case '4':
- 			//$notificaciones->FnnotificaDespacho($this->bean);
       echo '<script>
         var id_des = "'.$id_des.'";
         function solicitar(est){
@@ -284,19 +262,41 @@ class SCO_DespachosViewDetail extends ViewDetail {
         }
         '.$js.'
       </script>';
- 			parent::display();
-      echo $st.$html;
- 				break;
+        break;
 
- 			default:
- 			parent::display();
- 				break;
- 		}
+      case '4':
+      //$notificaciones->FnnotificaDespacho($this->bean);
+      echo '<script>
+        var id_des = "'.$id_des.'";
+        function solicitar(est){
+          //debugger;
+          $.ajax({
+          type: "get",
+          url: "index.php?to_pdf=true&module=SCO_Despachos&action=estado&id="+id_des,
+          data: {est},
+          success: function(data) {
+            data = data.replace("$","");
+
+            var estado = $.parseJSON(data);
+            }
+          });
+          location.reload();
+        }
+        '.$js.'
+      </script>';
+      parent::display();
+      echo $st.$html;
+        break;
+
+      default:
+      parent::display();
+        break;
+    }
     if($estado == 0){
     require_once("modules/SCO_Despachos/dividirdespacho.php");
     }
     require_once("modules/SCO_Despachos/validacionesItems.php");
- 	}
+  }
 
  }
 ?>

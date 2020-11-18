@@ -1,6 +1,6 @@
 <?php
 /**
-*Esta clase realiza operaciones matemáticas.
+*Esta clase realiza operaciones matemÃ¡ticas.
 *
 *@author Limberg Alcon <lalcon@hansa.com.bo>
 *@copyright 2018
@@ -65,11 +65,11 @@ require_once('include/entryPoint.php');
 			$nuevoplan = 0;
       while($row = $GLOBALS['db']->fetchByAssoc($results)){
         //Query, Insertando datos a la relacion de EMBARQUES y EVENTOS
-        //incrementamos la cantodad de días para asignar una nueva fecha plan
+        //incrementamos la cantodad de dÃ­as para asignar una nueva fecha plan
         $dias += $row['cnfev_diastrans'];
 				$nuevoplan = $row['cnfev_diastrans'];
         #$fecha_plan = date('Y-m-d', strtotime('+'.$dias.' day'));
-        //Operacion, las fechas del modulo de EVENTOS## Incrementamos la cantidad de dias a la fecha de creación para tener la fecha plan del evento
+        //Operacion, las fechas del modulo de EVENTOS## Incrementamos la cantidad de dias a la fecha de creaciÃ³n para tener la fecha plan del evento
         $fecha_plan = date('Y-m-d', strtotime($fecha."+ ".$dias." day"));
         //Verificamos si la fecha plan del evento es dias Sabado o Domingo
         $fplan=date("w", strtotime($fecha_plan));
@@ -77,11 +77,11 @@ require_once('include/entryPoint.php');
         // {
         //   // Si es 0 o 6 el evento cae en fin de semana
         //   if($fplan=="6"){
-        //     // es Sabado e incrementamos 2 días a la fecha plan
+        //     // es Sabado e incrementamos 2 dÃ­as a la fecha plan
         //     $dias += 2;
         //   }
         //   if($fplan=="0"){
-        //     // es Domingo e incrementamos 1 día a la fecha plan
+        //     // es Domingo e incrementamos 1 dÃ­a a la fecha plan
         //     $dias += 1;
         //   }
         // }

@@ -1,6 +1,6 @@
 <?php
 /**
-*Esta clase realiza operaciones matemáticas.
+*Esta clase realiza operaciones matemÃ¡ticas.
 *
 *@author Reynaldo Kantuta <rkatuta@hansa.com.bo>
 *@copyright 2018
@@ -17,7 +17,7 @@ require_once('include/entryPoint.php');
   $observacion = $beanoc->orc_obs;
   if ($estado == 5) {
     if ($observacion == '' || $observacion == null ) {
-      $respuesta = 'Es necesario que coloque una observación';
+      $respuesta = 'Es necesario que coloque una observaciÃ³n';
     }
     else {
       $respuesta = true;

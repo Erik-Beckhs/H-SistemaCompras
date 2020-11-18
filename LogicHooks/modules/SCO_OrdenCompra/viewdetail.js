@@ -19,16 +19,23 @@ function descargaReporteGerencialDiv03(id,nombre,orc_nomcorto){
 }
 
 function estado(est,id){
-	if(est == 3){
-		var titulo = "Aprobación Orden de Compra";				
-		var mensaje = "Envío de Orden de Compra a ProcessMaker";
-		var cuerpo = "<br><center > <p class='text-info'><strong>Desea enviar la orden de compra a todos sus aprobadores?</strong></p>";
-		cuerpo += "<br><p > Esto realiara el envio de Email y casos ProcessMaker </p> </center>";
-		ventanaModalPM(titulo,cuerpo,mensaje,est,id);
-		$('#modalOrdenCompraPM').modal('show');
-	}else{
-		envioDeAprobadores(est,id);
-	}
+   if(divisionSolicitante == '06' || divisionSolicitante == '03'){
+    /*Aprobacion ProcessMaker*/
+      	if(est == 3){
+        		var titulo = "AprobaciÃ³n Orden de Compra";				
+        		var mensaje = "EnvÃ­o de Orden de Compra a ProcessMaker";
+        		var cuerpo = "<br><center > <div class='alert alert-warning' role='alert'>Si es la primera vez que ve este mensaje, consulte a su administrador.</div><p class='text-info'><strong>Desea enviar su orden de compra a todos sus aprobadores?</strong></p>";
+        		cuerpo += "<br><p > Esto realiara el envio de Email y casos ProcessMaker </p> </center>";
+        		ventanaModalPM(titulo,cuerpo,mensaje,est,id);
+        		$('#modalOrdenCompraPM').modal('show');
+      	}else{
+      		  envioDeAprobadores(est,id);
+      	}
+    }
+    else{
+      /*Descomentar en caso de aprobacion manual*/
+      envioDeAprobadores(est,id);
+    }
 }
 
 function verificarObs(id,estado){
@@ -48,6 +55,8 @@ function verificarObs(id,estado){
 
 function envioDeAprobadores(est,id){
 	$('#modalOrdenCompraPM').modal('hide');
+	$('#envioConfirma').html('<btn class="btn btn-sm alert-success" >Enviando su Informacion...</btn>');
+	$('#btnConfirma').css('display','none');
 	console.log("estado :" +est + ", Id:" + id);
 	var num = est;
 	var respuesta = verificarObs(id,num);	
@@ -73,17 +82,17 @@ function envioDeAprobadores(est,id){
 	        		if(desctot[2] == desctot[3]){
 	        			if(desctot[4] == '200'){
 	        				console.log('conexion exitosa, num = ' + desctot);
-	        				alert("Su informacion de Orden de Compra se envio exitosamente.");
+	        				alert("Su informacion de Orden de Compra se envio exitosamente, se refrescara su pantalla.");
 	    	        		location.reload(true);
 	        			}else{
 	        				$('#btn-estados').css('pointer-events','visible');
-		     				var titulo = "Aprobadores";				
-							var mensaje = "Alerta!!! No se pudo enviar la informacion.";
-							var cuerpo = "<br><center > <p class='text-info'><strong>No se realizo el envio de la Orden de compra a ProccessMaker.</strong></p>";
-							cuerpo += "<br><p >Consulte con su Administrador</p> </center>";
-							ventanaModal(data,titulo,cuerpo,mensaje);
-			      			$('#modalOrdenCompra').modal('show');
-	        			}	    
+  		     				var titulo = "Aprobacion ProcessMaker";				
+  							  var mensaje = "No se pudo enviar la informacion.";
+  							  var cuerpo = "<br><center > <p style='color:red;'><strong>No se realizo el envio de la Orden de compra a ProccessMaker.</strong></p>";
+  							  cuerpo += "<br><p >Consulte con su Administrador</p> </center>";
+  							  ventanaModal(data,titulo,cuerpo,mensaje);
+							  $('#modalOrdenCompra').modal('show');
+	        			}
 	  				}else{
 	     				//$('#alertapp').append('<div class="alert alert-danger"><button type="button" style=" background: transparent !important; color: #000000!important; padding-left: 10px; " class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Verifique los precios totales de <strong>Productos</strong> '+ desctot[3] + ' y <strong>Plan de Pagos</strong> '+ desctot[2] + '</div>');
 	     				$('#btn-estados').css('pointer-events','visible');
@@ -172,7 +181,7 @@ function ventanaModalPM(titulo,cuerpo,mensaje,est,id){
 	    htmlm += '                <h4 class="modal-title">'+titulo+'</h4>';
 	    htmlm += '            </div>';
 	    htmlm += '            <div class="modal-body" >';
-	    htmlm += '                <div class="panel panel-success">';
+	    htmlm += '                <div class="panel panel-info">';
     	htmlm += '                    <div class="panel-heading">' + mensaje+ '</div>';
     	htmlm += '                    <div class="panel-body"style="padding: 10px;">';
     	htmlm += '						<div id="datosModal">' + cuerpo + '</div>';
@@ -184,7 +193,7 @@ function ventanaModalPM(titulo,cuerpo,mensaje,est,id){
 		htmlm += '                   <button type="button" class="btn btn-sm btn-danger" style="width: 100%;background: #dc3545;color:#fff;border:solid 1px#dc3545;" data-dismiss="modal">Cancelar</button>';
 		htmlm += '               </div>';
 		htmlm += '               <div class="col-sm-6">';
-		htmlm += '                   <button type="button" class="btn btn-sm btn-verde" style="width: 100%;background: #31708f;color:#fff;" onclick=envioDeAprobadores("'+est+'","'+id+'");>Confirmar y Enviar</button>';
+		htmlm += '                   <span id="envioConfirma" ><span><button type="button" id="btnConfirma"class="btn btn-sm btn-verde" style="width: 100%;background: #31708f;color:#fff;" onclick=envioDeAprobadores("'+est+'","'+id+'");>Confirmar y Enviar</button>';
 		htmlm += '               </div>';
 		htmlm += '            </div>';
 

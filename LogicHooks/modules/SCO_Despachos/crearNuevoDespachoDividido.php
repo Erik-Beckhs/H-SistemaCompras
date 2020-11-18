@@ -43,7 +43,7 @@ if(isset($_POST["idPro"]))
   $id_despacho = create_guid();
   //Obtenemos los datos del despacho
   $queryProDespachos = "SELECT * FROM sco_despachos where id = '".$idDespacho[0]."'";
-	$productos_despachos = $GLOBALS['db']->query($queryProDespachos, true);
+  $productos_despachos = $GLOBALS['db']->query($queryProDespachos, true);
   $rowProductosDespachos = $GLOBALS['db']->fetchByAssoc($productos_despachos);
   //creamos una copia del despacho
   $insertarDespacho = "INSERT INTO sco_despachos
@@ -69,7 +69,7 @@ if(isset($_POST["idPro"]))
       '".$rowProductosDespachos["des_prioridad"]."'
     )";
   $GLOBALS['db']->query($insertarDespacho, true);
-  //Crear relación entre orden de compra y despachos
+  //Crear relaciÃ³n entre orden de compra y despachos
   $idRelDespachoOc = create_guid();
   $query2 = "INSERT INTO sco_despachos_sco_ordencompra_c
     (id,deleted,sco_despachos_sco_ordencomprasco_ordencompra_ida,sco_despachos_sco_ordencomprasco_despachos_idb)
@@ -156,7 +156,7 @@ if(isset($_POST["idPro"]))
           $GLOBALS['db']->query($r_pc_des, true);
         //Eliminando productos del despacho
         $ProDespachos = "UPDATE sco_productosdespachos SET deleted = '1' WHERE id = '".$row["id"]."'";
-  		  $GLOBALS['db']->query($ProDespachos, true);
+        $GLOBALS['db']->query($ProDespachos, true);
         }
       }
       if($original[$i] > $nuevoTotal[$i] && $nuevoTotal[$i] > 0) {
@@ -236,7 +236,7 @@ if(isset($_POST["idPro"]))
             //Descontar producto
             $NuevoSaldo = $original[$i] - $nuevoTotal[$i];
             $ProDespachos = "UPDATE sco_productosdespachos SET prdes_cantidad = '".$NuevoSaldo."' WHERE id = '".$row["id"]."'";
-      		  $GLOBALS['db']->query($ProDespachos, true);
+            $GLOBALS['db']->query($ProDespachos, true);
           }
       }
     }

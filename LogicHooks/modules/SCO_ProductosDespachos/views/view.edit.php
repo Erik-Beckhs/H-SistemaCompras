@@ -1,6 +1,6 @@
 <?php
 /**
-*Esta clase realiza operaciones matemáticas.
+*Esta clase realiza operaciones matemÃ¡ticas.
 *
 *@author Limberg Alcon <lalcon@hansa.com.bo>
 *@copyright 2018
@@ -27,7 +27,7 @@ class SCO_ProductosDespachosViewEdit extends ViewEdit {
    #form_SubpanelQuickCreate_SCO_ProductosDespachos #prdes_subtotal{width:60px;}
   #SCO_ProductosDespachos_subpanel_full_form_button{display:none;}
   </style>";
-  	parent::display();
+    parent::display();
 
   }
 }
