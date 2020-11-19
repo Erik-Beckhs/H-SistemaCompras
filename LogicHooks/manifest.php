@@ -383,6 +383,16 @@ $installdefs = array(
         'from' => '<basepath>/modules/SCO_Despachos/validacionesItems.php',
         'to'   => 'modules/SCO_Despachos/validacionesItems.php',
       ),
+      
+      //SCO_DocumentoDespacho
+      array(
+        'from' => '<basepath>/modules/SCO_DocumentoDespacho/views/view.edit.php',
+        'to'   => 'modules/SCO_DocumentoDespacho/views/view.edit.php',
+      ),
+      array(
+        'from' => '<basepath>/modules/SCO_DocumentoDespacho/cargaArchivos.php',
+        'to'   => 'modules/SCO_DocumentoDespacho/cargaArchivos.php',
+      ),
 
       //SCO_documentos
       array(
